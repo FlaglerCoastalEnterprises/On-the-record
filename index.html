@@ -1,0 +1,783 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="data:,">
+<title>PublicDocket Map — Flagler County Prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+:root{--navy:#0A2342;--navy2:#0E2F57;--navy3:#12365E;--gold:#B28D57;--gold2:#D8C094;--gold-dark:#8C6E3E;--off:#F7F3EB;--paper:#FFFEFB;--ink:#1A2332;--muted:#5B6577;--line:#E6DDD0}
+*{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:var(--off);color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+button{font-family:inherit;min-height:40px} a{color:var(--navy)}
+.serif{font-family:"Playfair Display",Georgia,serif}
+.eyebrow{font-size:11px;letter-spacing:.22em;font-weight:800;text-transform:uppercase;color:var(--gold)}
+.orn{display:flex;align-items:center;gap:10px;justify-content:center}.orn:before,.orn:after{content:"";height:1px;width:44px;background:linear-gradient(90deg,transparent,var(--gold))}.orn:after{background:linear-gradient(90deg,var(--gold),transparent)}.orn span{color:var(--gold);font-size:12px}
+/* ===== GLOBE HERO ===== */
+#globeHero{position:relative;min-height:100svh;background:radial-gradient(ellipse 90% 60% at 50% 38%,#163d68 0%,var(--navy) 55%,#06172e 100%);color:#fff;overflow:hidden;display:flex;flex-direction:column;align-items:center;padding:28px 18px 36px;text-align:center;transition:opacity .7s ease,transform .9s cubic-bezier(.6,0,.2,1)}
+#globeHero.opening{transform:scale(1.06);opacity:0;pointer-events:none}
+#globeHero.gone{display:none}
+.hero-pills{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;z-index:3}
+.pill{font-size:10.5px;letter-spacing:.16em;font-weight:800;padding:7px 12px;border-radius:999px;line-height:1;text-transform:uppercase}
+.pill-proto{background:var(--gold);color:#0A2342}.pill-week{background:rgba(255,255,255,.1);color:#E6ECF5;border:1px solid rgba(255,255,255,.22)}.pill-by{background:transparent;color:var(--gold2);border:1px solid rgba(216,192,148,.45)}
+.hero-title{font-family:"Playfair Display",Georgia,serif;font-weight:800;font-size:clamp(34px,6.5vw,62px);line-height:1.02;margin:18px 0 0;letter-spacing:-.01em;z-index:3}
+.hero-title em{font-style:italic;color:var(--gold2);font-weight:500}
+.hero-sub{max-width:560px;color:#C7D3E6;font-size:15.5px;margin:14px auto 0;z-index:3}.hero-sub strong{color:#fff}
+/* Globe stage */
+.globe-stage{position:relative;width:min(520px,92vw);aspect-ratio:1;margin:8px auto 0;z-index:2;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.globe-stage:focus-visible{outline:2px solid var(--gold2);outline-offset:6px;border-radius:50%}
+#globeCanvas{position:absolute;inset:12%;width:76%;height:76%;filter:drop-shadow(0 0 34px rgba(178,141,87,.35))}
+.ring{position:absolute;border:1px solid rgba(216,192,148,.4);border-radius:50%;pointer-events:none}
+.ring.r1{inset:2%;animation:spin 46s linear infinite}.ring.r2{inset:9%;border-color:rgba(216,192,148,.28);animation:spinR 62s linear infinite}.ring.r3{inset:-3% -9%;border-color:rgba(216,192,148,.18);transform:rotate(-14deg)}
+@keyframes spin{to{transform:rotate(360deg)}} @keyframes spinR{to{transform:rotate(-360deg)}}
+.node-dot{position:absolute;top:-5px;left:50%;width:9px;height:9px;margin-left:-4px;border-radius:50%;background:var(--gold2);box-shadow:0 0 0 3px rgba(178,141,87,.3),0 0 12px rgba(216,192,148,.8)}
+.orbit-pill{position:absolute;z-index:4;background:rgba(10,35,66,.82);backdrop-filter:blur(4px);border:1px solid rgba(216,192,148,.55);color:#F3EAD6;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:8px 13px;border-radius:999px;white-space:nowrap;box-shadow:0 6px 18px rgba(0,0,0,.35);transition:transform .25s,border-color .25s,background .25s;cursor:pointer}
+.orbit-pill:hover{transform:scale(1.07);border-color:var(--gold2);background:rgba(18,54,94,.95)}
+.op1{top:9%;left:-2%}.op2{top:6%;right:-1%}.op3{top:44%;right:-9%}.op4{bottom:9%;right:3%}.op5{bottom:6%;left:2%}
+.globe-glow{position:absolute;inset:16%;border-radius:50%;background:radial-gradient(circle,rgba(216,192,148,.16),transparent 65%);pointer-events:none}
+.cta{margin-top:6px;z-index:3;background:linear-gradient(180deg,#C6A26B,var(--gold));color:#0A2342;border:none;font-weight:800;font-size:15px;letter-spacing:.04em;padding:15px 30px;border-radius:999px;cursor:pointer;box-shadow:0 10px 30px rgba(178,141,87,.4);transition:transform .2s,box-shadow .2s;animation:bob 2.6s ease-in-out infinite}
+.cta:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 14px 36px rgba(178,141,87,.55)}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.hero-hint{margin-top:12px;font-size:12.5px;color:#8FA3BF;letter-spacing:.06em;z-index:3}
+.hero-stats{display:flex;gap:26px;flex-wrap:wrap;justify-content:center;margin-top:22px;z-index:3}
+.hero-stats div b{font-family:"Playfair Display",serif;font-size:24px;color:var(--gold2);display:block;line-height:1}
+.hero-stats div span{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#9DB0CC}
+/* ===== APP ===== */
+#app{opacity:0;transform:translateY(14px);transition:opacity .6s ease .15s,transform .6s ease .15s}
+#app.shown{opacity:1;transform:none}
+.topbar{background:var(--navy);color:#fff;padding:20px 20px 18px;position:relative}
+.topbar:after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.topbar-inner{max-width:1180px;margin:0 auto;display:flex;justify-content:space-between;gap:16px;align-items:flex-start;flex-wrap:wrap}
+.topbar h1{margin:8px 0 0;font-family:"Playfair Display",serif;font-weight:800;font-size:clamp(26px,4.5vw,40px);line-height:1.02}
+.topbar h1 span{color:var(--gold2);font-style:italic;font-weight:500}
+.subtitle{margin:8px 0 0;color:#C7D3E6;font-size:14.5px;max-width:640px}.subtitle strong{color:#fff}
+#globeBtn{background:rgba(255,255,255,.08);border:1px solid rgba(216,192,148,.55);color:var(--gold2);border-radius:999px;padding:10px 16px;font-weight:700;font-size:13px;cursor:pointer;flex-shrink:0;transition:background .2s,transform .2s}
+#globeBtn:hover{background:rgba(178,141,87,.25);transform:translateY(-1px)}
+.glance{max-width:1180px;margin:0 auto;padding:20px 20px 0}
+.glance-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px}
+.glance-card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:16px;transition:transform .25s,box-shadow .25s,border-color .25s}
+.glance-card:hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(10,35,66,.1);border-color:var(--gold2)}
+.glance-card .num{font-family:"Playfair Display",serif;font-size:30px;line-height:1;color:var(--navy)}
+.glance-card .num small{font-size:16px;color:var(--gold-dark)}
+.glance-card h4{margin:8px 0 4px;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--gold-dark)}
+.glance-card p{margin:0;font-size:13.5px;line-height:1.5;color:#3B475C}
+.toolbar{max-width:1180px;margin:0 auto;padding:18px 20px 12px}
+.toolbar-top{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid #D6CFC0;background:#fff;border-radius:999px;padding:9px 15px;font-size:13.5px;font-weight:600;cursor:pointer;color:#334155;transition:all .22s}
+.chip:hover{border-color:var(--gold);transform:translateY(-1px)}
+.chip[aria-pressed="true"]{background:var(--navy);color:#fff;border-color:var(--navy);box-shadow:0 6px 16px rgba(10,35,66,.25)}
+.chip .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--gold);vertical-align:middle;margin-right:6px}
+.legend{display:flex;gap:14px;align-items:center;font-size:12.5px;color:var(--muted);flex-wrap:wrap}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:50%;vertical-align:middle;margin-right:5px}
+.lg-gold{background:var(--gold);box-shadow:0 0 0 4px rgba(178,141,87,.22)}.lg-gray{background:#9AA3B2}
+.topbar-actions{display:flex;gap:8px;flex-wrap:wrap;flex-shrink:0}
+#howBtn{background:var(--gold);border:1px solid var(--gold);color:#0A2342;border-radius:999px;padding:10px 16px;font-weight:800;font-size:13px;cursor:pointer;transition:transform .2s,background .2s}
+#howBtn:hover{background:#C6A26B;transform:translateY(-1px)}
+/* Search */
+.search-wrap{margin-bottom:14px;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:14px 14px 12px;box-shadow:0 8px 22px rgba(10,35,66,.06)}
+.search-label{display:block;font-size:11px;letter-spacing:.18em;font-weight:800;text-transform:uppercase;color:var(--gold-dark);margin-bottom:8px}
+.search-box{display:flex;align-items:center;gap:8px;background:#fff;border:1.5px solid #D6CFC0;border-radius:999px;padding:4px 6px 4px 14px;transition:border-color .2s,box-shadow .2s}
+.search-box:focus-within{border-color:var(--gold);box-shadow:0 0 0 4px rgba(178,141,87,.18)}
+.search-icon{font-size:20px;line-height:1;color:var(--navy);font-weight:700}
+#facilitySearch{flex:1;min-width:0;border:none;outline:none;background:transparent;font:inherit;font-size:15px;color:var(--ink);padding:9px 2px}
+#facilitySearch::placeholder{color:#8A94A6}
+.search-clear{width:36px;height:36px;min-height:36px;border:none;border-radius:50%;background:var(--navy);color:#fff;font-size:20px;line-height:1;cursor:pointer;flex-shrink:0}
+.search-hint{margin:8px 2px 0;font-size:12.5px;color:var(--muted)}
+.search-results{margin-top:10px;display:grid;gap:8px}
+.search-results[hidden]{display:none!important}
+.search-result{display:flex;gap:12px;align-items:flex-start;text-align:left;width:100%;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 13px;cursor:pointer;transition:border-color .2s,box-shadow .2s,transform .2s}
+.search-result:hover,.search-result:focus-visible{border-color:var(--gold);box-shadow:0 8px 20px rgba(10,35,66,.10);transform:translateY(-1px);outline:none}
+.search-result .sr-ic{font-size:20px;line-height:1.2}
+.search-result .sr-main{flex:1;min-width:0}
+.search-result .sr-name{font-family:"Playfair Display",serif;font-weight:700;font-size:15.5px;color:var(--navy);line-height:1.25}
+.search-result .sr-meta{font-size:12px;color:#64748B;margin-top:2px}
+.search-result .sr-head{font-size:13px;line-height:1.45;color:#3B475C;margin-top:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.search-result .sr-badge{flex-shrink:0}
+.search-empty{border:1px dashed #D6CFC0;border-radius:14px;padding:13px 14px;font-size:13.5px;line-height:1.55;color:#475569;background:#FFFEFB}
+.search-empty strong{color:var(--navy)}
+/* Map pin legend overlay */
+.map-legend{position:absolute;left:12px;bottom:52px;z-index:600;background:rgba(255,254,251,.96);border:1px solid var(--line);border-radius:14px;padding:11px 12px;box-shadow:0 10px 24px rgba(10,35,66,.18);max-width:248px;backdrop-filter:blur(4px)}
+.map-legend-title{font-size:10.5px;letter-spacing:.18em;font-weight:800;text-transform:uppercase;color:var(--gold-dark);margin-bottom:7px}
+.map-legend-row{display:flex;align-items:center;gap:8px;font-size:12.5px;line-height:1.4;color:#334155;margin-top:5px}
+.map-legend-row strong{color:var(--navy)}
+.legend-pin{flex-shrink:0;width:22px;height:22px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);display:inline-flex;align-items:center;justify-content:center;border:2px solid #fff;box-shadow:0 3px 8px rgba(0,0,0,.22);font-size:9px;color:#fff}
+.legend-pin span{transform:rotate(45deg);line-height:1}
+.legend-pin-gold{background:linear-gradient(135deg,#C6A26B,var(--gold))}
+.legend-pin-gray{background:#8A94A6}
+.map-legend-note{margin-top:8px;padding-top:8px;border-top:1px solid #EFE9DC;font-size:11.5px;line-height:1.45;color:var(--muted)}
+/* How it works overlay */
+.how-overlay{position:fixed;inset:0;z-index:1200;background:rgba(6,23,46,.72);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:18px}
+.how-overlay[hidden]{display:none}
+.how-card{position:relative;background:var(--paper);border:1px solid var(--gold2);border-radius:20px;max-width:560px;width:100%;max-height:calc(100svh - 36px);overflow:auto;padding:26px 24px 22px;box-shadow:0 24px 60px rgba(0,0,0,.35)}
+.how-card h3{margin:8px 34px 8px 0;font-family:"Playfair Display",serif;font-size:28px;line-height:1.08;color:var(--navy)}
+.how-intro{margin:0;font-size:14.5px;line-height:1.6;color:#3B475C}
+.how-close{position:absolute;top:12px;right:12px;width:38px;height:38px;min-height:38px;border-radius:50%;border:1px solid var(--line);background:#fff;font-size:22px;line-height:1;cursor:pointer;color:var(--navy)}
+.how-steps{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:10px}
+.how-steps li{display:flex;gap:12px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px 14px}
+.how-num{flex-shrink:0;width:30px;height:30px;border-radius:50%;background:var(--navy);color:var(--gold2);font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center}
+.how-steps strong{display:block;font-size:14px;color:var(--navy);line-height:1.3}
+.how-steps p{margin:3px 0 0;font-size:13.5px;line-height:1.55;color:#475569}
+.how-legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.how-legend span{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:700;color:#334155;background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 11px 7px 7px}
+.how-start{margin-top:18px;width:100%;background:linear-gradient(180deg,#C6A26B,var(--gold));color:#0A2342;border:none;font-weight:800;font-size:15px;padding:14px 18px;border-radius:999px;cursor:pointer;box-shadow:0 8px 22px rgba(178,141,87,.35)}
+.how-start:hover{background:#C6A26B}
+.how-note{margin:10px 0 0;text-align:center;font-size:12.5px;color:var(--muted)}
+.layout{max-width:1180px;margin:0 auto;padding:0 20px 8px;display:grid;grid-template-columns:1fr 392px;gap:14px;align-items:start}
+.map-wrap{position:relative;background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 10px 34px rgba(10,35,66,.1)}
+#map{height:580px;width:100%;background:#E8E2D6;z-index:1}
+.map-foot{padding:11px 14px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);border-top:1px solid #EFE9DC;background:#FFFEFB}
+.map-foot strong{color:var(--navy)}
+/* Panel */
+.panel{background:linear-gradient(180deg,var(--navy2),var(--navy) 30%);color:#fff;border-radius:20px;overflow:hidden;position:sticky;top:14px;box-shadow:0 16px 38px rgba(10,35,66,.28)}
+.panel-inner{animation:panelIn .45s cubic-bezier(.2,.8,.3,1)}
+@keyframes panelIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.panel-head{padding:20px 20px 0;text-align:left}
+.medallion{width:52px;height:52px;border-radius:50%;border:1.5px solid var(--gold);background:radial-gradient(circle at 35% 30%,#2A5480,var(--navy3) 70%);display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 0 0 5px rgba(178,141,87,.18),0 8px 18px rgba(0,0,0,.3);margin-bottom:12px}
+.panel h2{margin:4px 0 6px;font-family:"Playfair Display",serif;font-size:25px;line-height:1.08;font-weight:700}
+.panel-addr{font-size:13px;color:#B9C8DE;line-height:1.45}
+.panel-headline{font-family:"Playfair Display",serif;font-style:italic;font-size:15.5px;color:var(--gold2);line-height:1.45;margin-top:10px}
+.gold-rule{display:flex;align-items:center;gap:8px;margin:14px 0 0}.gold-rule:before,.gold-rule:after{content:"";height:1px;flex:1;background:linear-gradient(90deg,transparent,rgba(216,192,148,.6))}.gold-rule:after{background:linear-gradient(90deg,rgba(216,192,148,.6),transparent)}.gold-rule span{color:var(--gold);font-size:11px}
+.panel-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.tag{font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:5px 9px;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:#E6ECF5}
+.tag-gold{background:var(--gold);color:#0A2342;border-color:var(--gold)}
+.tag-quiet{background:#E2E8F0;color:#334155;border-color:#E2E8F0}
+.panel-body{padding:6px 20px 20px}
+.section-label{font-size:10.5px;letter-spacing:.2em;font-weight:800;text-transform:uppercase;color:var(--gold2);margin:18px 0 10px;display:flex;align-items:center;gap:8px}
+.section-label:after{content:"";flex:1;height:1px;background:rgba(216,192,148,.3)}
+.news-item{display:flex;gap:11px;margin-bottom:11px;animation:panelIn .5s both}
+.news-item .mk{flex-shrink:0;width:20px;height:20px;margin-top:1px;border-radius:50%;border:1px solid rgba(216,192,148,.6);color:var(--gold2);font-size:10px;display:flex;align-items:center;justify-content:center;background:rgba(178,141,87,.14)}
+.news-item p{margin:0;font-size:14px;line-height:1.55;color:#EDF1F7}
+.next-box{background:linear-gradient(135deg,rgba(178,141,87,.22),rgba(178,141,87,.08));border:1px solid rgba(216,192,148,.5);border-radius:14px;padding:13px 14px;font-size:14px;line-height:1.55;color:#F5EFE0}
+.next-box .nb-label{font-size:10px;letter-spacing:.18em;font-weight:800;color:var(--gold2);text-transform:uppercase;display:block;margin-bottom:5px}
+.meets{background:rgba(255,255,255,.06);border:1px solid rgba(216,192,148,.4);border-radius:14px;padding:13px 14px;font-size:13.5px;line-height:1.55;color:#E6ECF5}
+.meets p{margin:0 0 7px}.meets p:last-child{margin-bottom:0}
+.meets strong{color:#fff}
+.meets a{color:var(--gold2);font-weight:600;text-decoration:underline;text-underline-offset:2px}
+.meets a:hover{color:#F3EAD6}
+.meets .m-who{font-family:"Playfair Display",serif;font-size:15.5px;font-weight:700;color:var(--gold2);line-height:1.3}
+.meets .m-board{margin-top:12px;padding-top:12px;border-top:1px solid rgba(216,192,148,.3)}
+.meets .m-board:first-child{margin-top:0;padding-top:0;border-top:none}
+.timeline{border-left:2px solid rgba(216,192,148,.4);margin-left:7px;padding-left:16px}
+.tl-item{position:relative;padding-bottom:13px;animation:panelIn .5s both}
+.tl-item:last-child{padding-bottom:0}
+.tl-item:before{content:"";position:absolute;left:-23px;top:4px;width:10px;height:10px;border-radius:50%;background:var(--gold);border:2px solid var(--navy);box-shadow:0 0 0 2px var(--gold2)}
+.tl-date{font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--gold2)}
+.tl-text{font-size:13.5px;line-height:1.45;color:#E6ECF5;margin-top:1px}
+.panel-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:18px}
+.btn{flex:1;text-align:center;text-decoration:none;font-weight:700;font-size:13.5px;padding:12px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.28);color:#fff;background:transparent;cursor:pointer;transition:all .2s;line-height:1.25}
+.btn:hover{border-color:var(--gold2);background:rgba(255,255,255,.07)}
+.btn-gold{background:var(--gold);color:#0A2342;border-color:var(--gold)}
+.btn-gold:hover{background:#C6A26B;color:#0A2342}
+.btn-share{background:linear-gradient(180deg,#C6A26B,var(--gold));color:#0A2342;border-color:var(--gold);box-shadow:0 6px 16px rgba(178,141,87,.35)}
+.btn-share:hover{background:#C6A26B;color:#0A2342}
+.btn-follow{border-color:rgba(216,192,148,.65);color:var(--gold2)}
+.follow-panel{margin-top:12px;background:rgba(255,255,255,.07);border:1px solid rgba(216,192,148,.45);border-radius:14px;padding:14px;font-size:13.5px;line-height:1.55;color:#E6ECF5;animation:panelIn .35s both}
+.follow-panel strong{color:#fff}
+.follow-panel p{margin:0 0 10px}
+.follow-mail{display:inline-block;background:var(--gold);color:#0A2342;font-weight:800;font-size:13px;padding:10px 16px;border-radius:999px;text-decoration:none}
+.follow-mail:hover{background:#C6A26B}
+.share-note{font-size:12px;color:#9DB0CC;margin-top:8px;text-align:center;min-height:16px}
+/* Cards */
+.list-section{max-width:1180px;margin:0 auto;padding:16px 20px 6px}
+.list-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.list-head h3{margin:0;font-family:"Playfair Display",serif;font-size:22px;color:var(--navy)}
+.list-head span{font-size:13px;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-top:12px}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:15px;text-align:left;cursor:pointer;width:100%;transition:transform .22s,box-shadow .22s,border-color .22s;animation:cardIn .5s both}
+@keyframes cardIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.card:hover{border-color:var(--gold);transform:translateY(-3px);box-shadow:0 12px 26px rgba(10,35,66,.12)}
+.card.active{border-color:var(--navy);box-shadow:0 0 0 2px var(--navy) inset,0 10px 22px rgba(10,35,66,.12)}
+.card-top{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.card .ic{font-size:19px;line-height:1;margin-bottom:7px}
+.card h4{margin:0;font-family:"Playfair Display",serif;font-size:16px;line-height:1.25;color:var(--navy)}
+.card p{margin:6px 0 0;font-size:13px;line-height:1.5;color:#475569;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card .addr{font-size:12px;color:#64748B;margin-top:7px}
+.badge{flex-shrink:0;font-size:10px;font-weight:800;letter-spacing:.05em;padding:4px 8px;border-radius:999px;white-space:nowrap;text-transform:uppercase}
+.badge-news{background:#FEF3C7;color:#92400E;border:1px solid #FDE68A}.badge-quiet{background:#F1F5F9;color:#64748B;border:1px solid #E2E8F0}.badge-next{background:#E8EDF7;color:#2B4A77;border:1px solid #C9D6EE}
+.launch{max-width:1180px;margin:0 auto;padding:10px 20px 6px}
+.launch-box{background:linear-gradient(180deg,var(--navy2),var(--navy));color:#fff;border-radius:20px;padding:22px;box-shadow:0 16px 38px rgba(10,35,66,.22)}
+.launch-box h3{margin:6px 0 6px;font-family:"Playfair Display",serif;font-size:26px;line-height:1.1}
+.launch-box h3 span{color:var(--gold2);font-style:italic;font-weight:500}
+.launch-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+.launch-card{background:rgba(255,255,255,.06);border:1px solid rgba(216,192,148,.35);border-radius:14px;padding:14px}
+.launch-card h4{margin:0 0 7px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold2)}
+.launch-card p,.launch-card li{font-size:13.5px;line-height:1.55;color:#E6ECF5}
+.launch-card p{margin:0 0 8px}.launch-card ul,.launch-card ol{margin:0;padding-left:18px}.launch-card li{margin-bottom:5px}
+.launch-card blockquote{margin:0;font-size:13.5px;line-height:1.6;color:#F5EFE0;border-left:3px solid var(--gold);padding-left:10px;white-space:pre-wrap}
+.copy-btn{margin-top:10px;background:var(--gold);color:#0A2342;border:none;font-weight:800;font-size:12.5px;padding:9px 14px;border-radius:999px;cursor:pointer}
+.copy-btn:hover{background:#C6A26B}
+@media(max-width:900px){.launch-grid{grid-template-columns:1fr}.launch{padding-left:14px;padding-right:14px}}
+footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
+.footer-box{border-top:1px solid var(--line);padding-top:14px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12.5px;line-height:1.6;color:var(--muted)}
+.footer-box strong{color:var(--navy)}
+/* Pins */
+.custom-pin{position:relative;width:38px;height:38px;display:flex;align-items:center;justify-content:center;animation:pinDrop .55s cubic-bezier(.2,1.4,.4,1) both}
+@keyframes pinDrop{from{transform:translateY(-22px) scale(.6);opacity:0}to{transform:none;opacity:1}}
+.pin-core{width:29px;height:29px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);display:flex;align-items:center;justify-content:center;border:2px solid #fff;box-shadow:0 5px 14px rgba(0,0,0,.3);position:relative;z-index:2;transition:transform .2s}
+.pin-core span{transform:rotate(45deg);font-size:12px;line-height:1;color:#fff}
+.pin-gold{background:linear-gradient(135deg,#C6A26B,var(--gold))}.pin-gray{background:#8A94A6}
+.pin-pulse{position:absolute;inset:0;border-radius:50%;background:rgba(178,141,87,.45);animation:pulse 1.9s ease-out infinite;z-index:1}
+@keyframes pulse{0%{transform:scale(.6);opacity:1}100%{transform:scale(1.7);opacity:0}}
+.pin-bounce{animation:pinBounce .7s ease}
+@keyframes pinBounce{0%,100%{transform:translateY(0)}30%{transform:translateY(-14px)}55%{transform:translateY(0)}75%{transform:translateY(-6px)}}
+.leaflet-popup-content-wrapper{border-radius:14px;box-shadow:0 12px 30px rgba(10,35,66,.25)}
+.leaflet-popup-content{font-family:Inter,sans-serif;font-size:13.5px;line-height:1.5}
+@media(max-width:900px){
+ .map-legend{bottom:48px;left:10px;right:auto;max-width:228px;padding:9px 10px}
+ .how-card{padding:22px 18px 18px}
+ .how-card h3{font-size:24px}
+ .glance-grid{grid-template-columns:1fr 1fr}
+ .layout{grid-template-columns:1fr;padding:0 14px 6px}
+ #map{height:52vh;min-height:340px}
+ .panel{position:relative;top:auto;border-radius:18px}
+ .cards{grid-template-columns:1fr}
+ .topbar,.glance,.toolbar,.list-section,footer{padding-left:14px;padding-right:14px}
+ .toolbar-top{flex-direction:column;align-items:flex-start}
+ .op3{right:-3%}.op1{left:0}.orbit-pill{font-size:10px;padding:7px 10px}
+}
+@media(max-width:480px){.glance-grid{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.pin-pulse,.cta,.ring,.custom-pin,.news-item,.tl-item,.card{animation:none!important}#app,#globeHero{transition:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<!-- ============ GLOBE HERO ============ -->
+<section id="globeHero" aria-label="Welcome — tap the globe to open the Flagler County map">
+  <div class="hero-pills">
+    <span class="pill pill-proto">● Prototype</span>
+    <span class="pill pill-week">Sample week · Nov 16–22, 2026</span>
+    <span class="pill pill-by">Flagler Coastal Enterprises</span>
+  </div>
+  <h2 class="hero-title">PublicDocket <em>Map</em></h2>
+  <div class="orn" style="margin-top:12px"><span>◆</span></div>
+  <p class="hero-sub">Every public building in <strong>Flagler County</strong>, with the news that happened inside it — <strong>organized by place, not by date.</strong></p>
+
+  <div class="globe-stage" id="globeStage" role="button" tabindex="0" aria-label="Open the Flagler County map">
+    <div class="globe-glow"></div>
+    <div class="ring r3"></div>
+    <div class="ring r1"><span class="node-dot"></span></div>
+    <div class="ring r2"><span class="node-dot" style="top:auto;bottom:-5px"></span></div>
+    <canvas id="globeCanvas" width="640" height="640" aria-hidden="true"></canvas>
+    <button class="orbit-pill op1" data-goto-filter="meetings">◷ Meetings</button>
+    <button class="orbit-pill op2" data-goto-filter="money">$ Money</button>
+    <button class="orbit-pill op3" data-goto-filter="development">⬢ Development</button>
+    <button class="orbit-pill op4" data-goto-filter="safety">✦ Public Safety</button>
+    <button class="orbit-pill op5" data-goto-filter="schools">▤ Schools</button>
+  </div>
+
+  <button class="cta" id="openBtn">Tap the globe to open Flagler County →</button>
+  <div class="hero-hint">11 facilities · one week of real, researched local government news</div>
+  <div class="hero-stats">
+    <div><b>11</b><span>Facilities</span></div>
+    <div><b>6</b><span>With news</span></div>
+    <div><b>5</b><span>Layers</span></div>
+    <div><b>1</b><span>County</span></div>
+  </div>
+</section>
+
+<!-- ============ APP ============ -->
+<div id="app" hidden>
+<header class="topbar">
+  <div class="topbar-inner">
+    <div>
+      <div class="hero-pills" style="justify-content:flex-start">
+        <span class="pill pill-proto">● Prototype</span>
+        <span class="pill pill-week">Sample week · Nov 16–22, 2026</span>
+        <span class="pill pill-by">Flagler Coastal Enterprises</span>
+      </div>
+      <h1>PublicDocket Map — <span>Flagler County</span></h1>
+      <p class="subtitle">Click a building, see what's happening there. <strong>Government, in plain English.</strong> Gold pins had news this week. Gray pins were quiet.</p>
+    </div>
+    <div class="topbar-actions">
+      <button id="howBtn" type="button" aria-haspopup="dialog">? How it works</button>
+      <button id="globeBtn" aria-label="Return to the globe view">◎ Globe view</button>
+    </div>
+  </div>
+</header>
+
+<section class="glance" aria-label="This week at a glance">
+  <div class="eyebrow" style="color:var(--gold-dark)">This week at a glance — Nov 16–22</div>
+  <div class="glance-grid">
+    <div class="glance-card"><div class="num"><span data-count="3">0</span><small> of </small><span data-count="5">0</span></div><h4>Boards met</h4><p>County BOCC, Palm Coast Council &amp; School Board met. Bunnell &amp; Flagler Beach did not — their next meetings are previewed on their pins.</p></div>
+    <div class="glance-card"><div class="num"><span data-count="11">0</span></div><h4>Facilities mapped</h4><p>Every major public building in the county gets a living page — gold where news happened, gray where it was quiet.</p></div>
+    <div class="glance-card"><div class="num">$<span data-count="350">0</span><small>k</small></div><h4>Contract approved</h4><p>The BOCC's 1-year animal-control deal with Flagler Humane Society, approved 5–0 after a ~4-week lapse.</p></div>
+    <div class="glance-card"><div class="num">−$<span data-count="33">0</span><small>M</small></div><h4>Amendment 3 shadow</h4><p>The county's estimated exposure. Palm Coast estimates −$12.4M in 2027; the Sheriff expects ~$15.5M. December is when it becomes line items.</p></div>
+  </div>
+</section>
+
+<div class="toolbar">
+  <div class="search-wrap" aria-label="Search buildings, boards and topics">
+    <label class="search-label" for="facilitySearch">Search buildings, boards &amp; topics</label>
+    <div class="search-box">
+      <span class="search-icon" aria-hidden="true">⌕</span>
+      <input id="facilitySearch" type="search" placeholder="Try “YMCA”, “animal control”, “School Board”, “pier”…" autocomplete="off" spellcheck="false" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="searchResults">
+      <button id="searchClear" class="search-clear" type="button" hidden aria-label="Clear search">×</button>
+    </div>
+    <div id="searchResults" class="search-results" hidden role="listbox" aria-label="Search results"></div>
+    <p class="search-hint" id="searchHint">Search by place, board, or topic — tap a result and the map flies there and opens its card.</p>
+  </div>
+  <div class="toolbar-top">
+    <div class="chips" role="group" aria-label="Filter by layer">
+      <button class="chip" data-filter="all" aria-pressed="true">All places</button>
+      <button class="chip" data-filter="meetings" aria-pressed="false"><span class="dot"></span>Meetings</button>
+      <button class="chip" data-filter="money" aria-pressed="false"><span class="dot"></span>Money &amp; Contracts</button>
+      <button class="chip" data-filter="development" aria-pressed="false"><span class="dot"></span>Development</button>
+      <button class="chip" data-filter="safety" aria-pressed="false"><span class="dot"></span>Public Safety</button>
+      <button class="chip" data-filter="schools" aria-pressed="false"><span class="dot"></span>Schools</button>
+    </div>
+    <div class="legend" aria-label="Pin legend"><span><i class="lg-gold"></i> <strong>Gold pin</strong>&nbsp;= News this week</span><span><i class="lg-gray"></i> <strong>Gray pin</strong>&nbsp;= Quiet this week</span><span id="countLabel">11 places</span></div>
+  </div>
+</div>
+
+<main class="layout">
+  <div class="map-wrap">
+    <div id="map" aria-label="Interactive map of Flagler County facilities"></div>
+    <div class="map-legend" aria-label="Pin legend — gold means news this week, gray means quiet this week">
+      <div class="map-legend-title">Pin legend</div>
+      <div class="map-legend-row"><span class="legend-pin legend-pin-gold" aria-hidden="true"><span>●</span></span><span><strong>Gold pin</strong> — News this week</span></div>
+      <div class="map-legend-row"><span class="legend-pin legend-pin-gray" aria-hidden="true"><span>○</span></span><span><strong>Gray pin</strong> — Quiet this week</span></div>
+      <div class="map-legend-note">Tap any pin to open that building’s page.</div>
+    </div>
+    <div class="map-foot"><span><strong>Tap a pin</strong> to open its living page — latest decision, next meeting, and timeline.</span><span>Leaflet · © OpenStreetMap contributors</span></div>
+  </div>
+  <aside class="panel" id="detailPanel" aria-live="polite"></aside>
+</main>
+
+<section class="list-section">
+  <div class="list-head"><h3>All facilities</h3><span>Tap a card and the map flies to it.</span></div>
+  <div class="cards" id="cards"></div>
+</section>
+
+<section class="launch" aria-label="Launch kit — ready when you are">
+  <div class="launch-box">
+    <div class="eyebrow" style="color:var(--gold2)">Launch kit · Ready when you are — nothing posted yet</div>
+    <h3>How people get in: <span>one link.</span></h3>
+    <p style="margin:0;color:#C7D3E6;font-size:14.5px;line-height:1.6;max-width:760px">Yes — exactly like a link. When you share this page from Spaces, people tap the link and it opens in their browser. No app, no download, no account. Share the page link for the whole county, or open any building above and tap <strong style="color:#fff">Share this building</strong> — that link lands them straight on that building. Post the link on Facebook, text it, email it, or put it in a YouTube description — it's the same link everywhere.</p>
+    <div class="launch-grid">
+      <div class="launch-card"><h4>1 · Launch post — copy &amp; paste</h4><blockquote id="launchPost">Flagler County government, on a map. 🗺️
+
+We built the PublicDocket Map: tap a building — City Hall, the courthouse, the pier, the YMCA site — and see what was decided there, what's next, and when, in plain English.
+
+Gold pins had news this week. Start with Palm Coast City Hall or the Government Services Building and explore from there.
+
+👇 Tap the link, tap a building, tell us what you think.</blockquote><button class="copy-btn" data-copy="launchPost" type="button">Copy launch post</button></div>
+      <div class="launch-card"><h4>2 · Hot-news post template</h4><blockquote id="hotPost">[What just happened] at [Building] — [one plain-English sentence on the decision and the dollar figure].
+
+See what it means, what's next, and the timeline — on the map 👇
+[Paste that building's Share link here]</blockquote><button class="copy-btn" data-copy="hotPost" type="button">Copy template</button><p style="margin-top:10px">Use this the day a pin lights up — Bunnell wastewater hearing Nov 23, Amendment 3 in December, the YMCA decision. Always share the building link, not just the homepage.</p></div>
+      <div class="launch-card"><h4>3 · 45-second demo video script</h4><ol><li><strong>0–5s:</strong> Globe on screen. “What if county government had a map?”</li><li><strong>5–15s:</strong> Tap the globe — fly into Flagler. “Every public building. Gold means news this week.”</li><li><strong>15–30s:</strong> Tap Palm Coast City Hall. “New council, two budget votes — in plain English.”</li><li><strong>30–40s:</strong> Tap Share this building. “Send one building to anyone, with one link.”</li><li><strong>40–45s:</strong> “PublicDocket Map — link below. Follow the buildings you care about.”</li></ol><p>Film it as a screen recording on your phone — no face on camera needed.</p></div>
+      <div class="launch-card"><h4>4 · For realtors &amp; new residents</h4><blockquote id="realtorBlurb">Moving to Flagler County? Watch your neighborhood before you buy: what's being built, what's being taxed, and what's being decided — building by building, on one map. Free, in plain English, from a Palm Coast company.</blockquote><button class="copy-btn" data-copy="realtorBlurb" type="button">Copy blurb</button><p style="margin-top:10px">Send the page link with this blurb to 5–10 local realtors as a resource they can forward to clients.</p></div>
+      <div class="launch-card"><h4>5 · Go-live checklist</h4><ul><li>Load a second, fresh week of news</li><li>Share the page from Spaces to get the public link</li><li>Test the link in a private browser window + on a phone</li><li>Test one building Share link end-to-end</li><li>Post the launch post on the Facebook Page</li><li>Help answer one hot thread in a local group — with the sourced building link</li><li>Send the realtor blurb to your first 5 contacts</li></ul></div>
+      <div class="launch-card"><h4>6 · What success looks like</h4><p>Count four things each week: link taps per post, how many visitors open a second building, Follow emails received per building, and shares by people you don't know. If a hot-news post can't move those, more posting won't fix it — better news timing will.</p><p style="margin:0">Kept parked until you say go: no posts, no emails, and no schedule have been sent from this kit.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-box">
+    <div><strong>Prototype — not a live feed.</strong> News sample for Nov 16–22, 2026, researched from official agendas and local reporting. Fire Station 22 has no separate pin — its location could not be verified reliably, so its $230k budget news lives under Palm Coast City Hall.
+    <div style="margin-top:8px"><strong>Share the map:</strong> use any building's Share button, or share the page link — every link opens the map, building links open that building.</div>
+    <div style="margin-top:8px"><strong>How people will access it:</strong> when this page is shared from Spaces, visitors get one link to this page. Send the page link for the whole county, or use a building's Share button to send a link that opens straight to that building. No app or account needed — it opens in any browser.</div>
+    </div>
+    <div style="white-space:nowrap">PublicDocket Map · Flagler Coastal Enterprises</div>
+  </div>
+</footer>
+
+<div id="howOverlay" class="how-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="howTitle">
+  <div class="how-card">
+    <button class="how-close" id="howClose" type="button" aria-label="Close How it works">×</button>
+    <div class="eyebrow" style="color:var(--gold-dark)">How it works · First visit</div>
+    <h3 id="howTitle">Explore Flagler County, building by building</h3>
+    <p class="how-intro">Every public building has its own page — what happened there this week, what’s next, and when. You don’t need to read a whole agenda to follow along.</p>
+    <ol class="how-steps">
+      <li><span class="how-num">1</span><div><strong>Tap a pin on the map</strong><p>Gold pins had news this week. Gray pins were quiet. Tapping a pin opens that building’s card beside the map.</p></div></li>
+      <li><span class="how-num">2</span><div><strong>Search or filter to find your topic</strong><p>Use the search box for a building, a board, or a topic — try “YMCA” or “animal control” — or tap a layer like Meetings, Money, or Schools. The map flies to your match.</p></div></li>
+      <li><span class="how-num">3</span><div><strong>Read the card, check what’s next</strong><p>Each card gives the decision in plain English, the next meeting or deadline, and a short timeline — plus Share and Follow for that one building.</p></div></li>
+    </ol>
+    <div class="how-legend" aria-label="Pin legend">
+      <span><span class="legend-pin legend-pin-gold" aria-hidden="true"><span>●</span></span> Gold pin = News this week</span>
+      <span><span class="legend-pin legend-pin-gray" aria-hidden="true"><span>○</span></span> Gray pin = Quiet this week</span>
+    </div>
+    <button id="howStart" class="how-start" type="button">Start exploring →</button>
+    <p class="how-note">You can reopen this anytime with the “How it works” button at the top.</p>
+  </div>
+</div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+var FACILITIES = [
+  {id:1, icon:"🏛", name:"Government Services Building", short:"County HQ · BOCC + School Board", address:"1769 E Moody Blvd, Bunnell", type:"County Government · BOCC & School Board", lat:29.47195, lng:-81.2457, cats:["meetings","money","schools"], active:true, badge:"NEWS THIS WEEK", headline:"New chairs chosen in minutes, new members seated — YMCA $3M and the 2027–28 calendar approved here.", bullets:["BOCC Mon Nov 16: approved a 1-year, $350,000 animal-control contract with Flagler Humane Society, 5–0 — ending a ~4-week lapse with no contract.","The fight was over public records: draft said the Humane Society had “no obligation” to share nonpublic records. Board reworded it to Florida Ch. 119, kept the 1-year term and 90-day exit. Audit demand was NOT added.","School Board Tue Nov 17: elected Lauren Ramirez chair and Janie Ruddy vice chair — in four minutes. New members Cathy Moon and Rob Wood were seated, alongside re-elected Christy Chong (D4).","County Commission: unanimously selected Kim Carney as chair and Pam Richardson as vice chair. Theresa Pontieri is now a County Commissioner. Tue 4pm: swearing-in here for Pontieri (new, D2) & Leann Pennington (re-elected).","School Board Tue Nov 17: unanimously approved the YMCA 35-year lease and $3 million contribution — see the Town Center YMCA pin for full terms.","School Board Tue Nov 17: APPROVED the 2027–28 school calendar 4–1 (agenda item 11.01, Instructional Calendar). Vice Chair Janie Ruddy voted no — she wanted a full 180-day calendar; the approved calendar has 179 days, two of them half days (effectively 178 instructional days). Moved by Moon, seconded by Wood.","Calendar sources: Flagler Schools BoardDocs Nov 17 agenda item 11.01 (https://go.boarddocs.com/fla/flcsd/Board.nsf/Public) and the district meeting video https://www.youtube.com/watch?v=FbzsOW5DGCY (chapter Instructional calendar, 1:03:05–1:05:23). Note: the vote is from the meeting video; the formal approved minutes had not yet been posted as of Nov 20. There was no School Board business meeting on Nov 19 — BoardDocs lists Nov 17 as the most recent meeting.","Sources: FlaglerLive email alert, Nov. 17, 2026, 8:23 p.m. ET — “Ramirez Named School Board Chair in 4 Minutes Flat as Moon and Wood Are Seated and Pontieri Is Now County Commissioner”; YMCA source: FlaglerLive, Nov. 18, 2026, 2:49 p.m. ET (see YMCA pin)."], next:"BOCC next: Mon Dec 7, 9:00 a.m. — legislative-priorities workshop season begins. School Board: 2027–28 calendar decided Nov 17 (approved 4–1) — watch BoardDocs for the formal approved minutes.", timeline:[{d:"Mon Nov 16 · 5pm", t:"BOCC approves $350k Humane Society contract 5–0"},{d:"Tue Nov 17 · 1pm", t:"School Board workshop (Room 3, GSB)"},{d:"Tue Nov 17 · 4pm", t:"Pontieri & Pennington sworn in — Pontieri is now a County Commissioner"},{d:"Tue Nov 17 · 6pm", t:"School Board regular meeting — Ramirez elected chair, Ruddy vice chair in 4 minutes; Moon & Wood seated"},{d:"Tue Nov 17", t:"County Commission unanimously selects Kim Carney chair & Pam Richardson vice chair"},{d:"Tue Nov 17 · 6pm", t:"School Board unanimously approves YMCA 35-year lease + $3M (see YMCA pin)"},{d:"Tue Nov 17 · 6pm", t:"School Board approves 2027–28 calendar 4–1 (Item 11.01) — Ruddy no; 179 days, two half days"}], mapsQ:"Government Services Building 1769 E Moody Blvd Bunnell FL"},
+  {id:2, icon:"⚖", name:"Kim C. Hammond Justice Center", short:"Courthouse · Clerk of Court", address:"1769 E Moody Blvd, Bunnell", type:"Courthouse · Public Safety", lat:29.47345, lng:-81.2457, cats:["safety"], active:false, badge:"ALWAYS ON", headline:"Live court docket — same campus as the GSB, offset on the map so both pins stay clickable.", bullets:["Clerk's live court docket updates every few minutes during the day.","Hearings drop off the public list about 2 hours after they end — so what you see is what's actually in session or coming up.","No single “news item” this week — included so residents can check hearings by place, not just meetings."], next:"Open weekdays. Check the Clerk's docket for today's hearings before you go.", timeline:[{d:"Weekdays", t:"Court in session — docket refreshes every few minutes"}], mapsQ:"Kim C Hammond Justice Center Bunnell FL"},
+  {id:3, icon:"🏙", name:"Palm Coast City Hall", short:"City Council · Palm Coast", address:"160 Lake Ave, Palm Coast", type:"City Government · Palm Coast City Council", lat:29.48647, lng:-81.20768, cats:["meetings","money"], active:true, badge:"NEWS THIS WEEK", headline:"Change-of-government day: 3 new members, a new vice mayor, and two budget fixes.", bullets:["Tue Nov 17, 9am: Tony Amaral Jr. (D2), Ray Stevens (D3) and Darlene Shelley (D4) sworn in. Ty Miller named Vice Mayor, 4–1.","Budget amendment — Fire Impact Fee Fund: city summary ties it to +$230,000 for higher Fire Station 22 costs. Passed unanimously. (Meeting record frames it as a FY25→FY26 carry-forward — both framings noted; packet is the tiebreaker.)","Budget amendment — $20,000 transportation / Old Kings Road true-up to match actuals. Passed unanimously.","Residents showed up about: Rimfire Drive LED streetlights flooding yards, and a Belterra pond-pumping dispute in the Z-section."], next:"Next regular business meeting: Tue Dec 1, 6:00 p.m. — first full agenda for the new council.", timeline:[{d:"Tue Nov 17 · 9am", t:"Election results certified; 3 new members sworn in"},{d:"Tue Nov 17", t:"Miller named Vice Mayor 4–1; both budget amendments pass unanimously"},{d:"Tue Dec 1 · 6pm", t:"Next council business meeting"}], mapsQ:"Palm Coast City Hall 160 Lake Ave Palm Coast FL"},
+  {id:4, icon:"🏊", name:"Town Center — Future YMCA Site", short:"$14M project · Central Ave", address:"1580 Central Ave, Palm Coast", type:"Development Project · Multi-agency", lat:29.48449, lng:-81.19767, cats:["development","money"], active:true, badge:"APPROVED · UNANIMOUS", headline:"School Board unanimously approves $3M — the YMCA clears its final hurdle.", bullets:["Tue Nov 17: the Flagler County School Board unanimously approved a 35-year lease contributing $3 million toward building the new Volusia/Flagler YMCA in Town Center.","Per FlaglerLive, public dollars will fund 68% of the facility.","Deal terms per FlaglerLive: district swim teams get free access to an Olympic pool; the district can close the aging Belle Terre facility, saving at least $200,000 a year once construction finishes. Palm Coast signed a similar $3 million deal, enabling it to shut down the Frieda Zamba pool.","The Observer notes the board and YMCA agreed to two more amendments as part of the final approval.","Context: planned ~$14M YMCA on city land — 35-year lease at $1/year, Olympic-size pool that school teams would use. City approved its $3.25M share Oct 20, contingent on the School Board's $3M share.","Sources: FlaglerLive email alert, Nov. 18, 2026, 2:49 p.m. ET — “Public Dollars Will Fund 68% of Palm Coast YMCA as Unanimous School Board Vote Commits $3 Million”; corroborated by The Observer email, Nov. 18, 2026 — “Palm Coast YMCA clears final hurdle as School Board approves lease agreement.”"], next:"Approved Nov 17 at the Government Services Building — the final $3M hurdle is cleared. Next to watch: construction planning for the Town Center site.", timeline:[{d:"Oct 20", t:"City approves $3.25M share, contingent on schools"},{d:"Oct 27 → Nov 10", t:"School vote slips; discussed in workshop (no vote)"},{d:"Tue Nov 17 · 6pm", t:"School Board unanimously approves 35-year lease + $3M at the GSB"},{d:"Wed Nov 18", t:"FlaglerLive & The Observer report the approval — public dollars fund 68%, per FlaglerLive"}], mapsQ:"1580 Central Ave Palm Coast FL YMCA"},
+  {id:5, icon:"🏢", name:"Bunnell City Hall", short:"City administration · Bunnell", address:"200 S Church St, Bunnell", type:"City Government · Administration", lat:29.46587, lng:-81.25632, cats:["meetings"], active:false, badge:"QUIET THIS WEEK", headline:"Quiet this week — this is the admin building. The Commission itself meets across town (see the Commerce Pkwy pin).", bullets:["No City Commission news tied to this building in the Nov 16–22 sample week.","Included as an example of a quiet pin: the map stays honest — not every building has news every week."], next:"For Commission action, see Bunnell Commission Chambers — next hearing Mon Nov 23, 7pm.", timeline:[{d:"This week", t:"No items — quiet"}], mapsQ:"Bunnell City Hall 200 S Church St Bunnell FL"},
+  {id:6, icon:"🗣", name:"Bunnell Commission Chambers", short:"City Commission · Commerce Pkwy", address:"2400 Commerce Pkwy, Bunnell", type:"City Government · Bunnell City Commission", lat:29.47313, lng:-81.23886, cats:["meetings","development","money"], active:false, badge:"UP NEXT · NOV 23", headline:"Nov. 23 agenda is out — the wastewater money vote leads a packed night. Outcome pending.", bullets:["City Commission meets Mon Nov 23, 2026, 7:00 p.m., 2400 Commerce Pkwy, Chambers Meeting Room — amended agenda (amended Nov 17, 2026). Bunnell meets 2nd & 4th Mondays at 7:00 p.m.; last meeting was Nov 9. No meeting in the week of Nov 16.","Headline vote — Resolution 2026-16 (outcome pending): the commission will vote on approving Bunnell's wastewater treatment facility plan and sending it to the Florida Department of Environmental Protection. That step is required to unlock the city's awarded State Revolving Fund (SRF) SA-HMW funding for wastewater treatment plant improvements.","SA-HMW in plain English: the State Revolving Fund Supplemental Appropriation for Hurricanes Helene and Milton and the Hawaii Wildfires. Bunnell is lining up state infrastructure money for wastewater upgrades, and this vote is the paperwork step that releases it. It has NOT been voted on yet — the vote happens Nov 23.","Land use, second reading: Ordinances 2026-20 and 2026-21 would rezone about 14.92 acres from county Conservation / Agriculture / Commercial-High-Intensity to city Commercial-Medium (B-1 Business District). Ordinance 2026-22 would rezone about 0.92 acres from Industrial to Single Family-Medium Density.","Also on the agenda: Resolution 2026-17 amends the FY2025-2026 budget. New business covers the city's 2027 legislative priorities and amending the cold-weather shelter agreement with Flagler County. Old business: appointing a member to the Planning, Zoning and Appeals Board.","Consent items include renewing the citywide generator-maintenance agreement (Ring Power), sewer manhole inspection / rehabilitation work, and a street-sweeping agreement. The meeting opens with a capital-projects presentation; public comment is limited to 4 minutes per speaker.","Recent context: Oct 28, in a special hearing, the Commission denied the contested Project Butterfly 610-acre landfill west of Bunnell after 18 appeals — the fall's biggest land-use fight. File closed at city level unless appealed.","Source: City of Bunnell Agendas & Minutes — https://www.bunnellcity.us/1479/Agendas-Minutes (amended agenda and 310-page packet linked there, checked Nov 20, 2026)."], next:"Mon Nov 23, 7:00 p.m. — vote on Resolution 2026-16 (wastewater facility plan / SRF SA-HMW funding) — outcome pending until the meeting. Full agenda: City of Bunnell Agendas & Minutes page.", timeline:[{d:"Oct 28", t:"Project Butterfly landfill denied after 18 appeals"},{d:"Nov 9", t:"Last regular Commission meeting"},{d:"Nov 17", t:"Amended Nov 23 agenda published"},{d:"Mon Nov 23 · 7pm", t:"Res. 2026-16 wastewater / SRF vote — outcome pending; plus rezonings, budget amendment & consent items"}], mapsQ:"2400 Commerce Pkwy Bunnell FL"},
+  {id:7, icon:"🌊", name:"Flagler Beach City Hall", short:"City Commission · Flagler Beach", address:"105 S 2nd St, Flagler Beach", type:"City Government · Flagler Beach Commission", lat:29.47984, lng:-81.12757, cats:["meetings","development"], active:false, badge:"UP NEXT · DEC 10", headline:"No meeting this week. Two live issues: trailer/RV rules and the paid-parking fight.", bullets:["Last met Thu Nov 12. Substantive item: Ordinance 2026-28, first reading — rewriting trailer/RV parking on private property: allow driveway parking, limit expanded allowance to trailers under 25 ft, require sight-triangle visibility. Outcome of first reading not confirmed in sources checked.","Paid parking — simmering, NOT decided: LAZ Parking ranked first among vendors; a $2/hr, first-30-min-free, $15/day-max, residents-exempt model has been discussed for ~400 oceanfront spaces. Businesses are asking for a 12-month moratorium. No final decision, no date set — do not treat any rate as adopted."], next:"Thu Dec 10, 5:30 p.m. — the only December meeting (Nov 26 fell on Thanksgiving).", timeline:[{d:"Thu Nov 12", t:"Ordinance 2026-28 first reading (trailer/RV rules)"},{d:"Nov 14–17 reporting", t:"Paid parking: no decision, no date"},{d:"Thu Dec 10 · 5:30pm", t:"Next Commission meeting"}], mapsQ:"Flagler Beach City Hall 105 S 2nd St Flagler Beach FL"},
+  {id:8, icon:"🎣", name:"Flagler Beach Pier", short:"New pier · Ocean Shore Blvd", address:"S Ocean Shore Blvd, Flagler Beach", type:"Development · Landmark Project", lat:29.47879, lng:-81.12631, cats:["development"], active:true, badge:"UNDER CONSTRUCTION", headline:"The new concrete pier is rising — 28 ft above the sea, built to survive what took the last one.", bullets:["New concrete pier rising 28 ft above sea level, with pylons driven 80–125 ft deep.","On course for a spring opening.","Commission decision: no access charge for the first year or two; planned open hours 5am–10pm."], next:"Spring opening — watch City Hall's pin for any vote on hours, fees, or opening date.", timeline:[{d:"Now", t:"Construction underway — pylons 80–125 ft deep"},{d:"Spring", t:"Planned opening; free access for first year or two"}], mapsQ:"Flagler Beach Pier FL"},
+  {id:9, icon:"🐾", name:"Flagler Humane Society", short:"Animal control · Shelter Dr", address:"1 Shelter Dr, Palm Coast", type:"Nonprofit Vendor · County Contract", lat:29.55756, lng:-81.26587, cats:["money"], active:true, badge:"NEWS THIS WEEK", headline:"Won the county contract — after the county went almost a month with none.", bullets:["Mon Nov 16: won the county's 1-year, $350,000 animal-control contract, 5–0 (~$29,166/month).","Covers mandatory services only: dangerous-dog investigations, neglect investigations, rabies quarantines, sheltering animals of detained owners, and help in declared emergencies.","County may exit on 90 days' notice. No audit requirement was added — that was the meeting's main fight (see GSB pin)."], next:"Contract runs 1 year (retroactive in structure to Oct 1 fiscal year). Joint meetings with Palm Coast & Flagler Beach were directed by the BOCC.", timeline:[{d:"Sep 30 / Oct 20", t:"Old contract + extension expire — lapse begins"},{d:"Nov 16", t:"New 1-year $350k contract approved 5–0"}], mapsQ:"Flagler Humane Society 1 Shelter Dr Palm Coast FL"},
+  {id:10, icon:"🛡", name:"Flagler County Sheriff's Office", short:"Sheriff · Justice Ln, Bunnell", address:"1001 Justice Ln, Bunnell", type:"Law Enforcement · Public Safety", lat:29.45975, lng:-81.26273, cats:["safety","money"], active:true, badge:"NEWS THIS WEEK", headline:"Amendment 3 hits the Sheriff hardest in dollars — and a new tax is already being floated to fill it.", bullets:["Sheriff Rick Staly expects ~$15.5M revenue loss next fiscal year from Amendment 3.","Hiring freeze already in place; a patrol-car order was cancelled.","A dedicated law-enforcement MSTU (a separate taxing unit) is being discussed as a workaround — discussed, NOT adopted.","Sheriff declined to take over animal control, citing cost — “Nobody wants animal control,” per Commissioner Carney at the Nov 16 meeting."], next:"December–January: watch whether the MSTU moves from talk to a formal BOCC agenda item.", timeline:[{d:"Nov 3", t:"Voters approve Amendment 3"},{d:"Nov 9 workshop", t:"Sheriff: office does not want animal control"},{d:"This fall", t:"Hiring freeze; patrol-car order cancelled"}], mapsQ:"Flagler County Sheriff Office 1001 Justice Ln Bunnell FL"},
+  {id:11, icon:"📚", name:"Flagler County Public Library — Palm Coast", short:"Library · Palm Coast Pkwy", address:"2500 Palm Coast Pkwy NW, Palm Coast", type:"Public Library · Community / Schools", lat:29.55416, lng:-81.23815, cats:["schools"], active:false, badge:"QUIET THIS WEEK", headline:"Quiet this week — and that's the point of this pin.", bullets:["No news items for this facility in the Nov 16–22 sample.","A real PublicDocket map needs quiet pins too — otherwise “no pin” would look like “doesn't exist.” Every public building gets a page; most weeks, most pages are quiet."], next:"No upcoming item in the sample week.", timeline:[{d:"This week", t:"No items — quiet"}], mapsQ:"Flagler County Public Library Palm Coast 2500 Palm Coast Pkwy NW"}
+];
+/* "Who meets here" — meeting cadence, official agenda/video links and public-records contacts.
+   Researched & verified Nov 21, 2026 from the PublicDocket archive and the official sites linked.
+   Where a link failed its build-time check it is shown as plain text instead (noted inline). */
+var MEETS={
+1:'<div class="m-board"><p class="m-who">Flagler County Board of County Commissioners</p><p><strong>Meets:</strong> 1st Monday · 9:00 a.m. and 3rd Monday · 5:00 p.m. A 1:00 p.m. workshop may be added if needed.</p><p><strong>Agendas:</strong> <a href="https://flaglercofl.portal.civicclerk.com/" target="_blank" rel="noopener">CivicClerk portal</a> — agendas before Aug 17, 2026 are in the county archive.</p><p><strong>Watch live:</strong> <a href="https://www.youtube.com/@FlaglerCounty/live" target="_blank" rel="noopener">Flagler County on YouTube</a> — also airs on Spectrum channel 492.</p><p><strong>Public records:</strong> PublicRecords@flaglercounty.gov · 386-313-4005 · in person at 1769 E. Moody Blvd., Bldg. 2, 3rd Floor, Bunnell.</p></div><div class="m-board"><p class="m-who">Flagler County School Board</p><p><strong>Meets:</strong> regular meeting once a month, usually 4th Tuesday · 6:00 p.m.; agenda workshop 2nd Tuesday · 3:00 p.m.; information workshop the same day as the regular meeting · 1:00 p.m.</p><p><strong>Agendas:</strong> <a href="https://go.boarddocs.com/fla/flcsd/Board.nsf/Public" target="_blank" rel="noopener">BoardDocs</a></p><p><strong>Meeting videos:</strong> <a href="https://youtube.com/playlist?list=PLfx_w2JpNlBzcLsx7mTHJCM0z9nNsKrZE" target="_blank" rel="noopener">YouTube playlist</a></p><p><strong>Public records:</strong> publicrecordsrequests@flaglerschools.com · 386-437-7526 x1120 · 1769 E. Moody Blvd., Bldg. 2, Bunnell · <a href="https://www.flaglerschools.com/public-records" target="_blank" rel="noopener">Public records info</a></p></div>',
+2:'<p class="m-who">No board meets here</p><p>This is the home of the Clerk of the Circuit Court &amp; Comptroller.</p><p><strong>Hours:</strong> Mon–Fri 8:30 a.m.–4:30 p.m. · <strong>Phone:</strong> 386-313-4400</p><p><strong>Court today:</strong> <a href="https://flaglerclerk.gov/docket/" target="_blank" rel="noopener">Today\u2019s court docket</a> — updates every 5 minutes.</p>',
+3:'<p class="m-who">Palm Coast City Council</p><p><strong>Meets:</strong> business meetings 1st Tuesday · 6:00 p.m. and 3rd Tuesday · 9:00 a.m.; workshops 2nd Tuesday · 9:00 a.m.</p><p><strong>Agendas, minutes &amp; video:</strong> <a href="https://www.palmcoast.gov/agendas" target="_blank" rel="noopener">palmcoast.gov/agendas</a></p><p><strong>Watch live:</strong> <a href="https://www.youtube.com/channel/UCutMtNq3Rm4NzsRYtNMHSAg" target="_blank" rel="noopener">City of Palm Coast on YouTube</a></p><p><strong>Public records:</strong> the City Clerk is the records custodian — CityClerk@palmcoastgov.com · (386) 986-3713 · City Hall, 160 Lake Ave. · <a href="https://www.palmcoast.gov/city-clerk" target="_blank" rel="noopener">City Clerk page</a> · <a href="https://records.palmcoast.gov/" target="_blank" rel="noopener">Searchable records database</a></p>',
+4:'<p class="m-who">No public board meets here</p><p>This is the future ~$14 million YMCA site — city land on a 35-year lease. The School Board approved its $3 million share unanimously on Nov 17, 2026.</p><p>No agendas or livestreams apply here — the decisions behind it live on the <a href="#building=palm-coast-city-hall">Palm Coast City Hall</a> and <a href="#building=government-services-building">Government Services Building</a> cards.</p>',
+5:'<p class="m-who">No public board meets here</p><p>This is Bunnell\u2019s city administration building. The City Commission meets across town at the <a href="#building=bunnell-commission-chambers">Bunnell Commission Chambers</a> (2400 Commerce Pkwy) — see that pin for its schedule, agendas and records contact.</p><p>Meeting info for this building itself: not verified yet.</p>',
+6:'<p class="m-who">Bunnell City Commission</p><p><strong>Meets:</strong> 2nd &amp; 4th Monday · 7:00 p.m.</p><p><strong>Agendas &amp; minutes:</strong> <a href="https://www.bunnellcity.us/1479/Agendas-Minutes" target="_blank" rel="noopener">bunnellcity.us — Agendas &amp; Minutes</a></p><p><strong>Watch:</strong> meetings are broadcast on the City of Bunnell YouTube channel — broadcasts resumed October 2026, starting with the Oct 26, 2026 regular meeting.</p><p><strong>Public records:</strong> City Clerk Kristen Bates · (386) 437-7500, Option 5 · <a href="https://www.bunnellcity.us/1197/City-Clerk" target="_blank" rel="noopener">City Clerk page</a></p>',
+7:'<p class="m-who">Flagler Beach City Commission</p><p><strong>Meets:</strong> usually 2nd &amp; 4th Thursday · 5:30 p.m. In November and December 2026 there is one meeting a month: Nov 12 and Dec 10.</p><p><strong>Agendas, packets, minutes &amp; video:</strong> <a href="https://flaglerbeach-fl.municodemeetings.com/" target="_blank" rel="noopener">Flagler Beach meetings hub</a></p><p><strong>Livestream:</strong> not verified yet.</p><p><strong>Public records:</strong> City Clerk Penny Overstreet · poverstreet@cityofflaglerbeach.com · (386) 517-2000 x233 · 105 S. 2nd St., Flagler Beach · <a href="https://www.cityofflaglerbeach.com/DocumentCenter/View/1211/For-public-records-requests?bidId=" target="_blank" rel="noopener">How to request records</a></p><p><strong>Police records:</strong> (386) 517-2020 · Sbuttner@fbpd.org · 204 S. Flagler Ave.</p>',
+8:'<p class="m-who">No board meets here</p><p>This is the city-owned pier, under reconstruction.</p><p>Pier decisions are made by the Flagler Beach City Commission — see its <a href="https://flaglerbeach-fl.municodemeetings.com/" target="_blank" rel="noopener">meetings hub</a> for agendas and decisions.</p>',
+9:'<p class="m-who">No public board meets here</p><p>A nonprofit animal shelter — the county contracts with it for animal control (1-year, $350,000 contract approved by the County Commission Nov 16, 2026).</p><p><strong>Phone:</strong> (386) 445-1814 · <strong>Web:</strong> <a href="https://flaglerhumanesociety.org/" target="_blank" rel="noopener">flaglerhumanesociety.org</a></p><p><strong>Open:</strong> Sat–Tue 10 a.m.–5 p.m. · Wed–Fri 10 a.m.–7 p.m.</p><p><strong>Animal Services:</strong> (386) 246-8612 · 7 days a week, 8 a.m.–5 p.m.</p>',
+10:'<p class="m-who">No public board meets here</p><p>This is the Sheriff\u2019s Office headquarters.</p><p><strong>Records Unit:</strong> Mon–Fri 8:00 a.m.–4:00 p.m. Request records by email at publicrecordsrequest@flaglersheriff.com or by phone at (386) 437-4116.</p>',
+11:'<p class="m-who">No public board meets here</p><p>This is the Flagler County Public Library branch in Palm Coast — a public library, not a meeting hall for a public board.</p><p>Meeting info not verified yet.</p>'
+};
+var CAT_LABEL={meetings:"Meetings",money:"Money & Contracts",development:"Development",safety:"Public Safety",schools:"Schools"};
+var SLUGS={1:"government-services-building",2:"kim-c-hammond-justice-center",3:"palm-coast-city-hall",4:"town-center-ymca",5:"bunnell-city-hall",6:"bunnell-commission-chambers",7:"flagler-beach-city-hall",8:"flagler-beach-pier",9:"flagler-humane-society",10:"flagler-county-sheriffs-office",11:"flagler-county-public-library"};
+FACILITIES.forEach(function(f){ f.slug=SLUGS[f.id]||("building-"+f.id); });
+function facilityBySlug(slug){ for(var i=0;i<FACILITIES.length;i++){ if(FACILITIES[i].slug===slug) return FACILITIES[i]; } return null; }
+function facilityById(id){ for(var i=0;i<FACILITIES.length;i++){ if(FACILITIES[i].id===id) return FACILITIES[i]; } return null; }
+function deepLinkFor(f){ return "#building="+encodeURIComponent(f.slug); }
+function slugFromHash(){ try{ var h=window.location.hash||""; var m=h.match(/building=([a-z0-9\-]+)/i); return m?decodeURIComponent(m[1]):null; }catch(e){ return null; } }
+function setHashFor(f,replace){ try{ var url="#building="+encodeURIComponent(f.slug); if(replace===false){ window.location.hash="building="+encodeURIComponent(f.slug); } else if(window.history&&window.history.replaceState){ window.history.replaceState(null,"",url); } else { window.location.hash="building="+encodeURIComponent(f.slug); } }catch(e){} }
+var map=null, markers={}, currentFilter="all", selectedId=1, mapReady=false, opened=false, pendingFilter=null;
+var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* ---------- GLOBE (canvas wireframe) ---------- */
+(function(){
+  var cv=document.getElementById("globeCanvas"); if(!cv) return;
+  var ctx=cv.getContext("2d"), W=cv.width, H=cv.height, cx=W/2, cy=H/2, R=W*0.40, rot=0, raf=null;
+  function project(lat,lon){
+    var la=lat*Math.PI/180, lo=(lon+rot)*Math.PI/180;
+    var x=Math.cos(la)*Math.sin(lo), y=Math.sin(la), z=Math.cos(la)*Math.cos(lo);
+    return {x:cx+x*R, y:cy-y*R, z:z};
+  }
+  function circle(pts,close){
+    ctx.beginPath(); var started=false;
+    for(var i=0;i<pts.length;i++){ var p=pts[i]; if(p.z<-0.12){started=false;continue;} if(!started){ctx.moveTo(p.x,p.y);started=true;} else ctx.lineTo(p.x,p.y); }
+    ctx.stroke();
+  }
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    var g=ctx.createRadialGradient(cx-R*0.3,cy-R*0.35,R*0.1,cx,cy,R*1.05);
+    g.addColorStop(0,"#1D4E79"); g.addColorStop(0.55,"#123A63"); g.addColorStop(1,"#0A2342");
+    ctx.beginPath(); ctx.arc(cx,cy,R,0,Math.PI*2); ctx.fillStyle=g; ctx.fill();
+    ctx.strokeStyle="rgba(216,192,148,.9)"; ctx.lineWidth=2; ctx.stroke();
+    // parallels
+    ctx.lineWidth=1;
+    for(var lat=-60;lat<=60;lat+=20){ var pts=[]; for(var lon=-180;lon<=180;lon+=4) pts.push(project(lat,lon)); ctx.strokeStyle="rgba(216,192,148,.35)"; circle(pts); }
+    // meridians
+    for(var m=0;m<12;m++){ var lon0=m*30, pts2=[]; for(var la2=-90;la2<=90;la2+=4) pts2.push(project(la2,lon0)); ctx.strokeStyle="rgba(216,192,148,.4)"; circle(pts2); }
+    // rough continents: dotted landmass blobs (stylized, not geographic data)
+    ctx.fillStyle="rgba(216,192,148,.85)";
+    var blobs=[[-100,42,16],[ -60,-12,11],[15,50,10],[22,6,12],[95,28,11],[135,-26,10],[-78,28,4]];
+    for(var b=0;b<blobs.length;b++){ var bp=project(blobs[b][1],blobs[b][0]); if(bp.z>0.05){ ctx.beginPath(); ctx.arc(bp.x,bp.y,blobs[b][2]*(0.5+bp.z*0.6),0,Math.PI*2); ctx.globalAlpha=0.25+bp.z*0.5; ctx.fill(); ctx.globalAlpha=1; } }
+    // Flagler marker (approx Florida east coast)
+    var fp=project(29.5,-81.2);
+    if(fp.z>0){ ctx.beginPath(); ctx.arc(fp.x,fp.y,7,0,Math.PI*2); ctx.fillStyle="#D8C094"; ctx.fill(); ctx.beginPath(); ctx.arc(fp.x,fp.y,13+Math.sin(Date.now()/300)*3,0,Math.PI*2); ctx.strokeStyle="rgba(216,192,148,.7)"; ctx.lineWidth=2; ctx.stroke(); }
+    rot += reduced?0:0.12;
+    raf=requestAnimationFrame(draw);
+  }
+  draw();
+  document.addEventListener("visibilitychange",function(){ if(document.hidden){ if(raf) cancelAnimationFrame(raf); raf=null; } else if(!raf){ draw(); } });
+})();
+
+/* ---------- OPEN / CLOSE ---------- */
+function animateCounters(){
+  document.querySelectorAll("[data-count]").forEach(function(el){
+    var target=parseInt(el.getAttribute("data-count"),10);
+    if(reduced){ el.textContent=target; return; }
+    var t0=null;
+    function step(ts){ if(!t0) t0=ts; var p=Math.min(1,(ts-t0)/1100); el.textContent=Math.round(target*(1-Math.pow(1-p,3))); if(p<1) requestAnimationFrame(step); }
+    requestAnimationFrame(step);
+  });
+}
+function initMap(){
+  if(mapReady) return;
+  try{
+    map=L.map("map",{scrollWheelZoom:true}).setView([20,-40],2);
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"© OpenStreetMap contributors"}).addTo(map);
+    FACILITIES.forEach(function(f,i){
+      var m=L.marker([f.lat,f.lng],{icon:iconFor(f,i)}).addTo(map);
+      m.bindPopup("<strong style='font-family:Playfair Display,serif;font-size:15px'>"+f.name+"</strong><br>"+f.address+"<br><em style='color:#8C6E3E'>"+f.badge+"</em>");
+      m.on("click",function(){ selectFacility(f.id,false); });
+      markers[f.id]=m;
+    });
+    mapReady=true;
+  }catch(e){
+    document.getElementById("map").innerHTML='<div style="padding:24px;font-size:14px">Map could not load here — use the facility cards below. Every place and its news is still listed.</div>';
+  }
+}
+var pendingFacilityId=null, quickOpen=false, howShownThisSession=false;
+function showHow(){
+  var ov=document.getElementById("howOverlay"); if(!ov) return;
+  ov.hidden=false; howShownThisSession=true;
+  var start=document.getElementById("howStart"); if(start) setTimeout(function(){ try{ start.focus({preventScroll:true}); }catch(e){} },60);
+}
+function hideHow(){
+  var ov=document.getElementById("howOverlay"); if(!ov) return;
+  ov.hidden=true;
+  var s=document.getElementById("facilitySearch"); if(s && !reduced){ /* keep focus in page, do not force */ }
+}
+function openCounty(filter){
+  if(filter) pendingFilter=filter;
+  var hero=document.getElementById("globeHero"), app=document.getElementById("app");
+  if(opened){ if(pendingFilter){ setFilter(pendingFilter); pendingFilter=null; } if(pendingFacilityId){ var pf=facilityById(pendingFacilityId); pendingFacilityId=null; if(pf) selectFacility(pf.id,true); } app.scrollIntoView({behavior:reduced?"auto":"smooth"}); return; }
+  opened=true;
+  hero.classList.add("opening");
+  var delay=(reduced||quickOpen)?60:650;
+  setTimeout(function(){
+    hero.classList.add("gone");
+    app.hidden=false;
+    requestAnimationFrame(function(){ app.classList.add("shown"); });
+    initMap();
+    var startF=pendingFacilityId?facilityById(pendingFacilityId):FACILITIES[0];
+    if(!startF) startF=FACILITIES[0];
+    selectedId=startF.id;
+    renderPanel(startF); renderCards(); animateCounters();
+    if(pendingFilter){ setFilter(pendingFilter); pendingFilter=null; }
+    window.scrollTo({top:0,behavior:"auto"});
+    var wasDeepLink=!!(pendingFacilityId||slugFromHash());
+    if(map){ setTimeout(function(){ map.invalidateSize(); if(pendingFacilityId||slugFromHash()){ var tf=startF; map.setView([tf.lat,tf.lng],13); if(markers[tf.id]){ setTimeout(function(){ markers[tf.id].openPopup(); bouncePin(tf.id); },250); } setHashFor(tf,true); } else { map.flyTo([29.49,-81.24],11,{duration:reduced?0:2.2}); } pendingFacilityId=null; quickOpen=false; if(!wasDeepLink && !howShownThisSession){ setTimeout(showHow, reduced?120:650); } },80); }
+    else { pendingFacilityId=null; quickOpen=false; if(!wasDeepLink && !howShownThisSession){ setTimeout(showHow,200); } }
+  }, delay);
+}
+function backToGlobe(){
+  hideHow();
+  var hero=document.getElementById("globeHero"), app=document.getElementById("app");
+  opened=false;
+  app.classList.remove("shown"); app.hidden=true;
+  hero.classList.remove("gone"); hero.classList.remove("opening");
+  try{ if(window.history&&window.history.replaceState) window.history.replaceState(null,"","#"); }catch(e){}
+  window.scrollTo({top:0,behavior:"auto"});
+  document.getElementById("globeStage").focus({preventScroll:true});
+}
+document.getElementById("openBtn").addEventListener("click",function(){ openCounty(null); });
+var stage=document.getElementById("globeStage");
+stage.addEventListener("click",function(e){ if(e.target.closest(".orbit-pill")) return; openCounty(null); });
+stage.addEventListener("keydown",function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); openCounty(null); } });
+document.querySelectorAll(".orbit-pill").forEach(function(p){
+  p.addEventListener("click",function(e){ e.stopPropagation(); openCounty(p.getAttribute("data-goto-filter")); });
+});
+document.getElementById("globeBtn").addEventListener("click",backToGlobe);
+(function initHow(){
+  var howBtn=document.getElementById("howBtn");
+  if(howBtn) howBtn.addEventListener("click",showHow);
+  var closeBtn=document.getElementById("howClose");
+  if(closeBtn) closeBtn.addEventListener("click",hideHow);
+  var startBtn=document.getElementById("howStart");
+  if(startBtn) startBtn.addEventListener("click",function(){ hideHow(); var s=document.getElementById("facilitySearch"); if(s){ s.scrollIntoView({behavior:reduced?"auto":"smooth",block:"center"}); } });
+  var ov=document.getElementById("howOverlay");
+  if(ov) ov.addEventListener("click",function(e){ if(e.target===ov) hideHow(); });
+  document.addEventListener("keydown",function(e){ if(e.key==="Escape"){ var o=document.getElementById("howOverlay"); if(o && !o.hidden) hideHow(); } });
+})();
+
+/* ---------- SEARCH ---------- */
+var SEARCH_KEYWORDS={
+  1:"bocc board of county commissioners county commission school board animal control humane society contract public records calendar 2027-28 instructional calendar approved ruddy moon wood boarddocs",
+  2:"court courthouse clerk of court judge hearing docket justice center trial",
+  3:"palm coast city hall city council vice mayor budget fire station 22 impact fee transportation old kings road",
+  4:"ymca pool swimming town center central ave lease school board $3m $14m olympic pool",
+  5:"bunnell city hall administration quiet",
+  6:"bunnell commission chambers city commission wastewater srf state revolving fund sa-hmw dep florida dep hearing resolution 2026-16 resolution 2026-17 budget rezone ordinance 2026-20 2026-21 2026-22 legislative priorities cold weather shelter generator ring power manhole street sweeping landfill project butterfly",
+  7:"flagler beach city hall city commission trailer rv parking paid parking ordinance 2026-28 oceanfront",
+  8:"flagler beach pier fishing ocean shore construction pier opening",
+  9:"humane society animal control shelter dog dogs cat cats animal shelter contract dangerous dog rabies",
+  10:"sheriff sheriffs office law enforcement police public safety amendment 3 tax mstu staly hiring freeze patrol",
+  11:"library public library books reading palm coast parkway community schools"
+};
+function searchTextFor(f){
+  var catsText=(f.cats||[]).map(function(c){ return CAT_LABEL[c]||c; }).join(" ");
+  var bulletsText=(f.bullets||[]).join(" ");
+  var tlText=(f.timeline||[]).map(function(t){ return t.d+" "+t.t; }).join(" ");
+  return [f.name,f.short,f.address,f.type,f.badge,f.headline,bulletsText,f.next,tlText,catsText,SEARCH_KEYWORDS[f.id]||""].join(" ").toLowerCase();
+}
+function scoreFacility(f,q,tokens){
+  var hay=searchTextFor(f);
+  var nameHay=(f.name+" "+f.type+" "+f.short).toLowerCase();
+  var score=0;
+  if(hay.indexOf(q)>-1) score+=40;
+  if(nameHay.indexOf(q)>-1) score+=60;
+  for(var i=0;i<tokens.length;i++){
+    var t=tokens[i]; if(!t) continue;
+    if(hay.indexOf(t)===-1) return -1;
+    if(nameHay.indexOf(t)>-1) score+=18;
+    else if((SEARCH_KEYWORDS[f.id]||"").toLowerCase().indexOf(t)>-1) score+=12;
+    else score+=6;
+  }
+  if(f.active) score+=2;
+  return score;
+}
+function goToSearchResult(f){
+  if(!f) return;
+  // If a layer filter would hide this place, reset to All so its pin and card are visible
+  if(currentFilter!=="all" && f.cats.indexOf(currentFilter)===-1){ setFilter("all"); }
+  selectFacility(f.id,true);
+  var input=document.getElementById("facilitySearch");
+  var hint=document.getElementById("searchHint");
+  if(hint) hint.textContent="Found: "+f.name+" — map flying there and opening its card.";
+  // On mobile, bring the map into view so the fly-to is visible
+  var mw=document.querySelector(".map-wrap");
+  if(mw && window.innerWidth<900){ setTimeout(function(){ mw.scrollIntoView({behavior:reduced?"auto":"smooth",block:"start"}); },60); }
+}
+(function initSearch(){
+  var input=document.getElementById("facilitySearch");
+  var results=document.getElementById("searchResults");
+  var clearBtn=document.getElementById("searchClear");
+  var hint=document.getElementById("searchHint");
+  if(!input||!results) return;
+  var currentMatches=[];
+  function hideResults(){ results.hidden=true; results.innerHTML=""; input.setAttribute("aria-expanded","false"); currentMatches=[]; }
+  function clearSearch(){ input.value=""; if(clearBtn) clearBtn.hidden=true; hideResults(); if(hint) hint.textContent="Search by place, board, or topic — tap a result and the map flies there and opens its card."; }
+  function render(q){
+    var query=(q||"").trim().toLowerCase();
+    if(clearBtn) clearBtn.hidden=!query;
+    if(query.length<2){ hideResults(); return; }
+    var tokens=query.split(/\s+/).filter(Boolean);
+    var scored=[];
+    FACILITIES.forEach(function(f){ var s=scoreFacility(f,query,tokens); if(s>=0) scored.push({f:f,s:s}); });
+    scored.sort(function(a,b){ return b.s-a.s || a.f.name.localeCompare(b.f.name); });
+    currentMatches=scored.map(function(x){ return x.f; });
+    if(!scored.length){
+      results.innerHTML='<div class="search-empty" role="status"><strong>No matches for “'+query.replace(/</g,"&lt;")+'”.</strong><br>Try a building name (City Hall, Library, Pier), a board (School Board, BOCC, City Council), or a topic (YMCA, animal control, wastewater, parking).</div>';
+      results.hidden=false; input.setAttribute("aria-expanded","true"); return;
+    }
+    results.innerHTML=scored.map(function(x){
+      var f=x.f;
+      var bc=f.active?"badge-news":(f.badge.indexOf("UP NEXT")===0?"badge-next":"badge-quiet");
+      return '<button type="button" class="search-result" role="option" data-search-id="'+f.id+'"><span class="sr-ic" aria-hidden="true">'+f.icon+'</span><span class="sr-main"><span class="sr-name">'+f.name+'</span><span class="sr-meta" style="display:block">'+f.address+' · '+f.type+'</span><span class="sr-head">'+f.headline+'</span></span><span class="badge '+bc+' sr-badge">'+f.badge+'</span></button>';
+    }).join("");
+    results.hidden=false; input.setAttribute("aria-expanded","true");
+    results.querySelectorAll(".search-result").forEach(function(btn){
+      btn.addEventListener("click",function(){ var f=facilityById(parseInt(btn.getAttribute("data-search-id"),10)); goToSearchResult(f); });
+    });
+    if(hint) hint.textContent=scored.length+(scored.length===1?" match":" matches")+" — tap a result and the map flies there.";
+  }
+  input.addEventListener("input",function(){ render(input.value); });
+  input.addEventListener("keydown",function(e){
+    if(e.key==="Enter"){ e.preventDefault(); if(currentMatches.length) goToSearchResult(currentMatches[0]); }
+    else if(e.key==="Escape"){ clearSearch(); }
+  });
+  if(clearBtn) clearBtn.addEventListener("click",function(){ clearSearch(); input.focus(); });
+})();
+
+/* ---------- MAP APP ---------- */
+function iconFor(f,i){
+  var cls=f.active?"pin-gold":"pin-gray";
+  var pulse=f.active?'<div class="pin-pulse"></div>':'';
+  var delay=reduced?0:(i*0.09);
+  var html='<div class="custom-pin" id="pin-'+f.id+'" style="animation-delay:'+delay+'s">'+pulse+'<div class="pin-core '+cls+'"><span>'+(f.active?"●":"○")+'</span></div></div>';
+  return L.divIcon({className:"",html:html,iconSize:[38,38],iconAnchor:[19,19],popupAnchor:[0,-16]});
+}
+function mapsLink(q){ return "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q); }
+function esc(s){ return s; }
+function renderPanel(f){
+  var panel=document.getElementById("detailPanel");
+  var tags=f.cats.map(function(c){ return '<span class="tag">'+CAT_LABEL[c]+'</span>'; }).join("");
+  var statusTag=f.active?'<span class="tag tag-gold">'+f.badge+'</span>':'<span class="tag tag-quiet">'+f.badge+'</span>';
+  var news=f.bullets.map(function(b,i){ return '<div class="news-item" style="animation-delay:'+(i*0.07)+'s"><span class="mk">◆</span><p>'+b+'</p></div>'; }).join("");
+  var tl=f.timeline.map(function(t,i){ return '<div class="tl-item" style="animation-delay:'+(i*0.08)+'s"><div class="tl-date">'+t.d+'</div><div class="tl-text">'+t.t+'</div></div>'; }).join("");
+  panel.innerHTML='<div class="panel-inner"><div class="panel-head"><div class="medallion" aria-hidden="true">'+f.icon+'</div><div class="eyebrow">'+f.type+'</div><h2>'+f.name+'</h2><div class="panel-addr">📍 '+f.address+'</div><div class="panel-headline">“'+f.headline+'”</div><div class="gold-rule"><span>◆ ◆ ◆</span></div><div class="panel-meta">'+statusTag+tags+'</div></div>'+
+  '<div class="panel-body"><div class="section-label">What happened this week</div>'+news+
+  '<div class="section-label">Who meets here</div><div class="meets">'+(MEETS[f.id]||'<p>Meeting info not verified yet.</p>')+'</div>'+
+  '<div class="section-label">What\'s next</div><div class="next-box"><span class="nb-label">◎ Next</span>'+f.next+'</div>'+
+  '<div class="section-label">Timeline</div><div class="timeline">'+tl+'</div>'+
+  '<div class="panel-actions"><button class="btn btn-share" id="shareBtn" type="button">↗ Share this building</button><button class="btn btn-follow" id="followBtn" type="button" aria-expanded="false">＋ Follow this building</button><a class="btn btn-gold" target="_blank" rel="noopener" href="'+mapsLink(f.mapsQ)+'">Open in Maps ↗</a><button class="btn" id="zoomBtn" type="button">Zoom to pin</button></div><div class="share-note" id="shareNote" role="status" aria-live="polite"></div><div class="follow-panel" id="followPanel" hidden><p><strong>Alerts for this building are coming soon.</strong> We\'re not collecting signups inside the map yet. To be first to know when '+f.name+' has news, email us and we\'ll add you to the early list:</p><a class="follow-mail" href="mailto:coastalenterprises386@gmail.com?subject='+encodeURIComponent("Follow: "+f.name)+'&amp;body='+encodeURIComponent("Please let me know when there is news at "+f.name+" ("+f.address+").")+'">Email to follow '+f.name+' →</a><p style="margin:10px 0 0;font-size:12.5px;color:#B9C8DE">Subject is pre-filled: “Follow: '+f.name+'” — just press send.</p></div></div></div>';
+  var zb=document.getElementById("zoomBtn");
+  if(zb) zb.addEventListener("click",function(){ if(map) map.flyTo([f.lat,f.lng],14,{duration:reduced?0:.8}); bouncePin(f.id); document.querySelector(".map-wrap").scrollIntoView({behavior:reduced?"auto":"smooth",block:"start"}); });
+  var sb=document.getElementById("shareBtn");
+  if(sb) sb.addEventListener("click",function(){ shareFacility(f,sb); });
+  var fb=document.getElementById("followBtn");
+  var fp=document.getElementById("followPanel");
+  if(fb&&fp) fb.addEventListener("click",function(){ var open=fp.hidden; fp.hidden=!open; fb.setAttribute("aria-expanded",open?"true":"false"); fb.textContent=open?"− Following — alerts coming soon":"＋ Follow this building"; if(open) fp.scrollIntoView({behavior:reduced?"auto":"smooth",block:"nearest"}); });
+}
+function bouncePin(id){
+  var el=document.getElementById("pin-"+id);
+  if(el && !reduced){ el.classList.remove("pin-bounce"); void el.offsetWidth; el.classList.add("pin-bounce"); }
+}
+function shareFacility(f,btn){
+  var url=deepLinkFor(f);
+  var title="This week at "+f.name;
+  var text=f.headline+" — PublicDocket Map · Flagler County";
+  var note=document.getElementById("shareNote");
+  function copied(){ if(note) note.textContent="Building link copied ("+url+") — add it to the end of the page link and it opens straight to this building."; if(btn){ var old=btn.textContent; btn.textContent="✓ Link copied"; setTimeout(function(){ btn.textContent=old; if(note) note.textContent=""; },3200); } }
+  function fallbackCopy(){
+    if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(url).then(copied).catch(function(){ legacyCopy(); }); } else { legacyCopy(); }
+  }
+  function legacyCopy(){
+    try{ var ta=document.createElement("textarea"); ta.value=url; ta.style.position="fixed"; ta.style.opacity="0"; document.body.appendChild(ta); ta.select(); document.execCommand("copy"); document.body.removeChild(ta); copied(); }catch(e){ if(note) note.textContent="Copy this link: "+url; }
+  }
+  if(navigator.share){
+    navigator.share({title:title,text:text,url:url}).then(function(){ if(note) note.textContent="Thanks for sharing "+f.name+"."; }).catch(function(err){ if(err&&err.name==="AbortError") return; fallbackCopy(); });
+  } else { fallbackCopy(); }
+}
+function renderCards(){
+  var wrap=document.getElementById("cards");
+  var visible=FACILITIES.filter(function(f){ return currentFilter==="all"||f.cats.indexOf(currentFilter)>-1; });
+  document.getElementById("countLabel").textContent=visible.length+(visible.length===1?" place":" places")+(currentFilter==="all"?"":" in this layer");
+  wrap.innerHTML=visible.map(function(f,i){
+    var bc=f.active?"badge-news":(f.badge.indexOf("UP NEXT")===0?"badge-next":"badge-quiet");
+    return '<button class="card'+(f.id===selectedId?' active':'')+'" data-id="'+f.id+'" style="animation-delay:'+(i*0.05)+'s"><div class="ic" aria-hidden="true">'+f.icon+'</div><div class="card-top"><h4>'+f.name+'</h4><span class="badge '+bc+'">'+f.badge+'</span></div><p>'+f.headline+'</p><div class="addr">'+f.address+' · '+f.short+'</div></button>';
+  }).join("");
+  wrap.querySelectorAll(".card").forEach(function(btn){ btn.addEventListener("click",function(){ selectFacility(parseInt(btn.getAttribute("data-id"),10),true); }); });
+}
+function selectFacility(id,fly){
+  selectedId=id;
+  var f=FACILITIES.filter(function(x){ return x.id===id; })[0];
+  if(!f) return;
+  setHashFor(f,true);
+  renderPanel(f); renderCards();
+  if(map&&markers[id]){
+    if(!map.hasLayer(markers[id])) markers[id].addTo(map);
+    if(fly) map.flyTo([f.lat,f.lng],Math.max(map.getZoom(),12),{duration:reduced?0:.9});
+    setTimeout(function(){ markers[id].openPopup(); bouncePin(id); }, reduced?0:450);
+  }
+  if(window.innerWidth<900){ document.getElementById("detailPanel").scrollIntoView({behavior:reduced?"auto":"smooth",block:"start"}); }
+}
+function applyFilter(){
+  if(!map) { renderCards(); return; }
+  FACILITIES.forEach(function(f){
+    var show=currentFilter==="all"||f.cats.indexOf(currentFilter)>-1;
+    var m=markers[f.id]; if(!m) return;
+    if(show){ if(!map.hasLayer(m)) m.addTo(map); } else if(map.hasLayer(m)) map.removeLayer(m);
+  });
+  renderCards();
+}
+function setFilter(name){
+  currentFilter=name;
+  document.querySelectorAll(".chip").forEach(function(c){ c.setAttribute("aria-pressed", c.getAttribute("data-filter")===name?"true":"false"); });
+  applyFilter();
+}
+document.querySelectorAll(".chip").forEach(function(ch){
+  ch.addEventListener("click",function(){ setFilter(ch.getAttribute("data-filter")); });
+});
+/* Launch kit copy buttons */
+document.querySelectorAll(".copy-btn").forEach(function(btn){
+  btn.addEventListener("click",function(){
+    var el=document.getElementById(btn.getAttribute("data-copy")); if(!el) return;
+    var txt=el.textContent.trim();
+    function done(){ var old=btn.textContent; btn.textContent="✓ Copied"; setTimeout(function(){ btn.textContent=old; },2000); }
+    if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(done).catch(function(){ done(); }); } else { try{ var ta=document.createElement("textarea"); ta.value=txt; ta.style.position="fixed"; ta.style.opacity="0"; document.body.appendChild(ta); ta.select(); document.execCommand("copy"); document.body.removeChild(ta); }catch(e){} done(); }
+  });
+});
+/* Deep links: #building=<slug> opens straight to that building */
+window.addEventListener("hashchange",function(){
+  var s=slugFromHash(); if(!s) return; var f=facilityBySlug(s); if(!f) return;
+  if(!opened){ pendingFacilityId=f.id; quickOpen=true; openCounty(null); } else if(f.id!==selectedId){ selectFacility(f.id,true); }
+});
+(function initDeepLink(){
+  var s=slugFromHash(); if(!s) return; var f=facilityBySlug(s); if(!f) return;
+  pendingFacilityId=f.id; quickOpen=true;
+  if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded",function(){ openCounty(null); }); } else { setTimeout(function(){ openCounty(null); },30); }
+})();
+</script>
+</body>
+</html>
