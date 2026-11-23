@@ -732,10 +732,30 @@ function bouncePin(id){
   var el=document.getElementById("pin-"+id);
   if(el && !reduced){ el.classList.remove("pin-bounce"); void el.offsetWidth; el.classList.add("pin-bounce"); }
 }
+/* Ready-to-post share lines — each building's own verified headline item from the
+   sample week (Nov 16–22, 2026), researched from official agendas and local reporting.
+   Buildings with no entry here (Bunnell City Hall, the library) were quiet this week
+   and get the honest quiet-week line instead of an invented headline. */
+var SHARE_LINES={
+1:"County commissioners approved a $350,000 one-year animal-control contract with the Flagler Humane Society 5–0 on Nov 16, ending a nearly four-week lapse; the School Board seated its new members Nov 17, approved the 2027–28 school calendar 4–1 and its $3M YMCA share unanimously, and elected Lauren Ramirez chair and Janie Ruddy vice chair.",
+2:"No board news here this week — no board meets here; this is the Clerk of the Circuit Court & Comptroller's building. For what's happening here, check the court docket.",
+3:"Three new council members were sworn in Nov 17 and Ty Miller was named Vice Mayor 4–1.",
+4:"The School Board approved its $3M share unanimously Nov 17 for the roughly $14M YMCA, on a 35-year lease.",
+6:"No meeting this week — next is tonight, Mon Nov 23 at 7:00 p.m., a public hearing on Resolution 2026-16, the wastewater treatment facility plan and State Revolving Fund support.",
+7:"No meeting this week; last met Nov 12 (first reading of Ordinance 2026-28 on trailer and RV parking rules); next meeting Thu Dec 10.",
+8:"The pier is under reconstruction as a new concrete structure (closed since fall 2022); substantial completion is targeted for January 2027.",
+9:"The county approved a $350,000 one-year animal-control contract 5–0 on Nov 16, ending a nearly four-week lapse in coverage.",
+10:"No board meets here. Sheriff Staly expects about a $15.5 million revenue loss from Amendment 3 and has frozen hiring."
+};
+function shareTextFor(f){
+  var line=SHARE_LINES[f.id];
+  if(!line) return "Quiet this week at "+f.name+" — no meeting and no new item.";
+  return "This week at "+f.name+": "+line;
+}
 function shareFacility(f,btn){
   var url=deepLinkFor(f);
   var title="This week at "+f.name;
-  var text=f.headline+" — On The Record · Flagler County";
+  var text=shareTextFor(f);
   var note=document.getElementById("shareNote");
   function copied(){ if(note) note.textContent="Building link copied ("+url+") — add it to the end of the page link and it opens straight to this building."; if(btn){ var old=btn.textContent; btn.textContent="✓ Link copied"; setTimeout(function(){ btn.textContent=old; if(note) note.textContent=""; },3200); } }
   function fallbackCopy(){
