@@ -15,6 +15,7 @@
   gtag('js', new Date());
   gtag('config', 'G-RM6ZJVB04K');
 </script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -248,6 +249,17 @@ button{font-family:inherit;min-height:40px} a{color:var(--navy)}
 .copy-btn{margin-top:10px;background:var(--gold);color:#0A2342;border:none;font-weight:800;font-size:12.5px;padding:9px 14px;border-radius:999px;cursor:pointer}
 .copy-btn:hover{background:#C6A26B}
 @media(max-width:900px){.launch-grid{grid-template-columns:1fr}.launch{padding-left:14px;padding-right:14px}}
+.newsletter{max-width:1180px;margin:0 auto;padding:10px 20px 6px}
+.newsletter-box{background:linear-gradient(180deg,var(--navy2),var(--navy));color:#fff;border-radius:20px;padding:28px 22px;text-align:center;box-shadow:0 16px 38px rgba(10,35,66,.22)}
+.newsletter-box h3{margin:6px 0 8px;font-family:"Playfair Display",serif;font-size:28px;line-height:1.12;font-weight:800}
+.newsletter-box h3 span{color:var(--gold2);font-style:italic;font-weight:500}
+.newsletter-box p{margin:0 auto;max-width:640px;color:#C7D3E6;font-size:15px;line-height:1.6}
+.newsletter-embed{margin:20px auto 0;max-width:480px;width:100%}
+.newsletter-embed iframe{width:100%;max-width:480px;height:150px;border:0;border-radius:12px;background:#fff;display:block;margin:0 auto}
+.newsletter-fallback{margin-top:14px;font-size:14px}
+.newsletter-fallback a{color:var(--gold2);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.newsletter-fallback a:hover{color:#F3EAD6}
+@media(max-width:900px){.newsletter{padding-left:14px;padding-right:14px}.newsletter-box h3{font-size:24px}}
 footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
 .footer-box{border-top:1px solid var(--line);padding-top:14px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12.5px;line-height:1.6;color:var(--muted)}
 .footer-box strong{color:var(--navy)}
@@ -325,7 +337,7 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
         <span class="pill pill-week">Week of Nov 16–22, 2026</span>
         <span class="pill pill-by">Flagler Coastal Enterprises</span>
       </div>
-      <h1>On The Record — <span>Flagler County</span></h1>
+      <h1>On The Record Map — <span>Flagler County</span></h1>
       <p class="subtitle">Click a building, see what's happening there. <strong>Government, in plain English.</strong> Gold pins had news this week. Gray pins were quiet.</p>
     </div>
     <div class="topbar-actions">
@@ -406,7 +418,7 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
     <div class="launch-grid">
       <div class="launch-card"><h4>1 · Launch post — copy &amp; paste</h4><blockquote id="launchPost">Flagler County government, on a map. 🗺️
 
-We built the On The Record: tap a building — City Hall, the courthouse, the pier, the YMCA site — and see what was decided there, what's next, and when, in plain English.
+We built the On The Record Map: tap a building — City Hall, the courthouse, the pier, the YMCA site — and see what was decided there, what's next, and when, in plain English.
 
 Gold pins had news this week. Start with Palm Coast City Hall or the Government Services Building and explore from there.
 
@@ -415,11 +427,23 @@ Gold pins had news this week. Start with Palm Coast City Hall or the Government 
 
 See what it means, what's next, and the timeline — on the map 👇
 [Paste that building's Share link here]</blockquote><button class="copy-btn" data-copy="hotPost" type="button">Copy template</button><p style="margin-top:10px">Use this the day a pin lights up — Bunnell wastewater hearing Nov 23, Amendment 3 in December, the YMCA decision. Always share the building link, not just the homepage.</p></div>
-      <div class="launch-card"><h4>3 · 45-second demo video script</h4><ol><li><strong>0–5s:</strong> Globe on screen. “What if county government had a map?”</li><li><strong>5–15s:</strong> Tap the globe — fly into Flagler. “Every public building. Gold means news this week.”</li><li><strong>15–30s:</strong> Tap Palm Coast City Hall. “New council, two budget votes — in plain English.”</li><li><strong>30–40s:</strong> Tap Share this building. “Send one building to anyone, with one link.”</li><li><strong>40–45s:</strong> “On The Record — link below. Follow the buildings you care about.”</li></ol><p>Film it as a screen recording on your phone — no face on camera needed.</p></div>
+      <div class="launch-card"><h4>3 · 45-second demo video script</h4><ol><li><strong>0–5s:</strong> Globe on screen. “What if county government had a map?”</li><li><strong>5–15s:</strong> Tap the globe — fly into Flagler. “Every public building. Gold means news this week.”</li><li><strong>15–30s:</strong> Tap Palm Coast City Hall. “New council, two budget votes — in plain English.”</li><li><strong>30–40s:</strong> Tap Share this building. “Send one building to anyone, with one link.”</li><li><strong>40–45s:</strong> “On The Record Map — link below. Follow the buildings you care about.”</li></ol><p>Film it as a screen recording on your phone — no face on camera needed.</p></div>
       <div class="launch-card"><h4>4 · For realtors &amp; new residents</h4><blockquote id="realtorBlurb">Moving to Flagler County? Watch your neighborhood before you buy: what's being built, what's being taxed, and what's being decided — building by building, on one map. Free, in plain English, from a Palm Coast company.</blockquote><button class="copy-btn" data-copy="realtorBlurb" type="button">Copy blurb</button><p style="margin-top:10px">Send the page link with this blurb to 5–10 local realtors as a resource they can forward to clients.</p></div>
       <div class="launch-card"><h4>5 · Go-live checklist</h4><ul><li>Load a second, fresh week of news</li><li>Share the page from Spaces to get the public link</li><li>Test the link in a private browser window + on a phone</li><li>Test one building Share link end-to-end</li><li>Post the launch post on the Facebook Page</li><li>Help answer one hot thread in a local group — with the sourced building link</li><li>Send the realtor blurb to your first 5 contacts</li></ul></div>
       <div class="launch-card"><h4>6 · What success looks like</h4><p>Count four things each week: link taps per post, how many visitors open a second building, Follow emails received per building, and shares by people you don't know. If a hot-news post can't move those, more posting won't fix it — better news timing will.</p><p style="margin:0">Kept parked until you say go: no posts, no emails, and no schedule have been sent from this kit.</p></div>
     </div>
+  </div>
+</section>
+
+<section class="newsletter" aria-label="Newsletter subscribe">
+  <div class="newsletter-box">
+    <div class="eyebrow" style="color:var(--gold2)">Newsletter</div>
+    <h3>On The Record — in your inbox, every Sunday</h3>
+    <p>The week's Flagler County votes, development, and roadwork — in plain English. Free, every Sunday.</p>
+    <div class="newsletter-embed">
+      <iframe src="https://flaglercoastalenterprises.substack.com/embed" title="Subscribe to On The Record on Substack" loading="lazy"></iframe>
+    </div>
+    <div class="newsletter-fallback"><a href="https://flaglercoastalenterprises.substack.com/" target="_blank" rel="noopener">Prefer to subscribe on Substack →</a></div>
   </div>
 </section>
 
@@ -428,7 +452,7 @@ See what it means, what's next, and the timeline — on the map 👇
     <div>News for Nov 16–22, 2026, researched from official agendas and local reporting. Fire Station 22 has no separate pin — its location could not be verified reliably, so its $230k budget news lives under Palm Coast City Hall.
     <div style="margin-top:8px"><strong>Share the map:</strong> use any building's Share button, or share the page link — every link opens the map, building links open that building.</div>
     </div>
-    <div style="white-space:nowrap">On The Record · Flagler Coastal Enterprises</div>
+    <div style="white-space:nowrap">On The Record Map · Flagler Coastal Enterprises</div>
   </div>
 </footer>
 
@@ -466,7 +490,7 @@ var FACILITIES = [
   {id:8, icon:"🎣", name:"Flagler Beach Pier", short:"New pier · Ocean Shore Blvd", address:"S Ocean Shore Blvd, Flagler Beach", type:"Development · Landmark Project", lat:29.47879, lng:-81.12631, cats:["development"], active:true, badge:"UNDER CONSTRUCTION", headline:"The new concrete pier is rising — 28 ft above the sea, built to survive what took the last one.", bullets:["New concrete pier rising 28 ft above sea level, with pylons driven 80–125 ft deep.","On course for a spring opening.","Commission decision: no access charge for the first year or two; planned open hours 5am–10pm."], next:"Spring opening — watch City Hall's pin for any vote on hours, fees, or opening date.", timeline:[{d:"Now", t:"Construction underway — pylons 80–125 ft deep"},{d:"Spring", t:"Planned opening; free access for first year or two"}], mapsQ:"Flagler Beach Pier FL"},
   {id:9, icon:"🐾", name:"Flagler Humane Society", short:"Animal control · Shelter Dr", address:"1 Shelter Dr, Palm Coast", type:"Nonprofit Vendor · County Contract", lat:29.55756, lng:-81.26587, cats:["money"], active:true, badge:"NEWS THIS WEEK", headline:"Won the county contract — after the county went almost a month with none.", bullets:["Mon Nov 16: won the county's 1-year, $350,000 animal-control contract, 5–0 (~$29,166/month).","Covers mandatory services only: dangerous-dog investigations, neglect investigations, rabies quarantines, sheltering animals of detained owners, and help in declared emergencies.","County may exit on 90 days' notice. No audit requirement was added — that was the meeting's main fight (see GSB pin)."], next:"Contract runs 1 year (retroactive in structure to Oct 1 fiscal year). Joint meetings with Palm Coast & Flagler Beach were directed by the BOCC.", timeline:[{d:"Sep 30 / Oct 20", t:"Old contract + extension expire — lapse begins"},{d:"Nov 16", t:"New 1-year $350k contract approved 5–0"}], mapsQ:"Flagler Humane Society 1 Shelter Dr Palm Coast FL"},
   {id:10, icon:"🛡", name:"Flagler County Sheriff's Office", short:"Sheriff · Justice Ln, Bunnell", address:"1001 Justice Ln, Bunnell", type:"Law Enforcement · Public Safety", lat:29.45975, lng:-81.26273, cats:["safety","money"], active:true, badge:"NEWS THIS WEEK", headline:"Amendment 3 hits the Sheriff hardest in dollars — and a new tax is already being floated to fill it.", bullets:["Sheriff Rick Staly expects ~$15.5M revenue loss next fiscal year from Amendment 3.","Hiring freeze already in place; a patrol-car order was cancelled.","A dedicated law-enforcement MSTU (a separate taxing unit) is being discussed as a workaround — discussed, NOT adopted.","Sheriff declined to take over animal control, citing cost — “Nobody wants animal control,” per Commissioner Carney at the Nov 16 meeting."], next:"December–January: watch whether the MSTU moves from talk to a formal BOCC agenda item.", timeline:[{d:"Nov 3", t:"Voters approve Amendment 3"},{d:"Nov 9 workshop", t:"Sheriff: office does not want animal control"},{d:"This fall", t:"Hiring freeze; patrol-car order cancelled"}], mapsQ:"Flagler County Sheriff Office 1001 Justice Ln Bunnell FL"},
-  {id:11, icon:"📚", name:"Flagler County Public Library — Palm Coast", short:"Library · Palm Coast Pkwy", address:"2500 Palm Coast Pkwy NW, Palm Coast", type:"Public Library · Community / Schools", lat:29.55416, lng:-81.23815, cats:["schools"], active:false, badge:"QUIET THIS WEEK", headline:"Quiet this week — and that's the point of this pin.", bullets:["No news items for this facility in the Nov 16–22 week.","A real On The Record needs quiet pins too — otherwise “no pin” would look like “doesn't exist.” Every public building gets a page; most weeks, most pages are quiet."], next:"No upcoming item this week.", timeline:[{d:"This week", t:"No items — quiet"}], mapsQ:"Flagler County Public Library Palm Coast 2500 Palm Coast Pkwy NW"}
+  {id:11, icon:"📚", name:"Flagler County Public Library — Palm Coast", short:"Library · Palm Coast Pkwy", address:"2500 Palm Coast Pkwy NW, Palm Coast", type:"Public Library · Community / Schools", lat:29.55416, lng:-81.23815, cats:["schools"], active:false, badge:"QUIET THIS WEEK", headline:"Quiet this week — and that's the point of this pin.", bullets:["No news items for this facility in the Nov 16–22 week.","A real On The Record map needs quiet pins too — otherwise “no pin” would look like “doesn't exist.” Every public building gets a page; most weeks, most pages are quiet."], next:"No upcoming item this week.", timeline:[{d:"This week", t:"No items — quiet"}], mapsQ:"Flagler County Public Library Palm Coast 2500 Palm Coast Pkwy NW"}
 ];
 /* "Who meets here" — meeting cadence, official agenda/video links and public-records contacts.
    Researched & verified Nov 21, 2026 from the On The Record archive and the official sites linked.
