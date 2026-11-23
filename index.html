@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light">
 <link rel="icon" href="data:,">
-<title>On The Record — Flagler County Prototype</title>
+<title>On The Record Map — Flagler County Prototype</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -18,7 +18,7 @@ button{font-family:inherit;min-height:40px} a{color:var(--navy)}
 .eyebrow{font-size:11px;letter-spacing:.22em;font-weight:800;text-transform:uppercase;color:var(--gold)}
 .orn{display:flex;align-items:center;gap:10px;justify-content:center}.orn:before,.orn:after{content:"";height:1px;width:44px;background:linear-gradient(90deg,transparent,var(--gold))}.orn:after{background:linear-gradient(90deg,var(--gold),transparent)}.orn span{color:var(--gold);font-size:12px}
 /* ===== GLOBE HERO ===== */
-#globeHero{position:relative;min-height:100svh;background:radial-gradient(ellipse 90% 60% at 50% 38%,#163d68 0%,var(--navy) 55%,#06172e 100%);color:#fff;overflow:hidden;display:flex;flex-direction:column;align-items:center;padding:28px 18px 36px;text-align:center;transition:opacity .7s ease,transform .9s cubic-bezier(.6,0,.2,1)}
+#globeHero{position:fixed;inset:0;z-index:1400;overflow-y:auto;overscroll-behavior:contain;background:radial-gradient(ellipse 90% 60% at 50% 38%,#163d68 0%,var(--navy) 55%,#06172e 100%);color:#fff;display:flex;flex-direction:column;align-items:center;padding:28px 18px 36px;text-align:center;transition:opacity .7s ease,transform .9s cubic-bezier(.6,0,.2,1)}
 #globeHero.opening{transform:scale(1.06);opacity:0;pointer-events:none}
 #globeHero.gone{display:none}
 .hero-pills{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;z-index:3}
@@ -78,6 +78,27 @@ button{font-family:inherit;min-height:40px} a{color:var(--navy)}
 .topbar-actions{display:flex;gap:8px;flex-wrap:wrap;flex-shrink:0}
 #howBtn{background:var(--gold);border:1px solid var(--gold);color:#0A2342;border-radius:999px;padding:10px 16px;font-weight:800;font-size:13px;cursor:pointer;transition:transform .2s,background .2s}
 #howBtn:hover{background:#C6A26B;transform:translateY(-1px)}
+.globe-close{position:absolute;top:16px;right:16px;z-index:6;background:rgba(255,255,255,.1);border:1px solid rgba(216,192,148,.6);color:#F3EAD6;border-radius:999px;padding:10px 16px;font-weight:700;font-size:13px;cursor:pointer;transition:background .2s}
+.globe-close:hover{background:rgba(178,141,87,.3)}
+/* Map / List view toggle + list view */
+.view-toggle{display:inline-flex;background:#fff;border:1.5px solid #D6CFC0;border-radius:999px;padding:3px;gap:2px;flex-shrink:0}
+.vt-btn{border:none;background:transparent;padding:9px 20px;border-radius:999px;font-size:14px;font-weight:700;color:#5B6577;cursor:pointer;min-height:44px;min-width:88px;transition:background .2s,color .2s}
+.vt-btn[aria-pressed="true"]{background:var(--navy);color:#fff;box-shadow:0 4px 12px rgba(10,35,66,.25)}
+.listview{max-width:1180px;margin:0 auto;padding:4px 20px 6px}
+.listcards{display:grid;grid-template-columns:1fr;gap:10px;margin-top:12px}
+.lcard{display:flex;gap:13px;align-items:flex-start;text-align:left;width:100%;background:#fff;border:1px solid var(--line);border-radius:16px;padding:15px;cursor:pointer;transition:transform .22s,box-shadow .22s,border-color .22s;animation:cardIn .5s both;font-family:inherit}
+.lcard:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 12px 26px rgba(10,35,66,.12)}
+.lcard.active{border-color:var(--navy);box-shadow:0 0 0 2px var(--navy) inset,0 10px 22px rgba(10,35,66,.12)}
+.lcard-ic{font-size:22px;line-height:1.25;flex-shrink:0}
+.lcard-main{flex:1;min-width:0;display:block}
+.lcard-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.lcard-name{font-family:"Playfair Display",serif;font-weight:700;font-size:17px;line-height:1.25;color:var(--navy)}
+.lcard-org{display:block;font-size:12.5px;color:#64748B;margin-top:2px}
+.lcard-head{display:block;font-size:14px;line-height:1.55;color:#334155;margin-top:6px}
+.lcard-addr{display:block;font-size:12.5px;color:#64748B;margin-top:6px}
+.lcard-arrow{align-self:center;color:var(--gold-dark);font-size:19px;font-weight:800;flex-shrink:0}
+.list-empty{border:1px dashed #D6CFC0;border-radius:14px;padding:14px;font-size:14px;line-height:1.55;color:#475569;background:#FFFEFB;margin-top:12px}
+.list-empty strong{color:var(--navy)}
 /* Search */
 .search-wrap{margin-bottom:14px;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:14px 14px 12px;box-shadow:0 8px 22px rgba(10,35,66,.06)}
 .search-label{display:block;font-size:11px;letter-spacing:.18em;font-weight:800;text-transform:uppercase;color:var(--gold-dark);margin-bottom:8px}
@@ -242,7 +263,7 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
  #map{height:52vh;min-height:340px}
  .panel{position:relative;top:auto;border-radius:18px}
  .cards{grid-template-columns:1fr}
- .topbar,.glance,.toolbar,.list-section,footer{padding-left:14px;padding-right:14px}
+ .topbar,.glance,.toolbar,.list-section,.listview,footer{padding-left:14px;padding-right:14px}
  .toolbar-top{flex-direction:column;align-items:flex-start}
  .op3{right:-3%}.op1{left:0}.orbit-pill{font-size:10px;padding:7px 10px}
 }
@@ -252,8 +273,9 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
 </head>
 <body>
 
-<!-- ============ GLOBE HERO ============ -->
-<section id="globeHero" aria-label="Welcome — tap the globe to open the Flagler County map">
+<!-- ============ GLOBE OVERLAY (optional — the map is the main view) ============ -->
+<section id="globeHero" class="gone" aria-label="Globe view — decorative overview. Close it to return to the Flagler County map">
+  <button class="globe-close" id="globeClose" type="button" aria-label="Close the globe view and return to the map">✕ Back to map</button>
   <div class="hero-pills">
     <span class="pill pill-proto">● Prototype</span>
     <span class="pill pill-week">Sample week · Nov 16–22, 2026</span>
@@ -276,7 +298,7 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
     <button class="orbit-pill op5" data-goto-filter="schools">▤ Schools</button>
   </div>
 
-  <button class="cta" id="openBtn">Tap the globe to open Flagler County →</button>
+  <button class="cta" id="openBtn">Open the Flagler County map →</button>
   <div class="hero-hint">11 facilities · one week of real, researched local government news</div>
   <div class="hero-stats">
     <div><b>11</b><span>Facilities</span></div>
@@ -287,7 +309,7 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
 </section>
 
 <!-- ============ APP ============ -->
-<div id="app" hidden>
+<div id="app" class="shown">
 <header class="topbar">
   <div class="topbar-inner">
     <div>
@@ -296,7 +318,7 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
         <span class="pill pill-week">Sample week · Nov 16–22, 2026</span>
         <span class="pill pill-by">Flagler Coastal Enterprises</span>
       </div>
-      <h1>On The Record — <span>Flagler County</span></h1>
+      <h1>On The Record Map — <span>Flagler County</span></h1>
       <p class="subtitle">Click a building, see what's happening there. <strong>Government, in plain English.</strong> Gold pins had news this week. Gray pins were quiet.</p>
     </div>
     <div class="topbar-actions">
@@ -336,9 +358,19 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
       <button class="chip" data-filter="safety" aria-pressed="false"><span class="dot"></span>Public Safety</button>
       <button class="chip" data-filter="schools" aria-pressed="false"><span class="dot"></span>Schools</button>
     </div>
+    <div class="view-toggle" role="group" aria-label="Choose map view or list view">
+      <button class="vt-btn" id="viewMapBtn" type="button" aria-pressed="true">▦ Map</button>
+      <button class="vt-btn" id="viewListBtn" type="button" aria-pressed="false">☰ List</button>
+    </div>
     <div class="legend" aria-label="Pin legend"><span><i class="lg-gold"></i> <strong>Gold pin</strong>&nbsp;= News this week</span><span><i class="lg-gray"></i> <strong>Gray pin</strong>&nbsp;= Quiet this week</span><span id="countLabel">11 places</span></div>
   </div>
 </div>
+
+<section class="listview" id="listView" hidden aria-label="All facilities as a list">
+  <div class="list-head"><h3>All facilities — list view</h3><span id="listCount">11 places · tap a card to open it on the map</span></div>
+  <div class="listcards" id="listCards"></div>
+  <p class="list-empty" id="listEmpty" hidden><strong>No places match.</strong><br>Try a different search word, or tap “All places” above to clear the layer filter.</p>
+</section>
 
 <main class="layout">
   <div class="map-wrap">
@@ -367,7 +399,7 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
     <div class="launch-grid">
       <div class="launch-card"><h4>1 · Launch post — copy &amp; paste</h4><blockquote id="launchPost">Flagler County government, on a map. 🗺️
 
-We built the On The Record: tap a building — City Hall, the courthouse, the pier, the YMCA site — and see what was decided there, what's next, and when, in plain English.
+We built the On The Record Map: tap a building — City Hall, the courthouse, the pier, the YMCA site — and see what was decided there, what's next, and when, in plain English.
 
 Gold pins had news this week. Start with Palm Coast City Hall or the Government Services Building and explore from there.
 
@@ -376,7 +408,7 @@ Gold pins had news this week. Start with Palm Coast City Hall or the Government 
 
 See what it means, what's next, and the timeline — on the map 👇
 [Paste that building's Share link here]</blockquote><button class="copy-btn" data-copy="hotPost" type="button">Copy template</button><p style="margin-top:10px">Use this the day a pin lights up — Bunnell wastewater hearing Nov 23, Amendment 3 in December, the YMCA decision. Always share the building link, not just the homepage.</p></div>
-      <div class="launch-card"><h4>3 · 45-second demo video script</h4><ol><li><strong>0–5s:</strong> Globe on screen. “What if county government had a map?”</li><li><strong>5–15s:</strong> Tap the globe — fly into Flagler. “Every public building. Gold means news this week.”</li><li><strong>15–30s:</strong> Tap Palm Coast City Hall. “New council, two budget votes — in plain English.”</li><li><strong>30–40s:</strong> Tap Share this building. “Send one building to anyone, with one link.”</li><li><strong>40–45s:</strong> “On The Record — link below. Follow the buildings you care about.”</li></ol><p>Film it as a screen recording on your phone — no face on camera needed.</p></div>
+      <div class="launch-card"><h4>3 · 45-second demo video script</h4><ol><li><strong>0–5s:</strong> Globe on screen. “What if county government had a map?”</li><li><strong>5–15s:</strong> Tap the globe — fly into Flagler. “Every public building. Gold means news this week.”</li><li><strong>15–30s:</strong> Tap Palm Coast City Hall. “New council, two budget votes — in plain English.”</li><li><strong>30–40s:</strong> Tap Share this building. “Send one building to anyone, with one link.”</li><li><strong>40–45s:</strong> “On The Record Map — link below. Follow the buildings you care about.”</li></ol><p>Film it as a screen recording on your phone — no face on camera needed.</p></div>
       <div class="launch-card"><h4>4 · For realtors &amp; new residents</h4><blockquote id="realtorBlurb">Moving to Flagler County? Watch your neighborhood before you buy: what's being built, what's being taxed, and what's being decided — building by building, on one map. Free, in plain English, from a Palm Coast company.</blockquote><button class="copy-btn" data-copy="realtorBlurb" type="button">Copy blurb</button><p style="margin-top:10px">Send the page link with this blurb to 5–10 local realtors as a resource they can forward to clients.</p></div>
       <div class="launch-card"><h4>5 · Go-live checklist</h4><ul><li>Load a second, fresh week of news</li><li>Share the page from Spaces to get the public link</li><li>Test the link in a private browser window + on a phone</li><li>Test one building Share link end-to-end</li><li>Post the launch post on the Facebook Page</li><li>Help answer one hot thread in a local group — with the sourced building link</li><li>Send the realtor blurb to your first 5 contacts</li></ul></div>
       <div class="launch-card"><h4>6 · What success looks like</h4><p>Count four things each week: link taps per post, how many visitors open a second building, Follow emails received per building, and shares by people you don't know. If a hot-news post can't move those, more posting won't fix it — better news timing will.</p><p style="margin:0">Kept parked until you say go: no posts, no emails, and no schedule have been sent from this kit.</p></div>
@@ -390,7 +422,7 @@ See what it means, what's next, and the timeline — on the map 👇
     <div style="margin-top:8px"><strong>Share the map:</strong> use any building's Share button, or share the page link — every link opens the map, building links open that building.</div>
     <div style="margin-top:8px"><strong>How people will access it:</strong> when this page is shared from Spaces, visitors get one link to this page. Send the page link for the whole county, or use a building's Share button to send a link that opens straight to that building. No app or account needed — it opens in any browser.</div>
     </div>
-    <div style="white-space:nowrap">On The Record · Flagler Coastal Enterprises</div>
+    <div style="white-space:nowrap">On The Record Map · Flagler Coastal Enterprises</div>
   </div>
 </footer>
 
@@ -428,7 +460,7 @@ var FACILITIES = [
   {id:8, icon:"🎣", name:"Flagler Beach Pier", short:"New pier · Ocean Shore Blvd", address:"S Ocean Shore Blvd, Flagler Beach", type:"Development · Landmark Project", lat:29.47879, lng:-81.12631, cats:["development"], active:true, badge:"UNDER CONSTRUCTION", headline:"The new concrete pier is rising — 28 ft above the sea, built to survive what took the last one.", bullets:["New concrete pier rising 28 ft above sea level, with pylons driven 80–125 ft deep.","On course for a spring opening.","Commission decision: no access charge for the first year or two; planned open hours 5am–10pm."], next:"Spring opening — watch City Hall's pin for any vote on hours, fees, or opening date.", timeline:[{d:"Now", t:"Construction underway — pylons 80–125 ft deep"},{d:"Spring", t:"Planned opening; free access for first year or two"}], mapsQ:"Flagler Beach Pier FL"},
   {id:9, icon:"🐾", name:"Flagler Humane Society", short:"Animal control · Shelter Dr", address:"1 Shelter Dr, Palm Coast", type:"Nonprofit Vendor · County Contract", lat:29.55756, lng:-81.26587, cats:["money"], active:true, badge:"NEWS THIS WEEK", headline:"Won the county contract — after the county went almost a month with none.", bullets:["Mon Nov 16: won the county's 1-year, $350,000 animal-control contract, 5–0 (~$29,166/month).","Covers mandatory services only: dangerous-dog investigations, neglect investigations, rabies quarantines, sheltering animals of detained owners, and help in declared emergencies.","County may exit on 90 days' notice. No audit requirement was added — that was the meeting's main fight (see GSB pin)."], next:"Contract runs 1 year (retroactive in structure to Oct 1 fiscal year). Joint meetings with Palm Coast & Flagler Beach were directed by the BOCC.", timeline:[{d:"Sep 30 / Oct 20", t:"Old contract + extension expire — lapse begins"},{d:"Nov 16", t:"New 1-year $350k contract approved 5–0"}], mapsQ:"Flagler Humane Society 1 Shelter Dr Palm Coast FL"},
   {id:10, icon:"🛡", name:"Flagler County Sheriff's Office", short:"Sheriff · Justice Ln, Bunnell", address:"1001 Justice Ln, Bunnell", type:"Law Enforcement · Public Safety", lat:29.45975, lng:-81.26273, cats:["safety","money"], active:true, badge:"NEWS THIS WEEK", headline:"Amendment 3 hits the Sheriff hardest in dollars — and a new tax is already being floated to fill it.", bullets:["Sheriff Rick Staly expects ~$15.5M revenue loss next fiscal year from Amendment 3.","Hiring freeze already in place; a patrol-car order was cancelled.","A dedicated law-enforcement MSTU (a separate taxing unit) is being discussed as a workaround — discussed, NOT adopted.","Sheriff declined to take over animal control, citing cost — “Nobody wants animal control,” per Commissioner Carney at the Nov 16 meeting."], next:"December–January: watch whether the MSTU moves from talk to a formal BOCC agenda item.", timeline:[{d:"Nov 3", t:"Voters approve Amendment 3"},{d:"Nov 9 workshop", t:"Sheriff: office does not want animal control"},{d:"This fall", t:"Hiring freeze; patrol-car order cancelled"}], mapsQ:"Flagler County Sheriff Office 1001 Justice Ln Bunnell FL"},
-  {id:11, icon:"📚", name:"Flagler County Public Library — Palm Coast", short:"Library · Palm Coast Pkwy", address:"2500 Palm Coast Pkwy NW, Palm Coast", type:"Public Library · Community / Schools", lat:29.55416, lng:-81.23815, cats:["schools"], active:false, badge:"QUIET THIS WEEK", headline:"Quiet this week — and that's the point of this pin.", bullets:["No news items for this facility in the Nov 16–22 sample.","A real On The Record needs quiet pins too — otherwise “no pin” would look like “doesn't exist.” Every public building gets a page; most weeks, most pages are quiet."], next:"No upcoming item in the sample week.", timeline:[{d:"This week", t:"No items — quiet"}], mapsQ:"Flagler County Public Library Palm Coast 2500 Palm Coast Pkwy NW"}
+  {id:11, icon:"📚", name:"Flagler County Public Library — Palm Coast", short:"Library · Palm Coast Pkwy", address:"2500 Palm Coast Pkwy NW, Palm Coast", type:"Public Library · Community / Schools", lat:29.55416, lng:-81.23815, cats:["schools"], active:false, badge:"QUIET THIS WEEK", headline:"Quiet this week — and that's the point of this pin.", bullets:["No news items for this facility in the Nov 16–22 sample.","A real On The Record map needs quiet pins too — otherwise “no pin” would look like “doesn't exist.” Every public building gets a page; most weeks, most pages are quiet."], next:"No upcoming item in the sample week.", timeline:[{d:"This week", t:"No items — quiet"}], mapsQ:"Flagler County Public Library Palm Coast 2500 Palm Coast Pkwy NW"}
 ];
 /* "Who meets here" — meeting cadence, official agenda/video links and public-records contacts.
    Researched & verified Nov 21, 2026 from the On The Record archive and the official sites linked.
@@ -454,7 +486,7 @@ function facilityById(id){ for(var i=0;i<FACILITIES.length;i++){ if(FACILITIES[i
 function deepLinkFor(f){ return "#building="+encodeURIComponent(f.slug); }
 function slugFromHash(){ try{ var h=window.location.hash||""; var m=h.match(/building=([a-z0-9\-]+)/i); return m?decodeURIComponent(m[1]):null; }catch(e){ return null; } }
 function setHashFor(f,replace){ try{ var url="#building="+encodeURIComponent(f.slug); if(replace===false){ window.location.hash="building="+encodeURIComponent(f.slug); } else if(window.history&&window.history.replaceState){ window.history.replaceState(null,"",url); } else { window.location.hash="building="+encodeURIComponent(f.slug); } }catch(e){} }
-var map=null, markers={}, currentFilter="all", selectedId=1, mapReady=false, opened=false, pendingFilter=null;
+var map=null, markers={}, currentFilter="all", selectedId=1, mapReady=false, opened=true, pendingFilter=null, viewMode="map", currentQuery="";
 var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /* ---------- GLOBE (canvas wireframe) ---------- */
@@ -523,13 +555,14 @@ var TOWNS=[
 function initMap(){
   if(mapReady) return;
   try{
-    map=L.map("map",{scrollWheelZoom:true}).setView([20,-40],2);
+    map=L.map("map",{scrollWheelZoom:true}).setView([29.49,-81.24],11);
     var streetTiles=L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"© OpenStreetMap contributors"});
     var satelliteTiles=L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",{maxZoom:19,attribution:"Esri, Maxar, Earthstar Geographics"});
     streetTiles.addTo(map);
     L.control.layers({"Street map":streetTiles,"Satellite":satelliteTiles},null,{collapsed:false}).addTo(map);
     if(typeof FLAGLER_BOUNDARY!=="undefined"){
-      L.geoJSON(FLAGLER_BOUNDARY,{interactive:false,style:function(){ return {color:"#8C6E3E",weight:2,opacity:.9,fillColor:"#B28D57",fillOpacity:.05}; }}).addTo(map);
+      var countyLayer=L.geoJSON(FLAGLER_BOUNDARY,{interactive:false,style:function(){ return {color:"#8C6E3E",weight:2,opacity:.9,fillColor:"#B28D57",fillOpacity:.05}; }}).addTo(map);
+      map.fitBounds(countyLayer.getBounds(),{padding:[18,18]});
     }
     FACILITIES.forEach(function(f,i){
       var m=L.marker([f.lat,f.lng],{icon:iconFor(f,i)}).addTo(map);
@@ -556,47 +589,52 @@ function hideHow(){
   ov.hidden=true;
   var s=document.getElementById("facilitySearch"); if(s && !reduced){ /* keep focus in page, do not force */ }
 }
-function openCounty(filter){
-  if(filter) pendingFilter=filter;
-  var hero=document.getElementById("globeHero"), app=document.getElementById("app");
-  if(opened){ if(pendingFilter){ setFilter(pendingFilter); pendingFilter=null; } if(pendingFacilityId){ var pf=facilityById(pendingFacilityId); pendingFacilityId=null; if(pf) selectFacility(pf.id,true); } app.scrollIntoView({behavior:reduced?"auto":"smooth"}); return; }
-  opened=true;
-  hero.classList.add("opening");
-  var delay=(reduced||quickOpen)?60:650;
-  setTimeout(function(){
-    hero.classList.add("gone");
-    app.hidden=false;
-    requestAnimationFrame(function(){ app.classList.add("shown"); });
-    initMap();
-    var startF=pendingFacilityId?facilityById(pendingFacilityId):FACILITIES[0];
-    if(!startF) startF=FACILITIES[0];
-    selectedId=startF.id;
-    renderPanel(startF); renderCards(); animateCounters();
-    if(pendingFilter){ setFilter(pendingFilter); pendingFilter=null; }
-    window.scrollTo({top:0,behavior:"auto"});
-    var wasDeepLink=!!(pendingFacilityId||slugFromHash());
-    if(map){ setTimeout(function(){ map.invalidateSize(); if(pendingFacilityId||slugFromHash()){ var tf=startF; map.setView([tf.lat,tf.lng],13); if(markers[tf.id]){ setTimeout(function(){ markers[tf.id].openPopup(); bouncePin(tf.id); },250); } setHashFor(tf,true); } else { map.flyTo([29.49,-81.24],11,{duration:reduced?0:2.2}); } pendingFacilityId=null; quickOpen=false; if(!wasDeepLink && !howShownThisSession){ setTimeout(showHow, reduced?120:650); } },80); }
-    else { pendingFacilityId=null; quickOpen=false; if(!wasDeepLink && !howShownThisSession){ setTimeout(showHow,200); } }
-  }, delay);
-}
-function backToGlobe(){
+/* ---------- GLOBE OVERLAY (optional flourish) + MAP-FIRST BOOT ---------- */
+function showGlobe(){
   hideHow();
-  var hero=document.getElementById("globeHero"), app=document.getElementById("app");
-  opened=false;
-  app.classList.remove("shown"); app.hidden=true;
+  var hero=document.getElementById("globeHero");
   hero.classList.remove("gone"); hero.classList.remove("opening");
-  try{ if(window.history&&window.history.replaceState) window.history.replaceState(null,"","#"); }catch(e){}
+  document.body.style.overflow="hidden";
   window.scrollTo({top:0,behavior:"auto"});
-  document.getElementById("globeStage").focus({preventScroll:true});
+  var c=document.getElementById("globeClose"); if(c) setTimeout(function(){ try{ c.focus({preventScroll:true}); }catch(e){} },60);
+}
+function closeGlobe(){
+  var hero=document.getElementById("globeHero");
+  if(hero.classList.contains("gone")) return;
+  hero.classList.add("gone");
+  document.body.style.overflow="";
+  var b=document.getElementById("globeBtn"); if(b) b.focus({preventScroll:true});
+}
+function openCounty(filter){
+  closeGlobe();
+  if(filter) setFilter(filter);
+  var t=document.querySelector(".toolbar"); if(t) t.scrollIntoView({behavior:reduced?"auto":"smooth",block:"start"});
+}
+/* The page opens straight onto the map. A #building=<slug> deep link opens
+   that building's card on the map instead of the county overview. */
+function bootApp(){
+  initMap();
+  var deep=facilityBySlug(slugFromHash());
+  var startF=deep||FACILITIES[0];
+  selectedId=startF.id;
+  renderPanel(startF); renderCards(); animateCounters();
+  if(map){
+    setTimeout(function(){
+      map.invalidateSize();
+      if(deep){ map.setView([deep.lat,deep.lng],13); setHashFor(deep,true); if(markers[deep.id]) setTimeout(function(){ markers[deep.id].openPopup(); bouncePin(deep.id); },250); }
+    },80);
+  }
 }
 document.getElementById("openBtn").addEventListener("click",function(){ openCounty(null); });
+document.getElementById("globeClose").addEventListener("click",function(){ closeGlobe(); });
 var stage=document.getElementById("globeStage");
 stage.addEventListener("click",function(e){ if(e.target.closest(".orbit-pill")) return; openCounty(null); });
 stage.addEventListener("keydown",function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); openCounty(null); } });
 document.querySelectorAll(".orbit-pill").forEach(function(p){
   p.addEventListener("click",function(e){ e.stopPropagation(); openCounty(p.getAttribute("data-goto-filter")); });
 });
-document.getElementById("globeBtn").addEventListener("click",backToGlobe);
+document.getElementById("globeBtn").addEventListener("click",showGlobe);
+document.addEventListener("keydown",function(e){ if(e.key==="Escape") closeGlobe(); });
 (function initHow(){
   var howBtn=document.getElementById("howBtn");
   if(howBtn) howBtn.addEventListener("click",showHow);
@@ -665,8 +703,16 @@ function goToSearchResult(f){
   if(!input||!results) return;
   var currentMatches=[];
   function hideResults(){ results.hidden=true; results.innerHTML=""; input.setAttribute("aria-expanded","false"); currentMatches=[]; }
-  function clearSearch(){ input.value=""; if(clearBtn) clearBtn.hidden=true; hideResults(); if(hint) hint.textContent="Search by place, board, or topic — tap a result and the map flies there and opens its card."; }
+  function clearSearch(){ input.value=""; currentQuery=""; if(clearBtn) clearBtn.hidden=true; hideResults(); if(viewMode==="list"){ renderList(); if(hint) hint.textContent="Search filters this list — tap a card to open that place on the map."; } else if(hint) hint.textContent="Search by place, board, or topic — tap a result and the map flies there and opens its card."; }
   function render(q){
+    currentQuery=q||"";
+    if(viewMode==="list"){
+      if(clearBtn) clearBtn.hidden=!(q&&q.trim());
+      hideResults();
+      renderList();
+      if(hint) hint.textContent=(q&&q.trim())?"Showing matches in the list — tap a card to open that place on the map.":"Search filters this list — tap a card to open that place on the map.";
+      return;
+    }
     var query=(q||"").trim().toLowerCase();
     if(clearBtn) clearBtn.hidden=!query;
     if(query.length<2){ hideResults(); return; }
@@ -778,6 +824,47 @@ function renderCards(){
   }).join("");
   wrap.querySelectorAll(".card").forEach(function(btn){ btn.addEventListener("click",function(){ selectFacility(parseInt(btn.getAttribute("data-id"),10),true); }); });
 }
+/* ---------- LIST VIEW ---------- */
+function renderList(){
+  var wrap=document.getElementById("listCards"); if(!wrap) return;
+  var q=(currentQuery||"").trim().toLowerCase();
+  var tokens=q?q.split(/\s+/).filter(Boolean):[];
+  var visible=FACILITIES.filter(function(f){
+    if(currentFilter!=="all"&&f.cats.indexOf(currentFilter)===-1) return false;
+    if(q.length>=2&&scoreFacility(f,q,tokens)<0) return false;
+    return true;
+  });
+  var lc=document.getElementById("listCount");
+  if(lc) lc.textContent=visible.length+(visible.length===1?" place":" places")+" · tap a card to open it on the map";
+  var empty=document.getElementById("listEmpty"); if(empty) empty.hidden=visible.length>0;
+  wrap.innerHTML=visible.map(function(f,i){
+    var badge=f.active?'<span class="badge badge-news">● News this week</span>':'<span class="badge badge-quiet">Quiet this week</span>';
+    return '<button class="lcard'+(f.id===selectedId?' active':'')+'" data-id="'+f.id+'" style="animation-delay:'+(i*0.04)+'s"><span class="lcard-ic" aria-hidden="true">'+f.icon+'</span><span class="lcard-main"><span class="lcard-top"><span class="lcard-name">'+f.name+'</span>'+badge+'</span><span class="lcard-org">'+f.type+'</span><span class="lcard-head">'+f.headline+'</span><span class="lcard-addr">📍 '+f.address+'</span></span><span class="lcard-arrow" aria-hidden="true">→</span></button>';
+  }).join("");
+  wrap.querySelectorAll(".lcard").forEach(function(btn){
+    btn.addEventListener("click",function(){
+      var id=parseInt(btn.getAttribute("data-id"),10);
+      setViewMode("map");
+      setTimeout(function(){ selectFacility(id,true); },70);
+    });
+  });
+}
+function setViewMode(mode){
+  viewMode=mode;
+  var isList=mode==="list";
+  var mb=document.getElementById("viewMapBtn"), lb=document.getElementById("viewListBtn");
+  if(mb) mb.setAttribute("aria-pressed",isList?"false":"true");
+  if(lb) lb.setAttribute("aria-pressed",isList?"true":"false");
+  var layout=document.querySelector(".layout"); if(layout) layout.style.display=isList?"none":"";
+  var grid=document.querySelector(".list-section"); if(grid) grid.style.display=isList?"none":"";
+  var lv=document.getElementById("listView"); if(lv) lv.hidden=!isList;
+  var sh=document.getElementById("searchHint");
+  if(sh&&!(currentQuery||"").trim()) sh.textContent=isList?"Search filters this list — tap a card to open that place on the map.":"Search by place, board, or topic — tap a result and the map flies there and opens its card.";
+  if(isList){ renderList(); }
+  else if(map){ setTimeout(function(){ map.invalidateSize(); },40); }
+}
+document.getElementById("viewMapBtn").addEventListener("click",function(){ setViewMode("map"); });
+document.getElementById("viewListBtn").addEventListener("click",function(){ setViewMode("list"); });
 function selectFacility(id,fly){
   selectedId=id;
   var f=FACILITIES.filter(function(x){ return x.id===id; })[0];
@@ -799,6 +886,7 @@ function applyFilter(){
     if(show){ if(!map.hasLayer(m)) m.addTo(map); } else if(map.hasLayer(m)) map.removeLayer(m);
   });
   renderCards();
+  if(viewMode==="list") renderList();
 }
 function setFilter(name){
   currentFilter=name;
@@ -817,16 +905,15 @@ document.querySelectorAll(".copy-btn").forEach(function(btn){
     if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(done).catch(function(){ done(); }); } else { try{ var ta=document.createElement("textarea"); ta.value=txt; ta.style.position="fixed"; ta.style.opacity="0"; document.body.appendChild(ta); ta.select(); document.execCommand("copy"); document.body.removeChild(ta); }catch(e){} done(); }
   });
 });
-/* Deep links: #building=<slug> opens straight to that building */
+/* Deep links: #building=<slug> lands directly on that building's open card on the map */
 window.addEventListener("hashchange",function(){
   var s=slugFromHash(); if(!s) return; var f=facilityBySlug(s); if(!f) return;
-  if(!opened){ pendingFacilityId=f.id; quickOpen=true; openCounty(null); } else if(f.id!==selectedId){ selectFacility(f.id,true); }
+  closeGlobe();
+  if(viewMode!=="map") setViewMode("map");
+  if(f.id!==selectedId) selectFacility(f.id,true);
 });
-(function initDeepLink(){
-  var s=slugFromHash(); if(!s) return; var f=facilityBySlug(s); if(!f) return;
-  pendingFacilityId=f.id; quickOpen=true;
-  if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded",function(){ openCounty(null); }); } else { setTimeout(function(){ openCounty(null); },30); }
-})();
+/* Map-first: open straight onto the Flagler County map (bootApp reads any deep link) */
+bootApp();
 </script>
 </body>
 </html>
