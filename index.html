@@ -10,6 +10,10 @@
 <meta name="description" content="On The Record tracks Flagler County government: what was decided at each public building, what it cost, and what happens next — every item sourced from the official record.">
 <link rel="canonical" href="https://on-the-record.coastalenterprises386.workers.dev/">
 <meta name="theme-color" content="#0A2342">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="On The Record">
 <meta property="og:title" content="On The Record — Flagler County — Know before they vote.">
 <meta property="og:description" content="Know before they vote — votes, dollars and development in Flagler County, building by building, from the official record.">
 <meta property="og:type" content="website">
@@ -507,6 +511,75 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
 .follow-topic-box .follow-note{color:var(--muted)}
 .follow-topic-box .follow-thanks{color:var(--navy)}
 .follow-topic-box .follow-row input{border-color:#D6CFC0}
+/* ===== Phase 6 — Desktop two-panel map, mobile bottom sheet, tab bar, install banner ===== */
+/* Pin highlight (desktop list hover / keyboard focus) */
+.custom-pin.pin-hl{z-index:1200!important}
+.custom-pin.pin-hl .pin-core{transform:rotate(-45deg) scale(1.42);background:linear-gradient(135deg,var(--navy3),var(--navy));border-color:var(--gold2);box-shadow:0 0 0 5px rgba(178,141,87,.45),0 10px 22px rgba(0,0,0,.38)}
+/* The sheet handle + tab bar + install banner only exist on small screens */
+.sheet-handle{display:none}
+.tabbar{display:none}
+.tab-more-menu{display:none}
+.install-banner{display:none}
+/* --- Desktop two-panel Map view (1024px and wider) --- */
+@media(min-width:1024px){
+ .map-split{max-width:1180px;margin:0 auto;padding:0 20px 8px;display:grid;grid-template-columns:424px minmax(0,1fr);gap:14px;align-items:start}
+ .map-listcol{position:sticky;top:74px;max-height:calc(100vh - 88px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;padding:2px 4px 6px 2px}
+ .map-listcol .list-section{max-width:none;margin:0;padding:2px 0 4px}
+ .map-listcol .cards{grid-template-columns:1fr}
+ .map-split .layout{max-width:none;margin:0;padding:0}
+ .map-split .map-wrap{position:sticky;top:74px}
+ .map-split #map{height:calc(100vh - 158px);min-height:520px}
+ .map-split .panel{top:74px}
+ #view-map.vm-list .map-split{grid-template-columns:minmax(0,1fr)}
+ #view-map.vm-list .map-listcol{display:none}
+}
+/* --- Mobile (under 1024px): tab bar, bottom sheet, compact map --- */
+@media(max-width:1023px){
+ body{padding-bottom:calc(62px + env(safe-area-inset-bottom))}
+ /* Bottom tab bar */
+ .tabbar{position:fixed;left:0;right:0;bottom:0;z-index:1150;background:var(--navy);display:flex;align-items:stretch;padding-bottom:env(safe-area-inset-bottom);box-shadow:0 -4px 18px rgba(6,23,46,.35)}
+ .tabbar:before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+ .tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:58px;padding:7px 2px 6px;color:#9DB0CC;text-decoration:none;font-size:11px;font-weight:600;line-height:1.15;background:none;border:none;cursor:pointer;font-family:inherit;-webkit-tap-highlight-color:transparent}
+ .tab svg{width:23px;height:23px;flex-shrink:0}
+ .tab.active{color:var(--gold2)}
+ .tab:active{background:rgba(255,255,255,.07)}
+ /* Tab bar "More" menu */
+ .tab-more-menu{display:block;position:fixed;left:10px;right:10px;bottom:calc(70px + env(safe-area-inset-bottom));z-index:1151;background:var(--paper);border:1px solid var(--line);border-radius:16px;box-shadow:0 18px 44px rgba(6,23,46,.32);padding:8px}
+ .tab-more-menu[hidden]{display:none}
+ .tab-more-menu a{display:flex;align-items:center;min-height:48px;padding:11px 13px;border-radius:10px;color:var(--navy);text-decoration:none;font-size:15.5px;font-weight:600}
+ .tab-more-menu a:active,.tab-more-menu a:hover{background:#F5F1E8}
+ .tab-more-menu a.active{background:var(--gold);color:#0A2342}
+ .tmm-label{display:block;font-size:10.5px;letter-spacing:.18em;font-weight:800;text-transform:uppercase;color:var(--gold-dark);padding:10px 13px 2px}
+ .tmm-topics{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+ .tmm-topics a{min-height:48px;font-size:14.5px}
+ /* Install banner (sits above the tab bar) */
+ .install-banner{display:flex;align-items:center;gap:10px;position:fixed;left:10px;right:10px;bottom:calc(70px + env(safe-area-inset-bottom));z-index:1140;background:var(--paper);border:1px solid var(--gold2);border-radius:14px;box-shadow:0 14px 34px rgba(6,23,46,.28);padding:11px 12px}
+ .install-banner[hidden]{display:none}
+ .ib-text{flex:1;min-width:0;font-size:14px;line-height:1.4;color:var(--ink)}
+ .ib-text strong{display:block;font-size:14.5px;color:var(--navy)}
+ .ib-text span{color:#475569;font-size:13px}
+ .ib-install{background:var(--navy);color:#fff;border:none;border-radius:999px;padding:11px 18px;font-weight:800;font-size:14px;cursor:pointer;min-height:48px;flex-shrink:0}
+ .ib-close{width:44px;height:44px;min-height:44px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--navy);font-size:20px;line-height:1;cursor:pointer;flex-shrink:0}
+ /* Map view: map on top, facility list as a bottom sheet */
+ .map-split{display:block}
+ .map-split .layout{grid-template-columns:1fr;padding:0 14px 6px}
+ .map-split .panel{position:relative;top:auto}
+ .map-split #map{height:45vh;height:45dvh;min-height:300px}
+ .map-listcol{position:fixed;left:0;right:0;bottom:calc(58px + env(safe-area-inset-bottom));z-index:940;background:var(--off);border-top:1px solid var(--gold2);border-radius:18px 18px 0 0;box-shadow:0 -12px 34px rgba(6,23,46,.3);display:flex;flex-direction:column;height:52vh;height:52dvh;transition:height .32s ease}
+ .map-listcol[data-snap="peek"]{height:252px}
+ .map-listcol[data-snap="half"]{height:52vh;height:52dvh}
+ .map-listcol[data-snap="full"]{height:calc(100vh - 126px);height:calc(100dvh - 126px)}
+ .map-listcol.dragging{transition:none}
+ #view-map.vm-list .map-listcol{display:none}
+ .sheet-handle{display:flex;align-items:center;justify-content:center;min-height:44px;padding:12px 0 8px;cursor:grab;touch-action:none;flex-shrink:0;-webkit-tap-highlight-color:transparent}
+ .sheet-handle:active{cursor:grabbing}
+ .sheet-grip{display:block;width:52px;height:5px;border-radius:999px;background:#B9AC93}
+ .sheet-scroll{overflow-y:auto;flex:1;min-height:0;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+ .map-listcol .list-section{max-width:none;margin:0;padding:2px 14px 16px}
+ .map-listcol .cards{grid-template-columns:1fr}
+ .map-listcol .card{min-height:48px}
+}
+@media(max-width:1023px) and (prefers-reduced-motion:reduce){.map-listcol{transition:none}}
 </style>
 </head>
 <body>
@@ -663,6 +736,16 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
   <p class="list-empty" id="listEmpty" hidden><strong>No places match.</strong><br>Try a different search word, or tap “All places” above to clear the layer filter.</p>
 </section>
 
+<div class="map-split">
+  <div class="map-listcol" id="mapListCol" data-snap="half">
+    <div class="sheet-handle" id="sheetHandle" role="button" tabindex="0" aria-expanded="true" aria-label="Facility list panel — tap or drag to resize"><span class="sheet-grip" aria-hidden="true"></span></div>
+    <div class="sheet-scroll" id="sheetScroll">
+<section class="list-section">
+  <div class="list-head"><h3>All facilities</h3><span>Tap a card and the map flies to it.</span></div>
+  <div class="cards" id="cards"></div>
+</section>
+    </div>
+  </div>
 <main class="layout">
   <div class="map-wrap">
     <div id="map" aria-label="Interactive map of Flagler County facilities"></div>
@@ -676,11 +759,7 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
   </div>
   <aside class="panel" id="detailPanel" aria-live="polite"></aside>
 </main>
-
-<section class="list-section">
-  <div class="list-head"><h3>All facilities</h3><span>Tap a card and the map flies to it.</span></div>
-  <div class="cards" id="cards"></div>
-</section>
+</div><!-- /map-split -->
 </div><!-- /view-map -->
 
 <div class="view" id="view-week" hidden>
@@ -947,6 +1026,34 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
     <p class="how-note">You can reopen this anytime with the “How it works” button at the top.</p>
   </div>
 </div>
+</div>
+
+<!-- ============ PHASE 6 — MOBILE TAB BAR + INSTALL BANNER (under 1024px only, via CSS) ============ -->
+<nav class="tabbar" id="tabBar" aria-label="Quick navigation">
+  <a class="tab" data-tab="home" href="#/home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.2 12 3l9 8.2"/><path d="M5.2 9.8V21h13.6V9.8"/><path d="M9.5 21v-6h5v6"/></svg><span>Home</span></a>
+  <a class="tab" data-tab="map" href="#/map"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21.2S5 15.6 5 10a7 7 0 1 1 14 0c0 5.6-7 11.2-7 11.2z"/><circle cx="12" cy="10" r="2.6"/></svg><span>Map</span></a>
+  <a class="tab" data-tab="week" href="#/week"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span>This Week</span></a>
+  <a class="tab" data-tab="archive" href="#/archive"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="5" rx="1"/><path d="M5 9v10.2A1.8 1.8 0 0 0 6.8 21h10.4a1.8 1.8 0 0 0 1.8-1.8V9M10 13.5h4"/></svg><span>Archive</span></a>
+  <button class="tab" id="tabMoreBtn" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="tabMoreMenu"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.9"/><circle cx="12" cy="12" r="1.9"/><circle cx="19" cy="12" r="1.9"/></svg><span>More</span></button>
+</nav>
+<div class="tab-more-menu" id="tabMoreMenu" role="menu" hidden>
+  <a href="#/newsletter" role="menuitem" data-tabmore="newsletter">Newsletter</a>
+  <span class="tmm-label" aria-hidden="true">Topics</span>
+  <div class="tmm-topics">
+    <a href="#/topics/meetings" role="menuitem" data-tabmore="topic">Meetings</a>
+    <a href="#/topics/money" role="menuitem" data-tabmore="topic">Money</a>
+    <a href="#/topics/development" role="menuitem" data-tabmore="topic">Development</a>
+    <a href="#/topics/safety" role="menuitem" data-tabmore="topic">Public Safety</a>
+    <a href="#/topics/schools" role="menuitem" data-tabmore="topic">Schools</a>
+  </div>
+  <a href="#/coverage" role="menuitem" data-tabmore="coverage">Coverage</a>
+  <a href="#/partner" role="menuitem" data-tabmore="partner">Partner</a>
+  <a href="#/about" role="menuitem" data-tabmore="about">About</a>
+</div>
+<div class="install-banner" id="installBanner" hidden role="region" aria-label="Install the On The Record app">
+  <div class="ib-text"><strong>Install the On The Record app</strong><span id="installHint" hidden>Tap Share, then “Add to Home Screen”.</span></div>
+  <button class="ib-install" id="installBtn" type="button">Install</button>
+  <button class="ib-close" id="installClose" type="button" aria-label="Dismiss the install banner">×</button>
 </div>
 
 <!-- Leaflet is NOT loaded here: the app lazy-loads its CSS+JS only when the Map view is first opened (see ensureMap). -->
@@ -1435,6 +1542,7 @@ function renderPanel(f){
   '<div class="section-label">What\'s next</div><div class="next-box"><span class="nb-label">Next</span>'+f.next+'</div>'+
   '<div class="section-label">Timeline</div><div class="timeline">'+tl+'</div>'+
   '<div class="panel-actions"><button class="btn btn-share" id="shareBtn" type="button">↗ Share this building</button><button class="btn btn-follow" id="followBtn" type="button" aria-expanded="false">＋ Follow this building</button><a class="btn btn-gold" target="_blank" rel="noopener" href="'+mapsLink(f.mapsQ)+'">Open in Maps ↗</a>'+(hasCoords(f)?'<button class="btn" id="zoomBtn" type="button">Zoom to pin</button>':'')+'</div><div class="share-note" id="shareNote" role="status" aria-live="polite"></div><div class="follow-panel" id="followPanel" hidden><p style="margin:0"><strong>Follow '+f.name+' by email.</strong></p><p style="margin:8px 0 0">Alerts go out when news is posted for this building — sent personally by the Flagler Coastal team, not an automated blast.</p><div class="follow-row"><input type="email" id="followEmail" placeholder="you@example.com" aria-label="Email address for alerts about this building" autocomplete="email"><button class="follow-mail" id="followGo" type="button" style="border:none;cursor:pointer">Follow by email</button></div><p class="follow-note">This opens your email app with a pre-addressed follow request — nothing is stored on this site.</p><p class="follow-thanks" id="followThanks" hidden>Thanks — your email app should open with the follow request addressed to us.</p></div><div class="panel-report"><a href="'+reportMailto(f)+'">Report an error on this card</a></div></div></div>';
+  refreshMapSize(80); /* panel opening changes the map's box (F) */
   var pcb=document.getElementById("panelClose");
   if(pcb) pcb.addEventListener("click",function(){ closePanel(); });
   var zb=document.getElementById("zoomBtn");
@@ -1456,6 +1564,19 @@ function renderPanel(f){
 function bouncePin(id){
   var el=document.getElementById("pin-"+id);
   if(el && !reduced){ el.classList.remove("pin-bounce"); void el.offsetWidth; el.classList.add("pin-bounce"); }
+}
+/* Phase 6: hovering or keyboard-focusing a facility card enlarges its pin
+   and switches it to the navy/gold accent treatment. */
+function highlightPin(id,on){
+  var m=markers[id];
+  if(m&&m.setZIndexOffset){ try{ m.setZIndexOffset(on?1200:0); }catch(e){} }
+  var el=document.getElementById("pin-"+id);
+  if(el) el.classList.toggle("pin-hl",!!on);
+}
+/* Phase 6 (F): Leaflet can render blank tiles after a layout change —
+   re-measure the map shortly after panels/sheets/views resize it. */
+function refreshMapSize(delay){
+  setTimeout(function(){ if(map){ try{ map.invalidateSize(); }catch(e){} } }, delay||60);
 }
 /* Ready-to-post share lines — each building's own verified headline item from the
    this week (Nov 23–29, 2026), researched from official agendas and local reporting.
@@ -1507,7 +1628,14 @@ function renderCards(){
     var addrLine=hasCoords(f)?(f.address+' · '+f.short):'Location pending verification';
     return '<div class="card-cell"><button class="card'+(f.id===selectedId?' active':'')+'" data-id="'+f.id+'" style="animation-delay:'+(i*0.05)+'s"><div class="ic" aria-hidden="true">'+f.icon+'</div><div class="card-top"><h4>'+f.name+'</h4><span class="badge '+bc+'">'+f.badge+'</span></div><p>'+cardUpdate+'</p><span class="card-src">'+cardSourceHTML(f)+'</span><div class="addr">'+addrLine+'</div></button><a class="report-link" href="'+reportMailto(f)+'">Report an error</a></div>';
   }).join("");
-  wrap.querySelectorAll(".card").forEach(function(btn){ btn.addEventListener("click",function(){ selectFacility(parseInt(btn.getAttribute("data-id"),10),true); }); });
+  wrap.querySelectorAll(".card").forEach(function(btn){
+    btn.addEventListener("click",function(){ selectFacility(parseInt(btn.getAttribute("data-id"),10),true); });
+    var cid=parseInt(btn.getAttribute("data-id"),10);
+    btn.addEventListener("mouseenter",function(){ highlightPin(cid,true); });
+    btn.addEventListener("mouseleave",function(){ highlightPin(cid,false); });
+    btn.addEventListener("focus",function(){ highlightPin(cid,true); });
+    btn.addEventListener("blur",function(){ highlightPin(cid,false); });
+  });
   wrap.querySelectorAll(".card-src a").forEach(function(a){ a.addEventListener("click",function(e){ e.stopPropagation(); }); });
 }
 /* ---------- LIST VIEW ---------- */
@@ -1549,6 +1677,7 @@ function setViewMode(mode){
   var layout=document.querySelector(".layout"); if(layout) layout.style.display=isList?"none":"";
   var grid=document.querySelector(".list-section"); if(grid) grid.style.display=isList?"none":"";
   var lv=document.getElementById("listView"); if(lv) lv.hidden=!isList;
+  var vm=document.getElementById("view-map"); if(vm) vm.classList.toggle("vm-list",isList); /* Phase 6: list mode hides the desktop list column / mobile sheet */
   var sh=document.getElementById("searchHint");
   if(sh&&!(currentQuery||"").trim()) sh.textContent=isList?"Search filters this list — tap a card to open that place on the map.":"Search by place, board, or topic — tap a result and the map flies there and opens its card.";
   if(isList){ renderList(); }
@@ -1580,11 +1709,21 @@ function selectFacility(id,fly){
     if(fly) map.flyTo([f.lat,f.lng],Math.max(map.getZoom(),12),{duration:reduced?0:1.1,easeLinearity:0.12});
     setTimeout(function(){ markers[id].openPopup(); bouncePin(id); }, reduced?0:500);
   }
-  if(window.innerWidth<900){ document.getElementById("detailPanel").scrollIntoView({behavior:reduced?"auto":"smooth",block:"start"}); }
+  /* Phase 6 (A): on desktop, bring the matching card into view in the
+     left-hand list and leave it marked active (renderCards did that). */
+  if(window.innerWidth>=1024){
+    var cardEl=document.querySelector('#cards .card[data-id="'+id+'"]');
+    if(cardEl) setTimeout(function(){ try{ cardEl.scrollIntoView({block:"nearest",behavior:reduced?"auto":"smooth"}); }catch(e){} },40);
+  }
+  if(window.innerWidth<1024){
+    if(window.__sheetSet) window.__sheetSet("peek"); /* drop the sheet so the panel is readable */
+    document.getElementById("detailPanel").scrollIntoView({behavior:reduced?"auto":"smooth",block:"start"});
+  }
 }
 function closePanel(){
   var panelEl=document.getElementById("detailPanel"); if(panelEl) panelEl.classList.add("panel-closed");
   var layoutEl=document.querySelector(".layout"); if(layoutEl) layoutEl.classList.add("panel-is-closed");
+  refreshMapSize(80); /* panel closing changes the map's box (F) */
 }
 function applyFilter(){
   if(!map) { renderCards(); return; }
@@ -1953,6 +2092,15 @@ function showView(name,param,section){
   var moreBtn=document.getElementById("navMoreBtn");
   if(moreBtn) moreBtn.classList.toggle("active",name==="coverage"||name==="partner"||name==="about");
   if(window.__closeNavMore) window.__closeNavMore();
+  /* Phase 6: mobile tab bar active state (bar itself is CSS-hidden on desktop) */
+  document.querySelectorAll(".tabbar .tab[data-tab]").forEach(function(t){ t.classList.toggle("active",t.getAttribute("data-tab")===name); });
+  var tabMoreBtn=document.getElementById("tabMoreBtn");
+  if(tabMoreBtn) tabMoreBtn.classList.toggle("active",name==="topic"||name==="newsletter"||name==="coverage"||name==="partner"||name==="about");
+  document.querySelectorAll(".tab-more-menu a[data-tabmore]").forEach(function(a){
+    var k=a.getAttribute("data-tabmore");
+    a.classList.toggle("active",(k==="topic"&&name==="topic"&&a.getAttribute("href")==="#/topics/"+param)||k===name);
+  });
+  if(window.__closeTabMore) window.__closeTabMore();
   var nl=document.getElementById("navLinks"); if(nl) nl.classList.remove("open");
   var tg=document.getElementById("navToggle"); if(tg) tg.setAttribute("aria-expanded","false");
   if(name==="map"){
@@ -2036,6 +2184,166 @@ document.addEventListener("keydown",function(e){
   });
 })();
 
+</script>
+<script>
+/* ================= PHASE 6 — PWA, BOTTOM SHEET, TAB BAR, INSTALL =================
+   The manifest, icons and service worker are separate site files; this
+   block only references them and wires the in-page behavior. No push
+   notifications are requested or faked here — that is a later decision. */
+(function initPhase6(){
+  "use strict";
+  var MOBILE_Q="(max-width: 1023px)";
+  function isMobile(){ return window.matchMedia&&window.matchMedia(MOBILE_Q).matches; }
+  function refresh(){ if(typeof refreshMapSize==="function") refreshMapSize(80); }
+
+  /* ---------- D: service worker (external /sw.js does the offline work) ---------- */
+  window.addEventListener("load",function(){
+    if("serviceWorker" in navigator){
+      try{ var p=navigator.serviceWorker.register("/sw.js"); if(p&&p.catch) p.catch(function(){}); }catch(e){}
+    }
+  });
+
+  /* ---------- F: re-measure the map on window resize (debounced) ---------- */
+  var rszT=null;
+  window.addEventListener("resize",function(){
+    clearTimeout(rszT);
+    rszT=setTimeout(function(){ refresh(); },180);
+  });
+
+  /* ---------- B: mobile bottom sheet (peek / half / full) ---------- */
+  var col=document.getElementById("mapListCol");
+  var handle=document.getElementById("sheetHandle");
+  var scrollEl=document.getElementById("sheetScroll");
+  var SNAPS=["peek","half","full"];
+  function snapHeight(name){
+    var vh=window.innerHeight;
+    if(name==="peek") return 252;
+    if(name==="full") return Math.max(240,vh-126);
+    return Math.round(vh*0.52);
+  }
+  function setSnap(name,skipRefresh){
+    if(!col) return;
+    col.classList.remove("dragging");
+    col.style.height="";
+    col.setAttribute("data-snap",name);
+    if(handle) handle.setAttribute("aria-expanded",name==="peek"?"false":"true");
+    if(!skipRefresh) refresh(); /* sheet resize changes the map's box (F) */
+  }
+  window.__sheetSet=setSnap;
+  if(col&&handle){
+    var drag=null;
+    handle.addEventListener("pointerdown",function(e){
+      if(!isMobile()) return;
+      drag={y:e.clientY,h:col.getBoundingClientRect().height,moved:false};
+      col.classList.add("dragging");
+      try{ handle.setPointerCapture(e.pointerId); }catch(err){}
+    });
+    handle.addEventListener("pointermove",function(e){
+      if(!drag) return;
+      var dy=drag.y-e.clientY;
+      if(Math.abs(dy)>4) drag.moved=true;
+      var maxH=Math.max(260,window.innerHeight-110);
+      var h=Math.min(maxH,Math.max(120,drag.h+dy));
+      col.style.height=h+"px";
+    });
+    function endDrag(e){
+      if(!drag) return;
+      var wasDrag=drag.moved, d=drag; drag=null;
+      col.classList.remove("dragging");
+      if(!wasDrag){ /* a tap toggles peek <-> half */
+        setSnap(col.getAttribute("data-snap")==="peek"?"half":"peek");
+        return;
+      }
+      var h=col.getBoundingClientRect().height, best="half", bestD=1e9;
+      SNAPS.forEach(function(s){ var dd=Math.abs(snapHeight(s)-h); if(dd<bestD){ bestD=dd; best=s; } });
+      setSnap(best);
+    }
+    handle.addEventListener("pointerup",endDrag);
+    handle.addEventListener("pointercancel",function(){ drag=null; col.classList.remove("dragging"); col.style.height=""; });
+    handle.addEventListener("keydown",function(e){
+      var cur=col.getAttribute("data-snap")||"half", i=SNAPS.indexOf(cur);
+      if(e.key==="Enter"||e.key===" "){ e.preventDefault(); setSnap(cur==="peek"?"half":"peek"); }
+      else if(e.key==="ArrowUp"){ e.preventDefault(); setSnap(SNAPS[Math.min(2,i+1)]); }
+      else if(e.key==="ArrowDown"){ e.preventDefault(); setSnap(SNAPS[Math.max(0,i-1)]); }
+    });
+    if(scrollEl) scrollEl.addEventListener("touchstart",function(){},{passive:true});
+  }
+
+  /* ---------- C: tab bar "More" menu ---------- */
+  var tBtn=document.getElementById("tabMoreBtn"), tMenu=document.getElementById("tabMoreMenu");
+  function closeTabMore(){ if(tMenu) tMenu.hidden=true; if(tBtn) tBtn.setAttribute("aria-expanded","false"); }
+  window.__closeTabMore=closeTabMore;
+  if(tBtn&&tMenu){
+    tBtn.addEventListener("click",function(e){
+      e.stopPropagation();
+      if(tMenu.hidden){ tMenu.hidden=false; tBtn.setAttribute("aria-expanded","true"); }
+      else closeTabMore();
+    });
+    document.addEventListener("click",function(e){ if(tMenu&&!tMenu.hidden&&!e.target.closest("#tabMoreMenu")&&!e.target.closest("#tabMoreBtn")) closeTabMore(); });
+    tMenu.querySelectorAll("a").forEach(function(a){ a.addEventListener("click",closeTabMore); });
+    document.addEventListener("keydown",function(e){ if(e.key==="Escape"&&tMenu&&!tMenu.hidden){ closeTabMore(); tBtn.focus(); } });
+  }
+
+  /* ---------- E: install prompt ----------
+     Visit counting: otr_visits increments once per page load. The banner
+     shows only on small screens, from the second visit on, when the app
+     is not installed and the banner was never dismissed. */
+  var visits=0;
+  try{
+    visits=parseInt(localStorage.getItem("otr_visits")||"0",10)||0;
+    visits+=1;
+    localStorage.setItem("otr_visits",String(visits));
+  }catch(e){ visits=2; /* storage unavailable: don't trap the banner off forever */ }
+  var deferredPrompt=null;
+  var banner=document.getElementById("installBanner");
+  var installBtn=document.getElementById("installBtn");
+  var installHint=document.getElementById("installHint");
+  var closeBtn=document.getElementById("installClose");
+  function isStandalone(){
+    return (window.matchMedia&&window.matchMedia("(display-mode: standalone)").matches)||window.navigator.standalone===true;
+  }
+  function wasDismissed(){ try{ return !!localStorage.getItem("otr_install_dismissed"); }catch(e){ return false; } }
+  function isIOS(){ return /iphone|ipad|ipod/i.test(window.navigator.userAgent||""); }
+  function maybeShowInstall(){
+    if(!banner||!banner.hidden) return;
+    if(!isMobile()) return;               /* never on desktop */
+    if(visits<2) return;                  /* never on the first visit */
+    if(isStandalone()||wasDismissed()) return;
+    if(deferredPrompt){
+      if(installBtn) installBtn.hidden=false;
+      if(installHint) installHint.hidden=true;
+      banner.hidden=false;
+    } else if(isIOS()){
+      /* iOS Safari has no beforeinstallprompt: show the Share hint instead */
+      if(installBtn) installBtn.hidden=true;
+      if(installHint) installHint.hidden=false;
+      banner.hidden=false;
+    }
+  }
+  window.addEventListener("beforeinstallprompt",function(e){
+    e.preventDefault();
+    deferredPrompt=e;
+    maybeShowInstall();
+  });
+  window.addEventListener("appinstalled",function(){
+    deferredPrompt=null;
+    if(banner) banner.hidden=true;
+  });
+  if(installBtn) installBtn.addEventListener("click",function(){
+    if(!deferredPrompt){ if(banner) banner.hidden=true; return; }
+    var p=deferredPrompt; deferredPrompt=null;
+    if(banner) banner.hidden=true;
+    try{
+      p.prompt();
+      if(p.userChoice&&p.userChoice.then) p.userChoice.then(function(){},function(){});
+    }catch(e){}
+  });
+  if(closeBtn) closeBtn.addEventListener("click",function(){
+    if(banner) banner.hidden=true;
+    try{ localStorage.setItem("otr_install_dismissed","1"); }catch(e){}
+  });
+  maybeShowInstall();
+})();
 </script>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "c68d8265fc6d4f238d67c9b7cf71df1e"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
