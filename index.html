@@ -1274,44 +1274,43 @@ function initMap(){
     TOWNS.forEach(function(t){
       L.marker([t.lat,t.lng],{interactive:false,keyboard:false,zIndexOffset:-1000,icon:L.divIcon({className:"town-label",html:"<span>"+t.name+"</span>"})}).addTo(map);
     });
-    /* Phase 6 correction — interaction tracking, click-to-interact wheel
-       zoom, and real-size framing.
-       userInteracted flips true on the first map drag, zoom, pin click or
-       card click (card clicks flip it inside selectFacility). Once true,
-       nothing may reframe the map or change its zoom/center. */
+    /* Phase 6 correction 3 — interaction tracking, the wheel-zoom gate,
+       and initial framing, restructured so the guarantees hold by
+       construction rather than by one fragile callback:
+       - userInteracted flips true ONLY on genuine gestures: a pointerdown
+         or drag on the map itself, a pin click, a card / list / search
+         click (those flip it inside selectFacility). Programmatic
+         selection at load (the boot default, a #building= deep link)
+         never flips it.
+       - scrollWheelZoom is disabled at creation (option above) and is
+         enabled ONLY by the pointerdown listener below, whose target is
+         inside the Leaflet container itself. It disables again when the
+         pointer leaves the container. No load, view-open, panel-open or
+         selection path touches the wheel handler. Pinch zoom and the
+         +/− controls work regardless.
+       - Initial framing is owned by scheduleInitialFrame() (defined with
+         frameCounty below): it runs at the end of initMap, again on every
+         Map-view open (via showView), and again on every container resize
+         (the ResizeObserver here) — always re-measuring from the real
+         size, and only before the user's first genuine interaction.
+         After interaction, resizes only re-measure; they never reframe. */
     map.on("dragstart",function(){ userInteracted=true; });
     var mapBox=map.getContainer();
-    /* A click or tap into the map arms wheel zoom; it disarms again when
-       the pointer leaves the map, so ordinary page scrolling over the map
-       scrolls the page. Pinch zoom and the +/− controls work regardless. */
-    function armWheel(){ userInteracted=true; try{ map.scrollWheelZoom.enable(); }catch(e){} }
-    mapBox.addEventListener("mousedown",armWheel);
-    mapBox.addEventListener("touchstart",armWheel,{passive:true});
-    mapBox.addEventListener("mouseleave",function(){ try{ map.scrollWheelZoom.disable(); }catch(e){} });
-    /* Frame from the container's real size, once: when the box reports a
-       size that stays put for a beat and is non-zero, re-measure and —
-       only while the user has not interacted — run the initial framing
-       (the county fit, or the deep-link fly-to, in positionMapForRoute).
-       After interaction, resizes only re-measure; they never reframe. */
+    try{ map.scrollWheelZoom.disable(); }catch(e){} /* belt-and-braces: off until a real pointerdown inside the map */
+    mapBox.addEventListener("pointerdown",function(e){
+      if(e.target!==mapBox&&!mapBox.contains(e.target)) return;
+      userInteracted=true;
+      try{ map.scrollWheelZoom.enable(); }catch(err){}
+    });
+    function disarmWheel(){ try{ map.scrollWheelZoom.disable(); }catch(e){} }
+    mapBox.addEventListener("pointerleave",disarmWheel);
+    mapBox.addEventListener("mouseleave",disarmWheel);
     if(window.ResizeObserver){
-      var lastW=0,lastH=0,stableT=null;
-      var frameRO=new ResizeObserver(function(entries){
-        var r=entries[entries.length-1].contentRect;
-        var w=Math.round(r.width), h=Math.round(r.height);
-        if(w<=0||h<=0||(w===lastW&&h===lastH)) return;
-        lastW=w; lastH=h;
-        clearTimeout(stableT);
-        stableT=setTimeout(function(){
-          if(!map) return;
-          try{ map.invalidateSize(); }catch(e){}
-          if(!userInteracted) positionMapForRoute();
-        },140);
-      });
+      var frameRO=new ResizeObserver(function(){ scheduleInitialFrame(); });
       frameRO.observe(mapBox);
       map._frameRO=frameRO; /* keep a strong reference to the observer */
-    } else {
-      setTimeout(function(){ if(map){ try{ map.invalidateSize(); }catch(e){} if(!userInteracted) positionMapForRoute(); } },250);
     }
+    scheduleInitialFrame();
     mapReady=true;
   }catch(e){
     document.getElementById("map").innerHTML='<div style="padding:24px;font-size:14px">Map could not load here — use the facility cards below. Every place and its news is still listed.</div>';
@@ -1358,6 +1357,12 @@ function bootApp(){
   var deep=facilityForHashSlug(slugFromHash());
   var startF=deep||FACILITIES[0];
   selectedId=startF.id;
+  /* Programmatic default: with no deep link, the panel is pre-filled
+     with the first facility (Government Services Building). This renders
+     panel content ONLY — it never calls selectFacility, never sets
+     userInteracted, and never touches the map or its wheel gate, so the
+     initial county framing still runs when the Map view opens, fitting
+     the pane beside this panel. */
   renderPanel(startF); renderCards(); renderGlance();
 }
 document.getElementById("openBtn").addEventListener("click",function(){ openCounty(null); });
@@ -1731,11 +1736,16 @@ function setViewMode(mode){
 }
 document.getElementById("viewMapBtn").addEventListener("click",function(){ setViewMode("map"); });
 document.getElementById("viewListBtn").addEventListener("click",function(){ setViewMode("list"); });
-function selectFacility(id,fly){
+function selectFacility(id,fly,programmatic){
   selectedId=id;
   var f=FACILITIES.filter(function(x){ return x.id===id; })[0];
   if(!f) return;
-  userInteracted=true; /* a card / pin / search-result click is a map interaction: framing belongs to the user from here on */
+  /* Genuine gestures only — a pin, card, list or search-result click —
+     claim the framing from here on. A programmatic selection (the
+     #building= deep link resolved at load) passes programmatic=true and
+     must NOT count as interaction, so load-time framing keeps working
+     exactly as if nothing had been picked. */
+  if(!programmatic) userInteracted=true;
   setHashFor(f,true);
   document.title=f.name+" \u2014 On The Record";
   var panelEl=document.getElementById("detailPanel"); if(panelEl) panelEl.classList.remove("panel-closed");
@@ -1819,13 +1829,42 @@ function pinsBounds(){
 }
 /* Frame Flagler County in the map panel: re-measure first (the panel may
    have been resized by the layout settling), then fit the pins' bounds
-   with padding so the county sits centered, desktop and mobile alike. */
+   with padding so the county sits centered, desktop and mobile alike.
+   The fit uses the map element's own box — on desktop the detail panel
+   is a grid sibling beside the map, never an overlay, so the map's box
+   IS the visible pane and the county is fitted into the area beside the
+   panel, all 31 pins in frame. */
 function frameCounty(){
   if(!map) return;
   try{ map.invalidateSize(); }catch(e){}
   var b=pinsBounds();
   if(b){ try{ map.fitBounds(b,{padding:[36,36]}); return; }catch(e){} }
   try{ map.setView([29.49,-81.24],11); }catch(e){}
+}
+/* The one initial-framing routine. Called when the map is created, every
+   time the Map view opens, and on every container resize. It waits a
+   beat for layout to settle, retries briefly while the container still
+   has no size (view not shown yet), then re-measures and — only while
+   the user has not genuinely interacted — positions the map for the
+   current route (county fit, or the deep-link fly-to). Once the user has
+   interacted it still re-measures on resize, but never reframes. */
+var frameTimer=null;
+function scheduleInitialFrame(){
+  if(!map) return;
+  clearTimeout(frameTimer);
+  var tries=0;
+  function attempt(){
+    if(!map) return;
+    var box=map.getContainer();
+    var w=box?box.clientWidth:0, h=box?box.clientHeight:0;
+    if(w<=0||h<=0){
+      if(tries<14){ tries++; frameTimer=setTimeout(attempt,130); }
+      return;
+    }
+    try{ map.invalidateSize(); }catch(e){}
+    if(!userInteracted) positionMapForRoute();
+  }
+  frameTimer=setTimeout(attempt,130);
 }
 /* Position the freshly shown map, called only after the layout has
    settled: a building deep link wins and flies to that building's pin at
@@ -2173,13 +2212,16 @@ function showView(name,param,section){
   var tg=document.getElementById("navToggle"); if(tg) tg.setAttribute("aria-expanded","false");
   if(name==="map"){
     /* Lazy: Leaflet loads on this first open; later opens reuse the map.
-       No timer settle fit here: initial framing is owned solely by the
-       ResizeObserver armed in initMap, which fits from the container's
-       real, stable size and only before the user interacts. This
-       callback just re-measures so tiles render once the view is shown. */
-    ensureMap(function(){
-      if(map){ try{ map.invalidateSize(); }catch(e){} }
-    });
+       Every open asks for the initial framing pass (scheduleInitialFrame,
+       defined with the map code): it re-measures from the container's
+       real size and — only before the user's first genuine interaction —
+       fits the whole county into the visible pane (or flies to a
+       deep-linked building). After interaction it only re-measures;
+       it never reframes, and it never touches the wheel-zoom gate. */
+    ensureMap(function(){ scheduleInitialFrame(); });
+  } else if(map){
+    /* Leaving the Map view: never leave wheel zoom armed behind us. */
+    try{ map.scrollWheelZoom.disable(); }catch(e){}
   }
   if(section){
     setTimeout(function(){ var t=document.getElementById(section); if(t) t.scrollIntoView({behavior:reduced?"auto":"smooth",block:"start"}); },90);
@@ -2200,7 +2242,7 @@ function handleRoute(){
   if(slug){
     var f=facilityForHashSlug(slug);
     showView("map");
-    if(f){ if(viewMode!=="map") setViewMode("map"); selectFacility(f.id,true); }
+    if(f){ if(viewMode!=="map") setViewMode("map"); selectFacility(f.id,true,true); } /* programmatic: a deep link at load is not a user gesture */
     return;
   }
   if(h==="#about"||h==="#sources"||h==="#corrections"||h==="#privacy"){ showView("about",null,h.slice(1)); return; }
