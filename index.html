@@ -421,7 +421,58 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
 .footer-social{display:flex;gap:14px;margin-top:10px;flex-wrap:wrap}
 .footer-social a{color:var(--gold-dark);font-weight:700;text-decoration:none;font-size:13px}
 .footer-social a:hover{color:var(--navy);text-decoration:underline;text-underline-offset:3px}
-
+/* ===== Phase 4 — Parent brand, Coverage, Partner, follow signups ===== */
+.brand-strip{background:#06172E;color:#C7D3E6}
+.brand-strip-inner{max-width:1180px;margin:0 auto;padding:8px 20px;display:flex;align-items:center;gap:10px 18px;flex-wrap:wrap;font-size:12px;line-height:1.4}
+.bs-company{font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#fff;font-size:11.5px}
+.bs-tag{letter-spacing:.14em;text-transform:uppercase;color:var(--gold2);font-size:10.5px;font-weight:700}
+.bs-pub{margin-left:auto;color:#8FA3BF;font-size:12px}
+@media(max-width:900px){.brand-strip-inner{padding:8px 14px}.bs-pub{margin-left:0;width:100%}}
+.footer-parent{border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:14px;font-size:13px;line-height:1.65;color:#3B475C}
+.footer-parent strong{color:var(--navy)}
+.footer-services{display:block;margin-top:4px;color:var(--muted);font-size:12.5px}
+.footer-parent a{color:var(--navy);font-weight:700;text-decoration:none}
+.footer-parent a:hover{text-decoration:underline;text-underline-offset:3px}
+.cov-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+@media(max-width:900px){.cov-grid{grid-template-columns:1fr}}
+.cov-card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:20px;display:flex;flex-direction:column}
+.cov-card-live{border-color:var(--gold);box-shadow:0 10px 26px rgba(10,35,66,.08)}
+.cov-status{align-self:flex-start;font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:999px}
+.cov-status-live{background:var(--gold);color:#0A2342}
+.cov-status-soon{background:#F1F5F9;color:#64748B;border:1px solid #E2E8F0}
+.cov-card h2{font-family:"Playfair Display",serif;font-size:22px;color:var(--navy);margin:12px 0 0;line-height:1.2}
+.cov-card p{font-size:14.5px;line-height:1.6;color:#3B475C;margin:8px 0 0;flex:1}
+.cov-counts{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.cov-counts span{background:#F5F1E8;border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:12.5px;font-weight:700;color:var(--navy)}
+.cov-card .sc-link{margin-top:14px}
+.partner-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+@media(max-width:900px){.partner-grid{grid-template-columns:1fr}}
+.partner-card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:20px;display:flex;flex-direction:column}
+.partner-card h2{font-family:"Playfair Display",serif;font-size:20px;line-height:1.25;color:var(--navy);margin:10px 0 0}
+.partner-card p{font-size:14.5px;line-height:1.6;color:#3B475C;margin:8px 0 0}
+.partner-card .pc-kicker{font-size:10.5px;letter-spacing:.16em;font-weight:800;text-transform:uppercase;color:var(--gold-dark)}
+.pform{display:grid;gap:13px;margin-top:16px}
+.pform label{display:block;font-size:12px;letter-spacing:.1em;font-weight:800;text-transform:uppercase;color:var(--gold-dark)}
+.pform input,.pform select,.pform textarea{display:block;width:100%;margin-top:6px;font:inherit;font-size:15px;font-weight:400;letter-spacing:0;text-transform:none;color:var(--ink);background:#fff;border:1.5px solid #D6CFC0;border-radius:12px;padding:12px 13px}
+.pform input:focus,.pform select:focus,.pform textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 4px rgba(178,141,87,.18)}
+.pform textarea{min-height:96px;resize:vertical}
+.form-disclosure{font-size:13.5px;line-height:1.55;color:#475569;background:#F5F1E8;border:1px solid var(--line);border-radius:12px;padding:11px 13px;margin:0}
+.form-submit{justify-self:start;background:linear-gradient(180deg,#C6A26B,var(--gold));color:#0A2342;border:none;font-weight:800;font-size:15px;padding:14px 26px;border-radius:999px;cursor:pointer;box-shadow:0 8px 22px rgba(178,141,87,.3)}
+.form-submit:hover{background:#C6A26B}
+.form-thanks{display:none;font-size:14px;line-height:1.55;color:var(--navy);background:#F5F1E8;border:1px solid var(--gold2);border-radius:12px;padding:12px 14px;margin:0}
+.form-thanks.show{display:block}
+.follow-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.follow-row input{flex:1;min-width:180px;font:inherit;font-size:14px;color:var(--ink);background:#fff;border:1.5px solid rgba(216,192,148,.6);border-radius:999px;padding:11px 15px}
+.follow-row input:focus{outline:none;border-color:var(--gold2);box-shadow:0 0 0 4px rgba(178,141,87,.25)}
+.follow-note{font-size:12.5px;color:#B9C8DE;margin:10px 0 0}
+.follow-thanks{font-size:13.5px;color:#F3EAD6;margin:10px 0 0}
+.follow-topic-box{margin-top:26px;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:17px 18px}
+.btn-follow-topic{background:var(--navy);color:#fff;border:none;font-weight:800;font-size:14px;padding:12px 20px;border-radius:999px;cursor:pointer}
+.btn-follow-topic:hover{background:var(--navy3)}
+.follow-topic-box .follow-copy{font-size:14px;line-height:1.6;color:#3B475C;margin:12px 0 0}
+.follow-topic-box .follow-note{color:var(--muted)}
+.follow-topic-box .follow-thanks{color:var(--navy)}
+.follow-topic-box .follow-row input{border-color:#D6CFC0}
 </style>
 </head>
 <body>
@@ -456,6 +507,13 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
 
 <!-- ============ APP ============ -->
 <div id="app" class="shown">
+<div class="brand-strip" aria-label="Published by Flagler Coastal Enterprises">
+  <div class="brand-strip-inner">
+    <span class="bs-company">Flagler Coastal Enterprises</span>
+    <span class="bs-tag">People | Opportunity | A Stronger Tomorrow</span>
+    <span class="bs-pub">On The Record is a Flagler Coastal Enterprises publication</span>
+  </div>
+</div>
 <nav class="site-nav" aria-label="Main navigation">
   <div class="site-nav-inner">
     <a class="wordmark" href="#/home">On The <em>Record</em></a>
@@ -467,6 +525,8 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
       <a data-nav="archive" href="#/archive">Archive</a>
       <span class="nav-topics"><span class="nt-label">Topics</span><a data-nav="topics" data-topic="meetings" class="nav-topic" href="#/topics/meetings">Meetings</a><a data-nav="topics" data-topic="money" class="nav-topic" href="#/topics/money">Money</a><a data-nav="topics" data-topic="development" class="nav-topic" href="#/topics/development">Development</a><a data-nav="topics" data-topic="safety" class="nav-topic" href="#/topics/safety">Public Safety</a><a data-nav="topics" data-topic="schools" class="nav-topic" href="#/topics/schools">Schools</a></span>
       <a data-nav="newsletter" href="#/newsletter">Newsletter</a>
+      <a data-nav="coverage" href="#/coverage">Coverage</a>
+      <a data-nav="partner" href="#/partner">Partner</a>
       <a data-nav="about" href="#/about">About</a>
     </div>
   </div>
@@ -616,6 +676,15 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
     <h1 id="topicTitle">Meetings</h1>
     <p class="topic-desc" id="topicDesc"></p>
     <div id="topicStories"></div>
+    <div class="follow-topic-box">
+      <button class="btn-follow-topic" id="topicFollowBtn" type="button" aria-expanded="false">＋ Follow this topic</button>
+      <div id="topicFollowPanel" hidden>
+        <p class="follow-copy">Alerts go out when news is posted for this topic — sent personally by the Flagler Coastal team, not an automated blast.</p>
+        <div class="follow-row"><input type="email" id="topicFollowEmail" placeholder="you@example.com" aria-label="Email address for topic alerts" autocomplete="email"><button class="btn-follow-topic" id="topicFollowGo" type="button">Follow by email</button></div>
+        <p class="follow-note">This opens your email app with a pre-addressed follow request — nothing is stored on this site.</p>
+        <p class="follow-thanks" id="topicFollowThanks" hidden>Thanks — your email app should open with the follow request addressed to us.</p>
+      </div>
+    </div>
     <div class="topic-places"><h2>Places in this topic</h2><div id="topicPlaces"></div></div>
   </div>
 </div>
@@ -688,6 +757,7 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
   <div class="eyebrow" style="color:var(--gold-dark)">Contact</div>
   <h2>Contact</h2>
   <p><strong>Email:</strong> <a href="mailto:coastalenterprises386@gmail.com">coastalenterprises386@gmail.com</a><br><strong>Phone:</strong> <a href="tel:+19175443692">(917) 544-3692</a><br><strong>Published by:</strong> Flagler Coastal Enterprises LLC · Palm Coast, Florida</p>
+  <p><strong>Partnering:</strong> sponsorships, realtor &amp; neighborhood reports and custom public-records research — see <a href="#/partner">Partner With Us</a>. <strong>Coverage requests:</strong> want On The Record in your county or city? See <a href="#/coverage">Coverage</a> and request your area.</p>
   <p>Follow On The Record:</p>
   <div class="social-row">
     <a href="https://www.facebook.com/FCEPalmCoast" target="_blank" rel="noopener">Facebook</a>
@@ -703,14 +773,89 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
     <li><strong>No accounts on this site.</strong> On The Record has no sign-ups, logins or profiles, and the site itself does not collect personal information.</li>
     <li><strong>Newsletter subscriptions are handled by Substack</strong> under Substack’s own privacy policy; if you subscribe, your email address is held by Substack, not by this page.</li>
     <li><strong>Visit counting:</strong> this site uses Google Analytics to count visits and see which pages are read, so we know what coverage is useful.</li>
-    <li><strong>Error reports</strong> open your own email app and go to our contact email above — nothing is sent until you press send.</li>
+    <li><strong>Error reports, forms and follow signups</strong> open your own email app with a pre-addressed message to our contact email — nothing is sent until you press send, and nothing is stored on this site.</li>
   </ul>
 </section>
 </div>
 </div><!-- /view-about -->
 
+<div class="view" id="view-coverage" hidden>
+  <div class="page-wrap" style="max-width:980px">
+    <div class="eyebrow" style="color:var(--gold-dark)">Coverage</div>
+    <h1>Where we cover — and where we’re going</h1>
+    <p class="page-lede">On The Record starts where our team can read every agenda and record ourselves: Flagler County. New areas are added one at a time, so each new edition is researched to the same standard as the first — never scraped, never rushed.</p>
+    <div class="cov-grid" id="coverageCards"></div>
+    <section class="info-card" style="margin-top:22px" aria-label="Request your area">
+      <div class="eyebrow" style="color:var(--gold-dark)">Request your area</div>
+      <h2 style="font-size:24px">Don’t see your area yet?</h2>
+      <p>Tell us where you live or work. Requests are how we choose what opens next — the more requests an area gets, the sooner it moves up the list.</p>
+      <form class="pform" id="coverageForm">
+        <label>Your name<input type="text" id="covName" autocomplete="name" required></label>
+        <label>Your email<input type="email" id="covEmail" autocomplete="email" required></label>
+        <label>Area / city / county requested<input type="text" id="covArea" placeholder="e.g. Daytona Beach, Volusia County" required></label>
+        <label>Anything we should know? (optional)<textarea id="covNote" placeholder="A board, a project, a neighborhood — anything that matters where you are."></textarea></label>
+        <p class="form-disclosure">This opens your email app to send the request — no account, nothing stored on this site.</p>
+        <button class="form-submit" type="submit">Send the request →</button>
+        <p class="form-thanks" id="covThanks" role="status">Thanks — your email app should open with the request addressed to us. Just press send there and we’ll have it.</p>
+      </form>
+    </section>
+  </div>
+</div>
+
+<div class="view" id="view-partner" hidden>
+  <div class="page-wrap" style="max-width:980px">
+    <div class="eyebrow" style="color:var(--gold-dark)">Partner</div>
+    <h1>Partner With Us</h1>
+    <p class="page-lede">On The Record is published by Flagler Coastal Enterprises LLC and read by the people who live with Flagler County’s decisions — homeowners, buyers, builders and business owners. Three ways to work with us:</p>
+    <div class="partner-grid">
+      <article class="partner-card">
+        <span class="pc-kicker">For local businesses</span>
+        <h2>Sponsor the weekly briefing</h2>
+        <p>Your business in front of Flagler County readers, in the Sunday email briefing and on this site. Two sponsor slots per edition, clearly labeled as sponsorship — our coverage stays independent, and readers know exactly who supports it.</p>
+      </article>
+      <article class="partner-card">
+        <span class="pc-kicker">For realtors &amp; teams</span>
+        <h2>Realtor &amp; neighborhood reports</h2>
+        <p>A plain-English briefing on what’s being decided and built around a listing or a neighborhood — the votes, projects and timelines your clients actually ask about, drawn from the official record.</p>
+      </article>
+      <article class="partner-card">
+        <span class="pc-kicker">For anyone with a question</span>
+        <h2>Custom public-records research</h2>
+        <p>We dig through agendas, minutes and public records and hand you the plain-English answer — what was decided, when, by whom, and what happens next, with the sources attached.</p>
+      </article>
+    </div>
+    <p class="page-lede" style="font-size:15px">Pricing is by conversation — it depends on the work. Tell us what you need and we’ll reply with an honest scope and price.</p>
+    <section class="info-card" style="margin-top:22px" aria-label="Contact us about partnering">
+      <div class="eyebrow" style="color:var(--gold-dark)">Contact</div>
+      <h2 style="font-size:24px">Start the conversation</h2>
+      <form class="pform" id="partnerForm">
+        <label>Your name<input type="text" id="parName" autocomplete="name" required></label>
+        <label>Business<input type="text" id="parBusiness" autocomplete="organization"></label>
+        <label>Your email<input type="email" id="parEmail" autocomplete="email" required></label>
+        <label>I’m interested in
+          <select id="parInterest">
+            <option>Sponsor the weekly briefing</option>
+            <option>Realtor &amp; neighborhood reports</option>
+            <option>Custom public-records research</option>
+            <option>Other</option>
+          </select>
+        </label>
+        <label>Message<textarea id="parMessage" placeholder="What are you working on, and what would help?"></textarea></label>
+        <p class="form-disclosure">This opens your email app to send the inquiry — no account, nothing stored on this site.</p>
+        <button class="form-submit" type="submit">Send the inquiry →</button>
+        <p class="form-thanks" id="parThanks" role="status">Thanks — your email app should open with the inquiry addressed to us. Just press send there and we’ll reply.</p>
+      </form>
+    </section>
+  </div>
+</div>
+
 <footer>
   <div class="footer-box">
+    <div class="footer-parent">
+      <strong>On The Record is published by Flagler Coastal Enterprises LLC</strong> — hands-on business support for Northeast Florida.
+      <span class="footer-services">Workforce &amp; Talent · Vendor &amp; Procurement · Business Development &amp; Systems · Operations &amp; Interim Management · Real Estate Operations · Admin &amp; Business Support</span>
+      <a href="mailto:coastalenterprises386@gmail.com">coastalenterprises386@gmail.com</a> · <a href="tel:+19175443692">(917) 544-3692</a> · Palm Coast, Florida
+    </div>
     <div class="footer-main">
       <div>
         <strong>On The Record</strong> — Flagler County government, in plain English.<br>
@@ -735,6 +880,8 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
         <a href="#/topics/safety">Public Safety</a>
         <a href="#/topics/schools">Schools</a>
         <a href="#/newsletter">Newsletter</a>
+        <a href="#/coverage">Coverage</a>
+        <a href="#/partner">Partner With Us</a>
         <a href="#/about">About / Sources / Contact</a>
         <a href="#privacy">Privacy Policy</a>
       </nav>
@@ -1235,14 +1382,22 @@ function renderPanel(f){
   '<div class="section-label">Who meets here</div><div class="meets">'+(MEETS[f.id]||'<p>Meeting info not verified yet.</p>')+'</div>'+
   '<div class="section-label">What\'s next</div><div class="next-box"><span class="nb-label">◎ Next</span>'+f.next+'</div>'+
   '<div class="section-label">Timeline</div><div class="timeline">'+tl+'</div>'+
-  '<div class="panel-actions"><button class="btn btn-share" id="shareBtn" type="button">↗ Share this building</button><button class="btn btn-follow" id="followBtn" type="button" aria-expanded="false">＋ Follow this building</button><a class="btn btn-gold" target="_blank" rel="noopener" href="'+mapsLink(f.mapsQ)+'">Open in Maps ↗</a>'+(hasCoords(f)?'<button class="btn" id="zoomBtn" type="button">Zoom to pin</button>':'')+'</div><div class="share-note" id="shareNote" role="status" aria-live="polite"></div><div class="follow-panel" id="followPanel" hidden><p><strong>Alerts for this building are coming soon.</strong> We\'re not collecting signups inside the map yet. To be first to know when '+f.name+' has news, email us and we\'ll add you to the early list:</p><a class="follow-mail" href="mailto:coastalenterprises386@gmail.com?subject='+encodeURIComponent("Follow: "+f.name)+'&amp;body='+encodeURIComponent("Please let me know when there is news at "+f.name+" ("+f.address+").")+'">Email to follow '+f.name+' →</a><p style="margin:10px 0 0;font-size:12.5px;color:#B9C8DE">Subject is pre-filled: “Follow: '+f.name+'” — just press send.</p></div><div class="panel-report"><a href="'+reportMailto(f)+'">Report an error on this card</a></div></div></div>';
+  '<div class="panel-actions"><button class="btn btn-share" id="shareBtn" type="button">↗ Share this building</button><button class="btn btn-follow" id="followBtn" type="button" aria-expanded="false">＋ Follow this building</button><a class="btn btn-gold" target="_blank" rel="noopener" href="'+mapsLink(f.mapsQ)+'">Open in Maps ↗</a>'+(hasCoords(f)?'<button class="btn" id="zoomBtn" type="button">Zoom to pin</button>':'')+'</div><div class="share-note" id="shareNote" role="status" aria-live="polite"></div><div class="follow-panel" id="followPanel" hidden><p style="margin:0"><strong>Follow '+f.name+' by email.</strong></p><p style="margin:8px 0 0">Alerts go out when news is posted for this building — sent personally by the Flagler Coastal team, not an automated blast.</p><div class="follow-row"><input type="email" id="followEmail" placeholder="you@example.com" aria-label="Email address for alerts about this building" autocomplete="email"><button class="follow-mail" id="followGo" type="button" style="border:none;cursor:pointer">Follow by email</button></div><p class="follow-note">This opens your email app with a pre-addressed follow request — nothing is stored on this site.</p><p class="follow-thanks" id="followThanks" hidden>Thanks — your email app should open with the follow request addressed to us.</p></div><div class="panel-report"><a href="'+reportMailto(f)+'">Report an error on this card</a></div></div></div>';
   var zb=document.getElementById("zoomBtn");
   if(zb) zb.addEventListener("click",function(){ if(map) map.flyTo([f.lat,f.lng],14,{duration:reduced?0:.8}); bouncePin(f.id); document.querySelector(".map-wrap").scrollIntoView({behavior:reduced?"auto":"smooth",block:"start"}); });
   var sb=document.getElementById("shareBtn");
   if(sb) sb.addEventListener("click",function(){ shareFacility(f,sb); });
   var fb=document.getElementById("followBtn");
   var fp=document.getElementById("followPanel");
-  if(fb&&fp) fb.addEventListener("click",function(){ var open=fp.hidden; fp.hidden=!open; fb.setAttribute("aria-expanded",open?"true":"false"); fb.textContent=open?"− Following — alerts coming soon":"＋ Follow this building"; if(open) fp.scrollIntoView({behavior:reduced?"auto":"smooth",block:"nearest"}); });
+  if(fb&&fp) fb.addEventListener("click",function(){ var open=fp.hidden; fp.hidden=!open; fb.setAttribute("aria-expanded",open?"true":"false"); fb.textContent=open?"− Follow this building":"＋ Follow this building"; if(open) fp.scrollIntoView({behavior:reduced?"auto":"smooth",block:"nearest"}); });
+  var fgo=document.getElementById("followGo");
+  if(fgo) fgo.addEventListener("click",function(){
+    var em=document.getElementById("followEmail");
+    var addr=em?em.value.trim():"";
+    var body="Please send me an email alert when "+f.name+" ("+f.address+") has news."+(addr?("\n\nAlert this address: "+addr):"");
+    window.location.href="mailto:coastalenterprises386@gmail.com?subject="+encodeURIComponent("Follow: "+f.name)+"&body="+encodeURIComponent(body);
+    var th=document.getElementById("followThanks"); if(th) th.hidden=false;
+  });
 }
 function bouncePin(id){
   var el=document.getElementById("pin-"+id);
@@ -1273,12 +1428,12 @@ function shareFacility(f,btn){
   var title="This week at "+f.name;
   var text=shareTextFor(f);
   var note=document.getElementById("shareNote");
-  function copied(){ if(note) note.textContent="Building link copied ("+url+") — add it to the end of the page link and it opens straight to this building."; if(btn){ var old=btn.textContent; btn.textContent="✓ Link copied"; setTimeout(function(){ btn.textContent=old; if(note) note.textContent=""; },3200); } }
+  function copied(){ if(note) note.textContent="Share text copied — paste it anywhere to share "+f.name+"."; if(btn){ var old=btn.textContent; btn.textContent="✓ Link copied"; setTimeout(function(){ btn.textContent=old; if(note) note.textContent=""; },3200); } }
   function fallbackCopy(){
-    if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(url).then(copied).catch(function(){ legacyCopy(); }); } else { legacyCopy(); }
+    if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(text+" "+url).then(copied).catch(function(){ legacyCopy(); }); } else { legacyCopy(); }
   }
   function legacyCopy(){
-    try{ var ta=document.createElement("textarea"); ta.value=url; ta.style.position="fixed"; ta.style.opacity="0"; document.body.appendChild(ta); ta.select(); document.execCommand("copy"); document.body.removeChild(ta); copied(); }catch(e){ if(note) note.textContent="Copy this link: "+url; }
+    try{ var ta=document.createElement("textarea"); ta.value=text+" "+url; ta.style.position="fixed"; ta.style.opacity="0"; document.body.appendChild(ta); ta.select(); document.execCommand("copy"); document.body.removeChild(ta); copied(); }catch(e){ if(note) note.textContent="Copy this: "+text+" "+url; }
   }
   if(navigator.share){
     navigator.share({title:title,text:text,url:url}).then(function(){ if(note) note.textContent="Thanks for sharing "+f.name+"."; }).catch(function(err){ if(err&&err.name==="AbortError") return; fallbackCopy(); });
@@ -1382,7 +1537,8 @@ bootApp();
 <script>
 /* ================= PHASE 3 — SITE STRUCTURE =================
    Hash-routed views inside the single file. Routes: #/home, #/map, #/week,
-   #/archive, #/topics/<slug>, #/newsletter, #/about. Legacy links keep
+   #/archive, #/topics/<slug>, #/newsletter, #/coverage, #/partner, #/about.
+   Legacy links keep
    working: #building=<slug> opens the Map view on that facility, and
    #about / #sources / #corrections / #privacy open the About view. */
 function cleanText(t){
@@ -1503,6 +1659,7 @@ function renderArchive(){
 }
 /* ---------- Topics ---------- */
 function renderTopic(t){
+  currentTopicKey=t;
   var meta=TOPIC_META[t]; if(!meta) return;
   var title=document.getElementById("topicTitle"); if(title) title.textContent=meta.title;
   var desc=document.getElementById("topicDesc"); if(desc) desc.textContent=meta.desc;
@@ -1521,8 +1678,85 @@ function renderTopic(t){
     }).join("");
   }
 }
+/* ================= PHASE 4 — COUNTY REGISTRY, COVERAGE, PARTNER, FOLLOW =================
+   DATA STRUCTURE: one registry entry per county. Adding a county means
+   adding ONE entry here carrying that county's own data (facilities,
+   meets, slugs, boundary, towns, share lines, archive weeks, top-story
+   ids) — no view, router or rendering code changes. The app binds its
+   working data from the ACTIVE (live) county below; the Flagler entry
+   references the exact data objects the earlier phases defined, so
+   current rendering is unchanged. Coming-soon entries carry no data yet. */
+var COUNTIES=[
+  {id:"flagler", name:"Flagler County", status:"live", weekLabel:"Week of Nov 23–29, 2026",
+   facilities:FACILITIES, meets:MEETS, slugs:SLUGS, boundary:FLAGLER_BOUNDARY, towns:TOWNS,
+   shareLines:SHARE_LINES, archive:ARCHIVE, weekTopIds:WEEK_TOP_IDS},
+  {id:"volusia", name:"Volusia County", status:"coming-soon", note:"The next county edition of On The Record — Daytona Beach, Deltona, DeLand and the rest of Volusia, researched to the same standard as Flagler."},
+  {id:"st-johns", name:"St. Johns County", status:"coming-soon", note:"The county edition after Volusia — St. Augustine and the county north of Flagler, already on our doorstep at Marineland."}
+];
+/* Dedicated city editions planned inside the live county — deeper,
+   city-level coverage beyond the county map. */
+var CITY_EDITIONS=[
+  {name:"Palm Coast", kind:"City edition", note:"A deeper Palm Coast edition — every council, planning-board and neighborhood decision in the county’s biggest city, beyond what the county map carries."},
+  {name:"Flagler Beach", kind:"City edition", note:"A deeper Flagler Beach edition — the Commission, the pier and the beachside, covered on their own page."},
+  {name:"Bunnell", kind:"City edition", note:"A deeper Bunnell edition — the county seat’s own Commission, utilities and development, covered on their own page."}
+];
+var ACTIVE_COUNTY=COUNTIES.filter(function(c){ return c.status==="live"; })[0]||COUNTIES[0];
+/* Bind the app's working data to the active county. */
+FACILITIES=ACTIVE_COUNTY.facilities; MEETS=ACTIVE_COUNTY.meets; ARCHIVE=ACTIVE_COUNTY.archive;
+/* ---------- Coverage view (rendered from the registry) ---------- */
+function renderCoverage(){
+  var wrap=document.getElementById("coverageCards"); if(!wrap) return;
+  var c=ACTIVE_COUNTY;
+  var news=c.facilities.filter(function(f){ return f.active; }).length;
+  var weeks=(c.archive?c.archive.length:0)+1;
+  var html='<article class="cov-card cov-card-live"><span class="cov-status cov-status-live">● Live now</span><h2>'+c.name+'</h2><p>The original edition — every public building on one map, with the week’s decisions, dollars and development in plain English, each item sourced. Current week: '+c.weekLabel+'.</p><div class="cov-counts"><span>'+c.facilities.length+' places mapped</span><span>'+news+' with news this week</span><span>'+weeks+' weeks on the record</span></div><a class="sc-link" href="#/map">Open the '+c.name+' map →</a></article>';
+  COUNTIES.filter(function(x){ return x.status!=="live"; }).forEach(function(x){
+    html+='<article class="cov-card"><span class="cov-status cov-status-soon">Coming soon</span><h2>'+x.name+'</h2><p>'+x.note+'</p></article>';
+  });
+  CITY_EDITIONS.forEach(function(x){
+    html+='<article class="cov-card"><span class="cov-status cov-status-soon">Coming soon · '+x.kind+'</span><h2>'+x.name+'</h2><p>'+x.note+'</p></article>';
+  });
+  wrap.innerHTML=html;
+}
+/* ---------- Mailto forms (no backend: the visitor's email app sends) ---------- */
+var CONTACT_EMAIL="coastalenterprises386@gmail.com";
+function openMailto(subject,lines){
+  window.location.href="mailto:"+CONTACT_EMAIL+"?subject="+encodeURIComponent(subject)+"&body="+encodeURIComponent(lines.join("\n"));
+}
+function fieldVal(id){ var el=document.getElementById(id); return el?el.value.trim():""; }
+function wirePhase4Forms(){
+  var cf=document.getElementById("coverageForm");
+  if(cf) cf.addEventListener("submit",function(e){
+    e.preventDefault();
+    var area=fieldVal("covArea");
+    var lines=["Coverage request from the On The Record website.","","Name: "+fieldVal("covName"),"Email: "+fieldVal("covEmail"),"Area requested: "+area];
+    var note=fieldVal("covNote"); if(note) lines.push("Note: "+note);
+    openMailto("Coverage request: "+area,lines);
+    var th=document.getElementById("covThanks"); if(th) th.classList.add("show");
+  });
+  var pf=document.getElementById("partnerForm");
+  if(pf) pf.addEventListener("submit",function(e){
+    e.preventDefault();
+    var interest=fieldVal("parInterest");
+    var lines=["Partner inquiry from the On The Record website.","","Name: "+fieldVal("parName"),"Business: "+(fieldVal("parBusiness")||"—"),"Email: "+fieldVal("parEmail"),"Interested in: "+interest];
+    var msg=fieldVal("parMessage"); if(msg) lines.push("","Message: "+msg);
+    openMailto("Partner inquiry: "+interest,lines);
+    var th=document.getElementById("parThanks"); if(th) th.classList.add("show");
+  });
+  var tb=document.getElementById("topicFollowBtn"), tp=document.getElementById("topicFollowPanel");
+  if(tb&&tp) tb.addEventListener("click",function(){ var open=tp.hidden; tp.hidden=!open; tb.setAttribute("aria-expanded",open?"true":"false"); tb.textContent=open?"− Follow this topic":"＋ Follow this topic"; });
+  var tg=document.getElementById("topicFollowGo");
+  if(tg) tg.addEventListener("click",function(){
+    var title=(TOPIC_META[currentTopicKey]||{}).title||"this topic";
+    var addr=fieldVal("topicFollowEmail");
+    var body="Please send me an email alert when there is news in the "+title+" topic on On The Record."+(addr?("\n\nAlert this address: "+addr):"");
+    openMailto("Follow topic: "+title,body.split("\n"));
+    var th=document.getElementById("topicFollowThanks"); if(th) th.hidden=false;
+  });
+}
+var currentTopicKey="meetings";
 /* ---------- Router ---------- */
-var VIEW_IDS=["view-home","view-map","view-week","view-archive","view-topic","view-newsletter","view-about"];
+var VIEW_IDS=["view-home","view-map","view-week","view-archive","view-topic","view-newsletter","view-coverage","view-partner","view-about"];
 var currentView="home", mapShownOnce=false;
 function showView(name,param,section){
   currentView=name;
@@ -1533,7 +1767,7 @@ function showView(name,param,section){
     else act=(a.getAttribute("data-nav")===name);
     a.classList.toggle("active",!!act);
   });
-  var titles={home:"On The Record \u2014 Flagler County, in Plain English",map:"Map \u2014 On The Record · Flagler County",week:"This Week \u2014 On The Record · Flagler County",archive:"Archive \u2014 On The Record · Flagler County",topic:(TOPIC_META[param]?TOPIC_META[param].title+" \u2014 ":"")+"On The Record · Flagler County",newsletter:"Newsletter \u2014 On The Record",about:"About \u2014 On The Record"};
+  var titles={home:"On The Record \u2014 Flagler County, in Plain English",map:"Map \u2014 On The Record · Flagler County",week:"This Week \u2014 On The Record · Flagler County",archive:"Archive \u2014 On The Record · Flagler County",topic:(TOPIC_META[param]?TOPIC_META[param].title+" \u2014 ":"")+"On The Record · Flagler County",newsletter:"Newsletter \u2014 On The Record",coverage:"Coverage \u2014 On The Record · Flagler Coastal Enterprises",partner:"Partner With Us \u2014 On The Record · Flagler Coastal Enterprises",about:"About \u2014 On The Record"};
   document.title=titles[name]||titles.home;
   var nl=document.getElementById("navLinks"); if(nl) nl.classList.remove("open");
   var tg=document.getElementById("navToggle"); if(tg) tg.setAttribute("aria-expanded","false");
@@ -1557,7 +1791,7 @@ function handleRoute(){
   if(h.indexOf("#/")===0){
     var parts=h.slice(2).split("/"); var v=parts[0]||"home";
     if(v==="topics"){ var t=parts[1]||"meetings"; if(!TOPIC_META[t]) t="meetings"; renderTopic(t); showView("topic",t); }
-    else if(v==="home"||v==="map"||v==="week"||v==="archive"||v==="newsletter"||v==="about") showView(v);
+    else if(v==="home"||v==="map"||v==="week"||v==="archive"||v==="newsletter"||v==="coverage"||v==="partner"||v==="about") showView(v);
     else showView("home");
     return;
   }
@@ -1581,7 +1815,7 @@ window.__onHash=handleRoute;
   if(nlSection&&nlSlot) nlSlot.appendChild(nlSection);
   var homeSlot=document.getElementById("homeNewsletterSlot");
   if(nlSection&&homeSlot){ var clone=nlSection.cloneNode(true); clone.removeAttribute("id"); homeSlot.appendChild(clone); }
-  renderTopStories(); renderPreviewCounts(); renderWeek(); renderArchive();
+  renderTopStories(); renderPreviewCounts(); renderWeek(); renderArchive(); renderCoverage(); wirePhase4Forms();
   var tg=document.getElementById("navToggle"); var nl=document.getElementById("navLinks");
   if(tg&&nl) tg.addEventListener("click",function(){ var open=nl.classList.toggle("open"); tg.setAttribute("aria-expanded",open?"true":"false"); });
   document.querySelectorAll("[data-atopic]").forEach(function(b){ b.addEventListener("click",function(){ archiveTopic=b.getAttribute("data-atopic"); renderArchive(); }); });
