@@ -249,6 +249,40 @@ button{font-family:inherit;min-height:40px} a{color:var(--navy)}
 .newsletter-fallback a{color:var(--gold2);font-weight:700;text-decoration:underline;text-underline-offset:3px}
 .newsletter-fallback a:hover{color:#F3EAD6}
 @media(max-width:900px){.newsletter{padding-left:14px;padding-right:14px}.newsletter-box h3{font-size:24px}}
+/* ===== Phase 2 — Credibility: source lines, report-an-error, info sections ===== */
+.news-main{flex:1;min-width:0}
+.src-line{margin-top:5px;font-size:12px;line-height:1.5;color:#9DB0CC}
+.src-line a{color:var(--gold2);font-weight:600;text-decoration:underline;text-underline-offset:2px}
+.src-line a:hover{color:#F3EAD6}
+.card-cell{display:flex;flex-direction:column}
+.card-cell .card{flex:1}
+.card-src{display:block;font-size:11.5px;line-height:1.45;color:#8A94A6;margin-top:6px}
+.lcard-cell{display:flex;flex-direction:column}
+.lcard-src{display:block;font-size:11.5px;line-height:1.45;color:#8A94A6;margin-top:5px}
+.lcard-pending{color:var(--gold-dark);font-weight:700}
+.report-link{align-self:flex-start;margin-top:6px;font-size:12px;font-weight:600;color:#64748B;text-decoration:underline;text-underline-offset:2px;padding:2px}
+.report-link:hover{color:var(--navy)}
+.panel-report{margin-top:14px;text-align:center}
+.panel-report a{color:#9DB0CC;font-size:12.5px;font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.panel-report a:hover{color:var(--gold2)}
+.topbar-link{display:inline-flex;align-items:center;min-height:40px;background:rgba(255,255,255,.08);border:1px solid rgba(216,192,148,.55);color:var(--gold2);border-radius:999px;padding:10px 16px;font-weight:700;font-size:13px;text-decoration:none;transition:background .2s}
+.topbar-link:hover{background:rgba(178,141,87,.25)}
+.info-wrap{max-width:1180px;margin:0 auto;padding:2px 20px 6px}
+.info-card{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:28px 26px;margin-top:14px;box-shadow:0 10px 26px rgba(10,35,66,.06);scroll-margin-top:16px}
+.info-card h2{margin:6px 0 10px;font-family:"Playfair Display",serif;font-size:29px;line-height:1.1;color:var(--navy)}
+.info-card p{margin:0 0 12px;font-size:15px;line-height:1.65;color:#3B475C}
+.info-card p:last-child{margin-bottom:0}
+.info-card ul{margin:0 0 12px;padding-left:20px;font-size:15px;line-height:1.65;color:#3B475C}
+.info-card li{margin-bottom:7px}
+.info-card a{color:var(--navy);font-weight:600;text-decoration:underline;text-underline-offset:2px}
+.mission-line{font-family:"Playfair Display",serif;font-style:italic;font-size:21px;line-height:1.35;color:var(--navy)}
+.independence-box{background:#F5F1E8;border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-top:16px}
+.independence-box p{margin:0;font-size:14.5px}
+.independence-box .ib-label{font-size:10.5px;letter-spacing:.18em;font-weight:800;text-transform:uppercase;color:var(--gold-dark);display:block;margin-bottom:6px}
+.footer-links{display:flex;flex-direction:column;gap:6px;flex-shrink:0}
+.footer-links a{color:var(--navy);font-weight:700;text-decoration:none;font-size:13px}
+.footer-links a:hover{text-decoration:underline;text-underline-offset:3px}
+@media(max-width:900px){.info-wrap{padding-left:14px;padding-right:14px}.info-card{padding:22px 18px}.info-card h2{font-size:25px}}
 footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
 .footer-box{border-top:1px solid var(--line);padding-top:14px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12.5px;line-height:1.6;color:var(--muted)}
 .footer-box strong{color:var(--navy)}
@@ -325,6 +359,9 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
       <p class="updated-line" id="lastUpdated">Last updated: November 24, 2026</p>
     </div>
     <div class="topbar-actions">
+      <a class="topbar-link" href="#about">About</a>
+      <a class="topbar-link" href="#sources">Sources</a>
+      <a class="topbar-link" href="#corrections">Corrections</a>
       <button id="howBtn" type="button" aria-haspopup="dialog">? How it works</button>
       <button id="globeBtn" aria-label="Return to the globe view">◎ Globe view</button>
     </div>
@@ -394,7 +431,7 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
   <div class="cards" id="cards"></div>
 </section>
 
-<section class="newsletter" aria-label="Newsletter subscribe">
+<section class="newsletter" id="subscribe" aria-label="Newsletter subscribe">
   <div class="newsletter-box">
     <div class="eyebrow" style="color:var(--gold2)">Newsletter</div>
     <h3>On The Record — in your inbox, every Sunday</h3>
@@ -406,12 +443,54 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
   </div>
 </section>
 
+<div class="info-wrap">
+<section class="info-card" id="about" aria-label="About On The Record">
+  <div class="eyebrow" style="color:var(--gold-dark)">About</div>
+  <h2>About On The Record</h2>
+  <p class="mission-line">“Local government, in plain English.”</p>
+  <p>On The Record is a free interactive map of Flagler County government. Tap a building — a city hall, a courthouse, a fire station, a development site — and see what was decided there, what it cost, and what happens next. No agenda PDFs to decode and no jargon: every item is summarized in plain English and carries its source, so you can check the original yourself.</p>
+  <p><strong>Who runs it:</strong> On The Record is published by Flagler Coastal Enterprises LLC of Palm Coast, Florida. We research the week's meetings and records, write the summaries, and keep the map current.</p>
+  <p><strong>Contact:</strong> <a href="mailto:coastalenterprises386@gmail.com">coastalenterprises386@gmail.com</a> · <a href="tel:+19175443692">(917) 544-3692</a></p>
+  <div class="independence-box"><span class="ib-label">Editorial independence</span><p>On The Record is nonpartisan. We don't endorse candidates, campaigns or ballot measures, and we don't take positions on the decisions we cover. We summarize what local government did, in plain English, and link to the source so you can verify it yourself.</p></div>
+</section>
+
+<section class="info-card" id="sources" aria-label="Sources and methodology">
+  <div class="eyebrow" style="color:var(--gold-dark)">Trust</div>
+  <h2>Sources &amp; Methodology</h2>
+  <p>Accuracy is the point of this page, so here is exactly how it is put together.</p>
+  <ul>
+    <li><strong>Official sources first.</strong> Items start from the public record: published agendas, minutes, meeting video, and staff reports from Flagler County, the cities of Palm Coast, Bunnell and Flagler Beach, the towns of Beverly Beach and Marineland, and Flagler County Schools — plus FDOT releases and official public notices.</li>
+    <li><strong>Reporting is a lead, not the record.</strong> When local reporting — for example FlaglerLive — surfaces something first, we treat it as a lead and confirm it against the official record before it appears here. When an item rests on reporting, its source line names the outlet and the date.</li>
+    <li><strong>Updated daily, rebuilt weekly.</strong> The week's data is reviewed and updated daily — outcomes, corrections and newly posted documents are folded in as they appear — and a full new week is loaded each week.</li>
+    <li><strong>How items are chosen.</strong> An item earns a place when it involves a decision, public money, development, public safety or schools affecting Flagler County residents. Quiet buildings stay on the map and say so — a quiet week is information too.</li>
+    <li><strong>Check us.</strong> Every item carries a source line, so you can go straight to the agenda, minutes, video or article it came from and read the original.</li>
+  </ul>
+  <p><strong>The official records we check:</strong> <a href="https://flaglercofl.portal.civicclerk.com/" target="_blank" rel="noopener">Flagler County CivicClerk</a> · <a href="https://go.boarddocs.com/fla/flcsd/Board.nsf/Public" target="_blank" rel="noopener">Flagler Schools BoardDocs</a> · <a href="https://www.palmcoast.gov/agendas" target="_blank" rel="noopener">Palm Coast agenda center</a> · <a href="https://www.bunnellcity.us/1479/Agendas-Minutes" target="_blank" rel="noopener">City of Bunnell agendas &amp; minutes</a> · <a href="https://flaglerbeach-fl.municodemeetings.com/" target="_blank" rel="noopener">Flagler Beach meetings hub</a></p>
+</section>
+
+<section class="info-card" id="corrections" aria-label="Corrections policy">
+  <div class="eyebrow" style="color:var(--gold-dark)">Corrections</div>
+  <h2>Corrections policy</h2>
+  <p>If we publish something wrong, we fix it on the card, note what changed, and update the “Last updated” stamp at the top of the page. When an outcome wasn't reported yet — a vote whose minutes hadn't posted — the card says so, and is updated when the official record appears.</p>
+  <p>Spotted an error? Every building card carries a <strong>Report an error</strong> link, or email us any time at <a href="mailto:coastalenterprises386@gmail.com?subject=Error%20report">coastalenterprises386@gmail.com</a> with the building name and what looks wrong, and we will check it against the source.</p>
+</section>
+</div>
+
 <footer>
   <div class="footer-box">
-    <div>News for Nov 23–29, 2026, researched from official agendas and local reporting.
-    <div style="margin-top:8px"><strong>Share the map:</strong> use any building's Share button, or share the page link — every link opens the map, building links open that building.</div>
+    <div>
+      <strong>On The Record</strong> — Flagler County government, in plain English.<br>
+      On The Record is nonpartisan: we don't endorse candidates, campaigns or ballot measures, and we don't take positions on the decisions we cover.<br>
+      Published by Flagler Coastal Enterprises · Palm Coast, Florida<br>
+      © 2026 Flagler Coastal Enterprises LLC
+      <div style="margin-top:8px">News for Nov 23–29, 2026, researched from official agendas and local reporting. <strong>Share the map:</strong> use any building's Share button, or share the page link — every link opens the map, building links open that building.</div>
     </div>
-    <div style="white-space:nowrap">On The Record · Flagler Coastal Enterprises</div>
+    <nav class="footer-links" aria-label="About this site">
+      <a href="#about">About</a>
+      <a href="#sources">Sources &amp; Methodology</a>
+      <a href="#corrections">Corrections</a>
+      <a href="#subscribe">Subscribe</a>
+    </nav>
   </div>
 </footer>
 
@@ -621,6 +700,7 @@ function initMap(){
       map.fitBounds(countyLayer.getBounds(),{padding:[18,18]});
     }
     FACILITIES.forEach(function(f,i){
+      if(!hasCoords(f)) return; /* unverified location: no pin — the facility still appears in List view as "Location pending verification" */
       var m=L.marker([f.lat,f.lng],{icon:iconFor(f,i)}).addTo(map);
       m.bindPopup("<strong style='font-family:Playfair Display,serif;font-size:15px'>"+f.name+"</strong><br>"+f.address+"<br><em style='color:#8C6E3E'>"+f.badge+"</em>");
       m.on("click",function(){ selectFacility(f.id,false); });
@@ -677,7 +757,7 @@ function bootApp(){
   if(map){
     setTimeout(function(){
       map.invalidateSize();
-      if(deep){ map.setView([deep.lat,deep.lng],13); setHashFor(deep,true); if(markers[deep.id]) setTimeout(function(){ markers[deep.id].openPopup(); bouncePin(deep.id); },250); }
+      if(deep&&hasCoords(deep)){ map.setView([deep.lat,deep.lng],13); setHashFor(deep,true); if(markers[deep.id]) setTimeout(function(){ markers[deep.id].openPopup(); bouncePin(deep.id); },250); }
     },80);
   }
 }
@@ -830,21 +910,73 @@ function iconFor(f,i){
 }
 function mapsLink(q){ return "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q); }
 function esc(s){ return s; }
+/* ---------- PHASE 2 — CREDIBILITY ----------
+   Source lines: every news item names where it came from. The only links used
+   are the boards' official portals already verified in the MEETS data above —
+   no article or document URL is ever invented. Items drawn from local
+   reporting name the outlet and date in text (taken from the item's own
+   attribution) and link to the board's official record portal. */
+function hasCoords(f){ return !!f && isFinite(f.lat) && isFinite(f.lng); }
+var PORTAL_COUNTY={label:"Flagler County CivicClerk portal",url:"https://flaglercofl.portal.civicclerk.com/"};
+var PORTAL_SCHOOLS={label:"Flagler Schools BoardDocs",url:"https://go.boarddocs.com/fla/flcsd/Board.nsf/Public"};
+var PORTAL_PC={label:"Palm Coast agenda center",url:"https://www.palmcoast.gov/agendas"};
+var PORTAL_BUNNELL={label:"City of Bunnell — Agendas & Minutes",url:"https://www.bunnellcity.us/1479/Agendas-Minutes"};
+var PORTAL_FB={label:"Flagler Beach meetings hub",url:"https://flaglerbeach-fl.municodemeetings.com/"};
+var PORTAL_CLERK={label:"Clerk of Court — live court docket",url:"https://flaglerclerk.gov/docket/"};
+var PORTALS={1:PORTAL_COUNTY,2:PORTAL_CLERK,3:PORTAL_PC,4:PORTAL_SCHOOLS,5:PORTAL_BUNNELL,6:PORTAL_BUNNELL,7:PORTAL_FB,8:PORTAL_FB,9:PORTAL_COUNTY,12:PORTAL_PC,13:PORTAL_PC,14:PORTAL_PC,15:PORTAL_PC,16:PORTAL_PC,17:PORTAL_PC,18:PORTAL_PC,20:PORTAL_COUNTY,21:PORTAL_COUNTY,23:PORTAL_FB,24:PORTAL_FB,25:PORTAL_BUNNELL,28:PORTAL_PC,29:PORTAL_PC,30:PORTAL_PC,31:PORTAL_PC};
+function escT(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+function attributionFor(b,parenOnly){
+  if(!b) return null;
+  var m=b.match(/\(Sources?:\s*([^)]+)\)/);
+  if(m) return m[1].replace(/\s+/g," ").trim();
+  if(parenOnly) return null;
+  m=b.match(/Sources?:\s*(.+)$/);
+  if(m){ var s=m[1].replace(/\s+/g," ").trim(); var cut=s.indexOf(" — "); if(cut>0) s=s.slice(0,cut); s=s.replace(/\.+$/,"").trim(); var op=(s.match(/\(/g)||[]).length, cl=(s.match(/\)/g)||[]).length; if(op>cl){ s=s.slice(0,s.lastIndexOf("(")).replace(/[\s,;·-]+$/,"").trim(); } if(s&&s.length<=140) return s; }
+  if(/FlaglerLive/.test(b)) return "FlaglerLive";
+  if(/Daytona Beach News-Journal/.test(b)) return "Daytona Beach News-Journal";
+  if(/The Observer/.test(b)) return "The Observer";
+  if(/FOX 13/.test(b)) return "FOX 13";
+  if(/noticeregistry\.com/.test(b)) return "Public-hearing notice (noticeregistry.com)";
+  if(/flaglerlibrary\.org/.test(b)||/Flagler County Public Library/.test(b)) return "Flagler County Public Library";
+  if(/townofmarineland\.org/.test(b)) return "Town of Marineland";
+  if(/City of Palm Coast/.test(b)) return "City of Palm Coast";
+  if(/City of Bunnell/.test(b)) return "City of Bunnell";
+  if(/City of Flagler Beach/.test(b)) return "City of Flagler Beach";
+  if(/Town of Beverly Beach/.test(b)) return "Town of Beverly Beach";
+  if(/Flagler County Sheriff/.test(b)) return "Flagler County Sheriff's Office";
+  return null;
+}
+function sourceLineHTML(f,b){
+  var named=attributionFor(b,false);
+  var p=PORTALS[f.id];
+  if(named&&p) return 'Source: '+escT(named)+' · <a href="'+p.url+'" target="_blank" rel="noopener">Official record: '+p.label+' ↗</a>';
+  if(named) return 'Source: '+escT(named);
+  if(p) return 'Source: <a href="'+p.url+'" target="_blank" rel="noopener">'+p.label+' ↗</a>';
+  return 'Source: Researched by On The Record — <a href="#sources">how we source items</a>';
+}
+function cardSourceText(f){
+  var named=attributionFor(f.headline,false)||attributionFor(f.bullets&&f.bullets[0],true);
+  if(named) return "Source: "+escT(named);
+  var p=PORTALS[f.id];
+  if(p) return "Source: "+p.label;
+  return "Source: On The Record research";
+}
+function reportMailto(f){ return "mailto:coastalenterprises386@gmail.com?subject="+encodeURIComponent("Error report: "+f.name); }
 function renderPanel(f){
   var panel=document.getElementById("detailPanel");
   var tags=f.cats.map(function(c){ return '<span class="tag">'+CAT_LABEL[c]+'</span>'; }).join("");
   var statusTag=f.active?'<span class="tag tag-gold">'+f.badge+'</span>':'<span class="tag tag-quiet">'+f.badge+'</span>';
   var newsBullets=f.bullets.filter(function(b){ return f.active||b.indexOf("Quiet this week so far")!==0; });
-  var news=(f.active?"":'<div class="empty-state">No new activity this week.</div>')+newsBullets.map(function(b,i){ return '<div class="news-item" style="animation-delay:'+(i*0.07)+'s"><span class="mk">◆</span><p>'+b+'</p></div>'; }).join("");
+  var news=(f.active?"":'<div class="empty-state">No new activity this week.</div>')+newsBullets.map(function(b,i){ var quiet=b.indexOf("Quiet this week so far")===0; return '<div class="news-item" style="animation-delay:'+(i*0.07)+'s"><span class="mk">◆</span><div class="news-main"><p>'+b+'</p>'+(quiet?"":'<div class="src-line">'+sourceLineHTML(f,b)+'</div>')+'</div></div>'; }).join("");
   var tl=f.timeline.map(function(t,i){ return '<div class="tl-item" style="animation-delay:'+(i*0.08)+'s"><div class="tl-date">'+t.d+'</div><div class="tl-text">'+t.t+'</div></div>'; }).join("");
   var panelUpdate=f.active?f.headline:"No new activity this week.";
   var panelSub=f.active?"":'<div style="font-size:13px;line-height:1.5;color:#B9C8DE;margin-top:6px">'+f.headline+'</div>';
-  panel.innerHTML='<div class="panel-inner"><div class="panel-head"><div class="medallion" aria-hidden="true">'+f.icon+'</div><div class="eyebrow">'+f.type+'</div><h2>'+f.name+'</h2><div class="panel-addr">📍 '+f.address+'</div><div class="panel-headline">“'+panelUpdate+'”</div>'+panelSub+'<div class="gold-rule"><span>◆ ◆ ◆</span></div><div class="panel-meta">'+statusTag+tags+'</div></div>'+
+  panel.innerHTML='<div class="panel-inner"><div class="panel-head"><div class="medallion" aria-hidden="true">'+f.icon+'</div><div class="eyebrow">'+f.type+'</div><h2>'+f.name+'</h2><div class="panel-addr">'+(hasCoords(f)?('📍 '+f.address):'Location pending verification')+'</div><div class="panel-headline">“'+panelUpdate+'”</div>'+panelSub+'<div class="gold-rule"><span>◆ ◆ ◆</span></div><div class="panel-meta">'+statusTag+tags+'</div></div>'+
   '<div class="panel-body"><div class="section-label">What happened this week</div>'+news+
   '<div class="section-label">Who meets here</div><div class="meets">'+(MEETS[f.id]||'<p>Meeting info not verified yet.</p>')+'</div>'+
   '<div class="section-label">What\'s next</div><div class="next-box"><span class="nb-label">◎ Next</span>'+f.next+'</div>'+
   '<div class="section-label">Timeline</div><div class="timeline">'+tl+'</div>'+
-  '<div class="panel-actions"><button class="btn btn-share" id="shareBtn" type="button">↗ Share this building</button><button class="btn btn-follow" id="followBtn" type="button" aria-expanded="false">＋ Follow this building</button><a class="btn btn-gold" target="_blank" rel="noopener" href="'+mapsLink(f.mapsQ)+'">Open in Maps ↗</a><button class="btn" id="zoomBtn" type="button">Zoom to pin</button></div><div class="share-note" id="shareNote" role="status" aria-live="polite"></div><div class="follow-panel" id="followPanel" hidden><p><strong>Alerts for this building are coming soon.</strong> We\'re not collecting signups inside the map yet. To be first to know when '+f.name+' has news, email us and we\'ll add you to the early list:</p><a class="follow-mail" href="mailto:coastalenterprises386@gmail.com?subject='+encodeURIComponent("Follow: "+f.name)+'&amp;body='+encodeURIComponent("Please let me know when there is news at "+f.name+" ("+f.address+").")+'">Email to follow '+f.name+' →</a><p style="margin:10px 0 0;font-size:12.5px;color:#B9C8DE">Subject is pre-filled: “Follow: '+f.name+'” — just press send.</p></div></div></div>';
+  '<div class="panel-actions"><button class="btn btn-share" id="shareBtn" type="button">↗ Share this building</button><button class="btn btn-follow" id="followBtn" type="button" aria-expanded="false">＋ Follow this building</button><a class="btn btn-gold" target="_blank" rel="noopener" href="'+mapsLink(f.mapsQ)+'">Open in Maps ↗</a>'+(hasCoords(f)?'<button class="btn" id="zoomBtn" type="button">Zoom to pin</button>':'')+'</div><div class="share-note" id="shareNote" role="status" aria-live="polite"></div><div class="follow-panel" id="followPanel" hidden><p><strong>Alerts for this building are coming soon.</strong> We\'re not collecting signups inside the map yet. To be first to know when '+f.name+' has news, email us and we\'ll add you to the early list:</p><a class="follow-mail" href="mailto:coastalenterprises386@gmail.com?subject='+encodeURIComponent("Follow: "+f.name)+'&amp;body='+encodeURIComponent("Please let me know when there is news at "+f.name+" ("+f.address+").")+'">Email to follow '+f.name+' →</a><p style="margin:10px 0 0;font-size:12.5px;color:#B9C8DE">Subject is pre-filled: “Follow: '+f.name+'” — just press send.</p></div><div class="panel-report"><a href="'+reportMailto(f)+'">Report an error on this card</a></div></div></div>';
   var zb=document.getElementById("zoomBtn");
   if(zb) zb.addEventListener("click",function(){ if(map) map.flyTo([f.lat,f.lng],14,{duration:reduced?0:.8}); bouncePin(f.id); document.querySelector(".map-wrap").scrollIntoView({behavior:reduced?"auto":"smooth",block:"start"}); });
   var sb=document.getElementById("shareBtn");
@@ -900,7 +1032,8 @@ function renderCards(){
   wrap.innerHTML=visible.map(function(f,i){
     var bc=f.active?"badge-news":(f.badge.indexOf("UP NEXT")===0?"badge-next":"badge-quiet");
     var cardUpdate=f.active?f.headline:"No new activity this week.";
-    return '<button class="card'+(f.id===selectedId?' active':'')+'" data-id="'+f.id+'" style="animation-delay:'+(i*0.05)+'s"><div class="ic" aria-hidden="true">'+f.icon+'</div><div class="card-top"><h4>'+f.name+'</h4><span class="badge '+bc+'">'+f.badge+'</span></div><p>'+cardUpdate+'</p><div class="addr">'+f.address+' · '+f.short+'</div></button>';
+    var addrLine=hasCoords(f)?(f.address+' · '+f.short):'Location pending verification';
+    return '<div class="card-cell"><button class="card'+(f.id===selectedId?' active':'')+'" data-id="'+f.id+'" style="animation-delay:'+(i*0.05)+'s"><div class="ic" aria-hidden="true">'+f.icon+'</div><div class="card-top"><h4>'+f.name+'</h4><span class="badge '+bc+'">'+f.badge+'</span></div><p>'+cardUpdate+'</p><span class="card-src">'+cardSourceText(f)+'</span><div class="addr">'+addrLine+'</div></button><a class="report-link" href="'+reportMailto(f)+'">Report an error</a></div>';
   }).join("");
   wrap.querySelectorAll(".card").forEach(function(btn){ btn.addEventListener("click",function(){ selectFacility(parseInt(btn.getAttribute("data-id"),10),true); }); });
 }
@@ -922,7 +1055,8 @@ function renderList(){
     var badge='<span class="badge '+bc+'">'+f.badge+'</span>';
     var updateLine=f.active?f.headline:"No new activity this week.";
     var subLine=f.active?"":'<span class="lcard-empty">'+f.headline+'</span>';
-    return '<button class="lcard'+(f.id===selectedId?' active':'')+'" data-id="'+f.id+'" style="animation-delay:'+(i*0.04)+'s"><span class="lcard-ic" aria-hidden="true">'+f.icon+'</span><span class="lcard-main"><span class="lcard-top"><span class="lcard-name">'+f.name+'</span>'+badge+'</span><span class="lcard-org">'+f.type+'</span><span class="lcard-head">'+updateLine+'</span>'+subLine+'<span class="lcard-addr">📍 '+f.address+'</span></span><span class="lcard-arrow" aria-hidden="true">→</span></button>';
+    var lAddr=hasCoords(f)?('<span class="lcard-addr">📍 '+f.address+'</span>'):'<span class="lcard-addr lcard-pending">Location pending verification</span>';
+    return '<div class="lcard-cell"><button class="lcard'+(f.id===selectedId?' active':'')+'" data-id="'+f.id+'" style="animation-delay:'+(i*0.04)+'s"><span class="lcard-ic" aria-hidden="true">'+f.icon+'</span><span class="lcard-main"><span class="lcard-top"><span class="lcard-name">'+f.name+'</span>'+badge+'</span><span class="lcard-org">'+f.type+'</span><span class="lcard-head">'+updateLine+'</span>'+subLine+'<span class="lcard-src">'+cardSourceText(f)+'</span>'+lAddr+'</span><span class="lcard-arrow" aria-hidden="true">→</span></button><a class="report-link" href="'+reportMailto(f)+'">Report an error</a></div>';
   }).join("");
   wrap.querySelectorAll(".lcard").forEach(function(btn){
     btn.addEventListener("click",function(){
