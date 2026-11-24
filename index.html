@@ -2190,6 +2190,44 @@ function wirePhase4Forms(){
   });
 }
 var currentTopicKey="meetings";
+/* ---------- Phase 6 correction 5 — Map-view ENTRY SCROLL ----------
+   Diagnosis: inside #view-map, above the two-panel .map-split, the view
+   renders its own header block — the .topbar title block (week pills,
+   "On The Record — Flagler County" H1, subtitle, updated line, action
+   buttons, ≈255px) and the .toolbar (search card + filter chips /
+   Map–List toggle / pin legend row, ≈245px). With the brand strip
+   (≈33px) and the sticky site nav (≈61px) above the view, the map
+   pane's top sat ≈600px from the document top (≈625px at 1920×1000),
+   so opening the Map view at scroll 0 showed only the fitted county's
+   northern band — the fit was right, the pane was below the fold.
+   Fix: on Map-view ENTRY only, jump the page so .map-split's top sits
+   at the sticky offset the panes themselves use (nav height + 13px =
+   the CSS top:74px on desktop), putting the whole pane on screen.
+   Guarantees: this is a programmatic window scroll — it never sets
+   userInteracted, never touches the wheel-zoom gate, and does not
+   change the pane's size, so the framing pass queued by ensureMap in
+   showView still measures the same box and runs after this scroll.
+   It lives in showView, which runs only on route changes (nav click,
+   tab bar, deep link, initial load) — selecting buildings inside the
+   Map view never calls it, so it cannot re-trigger mid-visit. The
+   header block is not removed or shrunk; visitors can scroll back up
+   to it freely. */
+function scrollMapPaneIntoView(){
+  var split=document.querySelector(".map-split");
+  if(!split) return;
+  var nav=document.querySelector(".site-nav");
+  var navH=nav?nav.getBoundingClientRect().height:0;
+  var y=split.getBoundingClientRect().top+(window.pageYOffset||0)-(navH+13);
+  if(y<0) y=0;
+  /* Instant jump, not the stylesheet's smooth scroll: the framing pass
+     must settle on the final geometry, and a slow animated scroll
+     would leave the pane mid-flight when it runs. The inline override
+     is restored immediately after the jump. */
+  var de=document.documentElement, prev=de.style.scrollBehavior;
+  de.style.scrollBehavior="auto";
+  try{ window.scrollTo(0,y); }catch(e){}
+  de.style.scrollBehavior=prev;
+}
 /* ---------- Router ---------- */
 var VIEW_IDS=["view-home","view-map","view-week","view-archive","view-topic","view-newsletter","view-coverage","view-partner","view-about"];
 var currentView="home", mapShownOnce=false;
@@ -2233,6 +2271,12 @@ function showView(name,param,section){
   }
   if(section){
     setTimeout(function(){ var t=document.getElementById(section); if(t) t.scrollIntoView({behavior:reduced?"auto":"smooth",block:"start"}); },90);
+  } else if(name==="map"){
+    /* Correction 5: Map-view entry puts the map pane at the top of the
+       viewport (see scrollMapPaneIntoView above) instead of leaving the
+       page at scroll 0 with the pane below the fold. Entry only — this
+       branch runs once per route change into the Map view. */
+    scrollMapPaneIntoView();
   } else {
     window.scrollTo({top:0,behavior:"auto"});
   }
