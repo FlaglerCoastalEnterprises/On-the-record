@@ -1256,8 +1256,10 @@ function initMap(){
     streetTiles.addTo(map);
     L.control.layers({"Street map":streetTiles,"Satellite":satelliteTiles},null,{collapsed:false}).addTo(map);
     if(typeof FLAGLER_BOUNDARY!=="undefined"){
-      var countyLayer=L.geoJSON(FLAGLER_BOUNDARY,{interactive:false,style:function(){ return {color:"#8C6E3E",weight:2,opacity:.9,fillColor:"#B28D57",fillOpacity:.05}; }}).addTo(map);
-      map.fitBounds(countyLayer.getBounds(),{padding:[18,18]});
+      L.geoJSON(FLAGLER_BOUNDARY,{interactive:false,style:function(){ return {color:"#8C6E3E",weight:2,opacity:.9,fillColor:"#B28D57",fillOpacity:.05}; }}).addTo(map);
+      /* No fitBounds here: framing at init time measures the map before the
+         two-panel / sheet layout has settled, and that wrong first fit is
+         what positionMapForRoute (after invalidateSize, post-settle) owns. */
     }
     FACILITIES.forEach(function(f,i){
       if(!hasCoords(f)) return; /* unverified location: no pin — the facility still appears in List view as "Location pending verification" */
@@ -1565,8 +1567,11 @@ function bouncePin(id){
   var el=document.getElementById("pin-"+id);
   if(el && !reduced){ el.classList.remove("pin-bounce"); void el.offsetWidth; el.classList.add("pin-bounce"); }
 }
-/* Phase 6: hovering or keyboard-focusing a facility card enlarges its pin
-   and switches it to the navy/gold accent treatment. */
+/* Phase 6: hovering or keyboard-focusing a facility card highlights its
+   pin ONLY — enlarge + navy/gold accent via the pin-hl class, plus the
+   marker's z-index raise. This path must never move the map: it makes no
+   fitBounds / flyTo / setView / pan call and touches nothing but the one
+   marker and its pin element. */
 function highlightPin(id,on){
   var m=markers[id];
   if(m&&m.setZIndexOffset){ try{ m.setZIndexOffset(on?1200:0); }catch(e){} }
@@ -1764,19 +1769,38 @@ function ensureMap(cb){
   s.onerror=function(){ leafletState="error"; initMap(); flushMapCallbacks(); };
   document.head.appendChild(s);
 }
-/* Position the freshly shown map: a building deep link wins; otherwise the
-   first show frames the whole county. Mirrors the pre-lazy boot behavior. */
+/* Bounds of every facility pin — the frame the county view is fitted to. */
+function pinsBounds(){
+  var pts=[];
+  FACILITIES.forEach(function(f){ if(hasCoords(f)) pts.push([f.lat,f.lng]); });
+  return pts.length?L.latLngBounds(pts):null;
+}
+/* Frame Flagler County in the map panel: re-measure first (the panel may
+   have been resized by the layout settling), then fit the pins' bounds
+   with padding so the county sits centered, desktop and mobile alike. */
+function frameCounty(){
+  if(!map) return;
+  try{ map.invalidateSize(); }catch(e){}
+  var b=pinsBounds();
+  if(b){ try{ map.fitBounds(b,{padding:[36,36]}); return; }catch(e){} }
+  try{ map.setView([29.49,-81.24],11); }catch(e){}
+}
+/* Position the freshly shown map, called only after the layout has
+   settled: a building deep link wins and flies to that building's pin at
+   a close zoom once its panel is open; otherwise the first show frames
+   the whole county on the pins' bounds. */
 function positionMapForRoute(){
   if(!map) return;
   var slug=slugFromHash();
   var f=slug?facilityForHashSlug(slug):null;
   if(f&&hasCoords(f)&&markers[f.id]){
     mapShownOnce=true;
-    map.setView([f.lat,f.lng],13);
-    setTimeout(function(){ if(markers[f.id]){ markers[f.id].openPopup(); bouncePin(f.id); } },250);
+    try{ map.stop(); }catch(e){}
+    map.flyTo([f.lat,f.lng],14,{duration:reduced?0:1.1,easeLinearity:0.12});
+    setTimeout(function(){ if(markers[f.id]){ try{ markers[f.id].openPopup(); }catch(e){} bouncePin(f.id); } }, reduced?60:650);
   } else if(!mapShownOnce){
     mapShownOnce=true;
-    try{ map.fitBounds([[29.255,-81.53],[29.685,-81.06]],{padding:[14,14]}); }catch(e){}
+    frameCounty();
   }
 }
 
@@ -2104,10 +2128,15 @@ function showView(name,param,section){
   var nl=document.getElementById("navLinks"); if(nl) nl.classList.remove("open");
   var tg=document.getElementById("navToggle"); if(tg) tg.setAttribute("aria-expanded","false");
   if(name==="map"){
-    /* Lazy: Leaflet loads on this first open; later opens reuse the map. */
+    /* Lazy: Leaflet loads on this first open; later opens reuse the map.
+       Sizing and framing wait for two animation frames plus a short
+       settle, so Leaflet measures the final two-panel / sheet layout —
+       never a mid-layout box — before invalidateSize + positioning. */
     ensureMap(function(){
       if(!map) return;
-      setTimeout(function(){ if(map){ map.invalidateSize(); positionMapForRoute(); } },40);
+      var settle=function(){ if(map){ try{ map.invalidateSize(); }catch(e){} positionMapForRoute(); } };
+      if(window.requestAnimationFrame){ requestAnimationFrame(function(){ requestAnimationFrame(function(){ setTimeout(settle,60); }); }); }
+      else setTimeout(settle,90);
     });
   }
   if(section){
