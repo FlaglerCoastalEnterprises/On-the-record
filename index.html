@@ -838,6 +838,16 @@ var CAT_LABEL={meetings:"Meetings",money:"Money & Contracts",development:"Develo
 var SLUGS={1:"government-services-building",2:"kim-c-hammond-justice-center",3:"palm-coast-city-hall",4:"town-center-ymca",5:"bunnell-city-hall",6:"bunnell-commission-chambers",7:"flagler-beach-city-hall",8:"flagler-beach-pier",9:"flagler-humane-society",10:"flagler-county-sheriffs-office",11:"flagler-county-public-library",12:"fire-station-22",13:"fire-station-21",14:"fire-station-23",15:"fire-station-24",16:"fire-station-25",17:"fire-station-26",18:"palm-coast-community-center",19:"flagler-county-public-library-bunnell",20:"flagler-executive-airport",21:"flagler-county-emergency-operations-center",22:"sheriff-perry-hall-detention-facility",23:"flagler-beach-fire-station-11",24:"flagler-beach-police-department",25:"bunnell-police-department",26:"beverly-beach-town-hall",27:"town-of-marineland",28:"seminole-woods-sesame-commercial-corner",29:"evolve-palm-coast-phase-2",30:"lakeview-estates",31:"dc-blox-cable-landing-station"};
 FACILITIES.forEach(function(f){ f.slug=SLUGS[f.id]||("building-"+f.id); });
 function facilityBySlug(slug){ for(var i=0;i<FACILITIES.length;i++){ if(FACILITIES[i].slug===slug) return FACILITIES[i]; } return null; }
+/* Legacy short slugs used by share links posted before the long slugs existed.
+   Matched exactly — never fuzzy — so a legacy link opens precisely its facility. */
+var LEGACY_SLUGS={"sheriff":10,"gsb":1};
+function facilityForHashSlug(slug){
+  if(!slug) return null;
+  var f=facilityBySlug(slug);
+  if(f) return f;
+  if(Object.prototype.hasOwnProperty.call(LEGACY_SLUGS,slug)) return facilityById(LEGACY_SLUGS[slug]);
+  return null;
+}
 function facilityById(id){ for(var i=0;i<FACILITIES.length;i++){ if(FACILITIES[i].id===id) return FACILITIES[i]; } return null; }
 function deepLinkFor(f){ return "#building="+encodeURIComponent(f.slug); }
 function slugFromHash(){ try{ var h=window.location.hash||""; var m=h.match(/building=([a-z0-9\-]+)/i); return m?decodeURIComponent(m[1]):null; }catch(e){ return null; } }
@@ -998,7 +1008,7 @@ function openCounty(filter){
    that building's card on the map instead of the county overview. */
 function bootApp(){
   initMap();
-  var deep=facilityBySlug(slugFromHash());
+  var deep=facilityForHashSlug(slugFromHash());
   var startF=deep||FACILITIES[0];
   selectedId=startF.id;
   renderPanel(startF); renderCards(); renderGlance();
@@ -1553,7 +1563,7 @@ function handleRoute(){
   }
   var slug=slugFromHash();
   if(slug){
-    var f=facilityBySlug(slug);
+    var f=facilityForHashSlug(slug);
     showView("map");
     if(f){ if(viewMode!=="map") setViewMode("map"); selectFacility(f.id,true); }
     return;
