@@ -527,8 +527,16 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
  .map-listcol .list-section{max-width:none;margin:0;padding:2px 0 4px}
  .map-listcol .cards{grid-template-columns:1fr}
  .map-split .layout{max-width:none;margin:0;padding:0}
- .map-split .map-wrap{position:sticky;top:74px}
- .map-split #map{height:calc(100vh - 158px);min-height:520px}
+ /* Correction 4 — the wrapper IS the pane. The sticky wrap carries the
+    viewport-derived height itself (100dvh tracks the visible viewport
+    where vh does not), and #map flexes to fill whatever the wrap leaves
+    above the foot strip. The Leaflet container's box is therefore the
+    visible pane by construction: it can never inherit the two-panel
+    row's height (that row is as tall as the detail panel's content),
+    and fitBounds always measures the box the reader actually sees. */
+ .map-split .map-wrap{position:sticky;top:74px;height:calc(100vh - 158px);height:calc(100dvh - 158px);display:flex;flex-direction:column}
+ .map-split #map{flex:1 1 auto;height:auto;min-height:0}
+ .map-split .map-foot{flex:0 0 auto}
  .map-split .panel{top:74px}
  #view-map.vm-list .map-split{grid-template-columns:minmax(0,1fr)}
  #view-map.vm-list .map-listcol{display:none}
