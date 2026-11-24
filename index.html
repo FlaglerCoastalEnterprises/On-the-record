@@ -310,7 +310,7 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
 .footer-box{border-top:1px solid var(--line);padding-top:14px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12.5px;line-height:1.6;color:var(--muted)}
 .footer-box strong{color:var(--navy)}
 /* Pins */
-.custom-pin{position:relative;width:38px;height:38px;display:flex;align-items:center;justify-content:center;animation:pinDrop .55s cubic-bezier(.2,1.4,.4,1) both}
+.custom-pin{position:relative;width:38px;height:38px;display:flex;align-items:center;justify-content:center;animation:pinDrop .55s cubic-bezier(.2,1.4,.4,1) backwards;transition:transform .18s ease}
 @keyframes pinDrop{from{transform:translateY(-22px) scale(.6);opacity:0}to{transform:none;opacity:1}}
 .pin-core{width:29px;height:29px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);display:flex;align-items:center;justify-content:center;border:2px solid #fff;box-shadow:0 5px 14px rgba(0,0,0,.3);position:relative;z-index:2;transition:transform .2s}
 .pin-core span{transform:rotate(45deg);font-size:12px;line-height:1;color:#fff}
@@ -513,8 +513,8 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
 .follow-topic-box .follow-row input{border-color:#D6CFC0}
 /* ===== Phase 6 — Desktop two-panel map, mobile bottom sheet, tab bar, install banner ===== */
 /* Pin highlight (desktop list hover / keyboard focus) */
-.custom-pin.pin-hl{z-index:1200!important}
-.custom-pin.pin-hl .pin-core{transform:rotate(-45deg) scale(1.42);background:linear-gradient(135deg,var(--navy3),var(--navy));border-color:var(--gold2);box-shadow:0 0 0 5px rgba(178,141,87,.45),0 10px 22px rgba(0,0,0,.38)}
+.custom-pin.pin-hl{z-index:1200!important;transform:scale(1.25)}
+.custom-pin.pin-hl .pin-core{transform:rotate(-45deg);background:linear-gradient(135deg,var(--navy3),var(--navy));border-color:var(--gold2);box-shadow:0 0 0 5px rgba(178,141,87,.45),0 10px 22px rgba(0,0,0,.38)}
 /* The sheet handle + tab bar + install banner only exist on small screens */
 .sheet-handle{display:none}
 .tabbar{display:none}
@@ -1151,7 +1151,7 @@ function facilityById(id){ for(var i=0;i<FACILITIES.length;i++){ if(FACILITIES[i
 function deepLinkFor(f){ return "#building="+encodeURIComponent(f.slug); }
 function slugFromHash(){ try{ var h=window.location.hash||""; var m=h.match(/building=([a-z0-9\-]+)/i); return m?decodeURIComponent(m[1]):null; }catch(e){ return null; } }
 function setHashFor(f,replace){ try{ var url="#building="+encodeURIComponent(f.slug); if(replace===false){ window.location.hash="building="+encodeURIComponent(f.slug); } else if(window.history&&window.history.replaceState){ window.history.replaceState(null,"",url); } else { window.location.hash="building="+encodeURIComponent(f.slug); } }catch(e){} }
-var map=null, markers={}, currentFilter="all", selectedId=1, mapReady=false, opened=true, pendingFilter=null, viewMode="map", currentQuery="";
+var map=null, markers={}, currentFilter="all", selectedId=1, mapReady=false, opened=true, pendingFilter=null, viewMode="map", currentQuery="", userInteracted=false;
 var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /* ---------- GLOBE (canvas wireframe) ---------- */
@@ -1249,7 +1249,10 @@ var TOWNS=[
 function initMap(){
   if(mapReady) return;
   try{
-    map=L.map("map",{scrollWheelZoom:true,zoomControl:false}).setView([29.49,-81.24],11);
+    /* scrollWheelZoom starts OFF (click-to-interact, wired below): with it
+       on, Leaflet swallowed every page-scroll wheel tick over the map as a
+       zoom-out, throwing the view out to a Florida-wide frame — Symptom B. */
+    map=L.map("map",{scrollWheelZoom:false,zoomControl:false}).setView([29.49,-81.24],11);
     L.control.zoom({position:"bottomright"}).addTo(map); /* bottom-right: reachable one-thumb on a phone */
     var streetTiles=L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"© OpenStreetMap contributors"});
     var satelliteTiles=L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",{maxZoom:19,attribution:"Esri, Maxar, Earthstar Geographics"});
@@ -1258,19 +1261,57 @@ function initMap(){
     if(typeof FLAGLER_BOUNDARY!=="undefined"){
       L.geoJSON(FLAGLER_BOUNDARY,{interactive:false,style:function(){ return {color:"#8C6E3E",weight:2,opacity:.9,fillColor:"#B28D57",fillOpacity:.05}; }}).addTo(map);
       /* No fitBounds here: framing at init time measures the map before the
-         two-panel / sheet layout has settled, and that wrong first fit is
-         what positionMapForRoute (after invalidateSize, post-settle) owns. */
+         two-panel / sheet layout has settled. The ResizeObserver armed
+         below owns the one initial framing, from the real, stable size. */
     }
     FACILITIES.forEach(function(f,i){
       if(!hasCoords(f)) return; /* unverified location: no pin — the facility still appears in List view as "Location pending verification" */
       var m=L.marker([f.lat,f.lng],{icon:iconFor(f,i)}).addTo(map);
       m.bindPopup("<strong style='font-family:Source Serif 4,Merriweather,Georgia,serif;font-size:15px'>"+f.name+"</strong><br>"+f.address+"<br><em style='color:#715628'>"+f.badge+"</em>");
-      m.on("click",function(){ selectFacility(f.id,false); });
+      m.on("click",function(){ userInteracted=true; selectFacility(f.id,false); });
       markers[f.id]=m;
     });
     TOWNS.forEach(function(t){
       L.marker([t.lat,t.lng],{interactive:false,keyboard:false,zIndexOffset:-1000,icon:L.divIcon({className:"town-label",html:"<span>"+t.name+"</span>"})}).addTo(map);
     });
+    /* Phase 6 correction — interaction tracking, click-to-interact wheel
+       zoom, and real-size framing.
+       userInteracted flips true on the first map drag, zoom, pin click or
+       card click (card clicks flip it inside selectFacility). Once true,
+       nothing may reframe the map or change its zoom/center. */
+    map.on("dragstart",function(){ userInteracted=true; });
+    var mapBox=map.getContainer();
+    /* A click or tap into the map arms wheel zoom; it disarms again when
+       the pointer leaves the map, so ordinary page scrolling over the map
+       scrolls the page. Pinch zoom and the +/− controls work regardless. */
+    function armWheel(){ userInteracted=true; try{ map.scrollWheelZoom.enable(); }catch(e){} }
+    mapBox.addEventListener("mousedown",armWheel);
+    mapBox.addEventListener("touchstart",armWheel,{passive:true});
+    mapBox.addEventListener("mouseleave",function(){ try{ map.scrollWheelZoom.disable(); }catch(e){} });
+    /* Frame from the container's real size, once: when the box reports a
+       size that stays put for a beat and is non-zero, re-measure and —
+       only while the user has not interacted — run the initial framing
+       (the county fit, or the deep-link fly-to, in positionMapForRoute).
+       After interaction, resizes only re-measure; they never reframe. */
+    if(window.ResizeObserver){
+      var lastW=0,lastH=0,stableT=null;
+      var frameRO=new ResizeObserver(function(entries){
+        var r=entries[entries.length-1].contentRect;
+        var w=Math.round(r.width), h=Math.round(r.height);
+        if(w<=0||h<=0||(w===lastW&&h===lastH)) return;
+        lastW=w; lastH=h;
+        clearTimeout(stableT);
+        stableT=setTimeout(function(){
+          if(!map) return;
+          try{ map.invalidateSize(); }catch(e){}
+          if(!userInteracted) positionMapForRoute();
+        },140);
+      });
+      frameRO.observe(mapBox);
+      map._frameRO=frameRO; /* keep a strong reference to the observer */
+    } else {
+      setTimeout(function(){ if(map){ try{ map.invalidateSize(); }catch(e){} if(!userInteracted) positionMapForRoute(); } },250);
+    }
     mapReady=true;
   }catch(e){
     document.getElementById("map").innerHTML='<div style="padding:24px;font-size:14px">Map could not load here — use the facility cards below. Every place and its news is still listed.</div>';
@@ -1694,6 +1735,7 @@ function selectFacility(id,fly){
   selectedId=id;
   var f=FACILITIES.filter(function(x){ return x.id===id; })[0];
   if(!f) return;
+  userInteracted=true; /* a card / pin / search-result click is a map interaction: framing belongs to the user from here on */
   setHashFor(f,true);
   document.title=f.name+" \u2014 On The Record";
   var panelEl=document.getElementById("detailPanel"); if(panelEl) panelEl.classList.remove("panel-closed");
@@ -1798,7 +1840,9 @@ function positionMapForRoute(){
     try{ map.stop(); }catch(e){}
     map.flyTo([f.lat,f.lng],14,{duration:reduced?0:1.1,easeLinearity:0.12});
     setTimeout(function(){ if(markers[f.id]){ try{ markers[f.id].openPopup(); }catch(e){} bouncePin(f.id); } }, reduced?60:650);
-  } else if(!mapShownOnce){
+  } else if(!userInteracted){
+    /* County framing runs only before the user's first interaction;
+       after that, nothing reframes the map or changes its zoom/center. */
     mapShownOnce=true;
     frameCounty();
   }
@@ -2129,14 +2173,12 @@ function showView(name,param,section){
   var tg=document.getElementById("navToggle"); if(tg) tg.setAttribute("aria-expanded","false");
   if(name==="map"){
     /* Lazy: Leaflet loads on this first open; later opens reuse the map.
-       Sizing and framing wait for two animation frames plus a short
-       settle, so Leaflet measures the final two-panel / sheet layout —
-       never a mid-layout box — before invalidateSize + positioning. */
+       No timer settle fit here: initial framing is owned solely by the
+       ResizeObserver armed in initMap, which fits from the container's
+       real, stable size and only before the user interacts. This
+       callback just re-measures so tiles render once the view is shown. */
     ensureMap(function(){
-      if(!map) return;
-      var settle=function(){ if(map){ try{ map.invalidateSize(); }catch(e){} positionMapForRoute(); } };
-      if(window.requestAnimationFrame){ requestAnimationFrame(function(){ requestAnimationFrame(function(){ setTimeout(settle,60); }); }); }
-      else setTimeout(settle,90);
+      if(map){ try{ map.invalidateSize(); }catch(e){} }
     });
   }
   if(section){
