@@ -1745,6 +1745,7 @@ function setViewMode(mode){
 document.getElementById("viewMapBtn").addEventListener("click",function(){ setViewMode("map"); });
 document.getElementById("viewListBtn").addEventListener("click",function(){ setViewMode("list"); });
 function selectFacility(id,fly,programmatic){
+  var prevSelectedId=selectedId;
   selectedId=id;
   var f=FACILITIES.filter(function(x){ return x.id===id; })[0];
   if(!f) return;
@@ -1759,6 +1760,35 @@ function selectFacility(id,fly,programmatic){
   var panelEl=document.getElementById("detailPanel"); if(panelEl) panelEl.classList.remove("panel-closed");
   var layoutEl=document.querySelector(".layout"); if(layoutEl) layoutEl.classList.remove("panel-is-closed");
   renderPanel(f); renderCards();
+  /* Phase 6 micro-correction: a NEW selection starts the detail panel
+     at its top, so the building's title and headline are the first
+     things visible. Every selection path funnels through here (card,
+     pin, list, search result, deep link), and the reset is gated on
+     the facility actually changing — a same-facility re-render keeps
+     the reader's place. The panel's own scroll position is zeroed,
+     and on desktop the page is returned to the panel's top at the
+     same sticky offset the panes use (nav height + 13px), as an
+     instant jump in the entry scroll's style, so a reader who had
+     scrolled down through the previous building's panel lands on the
+     new building's title instead of mid-panel. Mobile already
+     scrolls the panel into view in its branch below. Nothing else
+     changes: no framing, flyTo, hash, or interaction-state effects. */
+  if(id!==prevSelectedId&&panelEl){
+    panelEl.scrollTop=0;
+    var panelInner=panelEl.querySelector(".panel-inner"); if(panelInner) panelInner.scrollTop=0;
+    if(window.innerWidth>=1024){
+      var navEl=document.querySelector(".site-nav");
+      var navH=navEl?navEl.getBoundingClientRect().height:0;
+      var panelY=panelEl.getBoundingClientRect().top+(window.pageYOffset||0)-(navH+13);
+      if(panelY<0) panelY=0;
+      if(Math.abs(panelY-(window.pageYOffset||0))>2){
+        var docEl=document.documentElement, prevBehavior=docEl.style.scrollBehavior;
+        docEl.style.scrollBehavior="auto";
+        try{ window.scrollTo(0,panelY); }catch(e){}
+        docEl.style.scrollBehavior=prevBehavior;
+      }
+    }
+  }
   if(fly&&hasCoords(f)&&!mapReady){
     /* Map not loaded yet (deep link / first open): load it, then fly. */
     ensureMap(function(){
