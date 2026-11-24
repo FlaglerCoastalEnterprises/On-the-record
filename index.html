@@ -4,30 +4,39 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light">
-<link rel="icon" href="data:,">
-<title>On The Record — Flagler County, in Plain English</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230A2342'/%3E%3Ctext x='32' y='45' font-family='Georgia,serif' font-size='36' font-weight='700' fill='%23D8C094' text-anchor='middle'%3ER%3C/text%3E%3C/svg%3E">
+<title>On The Record — Flagler County Government, in Plain English</title>
 <meta name="google-site-verification" content="X06DRhqoICD-IAzqhRw1xlMOPzREuxs7WTKf64zEb-Q">
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-RM6ZJVB04K"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-RM6ZJVB04K');
-</script>
-<meta name="description" content="On The Record: Flagler County government in plain English — an interactive map of every public building, what was decided there, what it cost, and what happens next.">
-<meta property="og:title" content="On The Record — Flagler County, in Plain English">
+<meta name="description" content="On The Record tracks Flagler County government in plain English: what was decided at each public building, what it cost, and what happens next — every item sourced from the official record.">
+<link rel="canonical" href="https://on-the-record.coastalenterprises386.workers.dev/">
+<meta name="theme-color" content="#0A2342">
+<meta property="og:title" content="On The Record — Flagler County Government, in Plain English">
 <meta property="og:description" content="Know what's happening in Flagler County — in plain English. Votes, dollars and development, building by building, from the official record.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://on-the-record.coastalenterprises386.workers.dev/">
+<meta property="og:image" content="https://on-the-record.coastalenterprises386.workers.dev/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="On The Record — Flagler County Government, in Plain English">
+<meta name="twitter:description" content="Know what's happening in Flagler County — in plain English. Votes, dollars and development, building by building, from the official record.">
+<meta name="twitter:image" content="https://on-the-record.coastalenterprises386.workers.dev/og-image.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"NewsMediaOrganization","name":"On The Record","url":"https://on-the-record.coastalenterprises386.workers.dev/","description":"Flagler County government in plain English — votes, dollars and development decisions, building by building, from the official record.","email":"coastalenterprises386@gmail.com","telephone":"+1-917-544-3692","sameAs":["https://www.facebook.com/FCEPalmCoast","https://x.com/fce_palmcoast","https://www.youtube.com/@FlaglerCoastalEnterprises"],"parentOrganization":{"@type":"Organization","name":"Flagler Coastal Enterprises LLC","address":{"@type":"PostalAddress","addressLocality":"Palm Coast","addressRegion":"FL","addressCountry":"US"}}},
+{"@type":"WebSite","name":"On The Record","url":"https://on-the-record.coastalenterprises386.workers.dev/","publisher":{"@type":"Organization","name":"Flagler Coastal Enterprises LLC"}}
+]}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,500;0,8..60,600;0,8..60,700;0,8..60,900;1,8..60,500;1,8..60,600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<!-- Leaflet CSS/JS are lazy-loaded by the app only when the Map view is first opened. -->
 <style>
-:root{--navy:#0A2342;--navy2:#0E2F57;--navy3:#12365E;--gold:#B28D57;--gold2:#D8C094;--gold-dark:#8C6E3E;--off:#F7F3EB;--paper:#FFFEFB;--ink:#1A2332;--muted:#5B6577;--line:#E6DDD0}
-*{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:var(--off);color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+:root{--navy:#0A2342;--navy2:#0E2F57;--navy3:#12365E;--gold:#B28D57;--gold2:#D8C094;--gold-dark:#715628;--off:#F7F3EB;--paper:#FFFEFB;--ink:#1A2332;--muted:#5B6577;--line:#E6DDD0;--serif:"Source Serif 4","Merriweather",Georgia,serif}
+*{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:var(--off);color:var(--ink);font-family:Inter,system-ui,sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
 button{font-family:inherit;min-height:40px} a{color:var(--navy)}
-.serif{font-family:"Playfair Display",Georgia,serif}
+/* Visible keyboard focus everywhere; gold-dark on light surfaces, pale gold on navy ones */
+:focus-visible{outline:3px solid var(--gold-dark);outline-offset:2px}
+.site-nav :focus-visible,.topbar :focus-visible,.panel :focus-visible,.newsletter-box :focus-visible,.map-preview :focus-visible,.brand-strip :focus-visible,#globeHero :focus-visible{outline-color:var(--gold2)}
+.serif{font-family:"Source Serif 4","Merriweather",Georgia,serif}
 .eyebrow{font-size:11px;letter-spacing:.22em;font-weight:800;text-transform:uppercase;color:var(--gold)}
 .orn{display:flex;align-items:center;gap:10px;justify-content:center}.orn:before,.orn:after{content:"";height:1px;width:44px;background:linear-gradient(90deg,transparent,var(--gold))}.orn:after{background:linear-gradient(90deg,var(--gold),transparent)}.orn span{color:var(--gold);font-size:12px}
 /* ===== GLOBE HERO ===== */
@@ -37,9 +46,9 @@ button{font-family:inherit;min-height:40px} a{color:var(--navy)}
 .hero-pills{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;z-index:3}
 .pill{font-size:10.5px;letter-spacing:.16em;font-weight:800;padding:7px 12px;border-radius:999px;line-height:1;text-transform:uppercase}
 .pill-proto{background:var(--gold);color:#0A2342}.pill-week{background:rgba(255,255,255,.1);color:#E6ECF5;border:1px solid rgba(255,255,255,.22)}.pill-by{background:transparent;color:var(--gold2);border:1px solid rgba(216,192,148,.45)}
-.hero-title{font-family:"Playfair Display",Georgia,serif;font-weight:800;font-size:clamp(34px,6.5vw,62px);line-height:1.02;margin:18px 0 0;letter-spacing:-.01em;z-index:3}
+.hero-title{font-family:"Source Serif 4","Merriweather",Georgia,serif;font-weight:800;font-size:clamp(34px,6.5vw,62px);line-height:1.02;margin:18px 0 0;letter-spacing:-.01em;z-index:3}
 .hero-title em{font-style:italic;color:var(--gold2);font-weight:500}
-.hero-sub{max-width:560px;color:#C7D3E6;font-size:15.5px;margin:14px auto 0;z-index:3}.hero-sub strong{color:#fff}
+.hero-sub{max-width:560px;color:#C7D3E6;font-size:16px;margin:14px auto 0;z-index:3}.hero-sub strong{color:#fff}
 /* Globe stage */
 .globe-stage{position:relative;width:min(520px,92vw);aspect-ratio:1;margin:8px auto 0;z-index:2;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .globe-stage:focus-visible{outline:2px solid var(--gold2);outline-offset:6px;border-radius:50%}
@@ -57,7 +66,7 @@ button{font-family:inherit;min-height:40px} a{color:var(--navy)}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
 .hero-hint{margin-top:12px;font-size:12.5px;color:#8FA3BF;letter-spacing:.06em;z-index:3}
 .hero-stats{display:flex;gap:26px;flex-wrap:wrap;justify-content:center;margin-top:22px;z-index:3}
-.hero-stats div b{font-family:"Playfair Display",serif;font-size:24px;color:var(--gold2);display:block;line-height:1}
+.hero-stats div b{font-family:"Source Serif 4","Merriweather",Georgia,serif;font-size:24px;color:var(--gold2);display:block;line-height:1}
 .hero-stats div span{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#9DB0CC}
 /* ===== APP ===== */
 #app{opacity:0;transform:translateY(14px);transition:opacity .6s ease .15s,transform .6s ease .15s}
@@ -65,26 +74,26 @@ button{font-family:inherit;min-height:40px} a{color:var(--navy)}
 .topbar{background:var(--navy);color:#fff;padding:20px 20px 18px;position:relative}
 .topbar:after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
 .topbar-inner{max-width:1180px;margin:0 auto;display:flex;justify-content:space-between;gap:16px;align-items:flex-start;flex-wrap:wrap}
-.topbar h1{margin:8px 0 0;font-family:"Playfair Display",serif;font-weight:800;font-size:clamp(26px,4.5vw,40px);line-height:1.02}
+.topbar h1{margin:8px 0 0;font-family:"Source Serif 4","Merriweather",Georgia,serif;font-weight:800;font-size:clamp(26px,4.5vw,40px);line-height:1.02}
 .topbar h1 span{color:var(--gold2);font-style:italic;font-weight:500}
-.subtitle{margin:8px 0 0;color:#C7D3E6;font-size:14.5px;max-width:640px}.subtitle strong{color:#fff}
+.subtitle{margin:8px 0 0;color:#C7D3E6;font-size:16px;max-width:640px}.subtitle strong{color:#fff}
 #globeBtn{background:rgba(255,255,255,.08);border:1px solid rgba(216,192,148,.55);color:var(--gold2);border-radius:999px;padding:10px 16px;font-weight:700;font-size:13px;cursor:pointer;flex-shrink:0;transition:background .2s,transform .2s}
 #globeBtn:hover{background:rgba(178,141,87,.25);transform:translateY(-1px)}
 .glance{max-width:1180px;margin:0 auto;padding:20px 20px 0}
 .glance-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px}
 .glance-card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:16px;transition:transform .25s,box-shadow .25s,border-color .25s}
 .glance-card:hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(10,35,66,.1);border-color:var(--gold2)}
-.glance-card .num{font-family:"Playfair Display",serif;font-size:30px;line-height:1;color:var(--navy)}
+.glance-card .num{font-family:"Source Serif 4","Merriweather",Georgia,serif;font-size:30px;line-height:1;color:var(--navy)}
 .glance-card .num small{font-size:16px;color:var(--gold-dark)}
 .glance-card h4{margin:8px 0 4px;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--gold-dark)}
-.glance-card p{margin:0;font-size:13.5px;line-height:1.5;color:#3B475C}
+.glance-card p{margin:0;font-size:16px;line-height:1.55;color:#3B475C}
 .updated-line{margin:10px 0 0;font-size:12.5px;letter-spacing:.05em;color:#9DB0CC}
-.empty-state{border:1px dashed rgba(216,192,148,.55);border-radius:12px;padding:12px 14px;font-size:14px;line-height:1.5;color:#E6ECF5;background:rgba(255,255,255,.05);margin-bottom:11px}
-.lcard-empty{display:block;font-size:12.5px;font-style:italic;color:#64748B;margin-top:5px}
+.empty-state{border:1px dashed rgba(216,192,148,.55);border-radius:12px;padding:12px 14px;font-size:16px;line-height:1.5;color:#E6ECF5;background:rgba(255,255,255,.05);margin-bottom:11px}
+.lcard-empty{display:block;font-size:14.5px;font-style:italic;color:#64748B;margin-top:5px}
 .toolbar{max-width:1180px;margin:0 auto;padding:18px 20px 12px}
 .toolbar-top{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{border:1px solid #D6CFC0;background:#fff;border-radius:999px;padding:9px 15px;font-size:13.5px;font-weight:600;cursor:pointer;color:#334155;transition:all .22s}
+.chip{border:1px solid #D6CFC0;background:#fff;border-radius:999px;padding:9px 15px;font-size:13.5px;font-weight:600;cursor:pointer;color:#334155;transition:all .22s;min-height:40px}
 .chip:hover{border-color:var(--gold);transform:translateY(-1px)}
 .chip[aria-pressed="true"]{background:var(--navy);color:#fff;border-color:var(--navy);box-shadow:0 6px 16px rgba(10,35,66,.25)}
 .chip .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--gold);vertical-align:middle;margin-right:6px}
@@ -105,15 +114,15 @@ button{font-family:inherit;min-height:40px} a{color:var(--navy)}
 .lcard{display:flex;gap:13px;align-items:flex-start;text-align:left;width:100%;background:#fff;border:1px solid var(--line);border-radius:16px;padding:15px;cursor:pointer;transition:transform .22s,box-shadow .22s,border-color .22s;animation:cardIn .5s both;font-family:inherit}
 .lcard:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 12px 26px rgba(10,35,66,.12)}
 .lcard.active{border-color:var(--navy);box-shadow:0 0 0 2px var(--navy) inset,0 10px 22px rgba(10,35,66,.12)}
-.lcard-ic{font-size:22px;line-height:1.25;flex-shrink:0}
+.lcard-ic{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;background:#F5F1E8;border:1px solid var(--line);font-size:18px;line-height:1;flex-shrink:0}
 .lcard-main{flex:1;min-width:0;display:block}
 .lcard-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
-.lcard-name{font-family:"Playfair Display",serif;font-weight:700;font-size:17px;line-height:1.25;color:var(--navy)}
+.lcard-name{font-family:"Source Serif 4","Merriweather",Georgia,serif;font-weight:700;font-size:17px;line-height:1.25;color:var(--navy)}
 .lcard-org{display:block;font-size:12.5px;color:#64748B;margin-top:2px}
-.lcard-head{display:block;font-size:14px;line-height:1.55;color:#334155;margin-top:6px}
+.lcard-head{display:block;font-size:16px;line-height:1.55;color:#334155;margin-top:6px}
 .lcard-addr{display:block;font-size:12.5px;color:#64748B;margin-top:6px}
 .lcard-arrow{align-self:center;color:var(--gold-dark);font-size:19px;font-weight:800;flex-shrink:0}
-.list-empty{border:1px dashed #D6CFC0;border-radius:14px;padding:14px;font-size:14px;line-height:1.55;color:#475569;background:#FFFEFB;margin-top:12px}
+.list-empty{border:1px dashed #D6CFC0;border-radius:14px;padding:14px;font-size:16px;line-height:1.55;color:#475569;background:#FFFEFB;margin-top:12px}
 .list-empty strong{color:var(--navy)}
 /* Search */
 .search-wrap{margin-bottom:14px;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:14px 14px 12px;box-shadow:0 8px 22px rgba(10,35,66,.06)}
@@ -121,21 +130,21 @@ button{font-family:inherit;min-height:40px} a{color:var(--navy)}
 .search-box{display:flex;align-items:center;gap:8px;background:#fff;border:1.5px solid #D6CFC0;border-radius:999px;padding:4px 6px 4px 14px;transition:border-color .2s,box-shadow .2s}
 .search-box:focus-within{border-color:var(--gold);box-shadow:0 0 0 4px rgba(178,141,87,.18)}
 .search-icon{font-size:20px;line-height:1;color:var(--navy);font-weight:700}
-#facilitySearch{flex:1;min-width:0;border:none;outline:none;background:transparent;font:inherit;font-size:15px;color:var(--ink);padding:9px 2px}
-#facilitySearch::placeholder{color:#8A94A6}
+#facilitySearch{flex:1;min-width:0;border:none;outline:none;background:transparent;font:inherit;font-size:16px;color:var(--ink);padding:9px 2px}
+#facilitySearch::placeholder{color:#66707E}
 .search-clear{width:36px;height:36px;min-height:36px;border:none;border-radius:50%;background:var(--navy);color:#fff;font-size:20px;line-height:1;cursor:pointer;flex-shrink:0}
 .search-hint{margin:8px 2px 0;font-size:12.5px;color:var(--muted)}
 .search-results{margin-top:10px;display:grid;gap:8px}
 .search-results[hidden]{display:none!important}
 .search-result{display:flex;gap:12px;align-items:flex-start;text-align:left;width:100%;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 13px;cursor:pointer;transition:border-color .2s,box-shadow .2s,transform .2s}
 .search-result:hover,.search-result:focus-visible{border-color:var(--gold);box-shadow:0 8px 20px rgba(10,35,66,.10);transform:translateY(-1px);outline:none}
-.search-result .sr-ic{font-size:20px;line-height:1.2}
+.search-result .sr-ic{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:#F5F1E8;border:1px solid var(--line);font-size:17px;line-height:1;flex-shrink:0}
 .search-result .sr-main{flex:1;min-width:0}
-.search-result .sr-name{font-family:"Playfair Display",serif;font-weight:700;font-size:15.5px;color:var(--navy);line-height:1.25}
+.search-result .sr-name{font-family:"Source Serif 4","Merriweather",Georgia,serif;font-weight:700;font-size:16px;color:var(--navy);line-height:1.25}
 .search-result .sr-meta{font-size:12px;color:#64748B;margin-top:2px}
-.search-result .sr-head{font-size:13px;line-height:1.45;color:#3B475C;margin-top:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.search-result .sr-head{font-size:16px;line-height:1.45;color:#3B475C;margin-top:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .search-result .sr-badge{flex-shrink:0}
-.search-empty{border:1px dashed #D6CFC0;border-radius:14px;padding:13px 14px;font-size:13.5px;line-height:1.55;color:#475569;background:#FFFEFB}
+.search-empty{border:1px dashed #D6CFC0;border-radius:14px;padding:13px 14px;font-size:16px;line-height:1.55;color:#475569;background:#FFFEFB}
 .search-empty strong{color:var(--navy)}
 /* Map pin legend overlay */
 .map-legend{position:absolute;left:12px;bottom:52px;z-index:600;background:rgba(255,254,251,.96);border:1px solid var(--line);border-radius:14px;padding:11px 12px;box-shadow:0 10px 24px rgba(10,35,66,.18);max-width:248px;backdrop-filter:blur(4px)}
@@ -157,14 +166,14 @@ button{font-family:inherit;min-height:40px} a{color:var(--navy)}
 .how-overlay{position:fixed;inset:0;z-index:1200;background:rgba(6,23,46,.72);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:18px}
 .how-overlay[hidden]{display:none}
 .how-card{position:relative;background:var(--paper);border:1px solid var(--gold2);border-radius:20px;max-width:560px;width:100%;max-height:calc(100svh - 36px);overflow:auto;padding:26px 24px 22px;box-shadow:0 24px 60px rgba(0,0,0,.35)}
-.how-card h3{margin:8px 34px 8px 0;font-family:"Playfair Display",serif;font-size:28px;line-height:1.08;color:var(--navy)}
-.how-intro{margin:0;font-size:14.5px;line-height:1.6;color:#3B475C}
+.how-card h3{margin:8px 34px 8px 0;font-family:"Source Serif 4","Merriweather",Georgia,serif;font-size:28px;line-height:1.08;color:var(--navy)}
+.how-intro{margin:0;font-size:16px;line-height:1.6;color:#3B475C}
 .how-close{position:absolute;top:12px;right:12px;width:38px;height:38px;min-height:38px;border-radius:50%;border:1px solid var(--line);background:#fff;font-size:22px;line-height:1;cursor:pointer;color:var(--navy)}
 .how-steps{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:10px}
 .how-steps li{display:flex;gap:12px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px 14px}
 .how-num{flex-shrink:0;width:30px;height:30px;border-radius:50%;background:var(--navy);color:var(--gold2);font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center}
 .how-steps strong{display:block;font-size:14px;color:var(--navy);line-height:1.3}
-.how-steps p{margin:3px 0 0;font-size:13.5px;line-height:1.55;color:#475569}
+.how-steps p{margin:3px 0 0;font-size:16px;line-height:1.55;color:#475569}
 .how-legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
 .how-legend span{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:700;color:#334155;background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 11px 7px 7px}
 .how-start{margin-top:18px;width:100%;background:linear-gradient(180deg,#C6A26B,var(--gold));color:#0A2342;border:none;font-weight:800;font-size:15px;padding:14px 18px;border-radius:999px;cursor:pointer;box-shadow:0 8px 22px rgba(178,141,87,.35)}
@@ -177,13 +186,17 @@ button{font-family:inherit;min-height:40px} a{color:var(--navy)}
 .map-foot strong{color:var(--navy)}
 /* Panel */
 .panel{background:linear-gradient(180deg,var(--navy2),var(--navy) 30%);color:#fff;border-radius:20px;overflow:hidden;position:sticky;top:14px;box-shadow:0 16px 38px rgba(10,35,66,.28)}
+.panel-close{position:absolute;top:12px;right:12px;z-index:3;width:38px;height:38px;min-height:38px;border-radius:50%;border:1px solid rgba(216,192,148,.55);background:rgba(255,255,255,.08);color:#F3EAD6;font-size:20px;line-height:1;cursor:pointer;transition:background .2s}
+.panel-close:hover{background:rgba(178,141,87,.3)}
+.panel.panel-closed{display:none}
+.layout.panel-is-closed{grid-template-columns:1fr}
 .panel-inner{animation:panelIn .45s cubic-bezier(.2,.8,.3,1)}
 @keyframes panelIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 .panel-head{padding:20px 20px 0;text-align:left}
 .medallion{width:52px;height:52px;border-radius:50%;border:1.5px solid var(--gold);background:radial-gradient(circle at 35% 30%,#2A5480,var(--navy3) 70%);display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 0 0 5px rgba(178,141,87,.18),0 8px 18px rgba(0,0,0,.3);margin-bottom:12px}
-.panel h2{margin:4px 0 6px;font-family:"Playfair Display",serif;font-size:25px;line-height:1.08;font-weight:700}
+.panel h2{margin:4px 0 6px;font-family:"Source Serif 4","Merriweather",Georgia,serif;font-size:25px;line-height:1.08;font-weight:700}
 .panel-addr{font-size:13px;color:#B9C8DE;line-height:1.45}
-.panel-headline{font-family:"Playfair Display",serif;font-style:italic;font-size:15.5px;color:var(--gold2);line-height:1.45;margin-top:10px}
+.panel-headline{font-family:"Source Serif 4","Merriweather",Georgia,serif;font-style:italic;font-size:16px;color:var(--gold2);line-height:1.45;margin-top:10px}
 .gold-rule{display:flex;align-items:center;gap:8px;margin:14px 0 0}.gold-rule:before,.gold-rule:after{content:"";height:1px;flex:1;background:linear-gradient(90deg,transparent,rgba(216,192,148,.6))}.gold-rule:after{background:linear-gradient(90deg,rgba(216,192,148,.6),transparent)}.gold-rule span{color:var(--gold);font-size:11px}
 .panel-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
 .tag{font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:5px 9px;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:#E6ECF5}
@@ -194,15 +207,15 @@ button{font-family:inherit;min-height:40px} a{color:var(--navy)}
 .section-label:after{content:"";flex:1;height:1px;background:rgba(216,192,148,.3)}
 .news-item{display:flex;gap:11px;margin-bottom:11px;animation:panelIn .5s both}
 .news-item .mk{flex-shrink:0;width:20px;height:20px;margin-top:1px;border-radius:50%;border:1px solid rgba(216,192,148,.6);color:var(--gold2);font-size:10px;display:flex;align-items:center;justify-content:center;background:rgba(178,141,87,.14)}
-.news-item p{margin:0;font-size:14px;line-height:1.55;color:#EDF1F7}
-.next-box{background:linear-gradient(135deg,rgba(178,141,87,.22),rgba(178,141,87,.08));border:1px solid rgba(216,192,148,.5);border-radius:14px;padding:13px 14px;font-size:14px;line-height:1.55;color:#F5EFE0}
+.news-item p{margin:0;font-size:16px;line-height:1.6;color:#EDF1F7}
+.next-box{background:linear-gradient(135deg,rgba(178,141,87,.22),rgba(178,141,87,.08));border:1px solid rgba(216,192,148,.5);border-radius:14px;padding:13px 14px;font-size:16px;line-height:1.6;color:#F5EFE0}
 .next-box .nb-label{font-size:10px;letter-spacing:.18em;font-weight:800;color:var(--gold2);text-transform:uppercase;display:block;margin-bottom:5px}
-.meets{background:rgba(255,255,255,.06);border:1px solid rgba(216,192,148,.4);border-radius:14px;padding:13px 14px;font-size:13.5px;line-height:1.55;color:#E6ECF5}
+.meets{background:rgba(255,255,255,.06);border:1px solid rgba(216,192,148,.4);border-radius:14px;padding:13px 14px;font-size:16px;line-height:1.6;color:#E6ECF5}
 .meets p{margin:0 0 7px}.meets p:last-child{margin-bottom:0}
 .meets strong{color:#fff}
 .meets a{color:var(--gold2);font-weight:600;text-decoration:underline;text-underline-offset:2px}
 .meets a:hover{color:#F3EAD6}
-.meets .m-who{font-family:"Playfair Display",serif;font-size:15.5px;font-weight:700;color:var(--gold2);line-height:1.3}
+.meets .m-who{font-family:"Source Serif 4","Merriweather",Georgia,serif;font-size:16px;font-weight:700;color:var(--gold2);line-height:1.3}
 .meets .m-board{margin-top:12px;padding-top:12px;border-top:1px solid rgba(216,192,148,.3)}
 .meets .m-board:first-child{margin-top:0;padding-top:0;border-top:none}
 .timeline{border-left:2px solid rgba(216,192,148,.4);margin-left:7px;padding-left:16px}
@@ -210,7 +223,7 @@ button{font-family:inherit;min-height:40px} a{color:var(--navy)}
 .tl-item:last-child{padding-bottom:0}
 .tl-item:before{content:"";position:absolute;left:-23px;top:4px;width:10px;height:10px;border-radius:50%;background:var(--gold);border:2px solid var(--navy);box-shadow:0 0 0 2px var(--gold2)}
 .tl-date{font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--gold2)}
-.tl-text{font-size:13.5px;line-height:1.45;color:#E6ECF5;margin-top:1px}
+.tl-text{font-size:16px;line-height:1.5;color:#E6ECF5;margin-top:1px}
 .panel-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:18px}
 .btn{flex:1;text-align:center;text-decoration:none;font-weight:700;font-size:13.5px;padding:12px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.28);color:#fff;background:transparent;cursor:pointer;transition:all .2s;line-height:1.25}
 .btn:hover{border-color:var(--gold2);background:rgba(255,255,255,.07)}
@@ -219,7 +232,7 @@ button{font-family:inherit;min-height:40px} a{color:var(--navy)}
 .btn-share{background:linear-gradient(180deg,#C6A26B,var(--gold));color:#0A2342;border-color:var(--gold);box-shadow:0 6px 16px rgba(178,141,87,.35)}
 .btn-share:hover{background:#C6A26B;color:#0A2342}
 .btn-follow{border-color:rgba(216,192,148,.65);color:var(--gold2)}
-.follow-panel{margin-top:12px;background:rgba(255,255,255,.07);border:1px solid rgba(216,192,148,.45);border-radius:14px;padding:14px;font-size:13.5px;line-height:1.55;color:#E6ECF5;animation:panelIn .35s both}
+.follow-panel{margin-top:12px;background:rgba(255,255,255,.07);border:1px solid rgba(216,192,148,.45);border-radius:14px;padding:14px;font-size:16px;line-height:1.55;color:#E6ECF5;animation:panelIn .35s both}
 .follow-panel strong{color:#fff}
 .follow-panel p{margin:0 0 10px}
 .follow-mail{display:inline-block;background:var(--gold);color:#0A2342;font-weight:800;font-size:13px;padding:10px 16px;border-radius:999px;text-decoration:none}
@@ -228,25 +241,25 @@ button{font-family:inherit;min-height:40px} a{color:var(--navy)}
 /* Cards */
 .list-section{max-width:1180px;margin:0 auto;padding:16px 20px 6px}
 .list-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
-.list-head h3{margin:0;font-family:"Playfair Display",serif;font-size:22px;color:var(--navy)}
+.list-head h3{margin:0;font-family:"Source Serif 4","Merriweather",Georgia,serif;font-size:22px;color:var(--navy)}
 .list-head span{font-size:13px;color:var(--muted)}
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-top:12px}
-.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:15px;text-align:left;cursor:pointer;width:100%;transition:transform .22s,box-shadow .22s,border-color .22s;animation:cardIn .5s both}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;text-align:left;cursor:pointer;width:100%;transition:transform .22s,box-shadow .22s,border-color .22s;animation:cardIn .5s both}
 @keyframes cardIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .card:hover{border-color:var(--gold);transform:translateY(-3px);box-shadow:0 12px 26px rgba(10,35,66,.12)}
 .card.active{border-color:var(--navy);box-shadow:0 0 0 2px var(--navy) inset,0 10px 22px rgba(10,35,66,.12)}
 .card-top{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
-.card .ic{font-size:19px;line-height:1;margin-bottom:7px}
-.card h4{margin:0;font-family:"Playfair Display",serif;font-size:16px;line-height:1.25;color:var(--navy)}
-.card p{margin:6px 0 0;font-size:13px;line-height:1.5;color:#475569;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card .ic{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;background:#F5F1E8;border:1px solid var(--line);font-size:18px;line-height:1;margin-bottom:9px}
+.card h4{margin:0;font-family:"Source Serif 4","Merriweather",Georgia,serif;font-size:16px;line-height:1.25;color:var(--navy)}
+.card p{margin:6px 0 0;font-size:16px;line-height:1.55;color:#475569;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .card .addr{font-size:12px;color:#64748B;margin-top:7px}
 .badge{flex-shrink:0;font-size:10px;font-weight:800;letter-spacing:.05em;padding:4px 8px;border-radius:999px;white-space:nowrap;text-transform:uppercase}
 .badge-news{background:#FEF3C7;color:#92400E;border:1px solid #FDE68A}.badge-quiet{background:#F1F5F9;color:#64748B;border:1px solid #E2E8F0}.badge-next{background:#E8EDF7;color:#2B4A77;border:1px solid #C9D6EE}
 .newsletter{max-width:1180px;margin:0 auto;padding:10px 20px 6px}
 .newsletter-box{background:linear-gradient(180deg,var(--navy2),var(--navy));color:#fff;border-radius:20px;padding:28px 22px;text-align:center;box-shadow:0 16px 38px rgba(10,35,66,.22)}
-.newsletter-box h3{margin:6px 0 8px;font-family:"Playfair Display",serif;font-size:28px;line-height:1.12;font-weight:800}
+.newsletter-box h3{margin:6px 0 8px;font-family:"Source Serif 4","Merriweather",Georgia,serif;font-size:28px;line-height:1.12;font-weight:800}
 .newsletter-box h3 span{color:var(--gold2);font-style:italic;font-weight:500}
-.newsletter-box p{margin:0 auto;max-width:640px;color:#C7D3E6;font-size:15px;line-height:1.6}
+.newsletter-box p{margin:0 auto;max-width:640px;color:#C7D3E6;font-size:16px;line-height:1.6}
 .newsletter-embed{margin:20px auto 0;max-width:480px;width:100%}
 .newsletter-embed iframe{width:100%;max-width:480px;height:150px;border:0;border-radius:12px;background:#fff;display:block;margin:0 auto}
 .newsletter-fallback{margin-top:14px;font-size:14px}
@@ -260,13 +273,13 @@ button{font-family:inherit;min-height:40px} a{color:var(--navy)}
 .src-line a:hover{color:#F3EAD6}
 .card-cell{display:flex;flex-direction:column}
 .card-cell .card{flex:1}
-.card-src{display:block;font-size:11.5px;line-height:1.45;color:#8A94A6;margin-top:6px}
+.card-src{display:block;font-size:11.5px;line-height:1.45;color:#5B6577;margin-top:6px}
 .card-src a,.lcard-src a{color:var(--gold-dark);font-weight:600;text-decoration:underline;text-underline-offset:2px}
 .card-src a:hover,.lcard-src a:hover{color:var(--navy)}
 .lcard-cell{display:flex;flex-direction:column}
-.lcard-src{display:block;font-size:11.5px;line-height:1.45;color:#8A94A6;margin-top:5px}
+.lcard-src{display:block;font-size:11.5px;line-height:1.45;color:#5B6577;margin-top:5px}
 .lcard-pending{color:var(--gold-dark);font-weight:700}
-.report-link{align-self:flex-start;margin-top:6px;font-size:12px;font-weight:600;color:#64748B;text-decoration:underline;text-underline-offset:2px;padding:2px}
+.report-link{align-self:flex-start;margin-top:6px;font-size:12px;font-weight:600;color:#64748B;text-decoration:underline;text-underline-offset:2px;padding:7px 2px}
 .report-link:hover{color:var(--navy)}
 .panel-report{margin-top:14px;text-align:center}
 .panel-report a{color:#9DB0CC;font-size:12.5px;font-weight:600;text-decoration:underline;text-underline-offset:3px}
@@ -275,15 +288,15 @@ button{font-family:inherit;min-height:40px} a{color:var(--navy)}
 .topbar-link:hover{background:rgba(178,141,87,.25)}
 .info-wrap{max-width:1180px;margin:0 auto;padding:2px 20px 6px}
 .info-card{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:28px 26px;margin-top:14px;box-shadow:0 10px 26px rgba(10,35,66,.06);scroll-margin-top:16px}
-.info-card h2{margin:6px 0 10px;font-family:"Playfair Display",serif;font-size:29px;line-height:1.1;color:var(--navy)}
-.info-card p{margin:0 0 12px;font-size:15px;line-height:1.65;color:#3B475C}
+.info-card h2{margin:6px 0 10px;font-family:"Source Serif 4","Merriweather",Georgia,serif;font-size:29px;line-height:1.1;color:var(--navy)}
+.info-card p{margin:0 0 12px;font-size:16px;line-height:1.65;color:#3B475C}
 .info-card p:last-child{margin-bottom:0}
-.info-card ul{margin:0 0 12px;padding-left:20px;font-size:15px;line-height:1.65;color:#3B475C}
+.info-card ul{margin:0 0 12px;padding-left:20px;font-size:16px;line-height:1.65;color:#3B475C}
 .info-card li{margin-bottom:7px}
 .info-card a{color:var(--navy);font-weight:600;text-decoration:underline;text-underline-offset:2px}
-.mission-line{font-family:"Playfair Display",serif;font-style:italic;font-size:21px;line-height:1.35;color:var(--navy)}
+.mission-line{font-family:"Source Serif 4","Merriweather",Georgia,serif;font-style:italic;font-size:21px;line-height:1.35;color:var(--navy)}
 .independence-box{background:#F5F1E8;border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-top:16px}
-.independence-box p{margin:0;font-size:14.5px}
+.independence-box p{margin:0;font-size:16px}
 .independence-box .ib-label{font-size:10.5px;letter-spacing:.18em;font-weight:800;text-transform:uppercase;color:var(--gold-dark);display:block;margin-bottom:6px}
 .footer-links{display:flex;flex-direction:column;gap:6px;flex-shrink:0}
 .footer-links a{color:var(--navy);font-weight:700;text-decoration:none;font-size:13px}
@@ -303,7 +316,7 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
 .pin-bounce{animation:pinBounce .7s ease}
 @keyframes pinBounce{0%,100%{transform:translateY(0)}30%{transform:translateY(-14px)}55%{transform:translateY(0)}75%{transform:translateY(-6px)}}
 .leaflet-popup-content-wrapper{border-radius:14px;box-shadow:0 12px 30px rgba(10,35,66,.25)}
-.leaflet-popup-content{font-family:Inter,sans-serif;font-size:13.5px;line-height:1.5}
+.leaflet-popup-content{font-family:Inter,sans-serif;font-size:15px;line-height:1.5}
 @media(max-width:900px){
  .map-legend{bottom:48px;left:10px;right:auto;max-width:228px;padding:9px 10px}
  .how-card{padding:22px 18px 18px}
@@ -323,30 +336,49 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
 .view[hidden]{display:none!important}
 .site-nav{position:sticky;top:0;z-index:1100;background:var(--navy);color:#fff;box-shadow:0 4px 18px rgba(6,23,46,.35)}
 .site-nav:after{content:"";display:block;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
-.site-nav-inner{max-width:1180px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:18px;min-height:58px}
-.wordmark{font-family:"Playfair Display",Georgia,serif;font-weight:800;font-size:21px;color:#fff;text-decoration:none;white-space:nowrap;line-height:1}
+.site-nav-inner{max-width:1180px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:14px;min-height:58px;flex-wrap:nowrap}
+.wordmark{font-family:"Source Serif 4","Merriweather",Georgia,serif;font-weight:800;font-size:20px;color:#fff;text-decoration:none;white-space:nowrap;line-height:1;flex-shrink:0}
 .wordmark em{color:var(--gold2);font-weight:500}
 .nav-toggle{display:none;margin-left:auto;background:rgba(255,255,255,.08);border:1px solid rgba(216,192,148,.55);color:var(--gold2);border-radius:999px;padding:9px 16px;font-weight:700;font-size:13px;cursor:pointer;min-height:40px}
-.nav-links{display:flex;align-items:center;gap:2px;flex-wrap:wrap;margin-left:auto}
-.nav-links a{color:#C7D3E6;text-decoration:none;font-size:13.5px;font-weight:600;padding:9px 11px;border-radius:999px;white-space:nowrap;transition:background .2s,color .2s}
+.nav-links{display:flex;align-items:center;gap:1px;flex-wrap:nowrap;margin-left:auto}
+.nav-links a{color:#C7D3E6;text-decoration:none;font-size:12.5px;font-weight:600;padding:10px 8px;border-radius:999px;white-space:nowrap;transition:background .2s,color .2s}
 .nav-links a:hover{color:#fff;background:rgba(255,255,255,.08)}
 .nav-links a.active{background:var(--gold);color:#0A2342}
-.nav-topics{display:inline-flex;align-items:center;gap:0}
-.nav-topics .nt-label{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#8FA3BF;font-weight:800;padding:0 2px 0 10px}
-.nav-links a.nav-topic{font-size:12.5px;padding:8px 8px;color:#9DB0CC}
+.nav-topics{display:inline-flex;align-items:center;gap:0;flex-wrap:nowrap}
+.nav-topics .nt-label{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:#8FA3BF;font-weight:800;padding:0 1px 0 7px}
+.nav-links a.nav-topic{font-size:12px;padding:10px 6px;color:#9DB0CC}
 .nav-links a.nav-topic.active{background:rgba(178,141,87,.3);color:#F3EAD6}
+/* More dropdown (desktop): Coverage / Partner / About live here so the bar stays one row */
+.nav-more{position:relative;flex-shrink:0}
+.nav-more-btn{display:inline-flex;align-items:center;gap:5px;background:transparent;border:none;color:#C7D3E6;font-size:12.5px;font-weight:600;padding:10px 8px;border-radius:999px;white-space:nowrap;cursor:pointer;min-height:40px;transition:background .2s,color .2s}
+.nav-more-btn:hover{color:#fff;background:rgba(255,255,255,.08)}
+.nav-more-btn.active{background:var(--gold);color:#0A2342}
+.nav-more-btn .nm-caret{font-size:9px;color:var(--gold2)}
+.nav-more-btn.active .nm-caret{color:#0A2342}
+.nav-more-menu{position:absolute;right:0;top:calc(100% + 8px);z-index:1300;background:var(--paper);border:1px solid var(--line);border-radius:14px;box-shadow:0 18px 40px rgba(6,23,46,.28);padding:6px;min-width:200px;display:flex;flex-direction:column;gap:2px}
+.nav-more-menu[hidden]{display:none}
+.nav-links .nav-more-menu a{color:var(--navy);font-size:14px;font-weight:600;padding:11px 13px;border-radius:9px}
+.nav-links .nav-more-menu a:hover{background:#F5F1E8;color:var(--navy)}
+.nav-links .nav-more-menu a.active{background:var(--gold);color:#0A2342}
 @media(max-width:900px){
  .site-nav-inner{padding:0 14px;flex-wrap:wrap;padding-top:10px;padding-bottom:10px}
  .nav-toggle{display:block}
- .nav-links{display:none;width:100%;flex-direction:column;align-items:stretch;margin-left:0;padding-bottom:6px}
+ .nav-links{display:none;width:100%;flex-direction:column;align-items:stretch;margin-left:0;padding-bottom:6px;flex-wrap:wrap}
  .nav-links.open{display:flex}
  .nav-links a{padding:12px 12px;font-size:15px}
  .nav-topics{flex-wrap:wrap}
  .nav-topics .nt-label{width:100%;padding:8px 12px 2px}
+ /* Mobile: no dropdown — the More items join the single Menu list */
+ .nav-more{display:block}
+ .nav-more-btn{display:none}
+ .nav-links .nav-more-menu{display:flex!important;position:static;box-shadow:none;border:none;background:transparent;padding:0;min-width:0;flex-direction:column;gap:1px}
+ .nav-links .nav-more-menu a{color:#C7D3E6;font-size:15px;padding:12px 12px;border-radius:999px}
+ .nav-links .nav-more-menu a:hover{background:rgba(255,255,255,.08);color:#fff}
+ .nav-links .nav-more-menu a.active{background:var(--gold);color:#0A2342}
 }
 /* Home */
 .home-hero{max-width:1180px;margin:0 auto;padding:52px 20px 10px;text-align:left}
-.home-hero h1{font-family:"Playfair Display",Georgia,serif;font-weight:800;font-size:clamp(34px,5.6vw,58px);line-height:1.05;color:var(--navy);margin:14px 0 0;max-width:820px;letter-spacing:-.01em}
+.home-hero h1{font-family:"Source Serif 4","Merriweather",Georgia,serif;font-weight:800;font-size:clamp(34px,5.6vw,58px);line-height:1.05;color:var(--navy);margin:14px 0 0;max-width:820px;letter-spacing:-.01em}
 .home-hero h1 em{font-style:italic;color:var(--gold-dark);font-weight:500}
 .home-sub{font-size:17px;line-height:1.6;color:#3B475C;max-width:640px;margin:16px 0 0}
 .hero-cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
@@ -354,57 +386,57 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
 .btn-hero:hover{transform:translateY(-2px)}
 .btn-hero-ghost{background:#fff;color:var(--navy);text-decoration:none;font-weight:700;font-size:15px;padding:15px 24px;border-radius:999px;border:1.5px solid #D6CFC0;transition:border-color .2s}
 .btn-hero-ghost:hover{border-color:var(--gold)}
-.updated-dark{color:#8A94A6}
+.updated-dark{color:#5B6577}
 .home-section{max-width:1180px;margin:0 auto;padding:26px 20px 0}
-.home-h2{font-family:"Playfair Display",serif;font-size:27px;color:var(--navy);margin:8px 0 0;line-height:1.15}
+.home-h2{font-family:"Source Serif 4","Merriweather",Georgia,serif;font-size:27px;color:var(--navy);margin:8px 0 0;line-height:1.15}
 .story-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
 .story-card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:18px;display:flex;flex-direction:column;transition:transform .22s,box-shadow .22s,border-color .22s}
 .story-card:hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(10,35,66,.1);border-color:var(--gold2)}
 .story-card .sc-place{font-size:11px;letter-spacing:.16em;font-weight:800;text-transform:uppercase;color:var(--gold-dark)}
-.story-card h3{font-family:"Playfair Display",serif;font-size:19px;line-height:1.3;color:var(--navy);margin:8px 0 0}
-.story-card p{font-size:14px;line-height:1.6;color:#3B475C;margin:9px 0 0;flex:1}
-.story-card .sc-src{display:block;font-size:12px;color:#8A94A6;margin-top:10px;line-height:1.5}
+.story-card h3{font-family:"Source Serif 4","Merriweather",Georgia,serif;font-size:19px;line-height:1.3;color:var(--navy);margin:8px 0 0}
+.story-card p{font-size:16px;line-height:1.6;color:#3B475C;margin:9px 0 0;flex:1}
+.story-card .sc-src{display:block;font-size:12px;color:#5B6577;margin-top:10px;line-height:1.5}
 .story-card .sc-src a{color:var(--gold-dark);font-weight:600}
 .sc-link{margin-top:12px;font-weight:700;font-size:14px;color:var(--navy);text-decoration:none}
 .sc-link:hover{text-decoration:underline;text-underline-offset:3px}
 .map-preview{background:linear-gradient(160deg,var(--navy2),var(--navy));border-radius:20px;color:#fff;padding:26px 24px;position:relative;overflow:hidden;box-shadow:0 16px 38px rgba(10,35,66,.22)}
 .map-preview:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 82% 18%,rgba(216,192,148,.22),transparent 55%);pointer-events:none}
-.map-preview h3{font-family:"Playfair Display",serif;font-size:26px;margin:8px 0 0;line-height:1.15;position:relative}
-.map-preview p{color:#C7D3E6;font-size:15px;line-height:1.6;max-width:560px;margin:10px 0 0;position:relative}
+.map-preview h3{font-family:"Source Serif 4","Merriweather",Georgia,serif;font-size:26px;margin:8px 0 0;line-height:1.15;position:relative}
+.map-preview p{color:#C7D3E6;font-size:16px;line-height:1.6;max-width:560px;margin:10px 0 0;position:relative}
 .preview-counts{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;position:relative}
 .preview-counts span{background:rgba(255,255,255,.08);border:1px solid rgba(216,192,148,.45);border-radius:999px;padding:8px 14px;font-size:13px;font-weight:700;color:#F3EAD6}
 .map-preview .btn-hero{display:inline-block;margin-top:20px;position:relative}
 @media(max-width:900px){.story-grid{grid-template-columns:1fr}.home-hero{padding:36px 14px 6px}.home-section{padding-left:14px;padding-right:14px}}
 /* Article views (This Week / Archive) */
 .page-wrap{max-width:860px;margin:0 auto;padding:34px 20px 10px}
-.page-wrap h1{font-family:"Playfair Display",serif;font-size:clamp(28px,4.6vw,42px);line-height:1.12;color:var(--navy);margin:10px 0 0}
+.page-wrap h1{font-family:"Source Serif 4","Merriweather",Georgia,serif;font-size:clamp(28px,4.6vw,42px);line-height:1.12;color:var(--navy);margin:10px 0 0}
 .page-lede{font-size:16.5px;line-height:1.65;color:#3B475C;margin:14px 0 0}
-.article-topic{font-family:"Playfair Display",serif;font-size:23px;color:var(--navy);margin:30px 0 4px;padding-top:18px;border-top:1px solid var(--line)}
+.article-topic{font-family:"Source Serif 4","Merriweather",Georgia,serif;font-size:23px;color:var(--navy);margin:30px 0 4px;padding-top:18px;border-top:1px solid var(--line)}
 .article-item{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:17px 18px;margin-top:12px}
-.article-item h3{font-family:"Playfair Display",serif;font-size:18.5px;line-height:1.3;color:var(--navy);margin:0}
+.article-item h3{font-family:"Source Serif 4","Merriweather",Georgia,serif;font-size:18.5px;line-height:1.3;color:var(--navy);margin:0}
 .article-item .ai-place{font-size:11px;letter-spacing:.15em;font-weight:800;text-transform:uppercase;color:var(--gold-dark);display:block;margin-bottom:6px}
-.article-item p{font-size:14.5px;line-height:1.65;color:#3B475C;margin:8px 0 0}
-.article-item .ai-src{display:block;font-size:12.5px;color:#8A94A6;margin-top:10px}
+.article-item p{font-size:16px;line-height:1.65;color:#3B475C;margin:8px 0 0}
+.article-item .ai-src{display:block;font-size:12.5px;color:#5B6577;margin-top:10px}
 .article-item .ai-src a{color:var(--gold-dark);font-weight:600}
 .ai-link{display:inline-block;margin-top:10px;font-weight:700;font-size:13.5px;color:var(--navy);text-decoration:none}
 .ai-link:hover{text-decoration:underline;text-underline-offset:3px}
-.quiet-line{background:#F5F1E8;border:1px solid var(--line);border-radius:14px;padding:15px 17px;font-size:14px;line-height:1.6;color:#3B475C;margin-top:26px}
+.quiet-line{background:#F5F1E8;border:1px solid var(--line);border-radius:14px;padding:15px 17px;font-size:16px;line-height:1.6;color:#3B475C;margin-top:26px}
 .quiet-line strong{color:var(--navy)}
 .archive-week{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:20px;margin-top:16px}
-.archive-week h2{font-family:"Playfair Display",serif;font-size:22px;color:var(--navy);margin:0}
+.archive-week h2{font-family:"Source Serif 4","Merriweather",Georgia,serif;font-size:22px;color:var(--navy);margin:0}
 .archive-week .aw-meta{font-size:13px;color:var(--muted);margin-top:4px}
 .archive-current{display:flex;justify-content:space-between;gap:12px;align-items:center;background:linear-gradient(160deg,var(--navy2),var(--navy));color:#fff;border-radius:18px;padding:20px;margin-top:16px;flex-wrap:wrap}
-.archive-current h2{font-family:"Playfair Display",serif;font-size:22px;margin:0;color:#fff}
-.archive-current p{margin:5px 0 0;color:#C7D3E6;font-size:14px}
+.archive-current h2{font-family:"Source Serif 4","Merriweather",Georgia,serif;font-size:22px;margin:0;color:#fff}
+.archive-current p{margin:5px 0 0;color:#C7D3E6;font-size:16px}
 .archive-current a{background:var(--gold);color:#0A2342;font-weight:800;text-decoration:none;padding:12px 20px;border-radius:999px;font-size:14px;white-space:nowrap}
 .archive-chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
 /* Topics */
 .topic-desc{font-size:16px;line-height:1.6;color:#3B475C;max-width:680px;margin:12px 0 0}
 .topic-places{margin-top:26px}
-.topic-places h2{font-family:"Playfair Display",serif;font-size:22px;color:var(--navy);margin:0 0 6px}
+.topic-places h2{font-family:"Source Serif 4","Merriweather",Georgia,serif;font-size:22px;color:var(--navy);margin:0 0 6px}
 .place-row{display:flex;justify-content:space-between;gap:10px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px 15px;margin-top:9px;text-decoration:none;transition:border-color .2s,transform .2s}
 .place-row:hover{border-color:var(--gold);transform:translateY(-1px)}
-.place-row .pr-name{font-family:"Playfair Display",serif;font-weight:700;font-size:16px;color:var(--navy)}
+.place-row .pr-name{font-family:"Source Serif 4","Merriweather",Georgia,serif;font-weight:700;font-size:16px;color:var(--navy)}
 .place-row .pr-addr{display:block;font-size:12.5px;color:#64748B;margin-top:2px;font-family:Inter,sans-serif}
 /* Newsletter / About extras */
 .nl-points{max-width:860px;margin:0 auto;padding:0 20px}
@@ -435,41 +467,43 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
 .footer-parent a:hover{text-decoration:underline;text-underline-offset:3px}
 .cov-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
 @media(max-width:900px){.cov-grid{grid-template-columns:1fr}}
-.cov-card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:20px;display:flex;flex-direction:column}
+.cov-card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:18px;display:flex;flex-direction:column;transition:border-color .22s,box-shadow .22s}
+.cov-card:hover{border-color:var(--gold2);box-shadow:0 10px 24px rgba(10,35,66,.07)}
 .cov-card-live{border-color:var(--gold);box-shadow:0 10px 26px rgba(10,35,66,.08)}
 .cov-status{align-self:flex-start;font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:999px}
 .cov-status-live{background:var(--gold);color:#0A2342}
 .cov-status-soon{background:#F1F5F9;color:#64748B;border:1px solid #E2E8F0}
-.cov-card h2{font-family:"Playfair Display",serif;font-size:22px;color:var(--navy);margin:12px 0 0;line-height:1.2}
-.cov-card p{font-size:14.5px;line-height:1.6;color:#3B475C;margin:8px 0 0;flex:1}
+.cov-card h2{font-family:"Source Serif 4","Merriweather",Georgia,serif;font-size:22px;color:var(--navy);margin:12px 0 0;line-height:1.2}
+.cov-card p{font-size:16px;line-height:1.6;color:#3B475C;margin:8px 0 0;flex:1}
 .cov-counts{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
 .cov-counts span{background:#F5F1E8;border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:12.5px;font-weight:700;color:var(--navy)}
 .cov-card .sc-link{margin-top:14px}
 .partner-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
 @media(max-width:900px){.partner-grid{grid-template-columns:1fr}}
-.partner-card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:20px;display:flex;flex-direction:column}
-.partner-card h2{font-family:"Playfair Display",serif;font-size:20px;line-height:1.25;color:var(--navy);margin:10px 0 0}
-.partner-card p{font-size:14.5px;line-height:1.6;color:#3B475C;margin:8px 0 0}
+.partner-card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:18px;display:flex;flex-direction:column;transition:border-color .22s,box-shadow .22s}
+.partner-card:hover{border-color:var(--gold2);box-shadow:0 10px 24px rgba(10,35,66,.07)}
+.partner-card h2{font-family:"Source Serif 4","Merriweather",Georgia,serif;font-size:20px;line-height:1.25;color:var(--navy);margin:10px 0 0}
+.partner-card p{font-size:16px;line-height:1.6;color:#3B475C;margin:8px 0 0}
 .partner-card .pc-kicker{font-size:10.5px;letter-spacing:.16em;font-weight:800;text-transform:uppercase;color:var(--gold-dark)}
 .pform{display:grid;gap:13px;margin-top:16px}
 .pform label{display:block;font-size:12px;letter-spacing:.1em;font-weight:800;text-transform:uppercase;color:var(--gold-dark)}
-.pform input,.pform select,.pform textarea{display:block;width:100%;margin-top:6px;font:inherit;font-size:15px;font-weight:400;letter-spacing:0;text-transform:none;color:var(--ink);background:#fff;border:1.5px solid #D6CFC0;border-radius:12px;padding:12px 13px}
+.pform input,.pform select,.pform textarea{display:block;width:100%;margin-top:6px;font:inherit;font-size:16px;font-weight:400;letter-spacing:0;text-transform:none;color:var(--ink);background:#fff;border:1.5px solid #D6CFC0;border-radius:12px;padding:12px 13px}
 .pform input:focus,.pform select:focus,.pform textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 4px rgba(178,141,87,.18)}
 .pform textarea{min-height:96px;resize:vertical}
-.form-disclosure{font-size:13.5px;line-height:1.55;color:#475569;background:#F5F1E8;border:1px solid var(--line);border-radius:12px;padding:11px 13px;margin:0}
+.form-disclosure{font-size:14.5px;line-height:1.55;color:#475569;background:#F5F1E8;border:1px solid var(--line);border-radius:12px;padding:11px 13px;margin:0}
 .form-submit{justify-self:start;background:linear-gradient(180deg,#C6A26B,var(--gold));color:#0A2342;border:none;font-weight:800;font-size:15px;padding:14px 26px;border-radius:999px;cursor:pointer;box-shadow:0 8px 22px rgba(178,141,87,.3)}
 .form-submit:hover{background:#C6A26B}
-.form-thanks{display:none;font-size:14px;line-height:1.55;color:var(--navy);background:#F5F1E8;border:1px solid var(--gold2);border-radius:12px;padding:12px 14px;margin:0}
+.form-thanks{display:none;font-size:14.5px;line-height:1.55;color:var(--navy);background:#F5F1E8;border:1px solid var(--gold2);border-radius:12px;padding:12px 14px;margin:0}
 .form-thanks.show{display:block}
 .follow-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-.follow-row input{flex:1;min-width:180px;font:inherit;font-size:14px;color:var(--ink);background:#fff;border:1.5px solid rgba(216,192,148,.6);border-radius:999px;padding:11px 15px}
+.follow-row input{flex:1;min-width:180px;font:inherit;font-size:16px;color:var(--ink);background:#fff;border:1.5px solid rgba(216,192,148,.6);border-radius:999px;padding:11px 15px}
 .follow-row input:focus{outline:none;border-color:var(--gold2);box-shadow:0 0 0 4px rgba(178,141,87,.25)}
 .follow-note{font-size:12.5px;color:#B9C8DE;margin:10px 0 0}
 .follow-thanks{font-size:13.5px;color:#F3EAD6;margin:10px 0 0}
 .follow-topic-box{margin-top:26px;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:17px 18px}
 .btn-follow-topic{background:var(--navy);color:#fff;border:none;font-weight:800;font-size:14px;padding:12px 20px;border-radius:999px;cursor:pointer}
 .btn-follow-topic:hover{background:var(--navy3)}
-.follow-topic-box .follow-copy{font-size:14px;line-height:1.6;color:#3B475C;margin:12px 0 0}
+.follow-topic-box .follow-copy{font-size:16px;line-height:1.6;color:#3B475C;margin:12px 0 0}
 .follow-topic-box .follow-note{color:var(--muted)}
 .follow-topic-box .follow-thanks{color:var(--navy)}
 .follow-topic-box .follow-row input{border-color:#D6CFC0}
@@ -494,11 +528,11 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
     <div class="ring r1"><span class="node-dot"></span></div>
     <div class="ring r2"><span class="node-dot" style="top:auto;bottom:-5px"></span></div>
     <canvas id="globeCanvas" width="640" height="640" aria-hidden="true"></canvas>
-    <button class="orbit-pill op1" data-goto-filter="meetings">◷ Meetings</button>
-    <button class="orbit-pill op2" data-goto-filter="money">$ Money</button>
-    <button class="orbit-pill op3" data-goto-filter="development">⬢ Development</button>
-    <button class="orbit-pill op4" data-goto-filter="safety">✦ Public Safety</button>
-    <button class="orbit-pill op5" data-goto-filter="schools">▤ Schools</button>
+    <button class="orbit-pill op1" data-goto-filter="meetings">Meetings</button>
+    <button class="orbit-pill op2" data-goto-filter="money">Money</button>
+    <button class="orbit-pill op3" data-goto-filter="development">Development</button>
+    <button class="orbit-pill op4" data-goto-filter="safety">Public Safety</button>
+    <button class="orbit-pill op5" data-goto-filter="schools">Schools</button>
   </div>
 
   <button class="cta" id="openBtn">Open the Flagler County map →</button>
@@ -525,9 +559,14 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
       <a data-nav="archive" href="#/archive">Archive</a>
       <span class="nav-topics"><span class="nt-label">Topics</span><a data-nav="topics" data-topic="meetings" class="nav-topic" href="#/topics/meetings">Meetings</a><a data-nav="topics" data-topic="money" class="nav-topic" href="#/topics/money">Money</a><a data-nav="topics" data-topic="development" class="nav-topic" href="#/topics/development">Development</a><a data-nav="topics" data-topic="safety" class="nav-topic" href="#/topics/safety">Public Safety</a><a data-nav="topics" data-topic="schools" class="nav-topic" href="#/topics/schools">Schools</a></span>
       <a data-nav="newsletter" href="#/newsletter">Newsletter</a>
-      <a data-nav="coverage" href="#/coverage">Coverage</a>
-      <a data-nav="partner" href="#/partner">Partner</a>
-      <a data-nav="about" href="#/about">About</a>
+      <div class="nav-more">
+        <button class="nav-more-btn" id="navMoreBtn" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="navMoreMenu">More <span class="nm-caret" aria-hidden="true">▾</span></button>
+        <div class="nav-more-menu" id="navMoreMenu" role="menu" hidden>
+          <a data-nav="coverage" href="#/coverage" role="menuitem">Coverage</a>
+          <a data-nav="partner" href="#/partner" role="menuitem">Partner</a>
+          <a data-nav="about" href="#/about" role="menuitem">About</a>
+        </div>
+      </div>
     </div>
   </div>
 </nav>
@@ -575,7 +614,7 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
       <a class="topbar-link" href="#/about">Sources</a>
       <a class="topbar-link" href="#/about">Corrections</a>
       <button id="howBtn" type="button" aria-haspopup="dialog">? How it works</button>
-      <button id="globeBtn" aria-label="Return to the globe view">◎ Globe view</button>
+      <button id="globeBtn" aria-label="Return to the globe view">Globe view</button>
     </div>
   </div>
 </header>
@@ -611,8 +650,8 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
       <button class="chip" data-filter="schools" aria-pressed="false"><span class="dot"></span>Schools</button>
     </div>
     <div class="view-toggle" role="group" aria-label="Choose map view or list view">
-      <button class="vt-btn" id="viewMapBtn" type="button" aria-pressed="true">▦ Map</button>
-      <button class="vt-btn" id="viewListBtn" type="button" aria-pressed="false">☰ List</button>
+      <button class="vt-btn" id="viewMapBtn" type="button" aria-pressed="true">Map</button>
+      <button class="vt-btn" id="viewListBtn" type="button" aria-pressed="false">List</button>
     </div>
     <div class="legend" aria-label="Pin legend"><span><i class="lg-gold"></i> <strong>Gold pin</strong>&nbsp;= News this week</span><span><i class="lg-gray"></i> <strong>Gray pin</strong>&nbsp;= Quiet this week</span><span id="countLabel">31 places</span></div>
   </div>
@@ -772,7 +811,7 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
   <ul>
     <li><strong>No accounts on this site.</strong> On The Record has no sign-ups, logins or profiles, and the site itself does not collect personal information.</li>
     <li><strong>Newsletter subscriptions are handled by Substack</strong> under Substack’s own privacy policy; if you subscribe, your email address is held by Substack, not by this page.</li>
-    <li><strong>Visit counting:</strong> this site uses Google Analytics to count visits and see which pages are read, so we know what coverage is useful.</li>
+    <li><strong>Visit counting:</strong> We use Cloudflare Web Analytics, which doesn't use cookies or track individual visitors.</li>
     <li><strong>Error reports, forms and follow signups</strong> open your own email app with a pre-addressed message to our contact email — nothing is sent until you press send, and nothing is stored on this site.</li>
   </ul>
 </section>
@@ -824,7 +863,7 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
         <p>We dig through agendas, minutes and public records and hand you the plain-English answer — what was decided, when, by whom, and what happens next, with the sources attached.</p>
       </article>
     </div>
-    <p class="page-lede" style="font-size:15px">Pricing is by conversation — it depends on the work. Tell us what you need and we’ll reply with an honest scope and price.</p>
+    <p class="page-lede">Pricing is by conversation — it depends on the work. Tell us what you need and we’ll reply with an honest scope and price.</p>
     <section class="info-card" style="margin-top:22px" aria-label="Contact us about partnering">
       <div class="eyebrow" style="color:var(--gold-dark)">Contact</div>
       <h2 style="font-size:24px">Start the conversation</h2>
@@ -910,8 +949,12 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
 </div>
 </div>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<!-- Leaflet is NOT loaded here: the app lazy-loads its CSS+JS only when the Map view is first opened (see ensureMap). -->
 <script>
+/* ===== [DATA:facilities] Canonical embedded copy of data/facilities.json.
+   The publish pipeline extracts the delimited DATA blocks in this file to
+   generate the JSON files under data/; at runtime the loader tries those
+   files first and falls back to these embedded copies on any failure. ===== */
 var FACILITIES = [
   {id:1, icon:"🏛", name:"Government Services Building", short:"County HQ · BOCC + School Board", address:"1769 E Moody Blvd, Bunnell", type:"County Government · BOCC & School Board", lat:29.47195, lng:-81.2457, cats:["meetings","money","schools"], active:true, badge:"NEWS THIS WEEK", headline:"Amendment 3 fallout: FlaglerLive reports the county faces 'cataclysmic' cuts of about $60 million.", bullets:["Amendment 3 fallout: FlaglerLive reports the county faces 'cataclysmic' cuts of about $60 million, layoffs, and potential new fees and taxes. The County Commission and Sheriff are exploring a special taxing district to pay for policing countywide. Flagler County voters backed Amendment 3 with 68%. (Source: FlaglerLive, Nov. 2026)","County unemployment held steady at 5.2% in October (vs. 4.3% statewide, 4.1% nationally), though the workforce shrank by more than 200. (Source: FlaglerLive, Nov. 23, 2026)","School Board: no School Board meeting this week. Last week (Nov 17) the board elected Lauren Ramirez chair and Janie Ruddy vice chair, seated new members Cathy Moon and Rob Wood, approved the 2027–28 school calendar 4–1, and approved the $3M YMCA share unanimously on a 35-year lease — full record in the timeline below.","Week 1 at this building (Nov 16–17): the BOCC approved the 1-year, $350,000 Humane Society animal-control contract 5–0, and the County Commission unanimously selected Kim Carney as chair and Pam Richardson as vice chair — full record in the timeline below."], next:"No County Commission meeting this week. Next regular meeting Mon Dec. 7, 2026, 9:00 a.m. — with a 9:30 a.m. public hearing on a resolution to use a uniform collection method for fire rescue assessments in unincorporated areas plus Beverly Beach, Bunnell, and Marineland, effective Oct. 1, 2027. (Source: public-hearing notice, noticeregistry.com.) School Board: no meeting this week.", timeline:[{d:"Mon Nov 16 · 5pm", t:"BOCC approves $350k Humane Society contract 5–0"},{d:"Tue Nov 17 · 1pm", t:"School Board workshop (Room 3, GSB)"},{d:"Tue Nov 17 · 4pm", t:"Pontieri & Pennington sworn in — Pontieri is now a County Commissioner"},{d:"Tue Nov 17 · 6pm", t:"School Board regular meeting — Ramirez elected chair, Ruddy vice chair in 4 minutes; Moon & Wood seated"},{d:"Tue Nov 17", t:"County Commission unanimously selects Kim Carney chair & Pam Richardson vice chair"},{d:"Tue Nov 17 · 6pm", t:"School Board unanimously approves YMCA 35-year lease + $3M (see YMCA pin)"},{d:"Tue Nov 17 · 6pm", t:"School Board approves 2027–28 calendar 4–1 (Item 11.01) — Ruddy no; 179 days, two half days"},{d:"Week of Nov 23–29", t:"No County Commission or School Board meeting this week — next BOCC meeting Mon Dec 7, 9:00 a.m."},{d:"Nov 2026 reporting", t:"FlaglerLive: county faces ~$60M in 'cataclysmic' Amendment 3 cuts; special taxing district for policing explored; county unemployment held at 5.2% in October"}], mapsQ:"Government Services Building 1769 E Moody Blvd Bunnell FL"},
   {id:2, icon:"⚖", name:"Kim C. Hammond Justice Center", short:"Courthouse · Clerk of Court", address:"1769 E Moody Blvd, Bunnell", type:"Courthouse · Public Safety", lat:29.47345, lng:-81.2457, cats:["safety"], active:false, badge:"ALWAYS ON", headline:"Live court docket — same campus as the GSB, offset on the map so both pins stay clickable.", bullets:["Clerk's live court docket updates every few minutes during the day.","Hearings drop off the public list about 2 hours after they end — so what you see is what's actually in session or coming up.","No single “news item” this week — included so residents can check hearings by place, not just meetings.","Quiet this week so far — no new meeting or news found for Nov. 23–29."], next:"Open weekdays. Check the Clerk's docket for today's hearings before you go.", timeline:[{d:"Weekdays", t:"Court in session — docket refreshes every few minutes"}], mapsQ:"Kim C Hammond Justice Center Bunnell FL"},
@@ -948,6 +991,7 @@ var FACILITIES = [
 /* "Who meets here" — meeting cadence, official agenda/video links and public-records contacts.
    Researched & verified Nov 21, 2026 from the On The Record archive and the official sites linked.
    Where a link failed its build-time check it is shown as plain text instead (noted inline). */
+/* [DATA:meets] "Who meets here" per facility id — merged into data/facilities.json as each entry's "meets". */
 var MEETS={
 1:'<div class="m-board"><p class="m-who">Flagler County Board of County Commissioners</p><p><strong>Meets:</strong> 1st Monday · 9:00 a.m. and 3rd Monday · 5:00 p.m. A 1:00 p.m. workshop may be added if needed.</p><p><strong>Agendas:</strong> <a href="https://flaglercofl.portal.civicclerk.com/" target="_blank" rel="noopener">CivicClerk portal</a> — agendas before Aug 17, 2026 are in the county archive.</p><p><strong>Watch live:</strong> <a href="https://www.youtube.com/@FlaglerCounty/live" target="_blank" rel="noopener">Flagler County on YouTube</a> — also airs on Spectrum channel 492.</p><p><strong>Public records:</strong> PublicRecords@flaglercounty.gov · 386-313-4005 · in person at 1769 E. Moody Blvd., Bldg. 2, 3rd Floor, Bunnell.</p></div><div class="m-board"><p class="m-who">Flagler County School Board</p><p><strong>Meets:</strong> regular meeting once a month, usually 4th Tuesday · 6:00 p.m.; agenda workshop 2nd Tuesday · 3:00 p.m.; information workshop the same day as the regular meeting · 1:00 p.m.</p><p><strong>Agendas:</strong> <a href="https://go.boarddocs.com/fla/flcsd/Board.nsf/Public" target="_blank" rel="noopener">BoardDocs</a></p><p><strong>Meeting videos:</strong> <a href="https://youtube.com/playlist?list=PLfx_w2JpNlBzcLsx7mTHJCM0z9nNsKrZE" target="_blank" rel="noopener">YouTube playlist</a></p><p><strong>Public records:</strong> publicrecordsrequests@flaglerschools.com · 386-437-7526 x1120 · 1769 E. Moody Blvd., Bldg. 2, Bunnell · <a href="https://www.flaglerschools.com/public-records" target="_blank" rel="noopener">Public records info</a></p></div>',
 2:'<p class="m-who">No board meets here</p><p>This is the home of the Clerk of the Circuit Court &amp; Comptroller.</p><p><strong>Hours:</strong> Mon–Fri 8:30 a.m.–4:30 p.m. · <strong>Phone:</strong> 386-313-4400</p><p><strong>Court today:</strong> <a href="https://flaglerclerk.gov/docket/" target="_blank" rel="noopener">Today\u2019s court docket</a> — updates every 5 minutes.</p>',
@@ -982,6 +1026,7 @@ var MEETS={
 31:'<p class="m-who">No public board meets here</p><p>This is a development site. The project was permitted by the City of Palm Coast; see palmcoast.gov/cls for the city\u2019s project page.</p>'
 };
 var CAT_LABEL={meetings:"Meetings",money:"Money & Contracts",development:"Development",safety:"Public Safety",schools:"Schools"};
+/* [DATA:slugs] Facility id -> URL slug — merged into data/facilities.json as each entry's "slug". */
 var SLUGS={1:"government-services-building",2:"kim-c-hammond-justice-center",3:"palm-coast-city-hall",4:"town-center-ymca",5:"bunnell-city-hall",6:"bunnell-commission-chambers",7:"flagler-beach-city-hall",8:"flagler-beach-pier",9:"flagler-humane-society",10:"flagler-county-sheriffs-office",11:"flagler-county-public-library",12:"fire-station-22",13:"fire-station-21",14:"fire-station-23",15:"fire-station-24",16:"fire-station-25",17:"fire-station-26",18:"palm-coast-community-center",19:"flagler-county-public-library-bunnell",20:"flagler-executive-airport",21:"flagler-county-emergency-operations-center",22:"sheriff-perry-hall-detention-facility",23:"flagler-beach-fire-station-11",24:"flagler-beach-police-department",25:"bunnell-police-department",26:"beverly-beach-town-hall",27:"town-of-marineland",28:"seminole-woods-sesame-commercial-corner",29:"evolve-palm-coast-phase-2",30:"lakeview-estates",31:"dc-blox-cable-landing-station"};
 FACILITIES.forEach(function(f){ f.slug=SLUGS[f.id]||("building-"+f.id); });
 function facilityBySlug(slug){ for(var i=0;i<FACILITIES.length;i++){ if(FACILITIES[i].slug===slug) return FACILITIES[i]; } return null; }
@@ -1017,6 +1062,8 @@ var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     ctx.stroke();
   }
   function draw(){
+    var heroEl=document.getElementById("globeHero");
+    if(heroEl&&heroEl.classList.contains("gone")){ raf=null; return; } /* hero hidden: stop the loop instead of drawing off-screen */
     ctx.clearRect(0,0,W,H);
     var g=ctx.createRadialGradient(cx-R*0.3,cy-R*0.35,R*0.1,cx,cy,R*1.05);
     g.addColorStop(0,"#1D4E79"); g.addColorStop(0.55,"#123A63"); g.addColorStop(1,"#0A2342");
@@ -1037,7 +1084,7 @@ var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     rot += reduced?0:0.12;
     raf=requestAnimationFrame(draw);
   }
-  draw();
+  window.__globeKick=function(){ if(!raf) draw(); };
   document.addEventListener("visibilitychange",function(){ if(document.hidden){ if(raf) cancelAnimationFrame(raf); raf=null; } else if(!raf){ draw(); } });
 })();
 
@@ -1095,7 +1142,8 @@ var TOWNS=[
 function initMap(){
   if(mapReady) return;
   try{
-    map=L.map("map",{scrollWheelZoom:true}).setView([29.49,-81.24],11);
+    map=L.map("map",{scrollWheelZoom:true,zoomControl:false}).setView([29.49,-81.24],11);
+    L.control.zoom({position:"bottomright"}).addTo(map); /* bottom-right: reachable one-thumb on a phone */
     var streetTiles=L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"© OpenStreetMap contributors"});
     var satelliteTiles=L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",{maxZoom:19,attribution:"Esri, Maxar, Earthstar Geographics"});
     streetTiles.addTo(map);
@@ -1107,7 +1155,7 @@ function initMap(){
     FACILITIES.forEach(function(f,i){
       if(!hasCoords(f)) return; /* unverified location: no pin — the facility still appears in List view as "Location pending verification" */
       var m=L.marker([f.lat,f.lng],{icon:iconFor(f,i)}).addTo(map);
-      m.bindPopup("<strong style='font-family:Playfair Display,serif;font-size:15px'>"+f.name+"</strong><br>"+f.address+"<br><em style='color:#8C6E3E'>"+f.badge+"</em>");
+      m.bindPopup("<strong style='font-family:Source Serif 4,Merriweather,Georgia,serif;font-size:15px'>"+f.name+"</strong><br>"+f.address+"<br><em style='color:#715628'>"+f.badge+"</em>");
       m.on("click",function(){ selectFacility(f.id,false); });
       markers[f.id]=m;
     });
@@ -1135,6 +1183,7 @@ function showGlobe(){
   hideHow();
   var hero=document.getElementById("globeHero");
   hero.classList.remove("gone"); hero.classList.remove("opening");
+  if(window.__globeKick) window.__globeKick();
   document.body.style.overflow="hidden";
   window.scrollTo({top:0,behavior:"auto"});
   var c=document.getElementById("globeClose"); if(c) setTimeout(function(){ try{ c.focus({preventScroll:true}); }catch(e){} },60);
@@ -1151,20 +1200,15 @@ function openCounty(filter){
   if(filter) setFilter(filter);
   var t=document.querySelector(".toolbar"); if(t) t.scrollIntoView({behavior:reduced?"auto":"smooth",block:"start"});
 }
-/* The page opens straight onto the map. A #building=<slug> deep link opens
-   that building's card on the map instead of the county overview. */
+/* The page opens on the Home view. A #building=<slug> deep link opens
+   that building's card on the map instead of the county overview.
+   The map itself is lazy: Leaflet loads only when the Map view is first
+   opened or a building deep link requires it (see ensureMap below). */
 function bootApp(){
-  initMap();
   var deep=facilityForHashSlug(slugFromHash());
   var startF=deep||FACILITIES[0];
   selectedId=startF.id;
   renderPanel(startF); renderCards(); renderGlance();
-  if(map){
-    setTimeout(function(){
-      map.invalidateSize();
-      if(deep&&hasCoords(deep)){ map.setView([deep.lat,deep.lng],13); setHashFor(deep,true); if(markers[deep.id]) setTimeout(function(){ markers[deep.id].openPopup(); bouncePin(deep.id); },250); }
-    },80);
-  }
 }
 document.getElementById("openBtn").addEventListener("click",function(){ openCounty(null); });
 document.getElementById("globeClose").addEventListener("click",function(){ closeGlobe(); });
@@ -1301,6 +1345,14 @@ function goToSearchResult(f){
   input.addEventListener("keydown",function(e){
     if(e.key==="Enter"){ e.preventDefault(); if(currentMatches.length) goToSearchResult(currentMatches[0]); }
     else if(e.key==="Escape"){ clearSearch(); }
+    else if(e.key==="ArrowDown"){ var first=results.querySelector(".search-result"); if(first){ e.preventDefault(); first.focus(); } }
+  });
+  results.addEventListener("keydown",function(e){
+    var btns=Array.prototype.slice.call(results.querySelectorAll(".search-result"));
+    var i=btns.indexOf(document.activeElement); if(i<0) return;
+    if(e.key==="ArrowDown"){ e.preventDefault(); (btns[i+1]||btns[0]).focus(); }
+    else if(e.key==="ArrowUp"){ e.preventDefault(); if(i===0) input.focus(); else btns[i-1].focus(); }
+    else if(e.key==="Escape"){ input.focus(); }
   });
   if(clearBtn) clearBtn.addEventListener("click",function(){ clearSearch(); input.focus(); });
 })();
@@ -1377,14 +1429,16 @@ function renderPanel(f){
   var tl=f.timeline.map(function(t,i){ return '<div class="tl-item" style="animation-delay:'+(i*0.08)+'s"><div class="tl-date">'+t.d+'</div><div class="tl-text">'+t.t+'</div></div>'; }).join("");
   var panelUpdate=f.active?f.headline:"No new activity this week.";
   var panelSub=f.active?"":'<div style="font-size:13px;line-height:1.5;color:#B9C8DE;margin-top:6px">'+f.headline+'</div>';
-  panel.innerHTML='<div class="panel-inner"><div class="panel-head"><div class="medallion" aria-hidden="true">'+f.icon+'</div><div class="eyebrow">'+f.type+'</div><h2>'+f.name+'</h2><div class="panel-addr">'+(hasCoords(f)?('📍 '+f.address):'Location pending verification')+'</div><div class="panel-headline">“'+panelUpdate+'”</div>'+panelSub+'<div class="gold-rule"><span>◆ ◆ ◆</span></div><div class="panel-meta">'+statusTag+tags+'</div></div>'+
+  panel.innerHTML='<div class="panel-inner"><button class="panel-close" id="panelClose" type="button" aria-label="Close this building\u2019s panel">×</button><div class="panel-head"><div class="medallion" aria-hidden="true">'+f.icon+'</div><div class="eyebrow">'+f.type+'</div><h2>'+f.name+'</h2><div class="panel-addr">'+(hasCoords(f)?f.address:'Location pending verification')+'</div><div class="panel-headline">“'+panelUpdate+'”</div>'+panelSub+'<div class="gold-rule"><span>◆ ◆ ◆</span></div><div class="panel-meta">'+statusTag+tags+'</div></div>'+
   '<div class="panel-body"><div class="section-label">What happened this week</div>'+news+
   '<div class="section-label">Who meets here</div><div class="meets">'+(MEETS[f.id]||'<p>Meeting info not verified yet.</p>')+'</div>'+
-  '<div class="section-label">What\'s next</div><div class="next-box"><span class="nb-label">◎ Next</span>'+f.next+'</div>'+
+  '<div class="section-label">What\'s next</div><div class="next-box"><span class="nb-label">Next</span>'+f.next+'</div>'+
   '<div class="section-label">Timeline</div><div class="timeline">'+tl+'</div>'+
   '<div class="panel-actions"><button class="btn btn-share" id="shareBtn" type="button">↗ Share this building</button><button class="btn btn-follow" id="followBtn" type="button" aria-expanded="false">＋ Follow this building</button><a class="btn btn-gold" target="_blank" rel="noopener" href="'+mapsLink(f.mapsQ)+'">Open in Maps ↗</a>'+(hasCoords(f)?'<button class="btn" id="zoomBtn" type="button">Zoom to pin</button>':'')+'</div><div class="share-note" id="shareNote" role="status" aria-live="polite"></div><div class="follow-panel" id="followPanel" hidden><p style="margin:0"><strong>Follow '+f.name+' by email.</strong></p><p style="margin:8px 0 0">Alerts go out when news is posted for this building — sent personally by the Flagler Coastal team, not an automated blast.</p><div class="follow-row"><input type="email" id="followEmail" placeholder="you@example.com" aria-label="Email address for alerts about this building" autocomplete="email"><button class="follow-mail" id="followGo" type="button" style="border:none;cursor:pointer">Follow by email</button></div><p class="follow-note">This opens your email app with a pre-addressed follow request — nothing is stored on this site.</p><p class="follow-thanks" id="followThanks" hidden>Thanks — your email app should open with the follow request addressed to us.</p></div><div class="panel-report"><a href="'+reportMailto(f)+'">Report an error on this card</a></div></div></div>';
+  var pcb=document.getElementById("panelClose");
+  if(pcb) pcb.addEventListener("click",function(){ closePanel(); });
   var zb=document.getElementById("zoomBtn");
-  if(zb) zb.addEventListener("click",function(){ if(map) map.flyTo([f.lat,f.lng],14,{duration:reduced?0:.8}); bouncePin(f.id); document.querySelector(".map-wrap").scrollIntoView({behavior:reduced?"auto":"smooth",block:"start"}); });
+  if(zb) zb.addEventListener("click",function(){ if(map) map.flyTo([f.lat,f.lng],14,{duration:reduced?0:1,easeLinearity:0.12}); bouncePin(f.id); document.querySelector(".map-wrap").scrollIntoView({behavior:reduced?"auto":"smooth",block:"start"}); });
   var sb=document.getElementById("shareBtn");
   if(sb) sb.addEventListener("click",function(){ shareFacility(f,sb); });
   var fb=document.getElementById("followBtn");
@@ -1407,6 +1461,7 @@ function bouncePin(id){
    this week (Nov 23–29, 2026), researched from official agendas and local reporting.
    Buildings with no entry here (Bunnell City Hall, the library) were quiet this week
    and get the honest quiet-week line instead of an invented headline. */
+/* [DATA:share-lines] Per-facility share text — merged into data/facilities.json as each entry's "shareLine". */
 var SHARE_LINES={
 1:"FlaglerLive reports Flagler County faces 'cataclysmic' cuts of about $60 million from Amendment 3 — layoffs, and potential new fees and taxes; the County Commission and Sheriff are exploring a special taxing district to pay for policing countywide.",
 2:"No board news here this week — no board meets here; this is the Clerk of the Circuit Court & Comptroller's building. For what's happening here, check the court docket.",
@@ -1424,7 +1479,10 @@ function shareTextFor(f){
   return "This week at "+f.name+": "+line;
 }
 function shareFacility(f,btn){
-  var url=deepLinkFor(f);
+  /* Share links always use the site's canonical public address (the same
+     URL as this page's <link rel="canonical">), never the address of
+     whatever frame the page happens to be running in. */
+  var url="https://on-the-record.coastalenterprises386.workers.dev/"+deepLinkFor(f);
   var title="This week at "+f.name;
   var text=shareTextFor(f);
   var note=document.getElementById("shareNote");
@@ -1470,7 +1528,7 @@ function renderList(){
     var badge='<span class="badge '+bc+'">'+f.badge+'</span>';
     var updateLine=f.active?f.headline:"No new activity this week.";
     var subLine=f.active?"":'<span class="lcard-empty">'+f.headline+'</span>';
-    var lAddr=hasCoords(f)?('<span class="lcard-addr">📍 '+f.address+'</span>'):'<span class="lcard-addr lcard-pending">Location pending verification</span>';
+    var lAddr=hasCoords(f)?('<span class="lcard-addr">'+f.address+'</span>'):'<span class="lcard-addr lcard-pending">Location pending verification</span>';
     return '<div class="lcard-cell"><button class="lcard'+(f.id===selectedId?' active':'')+'" data-id="'+f.id+'" style="animation-delay:'+(i*0.04)+'s"><span class="lcard-ic" aria-hidden="true">'+f.icon+'</span><span class="lcard-main"><span class="lcard-top"><span class="lcard-name">'+f.name+'</span>'+badge+'</span><span class="lcard-org">'+f.type+'</span><span class="lcard-head">'+updateLine+'</span>'+subLine+'<span class="lcard-src">'+cardSourceHTML(f)+'</span>'+lAddr+'</span><span class="lcard-arrow" aria-hidden="true">→</span></button><a class="report-link" href="'+reportMailto(f)+'">Report an error</a></div>';
   }).join("");
   wrap.querySelectorAll(".lcard").forEach(function(btn){
@@ -1503,13 +1561,30 @@ function selectFacility(id,fly){
   var f=FACILITIES.filter(function(x){ return x.id===id; })[0];
   if(!f) return;
   setHashFor(f,true);
+  document.title=f.name+" \u2014 On The Record";
+  var panelEl=document.getElementById("detailPanel"); if(panelEl) panelEl.classList.remove("panel-closed");
+  var layoutEl=document.querySelector(".layout"); if(layoutEl) layoutEl.classList.remove("panel-is-closed");
   renderPanel(f); renderCards();
+  if(fly&&hasCoords(f)&&!mapReady){
+    /* Map not loaded yet (deep link / first open): load it, then fly. */
+    ensureMap(function(){
+      if(map&&markers[id]){
+        if(!map.hasLayer(markers[id])) markers[id].addTo(map);
+        map.flyTo([f.lat,f.lng],Math.max(map.getZoom(),12),{duration:reduced?0:1.1,easeLinearity:0.12});
+        setTimeout(function(){ markers[id].openPopup(); bouncePin(id); }, reduced?0:500);
+      }
+    });
+  }
   if(map&&markers[id]){
     if(!map.hasLayer(markers[id])) markers[id].addTo(map);
-    if(fly) map.flyTo([f.lat,f.lng],Math.max(map.getZoom(),12),{duration:reduced?0:.9});
-    setTimeout(function(){ markers[id].openPopup(); bouncePin(id); }, reduced?0:450);
+    if(fly) map.flyTo([f.lat,f.lng],Math.max(map.getZoom(),12),{duration:reduced?0:1.1,easeLinearity:0.12});
+    setTimeout(function(){ markers[id].openPopup(); bouncePin(id); }, reduced?0:500);
   }
   if(window.innerWidth<900){ document.getElementById("detailPanel").scrollIntoView({behavior:reduced?"auto":"smooth",block:"start"}); }
+}
+function closePanel(){
+  var panelEl=document.getElementById("detailPanel"); if(panelEl) panelEl.classList.add("panel-closed");
+  var layoutEl=document.querySelector(".layout"); if(layoutEl) layoutEl.classList.add("panel-is-closed");
 }
 function applyFilter(){
   if(!map) { renderCards(); return; }
@@ -1531,8 +1606,113 @@ document.querySelectorAll(".chip[data-filter]").forEach(function(ch){
 });
 /* Deep links: #building=<slug> lands directly on that building's open card on the map */
 window.addEventListener("hashchange",function(){ closeGlobe(); if(window.__onHash) window.__onHash(); });
-/* Map-first: open straight onto the Flagler County map (bootApp reads any deep link) */
-bootApp();
+
+/* ================= LAZY MAP LOADER =================
+   Leaflet's CSS+JS (~150 KB) load only on first need: the Map view being
+   opened, a building deep link, or a fly-to request. The Home view never
+   pays for the map. Callbacks queue until the map exists. */
+var leafletState="idle", mapCallbacks=[];
+function flushMapCallbacks(){ var cbs=mapCallbacks; mapCallbacks=[]; cbs.forEach(function(cb){ try{ cb(); }catch(e){} }); }
+function ensureMap(cb){
+  if(cb) mapCallbacks.push(cb);
+  if(mapReady){ flushMapCallbacks(); return; }
+  if(leafletState==="loading") return;
+  if(window.L){ leafletState="ready"; initMap(); flushMapCallbacks(); return; }
+  leafletState="loading";
+  var link=document.createElement("link"); link.rel="stylesheet"; link.href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"; document.head.appendChild(link);
+  var s=document.createElement("script"); s.src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
+  s.onload=function(){ leafletState="ready"; initMap(); flushMapCallbacks(); };
+  s.onerror=function(){ leafletState="error"; initMap(); flushMapCallbacks(); };
+  document.head.appendChild(s);
+}
+/* Position the freshly shown map: a building deep link wins; otherwise the
+   first show frames the whole county. Mirrors the pre-lazy boot behavior. */
+function positionMapForRoute(){
+  if(!map) return;
+  var slug=slugFromHash();
+  var f=slug?facilityForHashSlug(slug):null;
+  if(f&&hasCoords(f)&&markers[f.id]){
+    mapShownOnce=true;
+    map.setView([f.lat,f.lng],13);
+    setTimeout(function(){ if(markers[f.id]){ markers[f.id].openPopup(); bouncePin(f.id); } },250);
+  } else if(!mapShownOnce){
+    mapShownOnce=true;
+    try{ map.fitBounds([[29.255,-81.53],[29.685,-81.06]],{padding:[14,14]}); }catch(e){}
+  }
+}
+
+/* ================= EXTERNAL DATA LOADER =================
+   [DATA:current-week] Canonical embedded copy of data/weeks/2026-11-23.json's
+   header fields (the week's items themselves live on the facility entries:
+   active / badge / headline / bullets / next / timeline). */
+var WEEK_META={id:"2026-11-23",label:"Week of Nov 23\u201329, 2026",range:"Nov 23\u201329, 2026",lede:"One board met this week \u2014 Bunnell, on Monday night, Nov. 23 \u2014 and its votes are still unreported. The week\u2019s biggest stories were money: the Sheriff\u2019s Office returned $4 million in unspent funds to the county, and reporting put the county\u2019s Amendment 3 budget shadow at about $60 million. Everything below is drawn from the same verified items on the map, grouped by topic.",topStories:[10,1,6]};
+/* On the published site the same data also ships as JSON files next to the
+   page — data/facilities.json, data/weeks/index.json, data/weeks/<id>.json —
+   so adding a week is a new file plus one index entry, not an HTML edit.
+   On boot we try those files first; if ANY fetch fails or returns invalid
+   data (in-Space preview, file:// opening, a missing file), we fall back
+   silently to the embedded copies above and the page behaves exactly as it
+   does with the embedded data alone. All updates are in place, so the
+   county registry and every other reference keep pointing at the same
+   arrays and objects. */
+function applyExternalData(fac,week,past){
+  try{
+    if(typeof WEEK_TOP_IDS==="undefined"||typeof ARCHIVE==="undefined") return; /* router script not parsed yet: keep embedded data */
+    if(!Array.isArray(fac)||!fac.length) return;
+    for(var i=0;i<fac.length;i++){ var f0=fac[i]; if(!f0||typeof f0.id!=="number"||typeof f0.name!=="string") return; }
+    if(!week||!Array.isArray(week.items)) return;
+    FACILITIES.length=0;
+    fac.forEach(function(f){ FACILITIES.push(f); });
+    Object.keys(SLUGS).forEach(function(k){ delete SLUGS[k]; });
+    Object.keys(MEETS).forEach(function(k){ delete MEETS[k]; });
+    Object.keys(SHARE_LINES).forEach(function(k){ delete SHARE_LINES[k]; });
+    FACILITIES.forEach(function(f){
+      if(f.slug) SLUGS[f.id]=f.slug;
+      if(f.meets) MEETS[f.id]=f.meets;
+      if(f.shareLine) SHARE_LINES[f.id]=f.shareLine;
+      delete f.meets; delete f.shareLine; /* harvested into the maps above; facility objects keep their embedded shape */
+    });
+    FACILITIES.forEach(function(f){ f.slug=SLUGS[f.id]||("building-"+f.id); });
+    week.items.forEach(function(it){
+      var f=facilityById(it.facilityId); if(!f) return;
+      ["active","badge","headline","bullets","next","timeline"].forEach(function(k){ if(it[k]!==undefined) f[k]=it[k]; });
+    });
+    if(week.id) WEEK_META.id=week.id;
+    if(week.label) WEEK_META.label=week.label;
+    if(week.range) WEEK_META.range=week.range;
+    if(week.lede) WEEK_META.lede=week.lede;
+    if(Array.isArray(week.topStories)&&week.topStories.length){ WEEK_TOP_IDS.length=0; week.topStories.forEach(function(id){ WEEK_TOP_IDS.push(id); }); }
+    var arch=past.map(function(p){ return {label:(p.data&&p.data.label)||p.entry.label, range:(p.data&&p.data.range)||p.entry.range, items:(p.data&&p.data.items)||[]}; }).filter(function(w){ return w.items.length; });
+    if(arch.length){ ARCHIVE.length=0; arch.forEach(function(w){ ARCHIVE.push(w); }); }
+  }catch(e){ /* embedded data stays */ }
+}
+var __dataResolve=null;
+window.__dataReady=new Promise(function(res){ __dataResolve=res; });
+(function loadExternalData(){
+  var done=false;
+  function finish(){ if(done) return; done=true; __dataResolve(); }
+  var timer=setTimeout(finish,3000);
+  function settle(){ clearTimeout(timer); finish(); }
+  if(typeof fetch!=="function"){ settle(); return; }
+  function getJSON(url){ return fetch(url).then(function(r){ if(!r.ok) throw new Error("http "+r.status); return r.json(); }); }
+  getJSON("data/weeks/index.json").then(function(index){
+    if(!Array.isArray(index)||!index.length) throw new Error("bad index");
+    var current=null;
+    index.forEach(function(w){ if(w&&w.current&&w.file&&!current) current=w; });
+    if(!current) throw new Error("no current week");
+    var jobs=[getJSON("data/facilities.json"),getJSON("data/weeks/"+current.file)];
+    index.forEach(function(w){
+      if(w&&!w.current&&w.file) jobs.push(getJSON("data/weeks/"+w.file).then(function(d){ return {entry:w,data:d}; }));
+    });
+    return Promise.all(jobs).then(function(res){
+      applyExternalData(res[0],res[1],res.slice(2));
+      settle();
+    });
+  }).catch(function(){ settle(); });
+})();
+/* Boot waits for the data loader to settle (fetched data or the embedded
+   fallback), then renders exactly as before. */
+window.__dataReady.then(function(){ bootApp(); });
 </script>
 <script>
 /* ================= PHASE 3 — SITE STRUCTURE =================
@@ -1572,7 +1752,7 @@ var TOPIC_META={
    three highest-impact facilities; anything missing falls back to ranking
    active facilities by (has a dollar figure, is a decision/outcome, data
    order) — the same rule the picker documents for future weeks. */
-var WEEK_TOP_IDS=[10,1,6];
+var WEEK_TOP_IDS=WEEK_META.topStories;
 function storyScore(f){
   var txt=(f.headline||"")+" "+(f.bullets||[]).join(" ");
   var s=0;
@@ -1608,7 +1788,7 @@ function articleItemHTML(f){
 }
 function renderWeek(){
   var wrap=document.getElementById("weekArticle"); if(!wrap) return;
-  var html='<p class="page-lede">One board met this week — Bunnell, on Monday night, Nov. 23 — and its votes are still unreported. The week\u2019s biggest stories were money: the Sheriff\u2019s Office returned $4 million in unspent funds to the county, and reporting put the county\u2019s Amendment 3 budget shadow at about $60 million. Everything below is drawn from the same verified items on the map, grouped by topic.</p>';
+  var html='<p class="page-lede">'+WEEK_META.lede+'</p>';
   TOPIC_ORDER.forEach(function(t){
     var items=FACILITIES.filter(function(f){ return f.active&&f.cats.indexOf(t)>-1; });
     if(!items.length) return;
@@ -1621,6 +1801,7 @@ function renderWeek(){
 /* ---------- Archive ----------
    ARCHIVE is data, not code: when a week rolls over, the outgoing week is
    appended here as another week object in this same shape. */
+/* [DATA:archive-weeks] Past weeks — extracted to data/weeks/<id>.json, one file per week. */
 var ARCHIVE=[
   {label:"Week of Nov 16\u201322, 2026", range:"Nov 16\u201322, 2026", items:[
     {board:"Flagler County Commission", facilityId:1, topics:["meetings","money"], headline:"County Commission approves $350,000 animal-control contract, 5\u20130", summary:"The County Commission approved a one-year, $350,000 animal-control contract with the Flagler Humane Society, voting 5\u20130. The vote ended a lapse in animal-control coverage of about four weeks.", sourceName:"FlaglerLive reporting", portal:PORTAL_COUNTY},
@@ -1689,7 +1870,7 @@ function renderTopic(t){
 var COUNTIES=[
   {id:"flagler", name:"Flagler County", status:"live", weekLabel:"Week of Nov 23–29, 2026",
    facilities:FACILITIES, meets:MEETS, slugs:SLUGS, boundary:FLAGLER_BOUNDARY, towns:TOWNS,
-   shareLines:SHARE_LINES, archive:ARCHIVE, weekTopIds:WEEK_TOP_IDS},
+   shareLines:SHARE_LINES, archive:ARCHIVE, weekTopIds:WEEK_TOP_IDS, weekMeta:WEEK_META},
   {id:"volusia", name:"Volusia County", status:"coming-soon", note:"The next county edition of On The Record — Daytona Beach, Deltona, DeLand and the rest of Volusia, researched to the same standard as Flagler."},
   {id:"st-johns", name:"St. Johns County", status:"coming-soon", note:"The county edition after Volusia — St. Augustine and the county north of Flagler, already on our doorstep at Marineland."}
 ];
@@ -1767,18 +1948,19 @@ function showView(name,param,section){
     else act=(a.getAttribute("data-nav")===name);
     a.classList.toggle("active",!!act);
   });
-  var titles={home:"On The Record \u2014 Flagler County, in Plain English",map:"Map \u2014 On The Record · Flagler County",week:"This Week \u2014 On The Record · Flagler County",archive:"Archive \u2014 On The Record · Flagler County",topic:(TOPIC_META[param]?TOPIC_META[param].title+" \u2014 ":"")+"On The Record · Flagler County",newsletter:"Newsletter \u2014 On The Record",coverage:"Coverage \u2014 On The Record · Flagler Coastal Enterprises",partner:"Partner With Us \u2014 On The Record · Flagler Coastal Enterprises",about:"About \u2014 On The Record"};
+  var titles={home:"On The Record \u2014 Flagler County Government, in Plain English",map:"Map \u2014 On The Record",week:"This Week \u2014 On The Record",archive:"Archive \u2014 On The Record",topic:(TOPIC_META[param]?TOPIC_META[param].title+" \u2014 ":"")+"On The Record",newsletter:"Newsletter \u2014 On The Record",coverage:"Coverage \u2014 On The Record",partner:"Partner With Us \u2014 On The Record",about:"About \u2014 On The Record"};
   document.title=titles[name]||titles.home;
+  var moreBtn=document.getElementById("navMoreBtn");
+  if(moreBtn) moreBtn.classList.toggle("active",name==="coverage"||name==="partner"||name==="about");
+  if(window.__closeNavMore) window.__closeNavMore();
   var nl=document.getElementById("navLinks"); if(nl) nl.classList.remove("open");
   var tg=document.getElementById("navToggle"); if(tg) tg.setAttribute("aria-expanded","false");
   if(name==="map"){
-    setTimeout(function(){
-      if(window.map&&map.invalidateSize){
-        map.invalidateSize();
-        if(!mapShownOnce&&!slugFromHash()){ mapShownOnce=true; try{ map.fitBounds([[29.255,-81.53],[29.685,-81.06]],{padding:[14,14]}); }catch(e){} }
-        else mapShownOnce=true;
-      }
-    },60);
+    /* Lazy: Leaflet loads on this first open; later opens reuse the map. */
+    ensureMap(function(){
+      if(!map) return;
+      setTimeout(function(){ if(map){ map.invalidateSize(); positionMapForRoute(); } },40);
+    });
   }
   if(section){
     setTimeout(function(){ var t=document.getElementById(section); if(t) t.scrollIntoView({behavior:reduced?"auto":"smooth",block:"start"}); },90);
@@ -1807,6 +1989,34 @@ function handleRoute(){
   showView("home");
 }
 window.__onHash=handleRoute;
+/* ---------- Nav "More" dropdown (desktop) ----------
+   Real button + aria-expanded; opens on click, closes on Escape, on an
+   outside click, on choosing a link, and on any route change (showView).
+   On mobile the button is hidden by CSS and the menu renders as part of
+   the single Menu list, so no dropdown behavior is needed there. */
+(function initNavMore(){
+  var btn=document.getElementById("navMoreBtn"), menu=document.getElementById("navMoreMenu");
+  if(!btn||!menu) return;
+  function close(){ menu.hidden=true; btn.setAttribute("aria-expanded","false"); }
+  window.__closeNavMore=close;
+  btn.addEventListener("click",function(e){
+    e.stopPropagation();
+    if(menu.hidden){ menu.hidden=false; btn.setAttribute("aria-expanded","true"); }
+    else close();
+  });
+  document.addEventListener("click",function(e){ if(!menu.hidden&&!e.target.closest(".nav-more")) close(); });
+  menu.querySelectorAll("a").forEach(function(a){ a.addEventListener("click",close); });
+  document.addEventListener("keydown",function(e){ if(e.key==="Escape"&&!menu.hidden){ close(); btn.focus(); } });
+})();
+/* ---------- Escape closes menus and the facility panel ---------- */
+document.addEventListener("keydown",function(e){
+  if(e.key!=="Escape") return;
+  var nl=document.getElementById("navLinks");
+  if(nl&&nl.classList.contains("open")){ nl.classList.remove("open"); var tg2=document.getElementById("navToggle"); if(tg2) tg2.setAttribute("aria-expanded","false"); }
+  var fp=document.getElementById("followPanel");
+  if(fp&&!fp.hidden){ fp.hidden=true; var fb2=document.getElementById("followBtn"); if(fb2){ fb2.setAttribute("aria-expanded","false"); fb2.textContent="＋ Follow this building"; } return; }
+  if(currentView==="map"&&typeof closePanel==="function") closePanel();
+});
 /* ---------- Phase 3 init: move shared blocks into their views, render, route ---------- */
 (function initPhase3(){
   var glance=document.querySelector(".glance"); var gs=document.getElementById("glanceSlot");
@@ -1815,13 +2025,18 @@ window.__onHash=handleRoute;
   if(nlSection&&nlSlot) nlSlot.appendChild(nlSection);
   var homeSlot=document.getElementById("homeNewsletterSlot");
   if(nlSection&&homeSlot){ var clone=nlSection.cloneNode(true); clone.removeAttribute("id"); homeSlot.appendChild(clone); }
-  renderTopStories(); renderPreviewCounts(); renderWeek(); renderArchive(); renderCoverage(); wirePhase4Forms();
   var tg=document.getElementById("navToggle"); var nl=document.getElementById("navLinks");
   if(tg&&nl) tg.addEventListener("click",function(){ var open=nl.classList.toggle("open"); tg.setAttribute("aria-expanded",open?"true":"false"); });
   document.querySelectorAll("[data-atopic]").forEach(function(b){ b.addEventListener("click",function(){ archiveTopic=b.getAttribute("data-atopic"); renderArchive(); }); });
-  handleRoute();
+  /* Renders wait for the data loader to settle (external JSON or the
+     embedded fallback), so every view renders once, from the final data. */
+  (window.__dataReady||Promise.resolve()).then(function(){
+    renderTopStories(); renderPreviewCounts(); renderWeek(); renderArchive(); renderCoverage(); wirePhase4Forms();
+    handleRoute();
+  });
 })();
 
 </script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "c68d8265fc6d4f238d67c9b7cf71df1e"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>

@@ -1,0 +1,136 @@
+{
+ "id": "2026-11-16",
+ "label": "Week of Nov 16–22, 2026",
+ "range": "Nov 16–22, 2026",
+ "items": [
+  {
+   "board": "Flagler County Commission",
+   "facilityId": 1,
+   "topics": [
+    "meetings",
+    "money"
+   ],
+   "headline": "County Commission approves $350,000 animal-control contract, 5–0",
+   "summary": "The County Commission approved a one-year, $350,000 animal-control contract with the Flagler Humane Society, voting 5–0. The vote ended a lapse in animal-control coverage of about four weeks.",
+   "sourceName": "FlaglerLive reporting",
+   "portal": {
+    "label": "Flagler County CivicClerk portal",
+    "url": "https://flaglercofl.portal.civicclerk.com/"
+   }
+  },
+  {
+   "board": "Flagler County Commission",
+   "facilityId": 1,
+   "topics": [
+    "meetings"
+   ],
+   "headline": "Carney elected County Commission chair, Richardson vice chair",
+   "summary": "The County Commission unanimously elected Kim Carney as chair and Pam Richardson as vice chair at its organizational meeting.",
+   "sourceName": "Official record",
+   "portal": {
+    "label": "Flagler County CivicClerk portal",
+    "url": "https://flaglercofl.portal.civicclerk.com/"
+   }
+  },
+  {
+   "board": "Palm Coast City Council",
+   "facilityId": 3,
+   "topics": [
+    "meetings"
+   ],
+   "headline": "Palm Coast seats three new council members; Miller named vice mayor",
+   "summary": "Three new members took their seats on the Palm Coast City Council — Amaral (District 2), Stevens (District 3) and Shelley (District 4). The council elected Ty Miller vice mayor, 4–1.",
+   "sourceName": "Official record",
+   "portal": {
+    "label": "Palm Coast agenda center",
+    "url": "https://www.palmcoast.gov/agendas"
+   }
+  },
+  {
+   "board": "Palm Coast City Council",
+   "facilityId": 3,
+   "topics": [
+    "money"
+   ],
+   "headline": "Palm Coast passes two budget amendments",
+   "summary": "At the same Nov. 17 meeting, the Palm Coast City Council passed two budget amendments, both unanimously.",
+   "sourceName": "Official record",
+   "portal": {
+    "label": "Palm Coast agenda center",
+    "url": "https://www.palmcoast.gov/agendas"
+   }
+  },
+  {
+   "board": "Flagler County School Board",
+   "facilityId": 1,
+   "topics": [
+    "schools",
+    "meetings"
+   ],
+   "headline": "School Board seats new members; Ramirez elected chair, Ruddy vice chair",
+   "summary": "At its Nov. 17 organizational meeting, the School Board seated newly elected members Moon (District 1) and Wood (District 2) alongside re-elected member Chong (District 4). The board elected Lauren Ramirez chair and Janie Ruddy vice chair.",
+   "sourceName": "Official record",
+   "portal": {
+    "label": "Flagler Schools BoardDocs",
+    "url": "https://go.boarddocs.com/fla/flcsd/Board.nsf/Public"
+   }
+  },
+  {
+   "board": "Flagler County School Board",
+   "facilityId": 1,
+   "topics": [
+    "schools",
+    "money"
+   ],
+   "headline": "School Board approves $3M YMCA share unanimously",
+   "summary": "The School Board unanimously approved the district’s $3 million share of the roughly $14 million Palm Coast YMCA planned for Town Center, on a 35-year lease.",
+   "sourceName": "FlaglerLive reporting",
+   "portal": {
+    "label": "Flagler Schools BoardDocs",
+    "url": "https://go.boarddocs.com/fla/flcsd/Board.nsf/Public"
+   }
+  },
+  {
+   "board": "Flagler County School Board",
+   "facilityId": 1,
+   "topics": [
+    "schools"
+   ],
+   "headline": "2027–28 school calendar approved 4–1",
+   "summary": "The board approved the 2027–28 school calendar 4–1, with Ruddy opposed. The calendar has 179 student days and a first day of Aug. 10.",
+   "sourceName": "Official record",
+   "portal": {
+    "label": "Flagler Schools BoardDocs",
+    "url": "https://go.boarddocs.com/fla/flcsd/Board.nsf/Public"
+   }
+  },
+  {
+   "board": "Palm Coast Planning Board",
+   "facilityId": 3,
+   "topics": [
+    "development"
+   ],
+   "headline": "Planning Board recommends asphalt plant approval, 6–1",
+   "summary": "The Palm Coast Planning Board voted 6–1 to recommend approval of the ACCI Ventures asphalt plant — 6 acres at 77 Hargrove Grade, about $6 million and roughly 45 jobs. The final decision rests with the City Council, where approval needs 4 of 5 votes.",
+   "sourceName": "Local reporting",
+   "portal": {
+    "label": "Palm Coast agenda center",
+    "url": "https://www.palmcoast.gov/agendas"
+   }
+  },
+  {
+   "board": "Flagler Beach City Commission",
+   "facilityId": 7,
+   "topics": [
+    "meetings"
+   ],
+   "headline": "Flagler Beach Commission last met Nov. 12",
+   "summary": "The Flagler Beach City Commission last met on Nov. 12, when trailer and RV parking rules (Ordinance 2026-28) were on the agenda. Its next meeting is Dec. 10.",
+   "sourceName": "Official record",
+   "portal": {
+    "label": "Flagler Beach meetings hub",
+    "url": "https://flaglerbeach-fl.municodemeetings.com/"
+   }
+  }
+ ]
+}

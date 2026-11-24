@@ -1,0 +1,516 @@
+[
+ {
+  "id": 1,
+  "icon": "🏛",
+  "name": "Government Services Building",
+  "short": "County HQ · BOCC + School Board",
+  "address": "1769 E Moody Blvd, Bunnell",
+  "type": "County Government · BOCC & School Board",
+  "lat": 29.47195,
+  "lng": -81.2457,
+  "cats": [
+   "meetings",
+   "money",
+   "schools"
+  ],
+  "mapsQ": "Government Services Building 1769 E Moody Blvd Bunnell FL",
+  "slug": "government-services-building",
+  "meets": "<div class=\"m-board\"><p class=\"m-who\">Flagler County Board of County Commissioners</p><p><strong>Meets:</strong> 1st Monday · 9:00 a.m. and 3rd Monday · 5:00 p.m. A 1:00 p.m. workshop may be added if needed.</p><p><strong>Agendas:</strong> <a href=\"https://flaglercofl.portal.civicclerk.com/\" target=\"_blank\" rel=\"noopener\">CivicClerk portal</a> — agendas before Aug 17, 2026 are in the county archive.</p><p><strong>Watch live:</strong> <a href=\"https://www.youtube.com/@FlaglerCounty/live\" target=\"_blank\" rel=\"noopener\">Flagler County on YouTube</a> — also airs on Spectrum channel 492.</p><p><strong>Public records:</strong> PublicRecords@flaglercounty.gov · 386-313-4005 · in person at 1769 E. Moody Blvd., Bldg. 2, 3rd Floor, Bunnell.</p></div><div class=\"m-board\"><p class=\"m-who\">Flagler County School Board</p><p><strong>Meets:</strong> regular meeting once a month, usually 4th Tuesday · 6:00 p.m.; agenda workshop 2nd Tuesday · 3:00 p.m.; information workshop the same day as the regular meeting · 1:00 p.m.</p><p><strong>Agendas:</strong> <a href=\"https://go.boarddocs.com/fla/flcsd/Board.nsf/Public\" target=\"_blank\" rel=\"noopener\">BoardDocs</a></p><p><strong>Meeting videos:</strong> <a href=\"https://youtube.com/playlist?list=PLfx_w2JpNlBzcLsx7mTHJCM0z9nNsKrZE\" target=\"_blank\" rel=\"noopener\">YouTube playlist</a></p><p><strong>Public records:</strong> publicrecordsrequests@flaglerschools.com · 386-437-7526 x1120 · 1769 E. Moody Blvd., Bldg. 2, Bunnell · <a href=\"https://www.flaglerschools.com/public-records\" target=\"_blank\" rel=\"noopener\">Public records info</a></p></div>",
+  "shareLine": "FlaglerLive reports Flagler County faces 'cataclysmic' cuts of about $60 million from Amendment 3 — layoffs, and potential new fees and taxes; the County Commission and Sheriff are exploring a special taxing district to pay for policing countywide."
+ },
+ {
+  "id": 2,
+  "icon": "⚖",
+  "name": "Kim C. Hammond Justice Center",
+  "short": "Courthouse · Clerk of Court",
+  "address": "1769 E Moody Blvd, Bunnell",
+  "type": "Courthouse · Public Safety",
+  "lat": 29.47345,
+  "lng": -81.2457,
+  "cats": [
+   "safety"
+  ],
+  "mapsQ": "Kim C Hammond Justice Center Bunnell FL",
+  "slug": "kim-c-hammond-justice-center",
+  "meets": "<p class=\"m-who\">No board meets here</p><p>This is the home of the Clerk of the Circuit Court &amp; Comptroller.</p><p><strong>Hours:</strong> Mon–Fri 8:30 a.m.–4:30 p.m. · <strong>Phone:</strong> 386-313-4400</p><p><strong>Court today:</strong> <a href=\"https://flaglerclerk.gov/docket/\" target=\"_blank\" rel=\"noopener\">Today’s court docket</a> — updates every 5 minutes.</p>",
+  "shareLine": "No board news here this week — no board meets here; this is the Clerk of the Circuit Court & Comptroller's building. For what's happening here, check the court docket."
+ },
+ {
+  "id": 3,
+  "icon": "🏙",
+  "name": "Palm Coast City Hall",
+  "short": "City Council · Palm Coast",
+  "address": "160 Lake Ave, Palm Coast",
+  "type": "City Government · Palm Coast City Council",
+  "lat": 29.48647,
+  "lng": -81.20768,
+  "cats": [
+   "meetings",
+   "money"
+  ],
+  "mapsQ": "Palm Coast City Hall 160 Lake Ave Palm Coast FL",
+  "slug": "palm-coast-city-hall",
+  "meets": "<p class=\"m-who\">Palm Coast City Council</p><p><strong>Meets:</strong> business meetings 1st Tuesday · 6:00 p.m. and 3rd Tuesday · 9:00 a.m.; workshops 2nd Tuesday · 9:00 a.m.</p><p><strong>Agendas, minutes &amp; video:</strong> <a href=\"https://www.palmcoast.gov/agendas\" target=\"_blank\" rel=\"noopener\">palmcoast.gov/agendas</a></p><p><strong>Watch live:</strong> <a href=\"https://www.youtube.com/channel/UCutMtNq3Rm4NzsRYtNMHSAg\" target=\"_blank\" rel=\"noopener\">City of Palm Coast on YouTube</a></p><p><strong>Public records:</strong> the City Clerk is the records custodian — CityClerk@palmcoastgov.com · (386) 986-3713 · City Hall, 160 Lake Ave. · <a href=\"https://www.palmcoast.gov/city-clerk\" target=\"_blank\" rel=\"noopener\">City Clerk page</a> · <a href=\"https://records.palmcoast.gov/\" target=\"_blank\" rel=\"noopener\">Searchable records database</a></p>",
+  "shareLine": "Palm Coast closed in November on its $17 million purchase of 23 parcels — about 259 acres — in Town Center, settling its lawsuit with Palm Coast Holdings/Allete."
+ },
+ {
+  "id": 4,
+  "icon": "🏊",
+  "name": "Town Center — Future YMCA Site",
+  "short": "$14M project · Central Ave",
+  "address": "1580 Central Ave, Palm Coast",
+  "type": "Development Project · Multi-agency",
+  "lat": 29.48449,
+  "lng": -81.19767,
+  "cats": [
+   "development",
+   "money"
+  ],
+  "mapsQ": "1580 Central Ave Palm Coast FL YMCA",
+  "slug": "town-center-ymca",
+  "meets": "<p class=\"m-who\">No public board meets here</p><p>This is the future ~$14 million YMCA site — city land on a 35-year lease. The School Board approved its $3 million share unanimously on Nov 17, 2026.</p><p>No agendas or livestreams apply here — the decisions behind it live on the <a href=\"#building=palm-coast-city-hall\">Palm Coast City Hall</a> and <a href=\"#building=government-services-building\">Government Services Building</a> cards.</p>",
+  "shareLine": "The School Board approved its $3M share unanimously Nov 17 for the roughly $14M YMCA, on a 35-year lease."
+ },
+ {
+  "id": 5,
+  "icon": "🏢",
+  "name": "Old Bunnell City Hall",
+  "short": "Historic City Hall · Church St",
+  "address": "200 S Church St, Bunnell",
+  "type": "Historic Landmark · Former City Hall",
+  "lat": 29.46587,
+  "lng": -81.25632,
+  "cats": [
+   "meetings"
+  ],
+  "mapsQ": "Bunnell City Hall 200 S Church St Bunnell FL",
+  "slug": "bunnell-city-hall",
+  "meets": "<p class=\"m-who\">No public board meets here anymore</p><p>This is the historic former City Hall, now a city event venue. Bunnell’s City Commission, administration and Police Department are at 2400 Commerce Pkwy — see the <a href=\"#building=bunnell-commission-chambers\">Bunnell Commission Chambers</a> pin.</p>"
+ },
+ {
+  "id": 6,
+  "icon": "🗣",
+  "name": "Bunnell Commission Chambers",
+  "short": "City Commission · Commerce Pkwy",
+  "address": "2400 Commerce Pkwy, Bunnell",
+  "type": "City Government · Bunnell City Commission",
+  "lat": 29.47313,
+  "lng": -81.23886,
+  "cats": [
+   "meetings",
+   "development",
+   "money"
+  ],
+  "mapsQ": "2400 Commerce Pkwy Bunnell FL",
+  "slug": "bunnell-commission-chambers",
+  "meets": "<p class=\"m-who\">Bunnell City Commission</p><p><strong>Meets:</strong> 2nd &amp; 4th Monday · 7:00 p.m.</p><p><strong>Agendas &amp; minutes:</strong> <a href=\"https://www.bunnellcity.us/1479/Agendas-Minutes\" target=\"_blank\" rel=\"noopener\">bunnellcity.us — Agendas &amp; Minutes</a></p><p><strong>Watch:</strong> meetings are broadcast on the City of Bunnell YouTube channel — broadcasts resumed October 2026, starting with the Oct 26, 2026 regular meeting.</p><p><strong>Public records:</strong> City Clerk Kristen Bates · (386) 437-7500, Option 5 · <a href=\"https://www.bunnellcity.us/1197/City-Clerk\" target=\"_blank\" rel=\"noopener\">City Clerk page</a></p>",
+  "shareLine": "Bunnell voted on its wastewater money Nov. 23 — the outcome hasn't been reported yet."
+ },
+ {
+  "id": 7,
+  "icon": "🌊",
+  "name": "Flagler Beach City Hall",
+  "short": "City Commission · Flagler Beach",
+  "address": "105 S 2nd St, Flagler Beach",
+  "type": "City Government · Flagler Beach Commission",
+  "lat": 29.47984,
+  "lng": -81.12757,
+  "cats": [
+   "meetings",
+   "development"
+  ],
+  "mapsQ": "Flagler Beach City Hall 105 S 2nd St Flagler Beach FL",
+  "slug": "flagler-beach-city-hall",
+  "meets": "<p class=\"m-who\">Flagler Beach City Commission</p><p><strong>Meets:</strong> usually 2nd &amp; 4th Thursday · 5:30 p.m. In November and December 2026 there is one meeting a month: Nov 12 and Dec 10.</p><p><strong>Agendas, packets, minutes &amp; video:</strong> <a href=\"https://flaglerbeach-fl.municodemeetings.com/\" target=\"_blank\" rel=\"noopener\">Flagler Beach meetings hub</a></p><p><strong>Meeting video:</strong> the city’s meetings hub carries agendas, packets, minutes and meeting video.</p><p><strong>Public records:</strong> City Clerk Penny Overstreet · poverstreet@cityofflaglerbeach.com · (386) 517-2000 x233 · 105 S. 2nd St., Flagler Beach · <a href=\"https://www.cityofflaglerbeach.com/DocumentCenter/View/1211/For-public-records-requests?bidId=\" target=\"_blank\" rel=\"noopener\">How to request records</a></p><p><strong>Police records:</strong> (386) 517-2020 · Sbuttner@fbpd.org · 204 S. Flagler Ave.</p>",
+  "shareLine": "March election news: Mayor Patti King and Commissioner Eric Cooley are stepping down; Trey Jones and Ken Bryan are running, with Bryan running for mayor."
+ },
+ {
+  "id": 8,
+  "icon": "🎣",
+  "name": "Flagler Beach Pier",
+  "short": "New pier · Ocean Shore Blvd",
+  "address": "S Ocean Shore Blvd, Flagler Beach",
+  "type": "Development · Landmark Project",
+  "lat": 29.47879,
+  "lng": -81.12631,
+  "cats": [
+   "development"
+  ],
+  "mapsQ": "Flagler Beach Pier FL",
+  "slug": "flagler-beach-pier",
+  "meets": "<p class=\"m-who\">No board meets here</p><p>This is the city-owned pier, under reconstruction.</p><p>Pier decisions are made by the Flagler Beach City Commission — see its <a href=\"https://flaglerbeach-fl.municodemeetings.com/\" target=\"_blank\" rel=\"noopener\">meetings hub</a> for agendas and decisions.</p>",
+  "shareLine": "The pier is under reconstruction as a new concrete structure (closed since fall 2022); substantial completion is targeted for January 2027."
+ },
+ {
+  "id": 9,
+  "icon": "🐾",
+  "name": "Flagler Humane Society",
+  "short": "Animal control · Shelter Dr",
+  "address": "1 Shelter Dr, Palm Coast",
+  "type": "Nonprofit Vendor · County Contract",
+  "lat": 29.55756,
+  "lng": -81.26587,
+  "cats": [
+   "money"
+  ],
+  "mapsQ": "Flagler Humane Society 1 Shelter Dr Palm Coast FL",
+  "slug": "flagler-humane-society",
+  "meets": "<p class=\"m-who\">No public board meets here</p><p>A nonprofit animal shelter — the county contracts with it for animal control (1-year, $350,000 contract approved by the County Commission Nov 16, 2026).</p><p><strong>Phone:</strong> (386) 445-1814 · <strong>Web:</strong> <a href=\"https://flaglerhumanesociety.org/\" target=\"_blank\" rel=\"noopener\">flaglerhumanesociety.org</a></p><p><strong>Open:</strong> Sat–Tue 10 a.m.–5 p.m. · Wed–Fri 10 a.m.–7 p.m.</p><p><strong>Animal Services:</strong> (386) 246-8612 · 7 days a week, 8 a.m.–5 p.m.</p>",
+  "shareLine": "The county approved a $350,000 one-year animal-control contract 5–0 on Nov 16, ending a nearly four-week lapse in coverage."
+ },
+ {
+  "id": 10,
+  "icon": "🛡",
+  "name": "Flagler County Sheriff's Office",
+  "short": "Sheriff · Operations Center, Bunnell",
+  "address": "61 Sheriff EW Johnston Dr, Bunnell",
+  "type": "Law Enforcement · Public Safety",
+  "lat": 29.47081,
+  "lng": -81.24074,
+  "cats": [
+   "safety",
+   "money"
+  ],
+  "mapsQ": "Flagler County Sheriff Operations Center 61 Sheriff EW Johnston Dr Bunnell FL",
+  "slug": "flagler-county-sheriffs-office",
+  "meets": "<p class=\"m-who\">No public board meets here</p><p>This is the Sheriff’s Office headquarters — the Operations Center (opened Dec 2022), off Commerce Pkwy in Bunnell. The street is named for E.W. Johnston, Flagler County’s first sheriff.</p><p><strong>Records Unit:</strong> Mon–Fri 8:00 a.m.–4:00 p.m. · publicrecordsrequest@flaglersheriff.com · (386) 437-4116.</p>",
+  "shareLine": "The Sheriff's Office returned $4 million in unspent funds to the county, including $3.2 million in excess federal payments from its secret ICE detention contracts — the first public reveal of their size (FlaglerLive, Nov. 23)."
+ },
+ {
+  "id": 11,
+  "icon": "📚",
+  "name": "Flagler County Public Library — Palm Coast",
+  "short": "Library · Palm Coast Pkwy",
+  "address": "2500 Palm Coast Pkwy NW, Palm Coast",
+  "type": "Public Library · Community / Schools",
+  "lat": 29.55416,
+  "lng": -81.23815,
+  "cats": [
+   "schools"
+  ],
+  "mapsQ": "Flagler County Public Library Palm Coast 2500 Palm Coast Pkwy NW",
+  "slug": "flagler-county-public-library",
+  "meets": "<p class=\"m-who\">No public board meets here</p><p>This is the Flagler County Public Library branch in Palm Coast — a public library, not a meeting hall for a public board.</p><p>Meeting info not verified yet.</p><p>The library system is overseen by the Flagler County Public Library Board of Trustees, which posts monthly agendas and minutes (per the library’s FY 2026–27 Annual Plan of Service, approved by the County Commission on Nov 16, 2026).</p>"
+ },
+ {
+  "id": 12,
+  "icon": "🚒",
+  "name": "Fire Station 22",
+  "short": "Fire Department · Palm Harbor",
+  "address": "350 Palm Coast Pkwy NE, Palm Coast",
+  "type": "Public Safety · Palm Coast Fire Department",
+  "lat": 29.56159,
+  "lng": -81.19738,
+  "cats": [
+   "safety",
+   "money"
+  ],
+  "mapsQ": "Fire Station 22 350 Palm Coast Pkwy NE Palm Coast FL",
+  "slug": "fire-station-22",
+  "meets": "<p class=\"m-who\">No public board meets here</p><p>This is a working Palm Coast Fire Department station — home to Engine 22 and Rescue 22, serving the Palm Harbor area.</p><p>Fire Department budgets and decisions are made by the Palm Coast City Council — see the <a href=\"#building=palm-coast-city-hall\">Palm Coast City Hall</a> card.</p>"
+ },
+ {
+  "id": 13,
+  "icon": "🚒",
+  "name": "Fire Station 21",
+  "short": "Fire Department · Corporate Dr",
+  "address": "9 Corporate Dr, Palm Coast",
+  "type": "Public Safety · Palm Coast Fire Department",
+  "lat": 29.55123,
+  "lng": -81.24075,
+  "cats": [
+   "safety"
+  ],
+  "mapsQ": "Fire Station 21 9 Corporate Dr Palm Coast FL",
+  "slug": "fire-station-21",
+  "meets": "<p class=\"m-who\">No public board meets here</p><p>This is a working Palm Coast Fire Department station.</p><p>Fire Department budgets and decisions are made by the Palm Coast City Council — see the <a href=\"#building=palm-coast-city-hall\">Palm Coast City Hall</a> card.</p>"
+ },
+ {
+  "id": 14,
+  "icon": "🚒",
+  "name": "Fire Station 23",
+  "short": "Fire Department · Belle Terre Pkwy",
+  "address": "5750 Belle Terre Pkwy, Palm Coast",
+  "type": "Public Safety · Palm Coast Fire Department",
+  "lat": 29.58944,
+  "lng": -81.26038,
+  "cats": [
+   "safety"
+  ],
+  "mapsQ": "Fire Station 23 5750 Belle Terre Pkwy Palm Coast FL",
+  "slug": "fire-station-23",
+  "meets": "<p class=\"m-who\">No public board meets here</p><p>This is a working Palm Coast Fire Department station.</p><p>Fire Department budgets and decisions are made by the Palm Coast City Council — see the <a href=\"#building=palm-coast-city-hall\">Palm Coast City Hall</a> card.</p>"
+ },
+ {
+  "id": 15,
+  "icon": "🚒",
+  "name": "Fire Station 24",
+  "short": "Fire Department · Palm Harbor Pkwy",
+  "address": "1505 Palm Harbor Pkwy, Palm Coast",
+  "type": "Public Safety · Palm Coast Fire Department",
+  "lat": 29.5872,
+  "lng": -81.22059,
+  "cats": [
+   "safety"
+  ],
+  "mapsQ": "Fire Station 24 1505 Palm Harbor Pkwy Palm Coast FL",
+  "slug": "fire-station-24",
+  "meets": "<p class=\"m-who\">No public board meets here</p><p>This is a working Palm Coast Fire Department station.</p><p>Fire Department budgets and decisions are made by the Palm Coast City Council — see the <a href=\"#building=palm-coast-city-hall\">Palm Coast City Hall</a> card.</p>"
+ },
+ {
+  "id": 16,
+  "icon": "🚒",
+  "name": "Fire Station 25",
+  "short": "Fire Department HQ · Belle Terre Pkwy",
+  "address": "1250 Belle Terre Pkwy, Palm Coast",
+  "type": "Public Safety · Palm Coast Fire Department",
+  "lat": 29.49507,
+  "lng": -81.21923,
+  "cats": [
+   "safety"
+  ],
+  "mapsQ": "Fire Station 25 1250 Belle Terre Pkwy Palm Coast FL",
+  "slug": "fire-station-25",
+  "meets": "<p class=\"m-who\">No public board meets here</p><p>This is a working Palm Coast Fire Department station — and the department’s headquarters.</p><p>Fire Department budgets and decisions are made by the Palm Coast City Council — see the <a href=\"#building=palm-coast-city-hall\">Palm Coast City Hall</a> card.</p>"
+ },
+ {
+  "id": 17,
+  "icon": "🚒",
+  "name": "Fire Station 26",
+  "short": "Fire Department · Seminole Woods",
+  "address": "72 Airport Commerce Way, Palm Coast",
+  "type": "Public Safety · Palm Coast Fire Department",
+  "lat": 29.45726,
+  "lng": -81.18678,
+  "cats": [
+   "safety"
+  ],
+  "mapsQ": "Fire Station 26 72 Airport Commerce Way Palm Coast FL",
+  "slug": "fire-station-26",
+  "meets": "<p class=\"m-who\">No public board meets here</p><p>This is a working Palm Coast Fire Department station — the department’s newest, opened May 2026.</p><p>Fire Department budgets and decisions are made by the Palm Coast City Council — see the <a href=\"#building=palm-coast-city-hall\">Palm Coast City Hall</a> card.</p>"
+ },
+ {
+  "id": 18,
+  "icon": "🏠",
+  "name": "Palm Coast Community Center",
+  "short": "Community Center · Palm Coast Pkwy NE",
+  "address": "305 Palm Coast Pkwy NE, Palm Coast",
+  "type": "Community Facility · City of Palm Coast",
+  "lat": 29.55799,
+  "lng": -81.20337,
+  "cats": [
+   "schools"
+  ],
+  "mapsQ": "Palm Coast Community Center 305 Palm Coast Pkwy NE Palm Coast FL",
+  "slug": "palm-coast-community-center",
+  "meets": "<p class=\"m-who\">No public board meets here</p><p>This is the City of Palm Coast’s community center.</p><p><strong>Hours:</strong> Mon–Fri 8 a.m.–6 p.m. (palmcoast.gov)</p>"
+ },
+ {
+  "id": 19,
+  "icon": "📚",
+  "name": "Flagler County Public Library — Bunnell (Nexus Center)",
+  "short": "Library · Commerce Pkwy, Bunnell",
+  "address": "2199 Commerce Pkwy, Bunnell",
+  "type": "Public Library · Community / Schools",
+  "lat": 29.47174,
+  "lng": -81.24181,
+  "cats": [
+   "schools"
+  ],
+  "mapsQ": "Flagler County Public Library Bunnell 2199 Commerce Pkwy Bunnell FL",
+  "slug": "flagler-county-public-library-bunnell",
+  "meets": "<p class=\"m-who\">No public board meets here</p><p>This is the Bunnell branch of the Flagler County Public Library, inside the Nexus Center. The Library Board of Trustees posts monthly agendas and minutes.</p><p><strong>Phone:</strong> (386) 437-7390 · flaglerlibrary.org</p>"
+ },
+ {
+  "id": 20,
+  "icon": "✈️",
+  "name": "Flagler Executive Airport",
+  "short": "County Airport · Airport Rd",
+  "address": "201 Airport Rd, Palm Coast",
+  "type": "County Airport · Flagler County",
+  "lat": 29.4722,
+  "lng": -81.20743,
+  "cats": [
+   "development"
+  ],
+  "mapsQ": "Flagler Executive Airport 201 Airport Rd Palm Coast FL",
+  "slug": "flagler-executive-airport",
+  "meets": "<p class=\"m-who\">No public board meets here</p><p>This is Flagler County’s public-use airport, run by the county’s Airport department.</p>"
+ },
+ {
+  "id": 21,
+  "icon": "🚨",
+  "name": "Flagler County Emergency Operations Center",
+  "short": "EOC · GSB campus, Bunnell",
+  "address": "1769 E Moody Blvd, Bunnell",
+  "type": "Emergency Management · Flagler County",
+  "lat": 29.47195,
+  "lng": -81.2432,
+  "cats": [
+   "safety"
+  ],
+  "mapsQ": "Flagler County Emergency Operations Center 1769 E Moody Blvd Bunnell FL",
+  "slug": "flagler-county-emergency-operations-center",
+  "meets": "<p class=\"m-who\">No public board meets here</p><p>This is Flagler County Emergency Management’s headquarters and the county EOC (Building 3 of the Government Services campus).</p>"
+ },
+ {
+  "id": 22,
+  "icon": "🔒",
+  "name": "Sheriff Perry Hall Inmate Detention Facility",
+  "short": "County Jail · Justice Ln, Bunnell",
+  "address": "1002 Justice Ln, Bunnell",
+  "type": "Detention Facility · Public Safety",
+  "lat": 29.45221,
+  "lng": -81.25635,
+  "cats": [
+   "safety"
+  ],
+  "mapsQ": "Sheriff Perry Hall Inmate Detention Facility 1002 Justice Ln Bunnell FL",
+  "slug": "sheriff-perry-hall-detention-facility",
+  "meets": "<p class=\"m-who\">No public board meets here</p><p>This is the county jail, operated by the Sheriff’s Office. Inmate search and visitation info: flaglersheriff.com.</p>"
+ },
+ {
+  "id": 23,
+  "icon": "🚒",
+  "name": "Flagler Beach Fire Department — Station 11",
+  "short": "Fire Department · S Flagler Ave",
+  "address": "320 S Flagler Ave, Flagler Beach",
+  "type": "Public Safety · Flagler Beach Fire Department",
+  "lat": 29.47768,
+  "lng": -81.12986,
+  "cats": [
+   "safety"
+  ],
+  "mapsQ": "Flagler Beach Fire Department 320 S Flagler Ave Flagler Beach FL",
+  "slug": "flagler-beach-fire-station-11",
+  "meets": "<p class=\"m-who\">No public board meets here</p><p>This is a working Flagler Beach Fire Department station.</p><p>Fire Department budgets and decisions are made by the Flagler Beach City Commission — see the <a href=\"#building=flagler-beach-city-hall\">Flagler Beach City Hall</a> card.</p>"
+ },
+ {
+  "id": 24,
+  "icon": "🚓",
+  "name": "Flagler Beach Police Department",
+  "short": "Police · S Flagler Ave",
+  "address": "204 S Flagler Ave, Flagler Beach",
+  "type": "Law Enforcement · Public Safety",
+  "lat": 29.47878,
+  "lng": -81.13049,
+  "cats": [
+   "safety"
+  ],
+  "mapsQ": "Flagler Beach Police Department 204 S Flagler Ave Flagler Beach FL",
+  "slug": "flagler-beach-police-department",
+  "meets": "<p class=\"m-who\">No public board meets here</p><p>This is the Flagler Beach Police Department.</p><p><strong>Records:</strong> (386) 517-2020 · fbpd.org</p>"
+ },
+ {
+  "id": 25,
+  "icon": "🚓",
+  "name": "Bunnell Police Department",
+  "short": "Police · Commerce Pkwy, Bunnell",
+  "address": "2400 Commerce Pkwy, Bunnell",
+  "type": "Law Enforcement · Public Safety",
+  "lat": 29.47255,
+  "lng": -81.23945,
+  "cats": [
+   "safety"
+  ],
+  "mapsQ": "Bunnell Police Department 2400 Commerce Pkwy Bunnell FL",
+  "slug": "bunnell-police-department",
+  "meets": "<p class=\"m-who\">No public board meets here</p><p>This is the Bunnell Police Department, in the city’s Administration &amp; Police complex.</p><p><strong>Phone:</strong> (386) 437-7508</p>"
+ },
+ {
+  "id": 26,
+  "icon": "🏛",
+  "name": "Beverly Beach Town Hall",
+  "short": "Town Hall · N Oceanshore Blvd",
+  "address": "2735 N Oceanshore Blvd, Beverly Beach",
+  "type": "Town Government · Town of Beverly Beach",
+  "lat": 29.52019,
+  "lng": -81.14658,
+  "cats": [
+   "meetings"
+  ],
+  "mapsQ": "Beverly Beach Town Hall 2735 N Oceanshore Blvd Beverly Beach FL",
+  "slug": "beverly-beach-town-hall",
+  "meets": "<p class=\"m-who\">Beverly Beach Town Commission</p><p>Meeting notices, agendas and minutes are posted on the town’s website (mybeverlybeach.org) and at Town Hall.</p><p><strong>Town Hall hours:</strong> Mon–Fri 10:00 a.m.–2:00 p.m.</p>"
+ },
+ {
+  "id": 27,
+  "icon": "🏛",
+  "name": "Town of Marineland — Town Office",
+  "short": "Town Office · Marina Dr",
+  "address": "176 Marina Dr, Marineland",
+  "type": "Town Government · Town of Marineland",
+  "lat": 29.66886,
+  "lng": -81.2134,
+  "cats": [
+   "meetings"
+  ],
+  "mapsQ": "Town of Marineland 176 Marina Dr Marineland FL",
+  "slug": "town-of-marineland",
+  "meets": "<p class=\"m-who\">Town of Marineland Commission</p><p>The Commission meets at the GTMNERR main conference room, 9741 N Oceanshore Blvd, St. Augustine — not at the town office.</p><p><strong>Town office:</strong> 176 Marina Dr · (386) 232-8060 · townofmarineland.org</p>"
+ },
+ {
+  "id": 28,
+  "icon": "⛽",
+  "name": "Seminole Woods & Sesame — Commercial Corner",
+  "short": "Approved · Seminole Woods Blvd",
+  "address": "2614 Seminole Woods Blvd, Palm Coast",
+  "type": "Development Project · Commercial",
+  "lat": 29.44402,
+  "lng": -81.18063,
+  "cats": [
+   "development"
+  ],
+  "mapsQ": "2614 Seminole Woods Blvd Palm Coast FL",
+  "slug": "seminole-woods-sesame-commercial-corner",
+  "meets": "<p class=\"m-who\">No public board meets here</p><p>This is a development site. It was approved by the Palm Coast Planning &amp; Land Development Regulation Board; city decisions live on the <a href=\"#building=palm-coast-city-hall\">Palm Coast City Hall</a> card.</p>"
+ },
+ {
+  "id": 29,
+  "icon": "🏗",
+  "name": "Evolve Palm Coast — Phase 2",
+  "short": "Approved · US-1 at Whiteview Pkwy",
+  "address": "11 Evolve Pkwy, Palm Coast",
+  "type": "Development Project · Multifamily",
+  "lat": 29.53174,
+  "lng": -81.2616,
+  "cats": [
+   "development"
+  ],
+  "mapsQ": "Evolve Palm Coast 11 Evolve Pkwy Palm Coast FL",
+  "slug": "evolve-palm-coast-phase-2",
+  "meets": "<p class=\"m-who\">No public board meets here</p><p>This is a development site. It was approved by the Palm Coast Planning &amp; Land Development Regulation Board; city decisions live on the <a href=\"#building=palm-coast-city-hall\">Palm Coast City Hall</a> card.</p>"
+ },
+ {
+  "id": 30,
+  "icon": "🏗",
+  "name": "Lakeview Estates",
+  "short": "Approved · Lakeview Blvd / US-1",
+  "address": "398 Lakeview Blvd, Palm Coast",
+  "type": "Development Project · Mixed Use",
+  "lat": 29.61787,
+  "lng": -81.26994,
+  "cats": [
+   "development"
+  ],
+  "mapsQ": "Lakeview Estates 398 Lakeview Blvd Palm Coast FL",
+  "slug": "lakeview-estates",
+  "meets": "<p class=\"m-who\">No public board meets here</p><p>This is a development site. It was approved by the Palm Coast Planning &amp; Land Development Regulation Board; city decisions live on the <a href=\"#building=palm-coast-city-hall\">Palm Coast City Hall</a> card.</p>"
+ },
+ {
+  "id": 31,
+  "icon": "🔌",
+  "name": "DC BLOX Cable Landing Station",
+  "short": "Under Construction · Town Center",
+  "address": "1035 Town Center Blvd, Palm Coast",
+  "type": "Development Project · Infrastructure",
+  "lat": 29.49298,
+  "lng": -81.19528,
+  "cats": [
+   "development"
+  ],
+  "mapsQ": "DC BLOX 1035 Town Center Blvd Palm Coast FL",
+  "slug": "dc-blox-cable-landing-station",
+  "meets": "<p class=\"m-who\">No public board meets here</p><p>This is a development site. The project was permitted by the City of Palm Coast; see palmcoast.gov/cls for the city’s project page.</p>"
+ }
+]

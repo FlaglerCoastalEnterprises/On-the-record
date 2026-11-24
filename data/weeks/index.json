@@ -1,0 +1,16 @@
+[
+ {
+  "id": "2026-11-23",
+  "label": "Week of Nov 23–29, 2026",
+  "range": "Nov 23–29, 2026",
+  "file": "2026-11-23.json",
+  "current": true
+ },
+ {
+  "id": "2026-11-16",
+  "label": "Week of Nov 16–22, 2026",
+  "range": "Nov 16–22, 2026",
+  "file": "2026-11-16.json",
+  "current": false
+ }
+]
