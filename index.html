@@ -537,7 +537,25 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
  .map-split .map-wrap{position:sticky;top:74px;height:calc(100vh - 158px);height:calc(100dvh - 158px);display:flex;flex-direction:column}
  .map-split #map{flex:1 1 auto;height:auto;min-height:0}
  .map-split .map-foot{flex:0 0 auto}
- .map-split .panel{top:74px}
+ /* Correction 8 — the panel is a true internal scroller on desktop,
+    exactly like the card column beside it (.map-listcol above: sticky,
+    viewport-capped, overflow-y auto). Measured diagnosis (probe-driven
+    real card click, window scrolled to the document bottom): the panel
+    previously had NO height cap and overflow:hidden, so it never
+    scrolled internally — its content height set the document height,
+    and "scrolling the panel" was really window scrolling. Swapping in
+    a shorter building's panel shrank the document and the browser
+    clamped window.scrollY to the new maximum (measured 3750 -> 3499,
+    docH 4650 -> 4399, inside renderPanel): the page jumped up and the
+    reader landed at max-scroll, staring at the new panel's bottom.
+    The old scrollTop reset targeted #detailPanel/.panel-inner, whose
+    scrollHeight always equalled clientHeight — a permanent no-op.
+    Capped, the panel's height no longer feeds the document height, so
+    selection can never shrink the page or move window.scrollY, and
+    the funnel's panelEl.scrollTop=0 reset finally has a real scroller
+    to reset. The 88px matches the list column: top 74px + cap leaves
+    the panel's bottom 14px above the viewport bottom. */
+ .map-split .panel{top:74px;max-height:calc(100vh - 88px);max-height:calc(100dvh - 88px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
  #view-map.vm-list .map-split{grid-template-columns:minmax(0,1fr)}
  #view-map.vm-list .map-listcol{display:none}
 }
@@ -1760,20 +1778,29 @@ function selectFacility(id,fly,programmatic){
   var panelEl=document.getElementById("detailPanel"); if(panelEl) panelEl.classList.remove("panel-closed");
   var layoutEl=document.querySelector(".layout"); if(layoutEl) layoutEl.classList.remove("panel-is-closed");
   renderPanel(f); renderCards();
-  /* Phase 6 micro-correction: a NEW selection starts the detail panel
-     at its top, so the building's title and headline are the first
-     things visible. Every selection path funnels through here (card,
-     pin, list, search result, deep link), and the reset is gated on
-     the facility actually changing — a same-facility re-render keeps
-     the reader's place. ONLY the panel's own scroll position is
-     zeroed: the window/page scroll position must not change at all
-     when a building is selected (micro-correction 7 — an earlier
-     version also jumped the page to the panes' sticky offset, which
-     yanked readers who had scrolled down back to the top). The
-     Map-view ENTRY scroll (scrollMapPaneIntoView) is a separate
-     behavior and is untouched. Mobile already scrolls the panel into
-     view in its branch below. Nothing else changes: no framing,
-     flyTo, hash, or interaction-state effects. */
+  /* Phase 6 micro-correction, completed by correction 8: a NEW
+     selection starts the detail panel at its top, so the building's
+     title and headline are the first things visible. Every selection
+     path funnels through here (card, pin, list, search result, deep
+     link), the reset runs AFTER renderPanel/renderCards above have
+     put the new content in place, and it is gated on the facility
+     actually changing — a same-facility re-render keeps the reader's
+     place. Correction 8's measured diagnosis (real card click, probe-
+     instrumented): on desktop the panel's true scroller is now
+     #detailPanel itself — correction 8 capped it (max-height +
+     overflow-y:auto in the desktop .map-split rules), so this reset
+     finally acts on a real scroll position; before the cap, the panel
+     never scrolled internally (scrollHeight always equalled
+     clientHeight), the WINDOW was the panel's scroller, and a shorter
+     incoming panel shrank the document so the browser clamped
+     window.scrollY to the new maximum — the page jump and the
+     panel-at-its-bottom view were that single clamp. With the cap,
+     panel content no longer feeds the document height, so selecting
+     a building cannot change window.scrollY at all. The Map-view
+     ENTRY scroll (scrollMapPaneIntoView) is a separate behavior and
+     is untouched. Mobile already scrolls the panel into view in its
+     branch below. Nothing else changes: no framing, flyTo, hash, or
+     interaction-state effects. */
   if(id!==prevSelectedId&&panelEl){
     panelEl.scrollTop=0;
     var panelInner=panelEl.querySelector(".panel-inner"); if(panelInner) panelInner.scrollTop=0;
@@ -1794,10 +1821,22 @@ function selectFacility(id,fly,programmatic){
     setTimeout(function(){ markers[id].openPopup(); bouncePin(id); }, reduced?0:500);
   }
   /* Phase 6 (A): on desktop, bring the matching card into view in the
-     left-hand list and leave it marked active (renderCards did that). */
+     left-hand list and leave it marked active (renderCards did that).
+     Correction 8: scroll ONLY the list column's own scroll position —
+     the previous Element.scrollIntoView call walks every scrollable
+     ancestor including the window, so it was a second path by which a
+     selection could move the page. The column (.map-listcol) is the
+     measured scroller for the cards; adjusting its scrollTop with
+     nearest-edge semantics brings the card into the column's view and
+     structurally cannot touch window.scrollY. */
   if(window.innerWidth>=1024){
     var cardEl=document.querySelector('#cards .card[data-id="'+id+'"]');
-    if(cardEl) setTimeout(function(){ try{ cardEl.scrollIntoView({block:"nearest",behavior:reduced?"auto":"smooth"}); }catch(e){} },40);
+    var colEl=document.querySelector(".map-listcol");
+    if(cardEl&&colEl) setTimeout(function(){ try{
+      var cr=cardEl.getBoundingClientRect(), lr=colEl.getBoundingClientRect();
+      if(cr.top<lr.top) colEl.scrollTop-=(lr.top-cr.top)+4;
+      else if(cr.bottom>lr.bottom) colEl.scrollTop+=(cr.bottom-lr.bottom)+4;
+    }catch(e){} },40);
   }
   if(window.innerWidth<1024){
     if(window.__sheetSet) window.__sheetSet("peek"); /* drop the sheet so the panel is readable */
