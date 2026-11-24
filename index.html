@@ -257,6 +257,8 @@ button{font-family:inherit;min-height:40px} a{color:var(--navy)}
 .card-cell{display:flex;flex-direction:column}
 .card-cell .card{flex:1}
 .card-src{display:block;font-size:11.5px;line-height:1.45;color:#8A94A6;margin-top:6px}
+.card-src a,.lcard-src a{color:var(--gold-dark);font-weight:600;text-decoration:underline;text-underline-offset:2px}
+.card-src a:hover,.lcard-src a:hover{color:var(--navy)}
 .lcard-cell{display:flex;flex-direction:column}
 .lcard-src{display:block;font-size:11.5px;line-height:1.45;color:#8A94A6;margin-top:5px}
 .lcard-pending{color:var(--gold-dark);font-weight:700}
@@ -923,7 +925,7 @@ var PORTAL_PC={label:"Palm Coast agenda center",url:"https://www.palmcoast.gov/a
 var PORTAL_BUNNELL={label:"City of Bunnell — Agendas & Minutes",url:"https://www.bunnellcity.us/1479/Agendas-Minutes"};
 var PORTAL_FB={label:"Flagler Beach meetings hub",url:"https://flaglerbeach-fl.municodemeetings.com/"};
 var PORTAL_CLERK={label:"Clerk of Court — live court docket",url:"https://flaglerclerk.gov/docket/"};
-var PORTALS={1:PORTAL_COUNTY,2:PORTAL_CLERK,3:PORTAL_PC,4:PORTAL_SCHOOLS,5:PORTAL_BUNNELL,6:PORTAL_BUNNELL,7:PORTAL_FB,8:PORTAL_FB,9:PORTAL_COUNTY,12:PORTAL_PC,13:PORTAL_PC,14:PORTAL_PC,15:PORTAL_PC,16:PORTAL_PC,17:PORTAL_PC,18:PORTAL_PC,20:PORTAL_COUNTY,21:PORTAL_COUNTY,23:PORTAL_FB,24:PORTAL_FB,25:PORTAL_BUNNELL,28:PORTAL_PC,29:PORTAL_PC,30:PORTAL_PC,31:PORTAL_PC};
+var PORTALS={1:PORTAL_COUNTY,2:PORTAL_CLERK,3:PORTAL_PC,4:PORTAL_SCHOOLS,5:PORTAL_BUNNELL,6:PORTAL_BUNNELL,7:PORTAL_FB,8:PORTAL_FB,9:PORTAL_COUNTY,10:PORTAL_COUNTY,11:PORTAL_COUNTY,12:PORTAL_PC,13:PORTAL_PC,14:PORTAL_PC,15:PORTAL_PC,16:PORTAL_PC,17:PORTAL_PC,18:PORTAL_PC,19:PORTAL_COUNTY,20:PORTAL_COUNTY,21:PORTAL_COUNTY,22:PORTAL_COUNTY,23:PORTAL_FB,24:PORTAL_FB,25:PORTAL_BUNNELL,28:PORTAL_PC,29:PORTAL_PC,30:PORTAL_PC,31:PORTAL_PC};
 function escT(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
 function attributionFor(b,parenOnly){
   if(!b) return null;
@@ -949,16 +951,17 @@ function attributionFor(b,parenOnly){
 function sourceLineHTML(f,b){
   var named=attributionFor(b,false);
   var p=PORTALS[f.id];
-  if(named&&p) return 'Source: '+escT(named)+' · <a href="'+p.url+'" target="_blank" rel="noopener">Official record: '+p.label+' ↗</a>';
+  if(named&&p) return 'Source: '+escT(named)+' · <a href="'+p.url+'" target="_blank" rel="noopener">Official record ↗</a>';
   if(named) return 'Source: '+escT(named);
-  if(p) return 'Source: <a href="'+p.url+'" target="_blank" rel="noopener">'+p.label+' ↗</a>';
+  if(p) return 'Source: <a href="'+p.url+'" target="_blank" rel="noopener">Official record ↗</a>';
   return 'Source: Researched by On The Record — <a href="#sources">how we source items</a>';
 }
-function cardSourceText(f){
+function cardSourceHTML(f){
   var named=attributionFor(f.headline,false)||attributionFor(f.bullets&&f.bullets[0],true);
-  if(named) return "Source: "+escT(named);
   var p=PORTALS[f.id];
-  if(p) return "Source: "+p.label;
+  if(named&&p) return "Source: "+escT(named)+' · <a href="'+p.url+'" target="_blank" rel="noopener">Official record ↗</a>';
+  if(named) return "Source: "+escT(named);
+  if(p) return 'Source: <a href="'+p.url+'" target="_blank" rel="noopener">Official record ↗</a>';
   return "Source: On The Record research";
 }
 function reportMailto(f){ return "mailto:coastalenterprises386@gmail.com?subject="+encodeURIComponent("Error report: "+f.name); }
@@ -1033,9 +1036,10 @@ function renderCards(){
     var bc=f.active?"badge-news":(f.badge.indexOf("UP NEXT")===0?"badge-next":"badge-quiet");
     var cardUpdate=f.active?f.headline:"No new activity this week.";
     var addrLine=hasCoords(f)?(f.address+' · '+f.short):'Location pending verification';
-    return '<div class="card-cell"><button class="card'+(f.id===selectedId?' active':'')+'" data-id="'+f.id+'" style="animation-delay:'+(i*0.05)+'s"><div class="ic" aria-hidden="true">'+f.icon+'</div><div class="card-top"><h4>'+f.name+'</h4><span class="badge '+bc+'">'+f.badge+'</span></div><p>'+cardUpdate+'</p><span class="card-src">'+cardSourceText(f)+'</span><div class="addr">'+addrLine+'</div></button><a class="report-link" href="'+reportMailto(f)+'">Report an error</a></div>';
+    return '<div class="card-cell"><button class="card'+(f.id===selectedId?' active':'')+'" data-id="'+f.id+'" style="animation-delay:'+(i*0.05)+'s"><div class="ic" aria-hidden="true">'+f.icon+'</div><div class="card-top"><h4>'+f.name+'</h4><span class="badge '+bc+'">'+f.badge+'</span></div><p>'+cardUpdate+'</p><span class="card-src">'+cardSourceHTML(f)+'</span><div class="addr">'+addrLine+'</div></button><a class="report-link" href="'+reportMailto(f)+'">Report an error</a></div>';
   }).join("");
   wrap.querySelectorAll(".card").forEach(function(btn){ btn.addEventListener("click",function(){ selectFacility(parseInt(btn.getAttribute("data-id"),10),true); }); });
+  wrap.querySelectorAll(".card-src a").forEach(function(a){ a.addEventListener("click",function(e){ e.stopPropagation(); }); });
 }
 /* ---------- LIST VIEW ---------- */
 function renderList(){
@@ -1056,7 +1060,7 @@ function renderList(){
     var updateLine=f.active?f.headline:"No new activity this week.";
     var subLine=f.active?"":'<span class="lcard-empty">'+f.headline+'</span>';
     var lAddr=hasCoords(f)?('<span class="lcard-addr">📍 '+f.address+'</span>'):'<span class="lcard-addr lcard-pending">Location pending verification</span>';
-    return '<div class="lcard-cell"><button class="lcard'+(f.id===selectedId?' active':'')+'" data-id="'+f.id+'" style="animation-delay:'+(i*0.04)+'s"><span class="lcard-ic" aria-hidden="true">'+f.icon+'</span><span class="lcard-main"><span class="lcard-top"><span class="lcard-name">'+f.name+'</span>'+badge+'</span><span class="lcard-org">'+f.type+'</span><span class="lcard-head">'+updateLine+'</span>'+subLine+'<span class="lcard-src">'+cardSourceText(f)+'</span>'+lAddr+'</span><span class="lcard-arrow" aria-hidden="true">→</span></button><a class="report-link" href="'+reportMailto(f)+'">Report an error</a></div>';
+    return '<div class="lcard-cell"><button class="lcard'+(f.id===selectedId?' active':'')+'" data-id="'+f.id+'" style="animation-delay:'+(i*0.04)+'s"><span class="lcard-ic" aria-hidden="true">'+f.icon+'</span><span class="lcard-main"><span class="lcard-top"><span class="lcard-name">'+f.name+'</span>'+badge+'</span><span class="lcard-org">'+f.type+'</span><span class="lcard-head">'+updateLine+'</span>'+subLine+'<span class="lcard-src">'+cardSourceHTML(f)+'</span>'+lAddr+'</span><span class="lcard-arrow" aria-hidden="true">→</span></button><a class="report-link" href="'+reportMailto(f)+'">Report an error</a></div>';
   }).join("");
   wrap.querySelectorAll(".lcard").forEach(function(btn){
     btn.addEventListener("click",function(){
@@ -1065,6 +1069,7 @@ function renderList(){
       setTimeout(function(){ selectFacility(id,true); },70);
     });
   });
+  wrap.querySelectorAll(".lcard-src a").forEach(function(a){ a.addEventListener("click",function(e){ e.stopPropagation(); }); });
 }
 function setViewMode(mode){
   viewMode=mode;
