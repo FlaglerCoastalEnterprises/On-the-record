@@ -74,6 +74,9 @@ button{font-family:inherit;min-height:40px} a{color:var(--navy)}
 .glance-card .num small{font-size:16px;color:var(--gold-dark)}
 .glance-card h4{margin:8px 0 4px;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--gold-dark)}
 .glance-card p{margin:0;font-size:13.5px;line-height:1.5;color:#3B475C}
+.updated-line{margin:10px 0 0;font-size:12.5px;letter-spacing:.05em;color:#9DB0CC}
+.empty-state{border:1px dashed rgba(216,192,148,.55);border-radius:12px;padding:12px 14px;font-size:14px;line-height:1.5;color:#E6ECF5;background:rgba(255,255,255,.05);margin-bottom:11px}
+.lcard-empty{display:block;font-size:12.5px;font-style:italic;color:#64748B;margin-top:5px}
 .toolbar{max-width:1180px;margin:0 auto;padding:18px 20px 12px}
 .toolbar-top{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
@@ -305,13 +308,7 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
   </div>
 
   <button class="cta" id="openBtn">Open the Flagler County map →</button>
-  <div class="hero-hint">31 facilities · one week of real, researched local government news</div>
-  <div class="hero-stats">
-    <div><b>31</b><span>Facilities</span></div>
-    <div><b>11</b><span>With news</span></div>
-    <div><b>5</b><span>Layers</span></div>
-    <div><b>1</b><span>County</span></div>
-  </div>
+  <div class="hero-hint">One week of real, researched local government news</div>
 </section>
 
 <!-- ============ APP ============ -->
@@ -325,6 +322,7 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
       </div>
       <h1>On The Record — <span>Flagler County</span></h1>
       <p class="subtitle">Click a building, see what's happening there. <strong>Government, in plain English.</strong> Gold pins had news this week. Gray pins were quiet.</p>
+      <p class="updated-line" id="lastUpdated">Last updated: November 24, 2026</p>
     </div>
     <div class="topbar-actions">
       <button id="howBtn" type="button" aria-haspopup="dialog">? How it works</button>
@@ -336,10 +334,10 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
 <section class="glance" aria-label="This week at a glance">
   <div class="eyebrow" style="color:var(--gold-dark)">This week at a glance — Nov 23–29</div>
   <div class="glance-grid">
-    <div class="glance-card"><div class="num"><span data-count="1">0</span><small> of </small><span data-count="5">0</span></div><h4>Boards met</h4><p>Only Bunnell met — Mon Nov 23, and its votes are still unreported. The County Commission, School Board, Palm Coast Council &amp; Flagler Beach did not meet; their next meetings are on their pins.</p></div>
-    <div class="glance-card"><div class="num"><span data-count="31">0</span></div><h4>Facilities mapped</h4><p>Every major public building in the county gets a living page — gold where news happened, gray where it was quiet.</p></div>
-    <div class="glance-card"><div class="num">$<span data-count="4">0</span><small>M</small></div><h4>Returned to the county</h4><p>The Sheriff's Office returned $4 million in unspent funds to the county — including $3.2 million in excess federal payments from ICE detention contracts (FlaglerLive, Nov. 23).</p></div>
-    <div class="glance-card"><div class="num">−$<span data-count="60">0</span><small>M</small></div><h4>Amendment 3 shadow</h4><p>What FlaglerLive reports the county faces in Amendment 3 cuts — plus layoffs and potential new fees and taxes. The Sheriff expects ~$15.5M in losses; a special taxing district for policing is being explored.</p></div>
+    <div class="glance-card" id="glanceBoards"><div class="num" id="statBoards">1<small> of </small>5</div><h4>Boards met</h4><p>Only Bunnell met — Mon Nov 23, and its votes are still unreported. The County Commission, School Board, Palm Coast Council &amp; Flagler Beach did not meet; their next meetings are on their pins.</p></div>
+    <div class="glance-card" id="glanceFacilities"><div class="num" id="statFacilities">31</div><h4>Facilities mapped</h4><p>Every major public building in the county gets a living page — gold where news happened, gray where it was quiet.</p></div>
+    <div class="glance-card" id="glanceReturned"><div class="num" id="statReturned">$4<small>M</small></div><h4>Returned to the county</h4><p>The Sheriff's Office returned $4 million in unspent funds to the county — money left over from its federal ICE detention contracts (FlaglerLive, Nov. 23).</p></div>
+    <div class="glance-card" id="glanceAmendment"><div class="num" id="statAmendment">−$60<small>M</small></div><h4>Amendment 3 shadow</h4><p>What FlaglerLive reports the county faces in Amendment 3 cuts — plus layoffs and potential new fees and taxes. A special taxing district for policing is being explored.</p></div>
   </div>
 </section>
 
@@ -560,14 +558,41 @@ var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 })();
 
 /* ---------- OPEN / CLOSE ---------- */
-function animateCounters(){
-  document.querySelectorAll("[data-count]").forEach(function(el){
-    var target=parseInt(el.getAttribute("data-count"),10);
-    if(reduced){ el.textContent=target; return; }
-    var t0=null;
-    function step(ts){ if(!t0) t0=ts; var p=Math.min(1,(ts-t0)/1100); el.textContent=Math.round(target*(1-Math.pow(1-p,3))); if(p<1) requestAnimationFrame(step); }
-    requestAnimationFrame(step);
+/* Glance stats are recomputed from the FACILITIES / MEETS data embedded in
+   this page — never typed in a second time, and never shown as placeholder
+   zeros. A stat whose source figure can't be found in the data is hidden. */
+function setGlanceStat(cardId,numId,html){
+  var card=document.getElementById(cardId); if(!card) return;
+  if(html===null||html===undefined||html===""){ card.style.display="none"; return; }
+  var num=document.getElementById(numId); if(num) num.innerHTML=html;
+}
+function moneyFigure(f,re){
+  if(!f) return null;
+  var text=[f.headline||""].concat(f.bullets||[]).join(" ");
+  var m=text.match(re);
+  return m?m[1]:null;
+}
+function renderGlance(){
+  // Facilities mapped — the real facility count.
+  setGlanceStat("glanceFacilities","statFacilities",FACILITIES.length>0?String(FACILITIES.length):null);
+  // Boards met — boards with a regular cadence in MEETS (one <strong>Meets:</strong>
+  // line per board) vs. boards whose timeline records a meeting held on a day of
+  // the loaded week (Nov 23–29).
+  var boardsTotal=0;
+  for(var mid in MEETS){ var mm=String(MEETS[mid]).match(/<strong>Meets:<\/strong>/g); if(mm) boardsTotal+=mm.length; }
+  var met=0;
+  FACILITIES.forEach(function(f){
+    var held=false;
+    (f.timeline||[]).forEach(function(t){ if(/Nov 2[3-9]/.test(t.d)&&/\bmet\b/i.test(t.t)&&!/no .*meeting/i.test(t.t)) held=true; });
+    if(held) met++;
   });
+  setGlanceStat("glanceBoards","statBoards",(met>0&&boardsTotal>0)?(met+'<small> of </small>'+boardsTotal):null);
+  // Returned to the county — the dollar figure as stated on the Sheriff's card.
+  var ret=moneyFigure(facilityById(10),/returned\s+\$(\d+(?:\.\d+)?)\s*million/i);
+  setGlanceStat("glanceReturned","statReturned",ret?("$"+ret+"<small>M</small>"):null);
+  // Amendment 3 shadow — the dollar figure as stated on the Government Services Building card.
+  var amd=moneyFigure(facilityById(1),/about\s+\$(\d+(?:\.\d+)?)\s*million/i);
+  setGlanceStat("glanceAmendment","statAmendment",amd?("−$"+amd+"<small>M</small>"):null);
 }
 /* Flagler County boundary — official US Census Bureau TIGER/Line geometry for Flagler County, FL
    (STATE 12 / COUNTY 035), fetched from the Census TIGERweb REST service at build time. Not hand-drawn. */
@@ -648,7 +673,7 @@ function bootApp(){
   var deep=facilityBySlug(slugFromHash());
   var startF=deep||FACILITIES[0];
   selectedId=startF.id;
-  renderPanel(startF); renderCards(); animateCounters();
+  renderPanel(startF); renderCards(); renderGlance();
   if(map){
     setTimeout(function(){
       map.invalidateSize();
@@ -809,9 +834,12 @@ function renderPanel(f){
   var panel=document.getElementById("detailPanel");
   var tags=f.cats.map(function(c){ return '<span class="tag">'+CAT_LABEL[c]+'</span>'; }).join("");
   var statusTag=f.active?'<span class="tag tag-gold">'+f.badge+'</span>':'<span class="tag tag-quiet">'+f.badge+'</span>';
-  var news=f.bullets.map(function(b,i){ return '<div class="news-item" style="animation-delay:'+(i*0.07)+'s"><span class="mk">◆</span><p>'+b+'</p></div>'; }).join("");
+  var newsBullets=f.bullets.filter(function(b){ return f.active||b.indexOf("Quiet this week so far")!==0; });
+  var news=(f.active?"":'<div class="empty-state">No new activity this week.</div>')+newsBullets.map(function(b,i){ return '<div class="news-item" style="animation-delay:'+(i*0.07)+'s"><span class="mk">◆</span><p>'+b+'</p></div>'; }).join("");
   var tl=f.timeline.map(function(t,i){ return '<div class="tl-item" style="animation-delay:'+(i*0.08)+'s"><div class="tl-date">'+t.d+'</div><div class="tl-text">'+t.t+'</div></div>'; }).join("");
-  panel.innerHTML='<div class="panel-inner"><div class="panel-head"><div class="medallion" aria-hidden="true">'+f.icon+'</div><div class="eyebrow">'+f.type+'</div><h2>'+f.name+'</h2><div class="panel-addr">📍 '+f.address+'</div><div class="panel-headline">“'+f.headline+'”</div><div class="gold-rule"><span>◆ ◆ ◆</span></div><div class="panel-meta">'+statusTag+tags+'</div></div>'+
+  var panelUpdate=f.active?f.headline:"No new activity this week.";
+  var panelSub=f.active?"":'<div style="font-size:13px;line-height:1.5;color:#B9C8DE;margin-top:6px">'+f.headline+'</div>';
+  panel.innerHTML='<div class="panel-inner"><div class="panel-head"><div class="medallion" aria-hidden="true">'+f.icon+'</div><div class="eyebrow">'+f.type+'</div><h2>'+f.name+'</h2><div class="panel-addr">📍 '+f.address+'</div><div class="panel-headline">“'+panelUpdate+'”</div>'+panelSub+'<div class="gold-rule"><span>◆ ◆ ◆</span></div><div class="panel-meta">'+statusTag+tags+'</div></div>'+
   '<div class="panel-body"><div class="section-label">What happened this week</div>'+news+
   '<div class="section-label">Who meets here</div><div class="meets">'+(MEETS[f.id]||'<p>Meeting info not verified yet.</p>')+'</div>'+
   '<div class="section-label">What\'s next</div><div class="next-box"><span class="nb-label">◎ Next</span>'+f.next+'</div>'+
@@ -871,7 +899,8 @@ function renderCards(){
   document.getElementById("countLabel").textContent=visible.length+(visible.length===1?" place":" places")+(currentFilter==="all"?"":" in this layer");
   wrap.innerHTML=visible.map(function(f,i){
     var bc=f.active?"badge-news":(f.badge.indexOf("UP NEXT")===0?"badge-next":"badge-quiet");
-    return '<button class="card'+(f.id===selectedId?' active':'')+'" data-id="'+f.id+'" style="animation-delay:'+(i*0.05)+'s"><div class="ic" aria-hidden="true">'+f.icon+'</div><div class="card-top"><h4>'+f.name+'</h4><span class="badge '+bc+'">'+f.badge+'</span></div><p>'+f.headline+'</p><div class="addr">'+f.address+' · '+f.short+'</div></button>';
+    var cardUpdate=f.active?f.headline:"No new activity this week.";
+    return '<button class="card'+(f.id===selectedId?' active':'')+'" data-id="'+f.id+'" style="animation-delay:'+(i*0.05)+'s"><div class="ic" aria-hidden="true">'+f.icon+'</div><div class="card-top"><h4>'+f.name+'</h4><span class="badge '+bc+'">'+f.badge+'</span></div><p>'+cardUpdate+'</p><div class="addr">'+f.address+' · '+f.short+'</div></button>';
   }).join("");
   wrap.querySelectorAll(".card").forEach(function(btn){ btn.addEventListener("click",function(){ selectFacility(parseInt(btn.getAttribute("data-id"),10),true); }); });
 }
@@ -889,8 +918,11 @@ function renderList(){
   if(lc) lc.textContent=visible.length+(visible.length===1?" place":" places")+" · tap a card to open it on the map";
   var empty=document.getElementById("listEmpty"); if(empty) empty.hidden=visible.length>0;
   wrap.innerHTML=visible.map(function(f,i){
-    var badge=f.active?'<span class="badge badge-news">● News this week</span>':'<span class="badge badge-quiet">Quiet this week</span>';
-    return '<button class="lcard'+(f.id===selectedId?' active':'')+'" data-id="'+f.id+'" style="animation-delay:'+(i*0.04)+'s"><span class="lcard-ic" aria-hidden="true">'+f.icon+'</span><span class="lcard-main"><span class="lcard-top"><span class="lcard-name">'+f.name+'</span>'+badge+'</span><span class="lcard-org">'+f.type+'</span><span class="lcard-head">'+f.headline+'</span><span class="lcard-addr">📍 '+f.address+'</span></span><span class="lcard-arrow" aria-hidden="true">→</span></button>';
+    var bc=f.active?"badge-news":(f.badge.indexOf("UP NEXT")===0?"badge-next":"badge-quiet");
+    var badge='<span class="badge '+bc+'">'+f.badge+'</span>';
+    var updateLine=f.active?f.headline:"No new activity this week.";
+    var subLine=f.active?"":'<span class="lcard-empty">'+f.headline+'</span>';
+    return '<button class="lcard'+(f.id===selectedId?' active':'')+'" data-id="'+f.id+'" style="animation-delay:'+(i*0.04)+'s"><span class="lcard-ic" aria-hidden="true">'+f.icon+'</span><span class="lcard-main"><span class="lcard-top"><span class="lcard-name">'+f.name+'</span>'+badge+'</span><span class="lcard-org">'+f.type+'</span><span class="lcard-head">'+updateLine+'</span>'+subLine+'<span class="lcard-addr">📍 '+f.address+'</span></span><span class="lcard-arrow" aria-hidden="true">→</span></button>';
   }).join("");
   wrap.querySelectorAll(".lcard").forEach(function(btn){
     btn.addEventListener("click",function(){
