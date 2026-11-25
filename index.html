@@ -34,14 +34,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,500;0,8..60,600;0,8..60,700;0,8..60,900;1,8..60,500;1,8..60,600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <!-- Leaflet CSS/JS are lazy-loaded by the app only when the Map view is first opened. -->
 <style>
-:root{--navy:#0A2342;--navy2:#0E2F57;--navy3:#12365E;--gold:#B28D57;--gold2:#D8C094;--gold-dark:#715628;--off:#F7F3EB;--paper:#FFFEFB;--ink:#1A2332;--muted:#5B6577;--line:#E6DDD0;--serif:"Source Serif 4","Merriweather",Georgia,serif}
+:root{--navy:#0A2342;--navy2:#0E2F57;--navy3:#12365E;--gold:#B28D57;--gold2:#D8C094;--gold-dark:#715628;--off:#F7F3EB;--paper:#FFFEFB;--ink:#1A2332;--muted:#5B6577;--line:#E6DDD0;--serif:"Source Serif 4","Merriweather",Georgia,serif;--h-lg:26px;--h-md:22px;--h-sm:19px;--btn-gold-bg:linear-gradient(180deg,#C6A26B,var(--gold))}
 *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:var(--off);color:var(--ink);font-family:Inter,system-ui,sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
 button{font-family:inherit;min-height:40px} a{color:var(--navy)}
 /* Visible keyboard focus everywhere; gold-dark on light surfaces, pale gold on navy ones */
 :focus-visible{outline:3px solid var(--gold-dark);outline-offset:2px}
 .site-nav :focus-visible,.topbar :focus-visible,.panel :focus-visible,.newsletter-box :focus-visible,.map-preview :focus-visible,.brand-strip :focus-visible,#globeHero :focus-visible{outline-color:var(--gold2)}
 .serif{font-family:"Source Serif 4","Merriweather",Georgia,serif}
-.eyebrow{font-size:11px;letter-spacing:.22em;font-weight:800;text-transform:uppercase;color:var(--gold)}
+.eyebrow{font-size:11px;letter-spacing:.22em;font-weight:800;text-transform:uppercase;color:var(--gold-dark)}
+.map-preview .eyebrow,.newsletter-box .eyebrow,.special-box .eyebrow,.panel .eyebrow{color:var(--gold2)}
 .orn{display:flex;align-items:center;gap:10px;justify-content:center}.orn:before,.orn:after{content:"";height:1px;width:44px;background:linear-gradient(90deg,transparent,var(--gold))}.orn:after{background:linear-gradient(90deg,var(--gold),transparent)}.orn span{color:var(--gold);font-size:12px}
 /* ===== GLOBE HERO ===== */
 #globeHero{position:fixed;inset:0;z-index:1400;overflow-y:auto;overscroll-behavior:contain;background:radial-gradient(ellipse 90% 60% at 50% 38%,#163d68 0%,var(--navy) 55%,#06172e 100%);color:#fff;display:flex;flex-direction:column;align-items:center;padding:28px 18px 36px;text-align:center;transition:opacity .7s ease,transform .9s cubic-bezier(.6,0,.2,1)}
@@ -65,7 +66,7 @@ button{font-family:inherit;min-height:40px} a{color:var(--navy)}
 .orbit-pill:hover{transform:scale(1.07);border-color:var(--gold2);background:rgba(18,54,94,.95)}
 .op1{top:9%;left:-2%}.op2{top:6%;right:-1%}.op3{top:44%;right:-9%}.op4{bottom:9%;right:3%}.op5{bottom:6%;left:2%}
 .globe-glow{position:absolute;inset:16%;border-radius:50%;background:radial-gradient(circle,rgba(216,192,148,.16),transparent 65%);pointer-events:none}
-.cta{margin-top:6px;z-index:3;background:linear-gradient(180deg,#C6A26B,var(--gold));color:#0A2342;border:none;font-weight:800;font-size:15px;letter-spacing:.04em;padding:15px 30px;border-radius:999px;cursor:pointer;box-shadow:0 10px 30px rgba(178,141,87,.4);transition:transform .2s,box-shadow .2s;animation:bob 2.6s ease-in-out infinite}
+.cta{margin-top:6px;z-index:3;background:var(--btn-gold-bg);color:#0A2342;border:none;font-weight:800;font-size:15px;letter-spacing:.04em;padding:15px 30px;border-radius:999px;cursor:pointer;box-shadow:0 10px 30px rgba(178,141,87,.4);transition:transform .2s,box-shadow .2s;animation:bob 2.6s ease-in-out infinite}
 .cta:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 14px 36px rgba(178,141,87,.55)}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
 .hero-hint{margin-top:12px;font-size:12.5px;color:#8FA3BF;letter-spacing:.06em;z-index:3}
@@ -91,6 +92,8 @@ button{font-family:inherit;min-height:40px} a{color:var(--navy)}
 .glance-card .num small{font-size:16px;color:var(--gold-dark)}
 .glance-card h4{margin:8px 0 4px;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--gold-dark)}
 .glance-card p{margin:0;font-size:16px;line-height:1.55;color:#3B475C}
+a.glance-card{display:block;text-decoration:none;color:inherit}
+.glance-card .glance-src{display:block;margin-top:8px;font-size:12px;line-height:1.45;color:#5B6577}
 .updated-line{margin:10px 0 0;font-size:12.5px;letter-spacing:.05em;color:#9DB0CC}
 .empty-state{border:1px dashed rgba(216,192,148,.55);border-radius:12px;padding:12px 14px;font-size:16px;line-height:1.5;color:#E6ECF5;background:rgba(255,255,255,.05);margin-bottom:11px}
 .lcard-empty{display:block;font-size:14.5px;font-style:italic;color:#64748B;margin-top:5px}
@@ -105,8 +108,8 @@ button{font-family:inherit;min-height:40px} a{color:var(--navy)}
 .legend i{display:inline-block;width:12px;height:12px;border-radius:50%;vertical-align:middle;margin-right:5px}
 .lg-gold{background:var(--gold);box-shadow:0 0 0 4px rgba(178,141,87,.22)}.lg-gray{background:#9AA3B2}
 .topbar-actions{display:flex;gap:8px;flex-wrap:wrap;flex-shrink:0}
-#howBtn{background:var(--gold);border:1px solid var(--gold);color:#0A2342;border-radius:999px;padding:10px 16px;font-weight:800;font-size:13px;cursor:pointer;transition:transform .2s,background .2s}
-#howBtn:hover{background:#C6A26B;transform:translateY(-1px)}
+#howBtn{background:var(--btn-gold-bg);border:1px solid var(--gold);color:#0A2342;border-radius:999px;padding:10px 16px;font-weight:800;font-size:13px;cursor:pointer;transition:transform .2s,background .2s}
+#howBtn:hover{transform:translateY(-2px)}
 .globe-close{position:absolute;top:16px;right:16px;z-index:6;background:rgba(255,255,255,.1);border:1px solid rgba(216,192,148,.6);color:#F3EAD6;border-radius:999px;padding:10px 16px;font-weight:700;font-size:13px;cursor:pointer;transition:background .2s}
 .globe-close:hover{background:rgba(178,141,87,.3)}
 /* Map / List view toggle + list view */
@@ -231,10 +234,10 @@ button{font-family:inherit;min-height:40px} a{color:var(--navy)}
 .panel-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:18px}
 .btn{flex:1;text-align:center;text-decoration:none;font-weight:700;font-size:13.5px;padding:12px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.28);color:#fff;background:transparent;cursor:pointer;transition:all .2s;line-height:1.25}
 .btn:hover{border-color:var(--gold2);background:rgba(255,255,255,.07)}
-.btn-gold{background:var(--gold);color:#0A2342;border-color:var(--gold)}
-.btn-gold:hover{background:#C6A26B;color:#0A2342}
-.btn-share{background:linear-gradient(180deg,#C6A26B,var(--gold));color:#0A2342;border-color:var(--gold);box-shadow:0 6px 16px rgba(178,141,87,.35)}
-.btn-share:hover{background:#C6A26B;color:#0A2342}
+.btn-gold{background:var(--btn-gold-bg);color:#0A2342;border-color:var(--gold)}
+.btn-gold:hover{transform:translateY(-2px);color:#0A2342}
+.btn-share{background:var(--btn-gold-bg);color:#0A2342;border-color:var(--gold);box-shadow:0 6px 16px rgba(178,141,87,.35)}
+.btn-share:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(178,141,87,.5);color:#0A2342}
 .btn-follow{border-color:rgba(216,192,148,.65);color:var(--gold2)}
 .btn-alerts{grid-column:1/-1;display:flex;align-items:center;justify-content:center;gap:9px}
 [data-alert-toggle][hidden]{display:none}
@@ -291,7 +294,7 @@ button{font-family:inherit;min-height:40px} a{color:var(--navy)}
 .lcard-cell{display:flex;flex-direction:column}
 .lcard-src{display:block;font-size:11.5px;line-height:1.45;color:#5B6577;margin-top:5px}
 .lcard-pending{color:var(--gold-dark);font-weight:700}
-.report-link{align-self:flex-start;margin-top:6px;font-size:12px;font-weight:600;color:#64748B;text-decoration:underline;text-underline-offset:2px;padding:7px 2px}
+.report-link{align-self:flex-start;margin-top:2px;font-size:12px;font-weight:600;color:#64748B;text-decoration:underline;text-underline-offset:2px;padding:11px 4px}
 .report-link:hover{color:var(--navy)}
 .panel-report{margin-top:14px;text-align:center}
 .panel-report a{color:#9DB0CC;font-size:12.5px;font-weight:600;text-decoration:underline;text-underline-offset:3px}
@@ -300,7 +303,7 @@ button{font-family:inherit;min-height:40px} a{color:var(--navy)}
 .topbar-link:hover{background:rgba(178,141,87,.25)}
 .info-wrap{max-width:1180px;margin:0 auto;padding:2px 20px 6px}
 .info-card{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:28px 26px;margin-top:14px;box-shadow:0 10px 26px rgba(10,35,66,.06);scroll-margin-top:16px}
-.info-card h2{margin:6px 0 10px;font-family:"Source Serif 4","Merriweather",Georgia,serif;font-size:29px;line-height:1.1;color:var(--navy)}
+.info-card h2{margin:6px 0 10px;font-family:"Source Serif 4","Merriweather",Georgia,serif;font-size:var(--h-lg);line-height:1.1;color:var(--navy)}
 .info-card p{margin:0 0 12px;font-size:16px;line-height:1.65;color:#3B475C}
 .info-card p:last-child{margin-bottom:0}
 .info-card ul{margin:0 0 12px;padding-left:20px;font-size:16px;line-height:1.65;color:#3B475C}
@@ -313,7 +316,7 @@ button{font-family:inherit;min-height:40px} a{color:var(--navy)}
 .footer-links{display:flex;flex-direction:column;gap:6px;flex-shrink:0}
 .footer-links a{color:var(--navy);font-weight:700;text-decoration:none;font-size:13px}
 .footer-links a:hover{text-decoration:underline;text-underline-offset:3px}
-@media(max-width:900px){.info-wrap{padding-left:14px;padding-right:14px}.info-card{padding:22px 18px}.info-card h2{font-size:25px}}
+@media(max-width:900px){.info-wrap{padding-left:14px;padding-right:14px}.info-card{padding:22px 18px}.info-card h2{font-size:var(--h-md)}}
 footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
 .footer-box{border-top:1px solid var(--line);padding-top:14px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12.5px;line-height:1.6;color:var(--muted)}
 .footer-box strong{color:var(--navy)}
@@ -342,7 +345,7 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
  .toolbar-top{flex-direction:column;align-items:flex-start}
  .op3{right:-3%}.op1{left:0}.orbit-pill{font-size:10px;padding:7px 10px}
 }
-@media(max-width:480px){.glance-grid{grid-template-columns:1fr}}
+@media(max-width:480px){.glance-card{padding:13px}.glance-card .num{font-size:25px}.glance-card p{font-size:15px}}
 @media(prefers-reduced-motion:reduce){.pin-pulse,.cta,.ring,.custom-pin,.news-item,.tl-item,.card{animation:none!important}#app,#globeHero{transition:none}html{scroll-behavior:auto}}
 /* ===== Phase 3 — Site structure: sticky nav + hash-routed views ===== */
 .view[hidden]{display:none!important}
@@ -394,18 +397,18 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
 .home-hero h1 em{font-style:italic;color:var(--gold-dark);font-weight:500}
 .home-sub{font-size:17px;line-height:1.6;color:#3B475C;max-width:640px;margin:16px 0 0}
 .hero-cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
-.btn-hero{background:linear-gradient(180deg,#C6A26B,var(--gold));color:#0A2342;text-decoration:none;font-weight:800;font-size:15px;padding:15px 28px;border-radius:999px;box-shadow:0 10px 26px rgba(178,141,87,.35);transition:transform .2s}
-.btn-hero:hover{transform:translateY(-2px)}
-.btn-hero-ghost{background:#fff;color:var(--navy);text-decoration:none;font-weight:700;font-size:15px;padding:15px 24px;border-radius:999px;border:1.5px solid #D6CFC0;transition:border-color .2s}
-.btn-hero-ghost:hover{border-color:var(--gold)}
+.btn-hero{background:var(--btn-gold-bg);color:#0A2342;text-decoration:none;font-weight:800;font-size:15px;padding:15px 28px;border-radius:999px;box-shadow:0 10px 26px rgba(178,141,87,.35);transition:transform .2s}
+.btn-hero:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(178,141,87,.45)}
+.btn-hero-ghost{background:#fff;color:var(--navy);text-decoration:none;font-weight:700;font-size:15px;padding:15px 24px;border-radius:999px;border:1.5px solid #D6CFC0;transition:border-color .2s,transform .2s}
+.btn-hero-ghost:hover{border-color:var(--gold);transform:translateY(-2px)}
 .updated-dark{color:#5B6577}
 .home-section{max-width:1180px;margin:0 auto;padding:26px 20px 0}
-.home-h2{font-family:"Source Serif 4","Merriweather",Georgia,serif;font-size:27px;color:var(--navy);margin:8px 0 0;line-height:1.15}
+.home-h2{font-family:"Source Serif 4","Merriweather",Georgia,serif;font-size:var(--h-lg);color:var(--navy);margin:8px 0 0;line-height:1.15}
 .story-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
 .story-card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:18px;display:flex;flex-direction:column;transition:transform .22s,box-shadow .22s,border-color .22s}
 .story-card:hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(10,35,66,.1);border-color:var(--gold2)}
 .story-card .sc-place{font-size:11px;letter-spacing:.16em;font-weight:800;text-transform:uppercase;color:var(--gold-dark)}
-.story-card h3{font-family:"Source Serif 4","Merriweather",Georgia,serif;font-size:19px;line-height:1.3;color:var(--navy);margin:8px 0 0}
+.story-card h3{font-family:"Source Serif 4","Merriweather",Georgia,serif;font-size:var(--h-sm);line-height:1.3;color:var(--navy);margin:8px 0 0}
 .story-card p{font-size:16px;line-height:1.6;color:#3B475C;margin:9px 0 0;flex:1}
 .story-card .sc-src{display:block;font-size:12px;color:#5B6577;margin-top:10px;line-height:1.5}
 .story-card .sc-src a{color:var(--gold-dark);font-weight:600}
@@ -413,7 +416,7 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
 .sc-link:hover{text-decoration:underline;text-underline-offset:3px}
 .map-preview{background:linear-gradient(160deg,var(--navy2),var(--navy));border-radius:20px;color:#fff;padding:26px 24px;position:relative;overflow:hidden;box-shadow:0 16px 38px rgba(10,35,66,.22)}
 .map-preview:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 82% 18%,rgba(216,192,148,.22),transparent 55%);pointer-events:none}
-.map-preview h3{font-family:"Source Serif 4","Merriweather",Georgia,serif;font-size:26px;margin:8px 0 0;line-height:1.15;position:relative}
+.map-preview h3{font-family:"Source Serif 4","Merriweather",Georgia,serif;font-size:var(--h-lg);margin:8px 0 0;line-height:1.15;position:relative}
 .map-preview p{color:#C7D3E6;font-size:16px;line-height:1.6;max-width:560px;margin:10px 0 0;position:relative}
 .preview-counts{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;position:relative}
 .preview-counts span{background:rgba(255,255,255,.08);border:1px solid rgba(216,192,148,.45);border-radius:999px;padding:8px 14px;font-size:13px;font-weight:700;color:#F3EAD6}
@@ -423,29 +426,30 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
 .page-wrap{max-width:860px;margin:0 auto;padding:34px 20px 10px}
 .page-wrap h1{font-family:"Source Serif 4","Merriweather",Georgia,serif;font-size:clamp(28px,4.6vw,42px);line-height:1.12;color:var(--navy);margin:10px 0 0}
 .page-lede{font-size:16.5px;line-height:1.65;color:#3B475C;margin:14px 0 0}
-.article-topic{font-family:"Source Serif 4","Merriweather",Georgia,serif;font-size:23px;color:var(--navy);margin:30px 0 4px;padding-top:18px;border-top:1px solid var(--line)}
+.article-topic{font-family:"Source Serif 4","Merriweather",Georgia,serif;font-size:var(--h-md);color:var(--navy);margin:30px 0 4px;padding-top:18px;border-top:1px solid var(--line)}
 .article-item{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:17px 18px;margin-top:12px}
-.article-item h3{font-family:"Source Serif 4","Merriweather",Georgia,serif;font-size:18.5px;line-height:1.3;color:var(--navy);margin:0}
+.article-item h3{font-family:"Source Serif 4","Merriweather",Georgia,serif;font-size:var(--h-sm);line-height:1.3;color:var(--navy);margin:0}
 .article-item .ai-place{font-size:11px;letter-spacing:.15em;font-weight:800;text-transform:uppercase;color:var(--gold-dark);display:block;margin-bottom:6px}
 .article-item p{font-size:16px;line-height:1.65;color:#3B475C;margin:8px 0 0}
 .article-item .ai-src{display:block;font-size:12.5px;color:#5B6577;margin-top:10px}
 .article-item .ai-src a{color:var(--gold-dark);font-weight:600}
-.ai-link{display:inline-block;margin-top:10px;font-weight:700;font-size:13.5px;color:var(--navy);text-decoration:none}
+.ai-link{display:inline-block;margin-top:2px;padding:10px 4px;font-weight:700;font-size:13.5px;color:var(--navy);text-decoration:none}
 .ai-link:hover{text-decoration:underline;text-underline-offset:3px}
 .quiet-line{background:#F5F1E8;border:1px solid var(--line);border-radius:14px;padding:15px 17px;font-size:16px;line-height:1.6;color:#3B475C;margin-top:26px}
 .quiet-line strong{color:var(--navy)}
 .archive-week{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:20px;margin-top:16px}
-.archive-week h2{font-family:"Source Serif 4","Merriweather",Georgia,serif;font-size:22px;color:var(--navy);margin:0}
+.archive-week h2{font-family:"Source Serif 4","Merriweather",Georgia,serif;font-size:var(--h-md);color:var(--navy);margin:0}
 .archive-week .aw-meta{font-size:13px;color:var(--muted);margin-top:4px}
 .archive-current{display:flex;justify-content:space-between;gap:12px;align-items:center;background:linear-gradient(160deg,var(--navy2),var(--navy));color:#fff;border-radius:18px;padding:20px;margin-top:16px;flex-wrap:wrap}
-.archive-current h2{font-family:"Source Serif 4","Merriweather",Georgia,serif;font-size:22px;margin:0;color:#fff}
+.archive-current h2{font-family:"Source Serif 4","Merriweather",Georgia,serif;font-size:var(--h-md);margin:0;color:#fff}
 .archive-current p{margin:5px 0 0;color:#C7D3E6;font-size:16px}
-.archive-current a{background:var(--gold);color:#0A2342;font-weight:800;text-decoration:none;padding:12px 20px;border-radius:999px;font-size:14px;white-space:nowrap}
+.archive-current a{background:var(--btn-gold-bg);color:#0A2342;font-weight:800;text-decoration:none;padding:12px 20px;border-radius:999px;font-size:14px;white-space:nowrap;box-shadow:0 8px 22px rgba(178,141,87,.3);transition:transform .2s,box-shadow .2s}
+.archive-current a:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(178,141,87,.45)}
 .archive-chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
 /* Topics */
 .topic-desc{font-size:16px;line-height:1.6;color:#3B475C;max-width:680px;margin:12px 0 0}
 .topic-places{margin-top:26px}
-.topic-places h2{font-family:"Source Serif 4","Merriweather",Georgia,serif;font-size:22px;color:var(--navy);margin:0 0 6px}
+.topic-places h2{font-family:"Source Serif 4","Merriweather",Georgia,serif;font-size:var(--h-md);color:var(--navy);margin:0 0 6px}
 .place-row{display:flex;justify-content:space-between;gap:10px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px 15px;margin-top:9px;text-decoration:none;transition:border-color .2s,transform .2s}
 .place-row:hover{border-color:var(--gold);transform:translateY(-1px)}
 .place-row .pr-name{font-family:"Source Serif 4","Merriweather",Georgia,serif;font-weight:700;font-size:16px;color:var(--navy)}
@@ -454,13 +458,13 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
 .nl-points{max-width:860px;margin:0 auto;padding:0 20px}
 .nl-points .info-card{margin-top:14px}
 .social-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-.social-row a{display:inline-flex;align-items:center;min-height:42px;background:var(--navy);color:#fff;text-decoration:none;font-weight:700;font-size:13.5px;padding:10px 18px;border-radius:999px}
-.social-row a:hover{background:var(--navy3)}
+.social-row a{display:inline-flex;align-items:center;min-height:42px;background:var(--navy);color:#fff;text-decoration:none;font-weight:700;font-size:13.5px;padding:10px 18px;border-radius:999px;transition:background .2s,transform .2s}
+.social-row a:hover{background:var(--navy3);transform:translateY(-2px)}
 .info-card{scroll-margin-top:76px}
 /* Footer */
 .footer-main{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
-.footer-nav{display:flex;flex-direction:column;gap:6px;flex-shrink:0}
-.footer-nav a{color:var(--navy);font-weight:700;text-decoration:none;font-size:13px}
+.footer-nav{display:flex;flex-direction:column;gap:0;flex-shrink:0}
+.footer-nav a{color:var(--navy);font-weight:700;text-decoration:none;font-size:13px;padding:10px 2px}
 .footer-nav a:hover{text-decoration:underline;text-underline-offset:3px}
 .footer-social{display:flex;gap:14px;margin-top:10px;flex-wrap:wrap}
 .footer-social a{color:var(--gold-dark);font-weight:700;text-decoration:none;font-size:13px}
@@ -485,7 +489,7 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
 .cov-status{align-self:flex-start;font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:999px}
 .cov-status-live{background:var(--gold);color:#0A2342}
 .cov-status-soon{background:#F1F5F9;color:#64748B;border:1px solid #E2E8F0}
-.cov-card h2{font-family:"Source Serif 4","Merriweather",Georgia,serif;font-size:22px;color:var(--navy);margin:12px 0 0;line-height:1.2}
+.cov-card h2{font-family:"Source Serif 4","Merriweather",Georgia,serif;font-size:var(--h-md);color:var(--navy);margin:12px 0 0;line-height:1.2}
 .cov-card p{font-size:16px;line-height:1.6;color:#3B475C;margin:8px 0 0;flex:1}
 .cov-counts{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
 .cov-counts span{background:#F5F1E8;border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:12.5px;font-weight:700;color:var(--navy)}
@@ -494,7 +498,7 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
 @media(max-width:900px){.partner-grid{grid-template-columns:1fr}}
 .partner-card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:18px;display:flex;flex-direction:column;transition:border-color .22s,box-shadow .22s}
 .partner-card:hover{border-color:var(--gold2);box-shadow:0 10px 24px rgba(10,35,66,.07)}
-.partner-card h2{font-family:"Source Serif 4","Merriweather",Georgia,serif;font-size:20px;line-height:1.25;color:var(--navy);margin:10px 0 0}
+.partner-card h2{font-family:"Source Serif 4","Merriweather",Georgia,serif;font-size:var(--h-sm);line-height:1.25;color:var(--navy);margin:10px 0 0}
 .partner-card p{font-size:16px;line-height:1.6;color:#3B475C;margin:8px 0 0}
 .partner-card .pc-kicker{font-size:10.5px;letter-spacing:.16em;font-weight:800;text-transform:uppercase;color:var(--gold-dark)}
 .pform{display:grid;gap:13px;margin-top:16px}
@@ -503,8 +507,8 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
 .pform input:focus,.pform select:focus,.pform textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 4px rgba(178,141,87,.18)}
 .pform textarea{min-height:96px;resize:vertical}
 .form-disclosure{font-size:14.5px;line-height:1.55;color:#475569;background:#F5F1E8;border:1px solid var(--line);border-radius:12px;padding:11px 13px;margin:0}
-.form-submit{justify-self:start;background:linear-gradient(180deg,#C6A26B,var(--gold));color:#0A2342;border:none;font-weight:800;font-size:15px;padding:14px 26px;border-radius:999px;cursor:pointer;box-shadow:0 8px 22px rgba(178,141,87,.3)}
-.form-submit:hover{background:#C6A26B}
+.form-submit{justify-self:start;background:var(--btn-gold-bg);color:#0A2342;border:none;font-weight:800;font-size:15px;padding:14px 26px;border-radius:999px;cursor:pointer;box-shadow:0 8px 22px rgba(178,141,87,.3);transition:transform .2s,box-shadow .2s}
+.form-submit:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(178,141,87,.45)}
 .form-thanks{display:none;font-size:14.5px;line-height:1.55;color:var(--navy);background:#F5F1E8;border:1px solid var(--gold2);border-radius:12px;padding:12px 14px;margin:0}
 .form-thanks.show{display:block}
 .follow-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
@@ -513,8 +517,8 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
 .follow-note{font-size:12.5px;color:#B9C8DE;margin:10px 0 0}
 .follow-thanks{font-size:13.5px;color:#F3EAD6;margin:10px 0 0}
 .follow-topic-box{margin-top:26px;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:17px 18px}
-.btn-follow-topic{background:var(--navy);color:#fff;border:none;font-weight:800;font-size:14px;padding:12px 20px;border-radius:999px;cursor:pointer}
-.btn-follow-topic:hover{background:var(--navy3)}
+.btn-follow-topic{background:var(--navy);color:#fff;border:none;font-weight:800;font-size:14px;padding:12px 20px;border-radius:999px;cursor:pointer;transition:background .2s,transform .2s}
+.btn-follow-topic:hover{background:var(--navy3);transform:translateY(-2px)}
 .follow-topic-box .follow-copy{font-size:16px;line-height:1.6;color:#3B475C;margin:12px 0 0}
 .follow-topic-box .follow-note{color:var(--muted)}
 .follow-topic-box .follow-thanks{color:var(--navy)}
@@ -592,7 +596,8 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
  .ib-text{flex:1;min-width:0;font-size:14px;line-height:1.4;color:var(--ink)}
  .ib-text strong{display:block;font-size:14.5px;color:var(--navy)}
  .ib-text span{color:#475569;font-size:13px}
- .ib-install{background:var(--navy);color:#fff;border:none;border-radius:999px;padding:11px 18px;font-weight:800;font-size:14px;cursor:pointer;min-height:48px;flex-shrink:0}
+ .ib-install{background:var(--navy);color:#fff;border:none;border-radius:999px;padding:11px 18px;font-weight:800;font-size:14px;cursor:pointer;min-height:48px;flex-shrink:0;transition:background .2s,transform .2s}
+ .ib-install:hover{background:var(--navy3);transform:translateY(-2px)}
  .ib-close{width:44px;height:44px;min-height:44px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--navy);font-size:20px;line-height:1;cursor:pointer;flex-shrink:0}
  /* Map view: map on top, facility list as a bottom sheet */
  .map-split{display:block}
@@ -655,26 +660,26 @@ html,body{overflow-x:clip}
 .key-date-card .kd-date{font-size:11px;letter-spacing:.14em;font-weight:800;text-transform:uppercase;color:var(--gold-dark)}
 .key-date-card h4{margin:6px 0 4px;font-family:var(--serif);font-size:16px;color:var(--navy);line-height:1.3}
 .key-date-card p{margin:0;font-size:14px;color:#475569;line-height:1.5}
-.follow-btn{display:inline-block;margin-top:10px;background:var(--navy);color:#fff;text-decoration:none;font-weight:700;font-size:12.5px;padding:8px 14px;border-radius:999px}
-.follow-btn:hover{background:var(--navy3)}
+.follow-btn{display:inline-block;margin-top:10px;background:var(--navy);color:#fff;text-decoration:none;font-weight:700;font-size:12.5px;padding:8px 14px;border-radius:999px;transition:background .2s,transform .2s}
+.follow-btn:hover{background:var(--navy3);transform:translateY(-2px)}
 .decisions-list{margin-top:12px;display:grid;gap:9px}
 .decision-row{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:flex;gap:12px;align-items:flex-start}
 .decision-row .d-date{flex-shrink:0;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--gold-dark);min-width:74px;padding-top:2px}
 .decision-row .d-text{flex:1;font-size:15px;line-height:1.55;color:#334155}
 .decision-row .d-text a{color:var(--gold-dark);font-weight:600}
 .quiet-list{background:#F5F1E8;border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-top:12px}
-.quiet-list h3{margin:0 0 8px;font-family:var(--serif);font-size:18px;color:var(--navy)}
+.quiet-list h3{margin:0 0 8px;font-family:var(--serif);font-size:var(--h-sm);color:var(--navy)}
 .quiet-row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px solid #E6DDD0;font-size:14.5px}
 .quiet-row:first-of-type{border-top:none}
 .quiet-row .q-name{font-weight:700;color:var(--navy)}
 .quiet-row .q-next{color:#475569;text-align:right;max-width:55%}
 .special-box{background:linear-gradient(160deg,var(--navy2),var(--navy));color:#fff;border-radius:16px;padding:20px;margin-top:16px}
-.special-box h3{margin:0;font-family:var(--serif);font-size:21px}
+.special-box h3{margin:0;font-family:var(--serif);font-size:var(--h-md)}
 .special-box p,.special-box li{color:#C7D3E6;font-size:15.5px;line-height:1.6}
 .special-box a{color:var(--gold2);font-weight:600}
 .special-box ul{margin:8px 0 0;padding-left:18px}
 .budget-box{background:#FFFEFB;border:1.5px solid var(--gold);border-radius:16px;padding:18px;margin-top:16px}
-.budget-box h3{margin:0;font-family:var(--serif);font-size:20px;color:var(--navy)}
+.budget-box h3{margin:0;font-family:var(--serif);font-size:var(--h-sm);color:var(--navy)}
 .budget-box p{font-size:15.5px;line-height:1.6;color:#3B475C}
 .calendar-list{margin-top:12px;display:grid;gap:8px}
 .calendar-row{background:#fff;border:1px solid var(--line);border-radius:12px;padding:11px 14px;display:flex;gap:12px;align-items:baseline}
@@ -687,7 +692,9 @@ html,body{overflow-x:clip}
 .grouped-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px;margin-top:9px}
 .grouped-card h4{margin:0;font-family:var(--serif);font-size:17px;color:var(--navy)}
 .grouped-card ul{margin:8px 0 0;padding-left:18px;font-size:14.5px;line-height:1.6;color:#334155}
-.section-h{font-family:var(--serif);font-size:22px;color:var(--navy);margin:26px 0 6px}
+.section-h{font-family:var(--serif);font-size:var(--h-md);color:var(--navy);margin:26px 0 6px}
+@media(max-width:1023px){.topbar{padding-top:10px;padding-bottom:10px}.topbar-inner{flex-direction:row;align-items:center;gap:10px;flex-wrap:nowrap}.topbar-inner>div:first-child{display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-width:0}.topbar h1,.topbar .subtitle,.topbar .pill-by{display:none}.topbar .hero-pills{flex-wrap:nowrap}.topbar .updated-line{margin:0}.topbar-actions{width:auto;flex-shrink:0}}
+@media(min-width:1024px){.toolbar .legend span:not(#countLabel){display:none}}
 </style>
 </head>
 <body>
@@ -754,21 +761,21 @@ html,body{overflow-x:clip}
 
 <div class="view" id="view-home">
   <section class="home-hero">
-    <div class="eyebrow" style="color:var(--gold-dark)">On The Record · Flagler County · Week of Nov 23–29, 2026</div>
+    <div class="eyebrow">On The Record · Flagler County · Week of Nov 23–29, 2026</div>
     <h1>Know before they vote.</h1>
     <p class="home-sub">Every meeting. Every dollar. Every week — for Flagler County.</p>
     <div class="hero-cta-row"><a class="btn-hero" href="#/map">Open the map →</a><a class="btn-hero-ghost" href="#/week">Read this week’s briefing</a></div>
     <p class="updated-line updated-dark">Last updated: November 25, 2026</p>
   </section>
   <section class="home-section" aria-label="This week's top stories">
-    <div class="eyebrow" style="color:var(--gold-dark)">This week · Nov 23–29</div>
+    <div class="eyebrow">This week · Nov 23–29</div>
     <h2 class="home-h2">This week’s top stories</h2>
     <div class="story-grid" id="topStories"></div>
   </section>
   <div id="glanceSlot"></div>
   <section class="home-section" aria-label="Map preview">
     <div class="map-preview">
-      <div class="eyebrow" style="color:var(--gold2)">The map</div>
+      <div class="eyebrow">The map</div>
       <h3>Every public building in Flagler County — one map</h3>
       <p>Gold pins had news this week; gray pins were quiet. Tap any pin to see what was decided there, what it cost, and what happens next — each item with its source.</p>
       <div class="preview-counts" id="previewCounts"></div>
@@ -801,12 +808,12 @@ html,body{overflow-x:clip}
 </header>
 
 <section class="glance" aria-label="This week at a glance">
-  <div class="eyebrow" style="color:var(--gold-dark)">This week at a glance — Nov 23–29</div>
+  <div class="eyebrow">This week at a glance — Nov 23–29</div>
   <div class="glance-grid">
     <div class="glance-card" id="glanceBoards"><div class="num" id="statBoards">1<small> of </small>5</div><h4>Boards met</h4><p>Only Bunnell met — Mon Nov 23, and its votes are still unreported. The County Commission, School Board, Palm Coast Council &amp; Flagler Beach did not meet; their next meetings are on their pins.</p></div>
     <div class="glance-card" id="glanceFacilities"><div class="num" id="statFacilities">46</div><h4>Facilities mapped</h4><p>Every major public building in the county gets a living page — gold where news happened, gray where it was quiet.</p></div>
-    <div class="glance-card" id="glanceReturned"><div class="num" id="statReturned">$4<small>M</small></div><h4>Returned to the county</h4><p>The Sheriff's Office returned $4 million in unspent funds to the county — money left over from its federal ICE detention contracts (FlaglerLive, Nov. 23).</p></div>
-    <div class="glance-card" id="glanceAmendment"><div class="num" id="statAmendment">−$60<small>M</small></div><h4>Amendment 3 shadow</h4><p>What FlaglerLive reports the county faces in Amendment 3 cuts — plus layoffs and potential new fees and taxes. A special taxing district for policing is being explored.</p></div>
+    <a class="glance-card" id="glanceReturned" href="#building=flagler-county-sheriffs-office"><div class="num" id="statReturned">$4<small>M</small></div><h4>Returned to the county</h4><p>The Sheriff's Office returned $4 million in unspent funds to the county — money left over from its federal ICE detention contracts.</p><span class="glance-src">Source: FlaglerLive, Nov. 23, 2026</span></a>
+    <a class="glance-card" id="glanceAmendment" href="#building=government-services-building"><div class="num" id="statAmendment">About $60<small>M</small></div><h4>Amendment 3 cuts</h4><p>FlaglerLive reports the county faces 'cataclysmic' cuts of about $60 million — plus layoffs and potential new fees and taxes. A special taxing district for policing is being explored.</p><span class="glance-src">Source: FlaglerLive, Nov. 2026</span></a>
   </div>
 </section>
 
@@ -873,8 +880,9 @@ html,body{overflow-x:clip}
 
 <div class="view" id="view-week" hidden>
   <div class="page-wrap">
-    <div class="eyebrow" style="color:var(--gold-dark)">The weekly briefing</div>
+    <div class="eyebrow">The weekly briefing</div>
     <h1>This Week in Flagler Government — Nov 23–29, 2026</h1>
+    <p class="updated-line updated-dark">Last updated: November 25, 2026</p>
     <div id="weekArticle"></div>
     <div class="quiet-line" style="margin-top:22px"><strong>Want this by email?</strong> The briefing goes out free every Sunday. <a href="#/newsletter" style="color:var(--navy);font-weight:700">Subscribe to the newsletter →</a></div>
   </div>
@@ -882,8 +890,9 @@ html,body{overflow-x:clip}
 
 <div class="view" id="view-archive" hidden>
   <div class="page-wrap" style="max-width:980px">
-    <div class="eyebrow" style="color:var(--gold-dark)">Archive</div>
+    <div class="eyebrow">Archive</div>
     <h1>Past weeks, on the record</h1>
+    <p class="updated-line updated-dark">Last updated: November 25, 2026</p>
     <p class="page-lede">Every week stays here — browsable by date and topic — so decisions don’t disappear when a new week loads. Filter by topic to follow one thread over time.</p>
     <div class="archive-chips" role="group" aria-label="Filter the archive by topic">
       <button class="chip" data-atopic="all" aria-pressed="true">All topics</button>
@@ -900,8 +909,9 @@ html,body{overflow-x:clip}
 
 <div class="view" id="view-topic" hidden>
   <div class="page-wrap" style="max-width:980px">
-    <div class="eyebrow" style="color:var(--gold-dark)">Topic</div>
+    <div class="eyebrow">Topic</div>
     <h1 id="topicTitle">Meetings</h1>
+    <p class="updated-line updated-dark">Last updated: November 25, 2026</p>
     <p class="topic-desc" id="topicDesc"></p>
     <div id="topicSummary"></div>
     <div id="topicSpecial"></div>
@@ -926,7 +936,7 @@ html,body{overflow-x:clip}
 
 <div class="view" id="view-newsletter" hidden>
   <div class="page-wrap">
-    <div class="eyebrow" style="color:var(--gold-dark)">Newsletter</div>
+    <div class="eyebrow">Newsletter</div>
     <h1>On The Record, by email</h1>
     <p class="page-lede">The week’s Flagler County briefing — the votes, the dollars and the development decisions — delivered free every Sunday. It is the same verified briefing published here as <a href="#/week">This Week</a>, sent to your inbox.</p>
   </div>
@@ -945,7 +955,7 @@ html,body{overflow-x:clip}
 
 <section class="newsletter" id="subscribe" aria-label="Newsletter subscribe">
   <div class="newsletter-box">
-    <div class="eyebrow" style="color:var(--gold2)">Newsletter</div>
+    <div class="eyebrow">Newsletter</div>
     <h3>On The Record — in your inbox, every Sunday</h3>
     <p>Know before they vote — the week's Flagler County votes, development, and roadwork. Free, every Sunday.</p>
     <div class="newsletter-embed">
@@ -958,8 +968,9 @@ html,body{overflow-x:clip}
 <div class="view" id="view-about" hidden>
 <div class="info-wrap">
 <section class="info-card" id="about" aria-label="About On The Record">
-  <div class="eyebrow" style="color:var(--gold-dark)">About</div>
+  <div class="eyebrow">About</div>
   <h2>About On The Record</h2>
+  <p class="updated-line updated-dark">Last updated: November 25, 2026</p>
   <p class="mission-line">“Know before they vote.”</p>
   <p>On The Record is a free interactive map of Flagler County government. Tap a building — a city hall, a courthouse, a fire station, a development site — and see what was decided there, what it cost, and what happens next. No agenda PDFs to decode and no jargon: every item is summarized in clear language and carries its source, so you can check the original yourself.</p>
   <p><strong>Who runs it:</strong> On The Record is published by Flagler Coastal Enterprises LLC of Palm Coast, Florida. We research the week's meetings and records, write the summaries, and keep the map current.</p>
@@ -968,7 +979,7 @@ html,body{overflow-x:clip}
 </section>
 
 <section class="info-card" id="sources" aria-label="Sources and methodology">
-  <div class="eyebrow" style="color:var(--gold-dark)">Trust</div>
+  <div class="eyebrow">Trust</div>
   <h2>Sources &amp; Methodology</h2>
   <p>Accuracy is the point of this page, so here is exactly how it is put together.</p>
   <ul>
@@ -982,14 +993,14 @@ html,body{overflow-x:clip}
 </section>
 
 <section class="info-card" id="corrections" aria-label="Corrections policy">
-  <div class="eyebrow" style="color:var(--gold-dark)">Corrections</div>
+  <div class="eyebrow">Corrections</div>
   <h2>Corrections policy</h2>
   <p>If we publish something wrong, we fix it on the card, note what changed, and update the “Last updated” stamp at the top of the page. When an outcome wasn't reported yet — a vote whose minutes hadn't posted — the card says so, and is updated when the official record appears.</p>
   <p>Spotted an error? Every building card carries a <strong>Report an error</strong> link, or email us any time at <a href="mailto:coastalenterprises386@gmail.com?subject=Error%20report">coastalenterprises386@gmail.com</a> with the building name and what looks wrong, and we will check it against the source.</p>
 </section>
 
 <section class="info-card" id="contact" aria-label="Contact">
-  <div class="eyebrow" style="color:var(--gold-dark)">Contact</div>
+  <div class="eyebrow">Contact</div>
   <h2>Contact</h2>
   <p><strong>Email:</strong> <a href="mailto:coastalenterprises386@gmail.com">coastalenterprises386@gmail.com</a><br><strong>Phone:</strong> <a href="tel:+19175443692">(917) 544-3692</a><br><strong>Published by:</strong> Flagler Coastal Enterprises LLC · Palm Coast, Florida</p>
   <p><strong>Partnering:</strong> sponsorships, realtor &amp; neighborhood reports and custom public-records research — see <a href="#/partner">Partner With Us</a>. <strong>Coverage requests:</strong> want On The Record in your county or city? See <a href="#/coverage">Coverage</a> and request your area.</p>
@@ -1002,7 +1013,7 @@ html,body{overflow-x:clip}
 </section>
 
 <section class="info-card" id="privacy" aria-label="Privacy policy">
-  <div class="eyebrow" style="color:var(--gold-dark)">Privacy</div>
+  <div class="eyebrow">Privacy</div>
   <h2>Privacy policy</h2>
   <ul>
     <li><strong>No accounts on this site.</strong> On The Record has no sign-ups, logins or profiles, and the site itself does not collect personal information.</li>
@@ -1016,12 +1027,12 @@ html,body{overflow-x:clip}
 
 <div class="view" id="view-coverage" hidden>
   <div class="page-wrap" style="max-width:980px">
-    <div class="eyebrow" style="color:var(--gold-dark)">Coverage</div>
+    <div class="eyebrow">Coverage</div>
     <h1>Where we cover — and where we’re going</h1>
     <p class="page-lede">On The Record starts where our team can read every agenda and record ourselves: Flagler County. New areas are added one at a time, so each new edition is researched to the same standard as the first — never scraped, never rushed.</p>
     <div class="cov-grid" id="coverageCards"></div>
     <section class="info-card" style="margin-top:22px" aria-label="Request your area">
-      <div class="eyebrow" style="color:var(--gold-dark)">Request your area</div>
+      <div class="eyebrow">Request your area</div>
       <h2 style="font-size:24px">Don’t see your area yet?</h2>
       <p>Tell us where you live or work. Requests are how we choose what opens next — the more requests an area gets, the sooner it moves up the list.</p>
       <form class="pform" id="coverageForm">
@@ -1039,7 +1050,7 @@ html,body{overflow-x:clip}
 
 <div class="view" id="view-partner" hidden>
   <div class="page-wrap" style="max-width:980px">
-    <div class="eyebrow" style="color:var(--gold-dark)">Partner</div>
+    <div class="eyebrow">Partner</div>
     <h1>Partner With Us</h1>
     <p class="page-lede">On The Record is published by Flagler Coastal Enterprises LLC and read by the people who live with Flagler County’s decisions — homeowners, buyers, builders and business owners. Three ways to work with us:</p>
     <div class="partner-grid">
@@ -1061,7 +1072,7 @@ html,body{overflow-x:clip}
     </div>
     <p class="page-lede">Pricing is by conversation — it depends on the work. Tell us what you need and we’ll reply with an honest scope and price.</p>
     <section class="info-card" style="margin-top:22px" aria-label="Contact us about partnering">
-      <div class="eyebrow" style="color:var(--gold-dark)">Contact</div>
+      <div class="eyebrow">Contact</div>
       <h2 style="font-size:24px">Start the conversation</h2>
       <form class="pform" id="partnerForm">
         <label>Your name<input type="text" id="parName" autocomplete="name" required></label>
@@ -1128,7 +1139,7 @@ html,body{overflow-x:clip}
 <div id="howOverlay" class="how-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="howTitle">
   <div class="how-card">
     <button class="how-close" id="howClose" type="button" aria-label="Close How it works">×</button>
-    <div class="eyebrow" style="color:var(--gold-dark)">How it works · First visit</div>
+    <div class="eyebrow">How it works · First visit</div>
     <h3 id="howTitle">Explore Flagler County, building by building</h3>
     <p class="how-intro">Every public building has its own page — what happened there this week, what’s next, and when. You don’t need to read a whole agenda to follow along.</p>
     <ol class="how-steps">
@@ -1379,7 +1390,7 @@ function renderGlance(){
   setGlanceStat("glanceReturned","statReturned",ret?("$"+ret+"<small>M</small>"):null);
   // Amendment 3 shadow — the dollar figure as stated on the Government Services Building card.
   var amd=moneyFigure(facilityById(1),/about\s+\$(\d+(?:\.\d+)?)\s*million/i);
-  setGlanceStat("glanceAmendment","statAmendment",amd?("−$"+amd+"<small>M</small>"):null);
+  setGlanceStat("glanceAmendment","statAmendment",amd?("About $"+amd+"<small>M</small>"):null);
 }
 /* Flagler County boundary — official US Census Bureau TIGER/Line geometry for Flagler County, FL
    (STATE 12 / COUNTY 035), fetched from the Census TIGERweb REST service at build time. Not hand-drawn. */
@@ -1754,7 +1765,9 @@ function renderPanel(f){
   var tl=f.timeline.map(function(t,i){ return '<div class="tl-item" style="animation-delay:'+(i*0.08)+'s"><div class="tl-date">'+t.d+'</div><div class="tl-text">'+t.t+'</div></div>'; }).join("");
   var panelUpdate=f.active?f.headline:"No new activity this week.";
   var panelSub=f.active?"":'<div style="font-size:13px;line-height:1.5;color:#B9C8DE;margin-top:6px">'+f.headline+'</div>';
-  panel.innerHTML='<div class="panel-inner"><button class="panel-close" id="panelClose" type="button" aria-label="Close this building\u2019s panel">×</button><div class="panel-head"><div class="medallion" aria-hidden="true">'+f.icon+'</div><div class="eyebrow">'+f.type+'</div><h2>'+f.name+'</h2><div class="panel-addr">'+(hasCoords(f)?f.address:'Location pending verification')+'</div><div class="panel-headline">“'+panelUpdate+'”</div>'+panelSub+'<div class="gold-rule"><span>◆ ◆ ◆</span></div><div class="panel-meta">'+statusTag+tags+'</div>'+(f.moneyAmount?'<div style="margin-top:12px;background:rgba(178,141,87,.18);border:1px solid rgba(216,192,148,.5);border-radius:12px;padding:10px 12px"><span style="font-size:10px;letter-spacing:.16em;font-weight:800;text-transform:uppercase;color:var(--gold2)">'+(f.moneyLabel||'Amount')+'</span><div style="font-family:var(--serif);font-size:28px;line-height:1;color:#fff">'+f.moneyAmount+'</div></div>':'')+(f.devStatus?'<div style="margin-top:10px"><span class="status-label">Status: '+f.devStatus+'</span></div>':'')+'</div>'+
+  var moneySrc="";
+  if(f.moneyAmount){ var amtStr=String(f.moneyAmount); var moneyRe; if(/M$/.test(amtStr)){ var moneyNum=amtStr.replace(/^\$/,'').replace(/M$/,'').replace(/\./g,'\\.'); moneyRe=new RegExp('\\$'+moneyNum+'\\s*(?:M\\b|million)','i'); } else { moneyRe=new RegExp('\\$'+amtStr.replace(/^\$/,'').replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'\\b','i'); } var moneyBullet=(f.bullets||[]).filter(function(b){ return moneyRe.test(b); })[0]; if(moneyBullet) moneySrc=sourceLineHTML(f,moneyBullet); }
+  panel.innerHTML='<div class="panel-inner"><button class="panel-close" id="panelClose" type="button" aria-label="Close this building\u2019s panel">×</button><div class="panel-head"><div class="medallion" aria-hidden="true">'+f.icon+'</div><div class="eyebrow">'+f.type+'</div><h2>'+f.name+'</h2><div class="panel-addr">'+(hasCoords(f)?f.address:'Location pending verification')+'</div><div class="panel-headline">“'+panelUpdate+'”</div>'+panelSub+'<div class="gold-rule"><span>◆ ◆ ◆</span></div><div class="panel-meta">'+statusTag+tags+'</div>'+(f.moneyAmount?'<div style="margin-top:12px;background:rgba(178,141,87,.18);border:1px solid rgba(216,192,148,.5);border-radius:12px;padding:10px 12px"><span style="font-size:10px;letter-spacing:.16em;font-weight:800;text-transform:uppercase;color:var(--gold2)">'+(f.moneyLabel||'Amount')+'</span><div style="font-family:var(--serif);font-size:28px;line-height:1;color:#fff">'+f.moneyAmount+'</div>'+(moneySrc?'<div class="src-line" style="margin-top:6px">'+moneySrc+'</div>':'')+'</div>':'')+(f.devStatus?'<div style="margin-top:10px"><span class="status-label">Status: '+f.devStatus+'</span></div>':'')+'</div>'+
   '<div class="panel-body"><div class="section-label">What happened this week</div>'+news+
   '<div class="section-label">Who meets here</div><div class="meets">'+(MEETS[f.id]||'<p>Meeting info not verified yet.</p>')+'</div>'+
   '<div class="section-label">What\'s next</div><div class="next-box"><span class="nb-label">Next</span>'+f.next+'</div>'+
@@ -2293,7 +2306,7 @@ function renderWeek(){
     html+='<h2 class="article-topic">'+TOPIC_SHORT[t]+'</h2>'+items.map(articleItemHTML).join("");
   });
   var quiet=FACILITIES.filter(function(f){ return !f.active; });
-  if(quiet.length) html+='<div class="quiet-line"><strong>No new activity this week:</strong> '+quiet.map(function(f){ return f.name; }).join(" · ")+'. Their pins stay on the map — a quiet week is information too.</div>';
+  if(quiet.length) html+='<div class="quiet-list"><h3>No new activity this week</h3>'+quiet.map(function(f){ return '<div class="quiet-row"><span class="q-name">'+f.name+'</span><span class="q-next">'+shortNext(f)+'</span></div>'; }).join("")+'<p style="margin:10px 0 0;font-size:13.5px;line-height:1.5;color:#5B6577">Their pins stay on the map — a quiet week is information too.</p></div>';
   wrap.innerHTML=html;
 }
 /* ---------- Archive ----------
@@ -2353,10 +2366,10 @@ function renderTopic(t){
   var sp=document.getElementById("topicSpecial"); var spHtml="";
   if(t==="schools"){
     var sw=COUNTY_SETTINGS.schoolsWeek;
-    spHtml='<div class="special-box"><div class="eyebrow" style="color:var(--gold2)">This week in schools</div><h3 style="margin-top:8px">'+sw.headline+'</h3><p style="margin:10px 0 0"><strong style="color:#fff">Votes</strong></p><ul>'+sw.votes.map(function(v){return "<li>"+v+"</li>";}).join("")+'</ul><p style="margin:10px 0 0"><strong style="color:#fff">District news</strong></p><ul>'+sw.districtNews.map(function(v){return "<li>"+v+"</li>";}).join("")+'</ul><p><strong style="color:#fff">Next:</strong> '+sw.next+'</p><p>Grades source: <a href="https://www.fldoe.org/accountability/accountability-reporting/school-grades/index.stml" target="_blank" rel="noopener">FLDOE School Grades 2026 (2025-26)</a></p></div>';
+    spHtml='<div class="special-box"><div class="eyebrow">This week in schools</div><h3 style="margin-top:8px">'+sw.headline+'</h3><p style="margin:10px 0 0"><strong style="color:#fff">Votes</strong></p><ul>'+sw.votes.map(function(v){return "<li>"+v+"</li>";}).join("")+'</ul><p style="margin:10px 0 0"><strong style="color:#fff">District news</strong></p><ul>'+sw.districtNews.map(function(v){return "<li>"+v+"</li>";}).join("")+'</ul><p><strong style="color:#fff">Next:</strong> '+sw.next+'</p><p>Grades source: <a href="https://www.fldoe.org/accountability/accountability-reporting/school-grades/index.stml" target="_blank" rel="noopener">FLDOE School Grades 2026 (2025-26)</a></p></div>';
   } else if(t==="money"){
     var bw=COUNTY_SETTINGS.budgetWatch;
-    spHtml='<div class="budget-box"><div class="eyebrow" style="color:var(--gold-dark)">Budget watch</div><h3>Budget Tracker — coming soon</h3><p>'+bw.text+'</p><p><a href="'+bw.url+'" target="_blank" rel="noopener" style="color:var(--navy);font-weight:700">'+bw.label+' ↗</a></p></div>';
+    spHtml='<div class="budget-box"><div class="eyebrow">Budget watch</div><h3>Budget Tracker — coming soon</h3><p>'+bw.text+'</p><p><a href="'+bw.url+'" target="_blank" rel="noopener" style="color:var(--navy);font-weight:700">'+bw.label+' ↗</a></p></div>';
   } else if(t==="meetings"){
     spHtml='<h2 class="section-h">Combined calendar — next 30 days (Nov 25 – Dec 24, 2026)</h2><div class="calendar-list">'+COUNTY_SETTINGS.calendar30.map(function(c){return '<div class="calendar-row"><span class="c-date">'+c.date+' · '+c.time+'</span><span class="c-text"><strong>'+c.board+'</strong> — '+c.title+'</span></div>';}).join("")+'</div><p style="font-size:13px;color:var(--muted);margin-top:8px">'+COUNTY_SETTINGS.calendarNote+'</p>';
   } else if(t==="safety"){
@@ -2384,7 +2397,7 @@ function renderTopic(t){
   if(dec){
     var list=COUNTY_SETTINGS.recentDecisions[t]||[];
     if(t==="community"){
-      dec.innerHTML='<h2 class="section-h">Recent decisions</h2><div class="quiet-line">No decisions recorded yet for Community — this list starts as the archive grows each week.</div>';
+      dec.innerHTML='<h2 class="section-h">Recent decisions</h2><div class="quiet-line"><strong>No decisions on record yet.</strong> Decisions recorded at Community buildings will be listed here.</div>';
     } else if(t==="safety"){
       dec.innerHTML='<h2 class="section-h">Recent decisions</h2><div class="decisions-list">'+list.map(decisionRowHTML).join("")+'</div><p style="font-size:13px;color:var(--muted)">Only one decision in the archive so far — the archive grows each week.</p>';
     } else if(list.length){
@@ -2644,7 +2657,8 @@ document.addEventListener("keydown",function(e){
   var nlSection=document.querySelector(".newsletter"); var nlSlot=document.getElementById("newsletterSlot");
   if(nlSection&&nlSlot) nlSlot.appendChild(nlSection);
   var homeSlot=document.getElementById("homeNewsletterSlot");
-  if(nlSection&&homeSlot){ var clone=nlSection.cloneNode(true); clone.removeAttribute("id"); homeSlot.appendChild(clone); }
+  function mountHomeNl(){ if(!nlSection||!homeSlot||homeSlot.firstChild) return; var clone=nlSection.cloneNode(true); clone.removeAttribute("id"); homeSlot.appendChild(clone); }
+  if(nlSection&&homeSlot){ if("IntersectionObserver" in window){ var nlObs=new IntersectionObserver(function(entries){ if(entries.some(function(e){ return e.isIntersecting; })){ mountHomeNl(); nlObs.disconnect(); } },{rootMargin:"600px 0px"}); nlObs.observe(homeSlot); } else { mountHomeNl(); } }
   var tg=document.getElementById("navToggle"); var nl=document.getElementById("navLinks");
   if(tg&&nl) tg.addEventListener("click",function(){ var open=nl.classList.toggle("open"); tg.setAttribute("aria-expanded",open?"true":"false"); });
   document.querySelectorAll("[data-atopic]").forEach(function(b){ b.addEventListener("click",function(){ archiveTopic=b.getAttribute("data-atopic"); renderArchive(); }); });
