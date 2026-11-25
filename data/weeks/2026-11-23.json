@@ -205,10 +205,10 @@
    "facilityId": 7,
    "active": true,
    "badge": "NEWS THIS WEEK",
-   "headline": "March election shake-up: Mayor King and Commissioner Cooley are stepping down — Jones and Bryan are running.",
+   "headline": "March election: Mayor King and Commissioner Cooley are stepping down — Jones and Bryan are running.",
    "bullets": [
     "March election news: Mayor Patti King and Commissioner Eric Cooley are stepping down; Trey Jones and Ken Bryan are running (Bryan for mayor). (Source: FlaglerLive, Nov. 2026)",
-    "Paid-parking pitch fell flat: FlaglerLive reported commissioners were leery of a next step on the Laz Parking paid-parking presentation at the Nov. 12 meeting. The vote on the $545,785.95 lift-station rehabilitation contract (Lift Station 4 / Pump Station 8) is still unconfirmed. (Sources: FlaglerLive, via PlacesGuru summary; Flagler Beach Nov. 12 agenda)",
+    "Paid parking: FlaglerLive reported commissioners were leery of a next step on the Laz Parking paid-parking presentation at the Nov. 12 meeting. The vote on the $545,785.95 lift-station rehabilitation contract (Lift Station 4 / Pump Station 8) is still unconfirmed. (Sources: FlaglerLive, via PlacesGuru summary; Flagler Beach Nov. 12 agenda)",
     "Still open from Nov. 12: Ordinance 2026-28, first reading — rewriting trailer/RV parking on private property: allow driveway parking, limit the expanded allowance to trailers under 25 ft, require sight-triangle visibility. Outcome of the first reading not confirmed in sources checked."
    ],
    "next": "No City Commission meeting this week. Next regular meeting Thu Dec. 10, 2026, 5:30 p.m.",
@@ -285,9 +285,9 @@
    "facilityId": 10,
    "active": true,
    "badge": "NEWS THIS WEEK",
-   "headline": "Secret ICE jail contracts revealed: the Sheriff's Office returned $4M to the county — and Amendment 3 cuts are next.",
+   "headline": "Sheriff's Office returned $4M to the county; ICE jail contract details released.",
    "bullets": [
-    "Secret ICE jail contract windfall: the Sheriff's Office returned $4 million in unspent funds to county government at the end of October, including $3.2 million in excess federal payments from housing undocumented migrants for ICE — the first public reveal of the size of the secret Sheriff–ICE detention contracts. The money goes into a capital reserve for the Sheriff's Office. (Source: FlaglerLive, Nov. 23, 2026)",
+    "The Sheriff's Office returned $4 million in unspent funds to county government at the end of October, including $3.2 million in excess federal payments from housing undocumented migrants for ICE — the first public disclosure of the size of the Sheriff–ICE detention contracts. The money goes into a capital reserve for the Sheriff's Office. (Source: FlaglerLive, Nov. 23, 2026)",
     "Amendment 3 fallout: Sheriff Rick Staly ordered staff to prepare drastic cuts — 'everything is on the table,' from the helicopter to body cams to service cuts. He expects the agency to lose about $15.5 million next fiscal year, has canceled its patrol car order, enacted a hiring freeze, and frozen every vacant position; he has proposed a dedicated property tax to offset the loss. (Sources: FlaglerLive, Nov. 2026; Daytona Beach News-Journal, Nov. 16, 2026; FOX 13, Nov. 23, 2026)"
    ],
    "next": "Watch whether the Sheriff's proposed dedicated property tax — and the special taxing district for countywide policing being explored with the County Commission — moves to a formal agenda item.",
@@ -310,7 +310,7 @@
     },
     {
      "d": "Mon Nov 23",
-     "t": "FlaglerLive reveals the ICE contract figures; Staly orders drastic-cut planning — 'everything is on the table'"
+     "t": "FlaglerLive reports the ICE contract figures; Staly orders drastic-cut planning — 'everything is on the table'"
     }
    ]
   },
