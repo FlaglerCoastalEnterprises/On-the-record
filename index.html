@@ -338,7 +338,7 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
  .how-card h3{font-size:24px}
  .glance-grid{grid-template-columns:1fr 1fr}
  .layout{grid-template-columns:1fr;padding:0 14px 6px}
- #map{height:52vh;min-height:340px}
+ #map{height:60vh;min-height:340px}
  .panel{position:relative;top:auto;border-radius:18px}
  .cards{grid-template-columns:1fr}
  .topbar,.glance,.toolbar,.list-section,.listview,footer{padding-left:14px;padding-right:14px}
@@ -603,7 +603,7 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
  .map-split{display:block}
  .map-split .layout{grid-template-columns:1fr;padding:0 14px 6px}
  .map-split .panel{position:relative;top:auto}
- .map-split #map{height:45vh;height:45dvh;min-height:300px}
+ .map-split #map{height:60vh;height:60dvh;min-height:340px}
  .map-listcol{position:fixed;left:0;right:0;bottom:calc(58px + env(safe-area-inset-bottom));z-index:940;background:var(--off);border-top:1px solid var(--gold2);border-radius:18px 18px 0 0;box-shadow:0 -12px 34px rgba(6,23,46,.3);display:flex;flex-direction:column;height:52vh;height:52dvh;transition:height .32s ease}
  .map-listcol[data-snap="peek"]{height:252px}
  .map-listcol[data-snap="half"]{height:52vh;height:52dvh}
@@ -734,7 +734,7 @@ html,body{overflow-x:clip}
 .map-legend-line .mll-gold{background:var(--gold)}
 .map-legend-line .mll-gray{background:#8A94A6}
 .otr-basemap-toggle button{background:rgba(255,254,251,.96);border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-family:Inter,system-ui,sans-serif;font-size:12.5px;font-weight:700;color:var(--navy);box-shadow:0 6px 16px rgba(10,35,66,.18);cursor:pointer;min-height:40px}
-.cluster-bubble{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid #fff;box-shadow:0 5px 14px rgba(0,0,0,.3);font-family:Inter,system-ui,sans-serif;font-size:14px;font-weight:800;color:#fff}
+.cluster-bubble{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid #fff;box-shadow:0 5px 14px rgba(0,0,0,.3);font-family:Inter,system-ui,sans-serif;font-size:14px;font-weight:800;color:#fff}
 .cluster-gold{background:linear-gradient(135deg,#C6A26B,var(--gold))}
 .cluster-gray{background:#8A94A6}
 /* Cluster picker: the small chooser list shown when a bubble cannot
@@ -745,6 +745,55 @@ html,body{overflow-x:clip}
 .cluster-picker-item:hover,.cluster-picker-item:focus-visible{border-color:var(--gold);box-shadow:0 0 0 2px rgba(178,141,87,.35);outline:none}
 .cluster-picker-name{font-family:"Source Serif 4","Merriweather",Georgia,serif;font-size:15px;font-weight:700;color:var(--navy)}
 .cluster-picker-sub{font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#64748B}
+/* ===== Mobile map improvements (owner, Nov 25) — under 1024px =====
+   Full-screen map: the map-wrap becomes a fixed pane filling the screen
+   above the bottom tab bar; the filter chips + Exit ride on top, and a
+   tapped pin opens the building panel as a bottom sheet over the map.
+   The map-foot hint hides after the first visit (JS + localStorage). */
+.map-foot[hidden]{display:none}
+.map-toast{position:absolute;left:50%;bottom:84px;transform:translateX(-50%);z-index:1250;max-width:min(92%,420px);background:var(--navy);color:#fff;border:1px solid var(--gold2);border-radius:12px;padding:11px 14px;font-size:14px;line-height:1.45;text-align:center;box-shadow:0 12px 30px rgba(6,23,46,.35);pointer-events:none}
+.map-toast[hidden]{display:none}
+.near-me-dot{width:18px;height:18px;border-radius:50%;background:#2563EB;border:3px solid #fff;box-shadow:0 0 0 4px rgba(37,99,235,.28),0 2px 8px rgba(0,0,0,.35)}
+.otr-map-nav{display:flex;flex-direction:column;gap:8px;align-items:flex-end}
+.otr-map-nav button{background:rgba(255,254,251,.96);border:1px solid var(--line);border-radius:999px;padding:9px 14px;font-family:Inter,system-ui,sans-serif;font-size:12.5px;font-weight:700;color:var(--navy);box-shadow:0 6px 16px rgba(10,35,66,.18);cursor:pointer;min-height:44px;white-space:nowrap}
+.otr-map-nav button:active{background:#F5F1E8}
+.fs-bar{display:none}
+.fs-sheet{display:none}
+@media(max-width:1023px){
+ .otr-fullscreen-toggle button{background:rgba(255,254,251,.96);border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-family:Inter,system-ui,sans-serif;font-size:12.5px;font-weight:700;color:var(--navy);box-shadow:0 6px 16px rgba(10,35,66,.18);cursor:pointer;min-height:40px;white-space:nowrap}
+ /* Full-screen map: fixed pane, top of the screen down to the tab bar. */
+ body.map-fullscreen{overflow:hidden;overscroll-behavior:none}
+ body.map-fullscreen .map-wrap{position:fixed;inset:0 0 calc(58px + env(safe-area-inset-bottom)) 0;z-index:1300;border-radius:0;border:none;box-shadow:none;display:flex;flex-direction:column}
+ body.map-fullscreen .map-wrap #map{flex:1 1 auto;height:auto!important;min-height:0}
+ body.map-fullscreen .map-foot{display:none}
+ body.map-fullscreen .map-listcol{visibility:hidden}
+ body.map-fullscreen .otr-fullscreen-toggle{display:none}
+ body.map-fullscreen .fs-bar{display:flex}
+ body.map-fullscreen .fs-sheet[data-open="true"]{display:flex}
+ /* Filter chips + Exit, floating over the top of the full-screen map. */
+ .fs-bar{position:absolute;top:56px;left:10px;right:10px;z-index:1250;gap:8px;align-items:flex-start;pointer-events:none}
+ .fs-bar>*{pointer-events:auto}
+ .fs-chips{display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;flex:1;min-width:0;padding-bottom:2px}
+ .fs-chips::-webkit-scrollbar{display:none}
+ .fs-chips .chip{flex-shrink:0;white-space:nowrap;background:rgba(255,254,251,.96);box-shadow:0 6px 16px rgba(10,35,66,.18);color:var(--navy)}
+ .fs-chips .chip[aria-pressed="true"]{background:var(--navy);color:#fff;border-color:var(--navy)}
+ .fs-exit{flex-shrink:0;background:var(--navy);color:#fff;border:1px solid var(--gold2);border-radius:999px;padding:10px 16px;font-weight:800;font-size:13px;cursor:pointer;min-height:44px;box-shadow:0 6px 16px rgba(10,35,66,.28)}
+ /* Bottom sheet over the full-screen map: the building panel itself,
+    moved into this container while full screen is open. Half height by
+    default; drag the handle (or tap it) up for full details. */
+ .fs-sheet{position:absolute;left:0;right:0;bottom:0;z-index:1260;flex-direction:column;height:50%;transition:height .28s ease;background:linear-gradient(180deg,var(--navy2),var(--navy) 30%);border-top:1px solid var(--gold2);border-radius:18px 18px 0 0;box-shadow:0 -12px 34px rgba(6,23,46,.4)}
+ .fs-sheet[data-snap="full"]{height:calc(100% - 108px)}
+ .fs-sheet.dragging{transition:none}
+ .fs-sheet-handle{display:flex;align-items:center;justify-content:center;min-height:44px;padding:12px 0 8px;cursor:grab;touch-action:none;flex-shrink:0;-webkit-tap-highlight-color:transparent}
+ .fs-sheet-handle:active{cursor:grabbing}
+ .fs-sheet-handle .sheet-grip{background:rgba(216,192,148,.75)}
+ .fs-sheet-body{flex:1;min-height:0;position:relative;overflow:hidden}
+ .fs-sheet-body .panel{position:absolute;inset:0;max-height:none;overflow-y:auto;overscroll-behavior:contain;border-radius:0;box-shadow:none}
+}
+@media(min-width:1024px){
+ .otr-fullscreen-toggle{display:none}
+ .otr-map-nav{display:none}
+}
 </style>
 </head>
 <body>
@@ -921,7 +970,24 @@ html,body{overflow-x:clip}
       <div class="map-legend-row"><span class="legend-pin legend-pin-gray" aria-hidden="true"><span>○</span></span><span><strong>Gray pin</strong> — Quiet this week</span></div>
       <div class="map-legend-note">Tap any pin to open that building’s page.</div>
     </div>
-    <div class="map-foot"><span><strong>Tap a pin</strong> to open its living page — latest decision, next meeting, and timeline.</span><span>Leaflet · © OpenStreetMap contributors © CARTO</span></div>
+    <div class="map-foot" id="mapFoot"><span><strong>Tap a pin</strong> to open its living page — latest decision, next meeting, and timeline.</span></div>
+    <div class="fs-bar" id="fsBar" aria-label="Full-screen map controls">
+      <div class="fs-chips" role="group" aria-label="Filter map by topic">
+        <button class="chip" data-filter="all" aria-pressed="true">All places</button>
+        <button class="chip" data-filter="meetings" aria-pressed="false">Meetings</button>
+        <button class="chip" data-filter="money" aria-pressed="false">Money</button>
+        <button class="chip" data-filter="development" aria-pressed="false">Development</button>
+        <button class="chip" data-filter="safety" aria-pressed="false">Safety</button>
+        <button class="chip" data-filter="schools" aria-pressed="false">Schools</button>
+        <button class="chip" data-filter="community" aria-pressed="false">Community</button>
+      </div>
+      <button class="fs-exit" id="fsExit" type="button">✕ Exit</button>
+    </div>
+    <div class="fs-sheet" id="fsSheet" data-snap="half" data-open="false">
+      <div class="fs-sheet-handle" id="fsSheetHandle" role="button" tabindex="0" aria-label="Building details sheet — tap or drag up for full details, down to close"><span class="sheet-grip" aria-hidden="true"></span></div>
+      <div class="fs-sheet-body" id="fsSheetBody"></div>
+    </div>
+    <div class="map-toast" id="mapToast" role="status" aria-live="polite" hidden></div>
   </div>
   <aside class="panel" id="detailPanel" aria-live="polite"></aside>
 </main>
@@ -1361,8 +1427,14 @@ function facilityForHashSlug(slug){
 function facilityById(id){ for(var i=0;i<FACILITIES.length;i++){ if(FACILITIES[i].id===id) return FACILITIES[i]; } return null; }
 function deepLinkFor(f){ return "#building="+encodeURIComponent(f.slug); }
 function slugFromHash(){ try{ var h=window.location.hash||""; var m=h.match(/building=([a-z0-9\-]+)/i); return m?decodeURIComponent(m[1]):null; }catch(e){ return null; } }
-function setHashFor(f,replace){ try{ var url="#building="+encodeURIComponent(f.slug); if(replace===false){ window.location.hash="building="+encodeURIComponent(f.slug); } else if(window.history&&window.history.replaceState){ window.history.replaceState(null,"",url); } else { window.location.hash="building="+encodeURIComponent(f.slug); } }catch(e){} }
+function setHashFor(f,replace){ try{ var url="#building="+encodeURIComponent(f.slug); if(replace===false){ window.location.hash="building="+encodeURIComponent(f.slug); } else if(window.history&&window.history.replaceState){ window.history.replaceState(null,"",url); } else { window.location.hash="building="+encodeURIComponent(f.slug); } window.__otrLastHash=url; }catch(e){} }
+/* Genuine selections push a history entry (owner, Nov 25): Browser Back
+   then steps back through picked buildings and finally closes the panel
+   and returns to the map, instead of leaving the site. A deep link at
+   load is programmatic and never pushes. */
+function pushHashFor(f){ try{ var url="#building="+encodeURIComponent(f.slug); if((window.location.hash||"")===url){ setHashFor(f,true); return; } if(window.history&&window.history.pushState){ window.history.pushState(null,"",url); } else { window.location.hash="building="+encodeURIComponent(f.slug); } window.__otrLastHash=url; }catch(e){} }
 var map=null, markers={}, projectMarkers={}, selectedProjectSlug=null, currentFilter="all", selectedId=1, mapReady=false, opened=true, pendingFilter=null, viewMode="map", currentQuery="", userInteracted=false;
+var fullscreenOpen=false, nearMeMarker=null, selectedPinKey=null;
 var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /* ---------- GLOBE (canvas wireframe) ---------- */
@@ -1503,22 +1575,23 @@ function initMap(){
     if(!countyBounds) countyBounds=L.latLngBounds([29.23,-81.56],[29.70,-81.00]);
     map=L.map("map",{scrollWheelZoom:false,zoomControl:false,minZoom:10,maxBounds:countyBounds,maxBoundsViscosity:1.0}).setView([29.49,-81.24],11);
     L.control.zoom({position:"bottomright"}).addTo(map); /* bottom-right: reachable one-thumb on a phone */
-    /* Street basemap, owner Nov 25: CARTO Positron, style light_all.
-       A cleaner muted light basemap, pale water, soft roads, quiet
-       labels, so the navy and gold pins stand out. CARTO free tier allows
-       commercial use up to 1,000,000 tile requests per month, then 500
-       dollars per month, but it now requires a free API key: request one
-       at https://carto.com/basemaps/apikey, it arrives by email, no
-       account needed, and paste it into CARTO_API_KEY below. Until a real
-       key is pasted, the map keeps the previous OpenStreetMap tiles so it
-       never goes blank. Retina: the r placeholder loads 2x tiles on
-       high-DPI screens, maxNativeZoom 18 per CARTO. Attribution stays
-       visible, as CARTO requires. Stadia was ruled out: its free tier is
-       non-commercial only, commercial starts at 20 dollars per month. */
+    /* Street basemap, owner Nov 25: CARTO Voyager, style voyager.
+       Switched from Positron (light_all) so roads, water and town names
+       are easier to read; same free API key, same attribution. CARTO free
+       tier allows commercial use up to 1,000,000 tile requests per month,
+       then 500 dollars per month, but it now requires a free API key:
+       request one at https://carto.com/basemaps/apikey, it arrives by
+       email, no account needed, and paste it into CARTO_API_KEY below.
+       Until a real key is pasted, the map keeps the previous
+       OpenStreetMap tiles so it never goes blank. Retina: the r
+       placeholder loads 2x tiles on high-DPI screens, maxNativeZoom 18
+       per CARTO. Attribution stays visible, as CARTO requires. Stadia
+       was ruled out: its free tier is non-commercial only, commercial
+       starts at 20 dollars per month. */
     var CARTO_API_KEY="cb1_5g1z_1_d32bd5481dd61a256657c876";
     var streetTiles;
     if(CARTO_API_KEY&&CARTO_API_KEY!=="PASTE_YOUR_CARTO_KEY_HERE"){
-      streetTiles=L.tileLayer("https://basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}{r}.png?key="+CARTO_API_KEY,{maxZoom:19,maxNativeZoom:18,attribution:'© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attribution/">CARTO</a>'});
+      streetTiles=L.tileLayer("https://basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png?key="+CARTO_API_KEY,{maxZoom:19,maxNativeZoom:18,attribution:'© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attribution/">CARTO</a>'});
     }else{
       streetTiles=L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"© OpenStreetMap contributors"});
     }
@@ -1538,7 +1611,11 @@ function initMap(){
     FACILITIES.forEach(function(f,i){
       if(!hasCoords(f)) return; /* unverified location: no pin — the facility still appears in List view as "Location pending verification" */
       var m=L.marker([f.lat,f.lng],{icon:iconFor(f,i)}).addTo(map);
-      m.bindPopup("<strong style='font-family:Source Serif 4,Merriweather,Georgia,serif;font-size:15px'>"+f.name+"</strong><br>"+f.address+"<br><em style='color:#715628'>"+f.badge+"</em>");
+      /* One thing per tap (owner, Nov 25): a pin tap opens the building
+         panel only — the small map popup never opens on tap. It still
+         appears on desktop hover (hoverPopupFor gates on width + a real
+         hover pointer), never on touch. */
+      hoverPopupFor(m,"<strong style='font-family:Source Serif 4,Merriweather,Georgia,serif;font-size:15px'>"+f.name+"</strong><br>"+f.address+"<br><em style='color:#715628'>"+f.badge+"</em>");
       m.on("click",function(){ userInteracted=true; selectFacility(f.id,false); });
       markers[f.id]=m;
     });
@@ -1546,7 +1623,7 @@ function initMap(){
       if(p.facilityId) return; /* facility-linked projects ride their building's pin — never double-pinned */
       if(!isFinite(p.lat)||!isFinite(p.lng)) return;
       var pm=L.marker([p.lat,p.lng],{icon:iconForProject(p)}).addTo(map);
-      pm.bindPopup("<strong style='font-family:Source Serif 4,Merriweather,Georgia,serif;font-size:15px'>"+p.name+"</strong><br>"+p.location+"<br><em style='color:#715628'>Big Project · "+p.status+"</em>");
+      hoverPopupFor(pm,"<strong style='font-family:Source Serif 4,Merriweather,Georgia,serif;font-size:15px'>"+p.name+"</strong><br>"+p.location+"<br><em style='color:#715628'>Big Project · "+p.status+"</em>");
       pm.on("click",function(){ userInteracted=true; selectProject(p.slug,false); });
       projectMarkers[p.slug]=pm;
     });
@@ -1659,9 +1736,19 @@ function bootApp(){
      visitor takes ownership (any selection, or a deliberate close via
      closePanel, clears it). */
   if(!deep){
-    if(window.innerWidth<1024){ if(typeof closePanel==="function") closePanel(); window.__panelAutoDefault="mobile-closed"; }
+    if(window.innerWidth<1024){ if(typeof closePanel==="function") closePanel(true); window.__panelAutoDefault="mobile-closed"; }
     else window.__panelAutoDefault="desktop-open";
   }
+  /* "Tap a pin" hint (owner, Nov 25): shown on the first visit only —
+     remembered in localStorage; the duplicate credit line below the map
+     is gone from the markup (the in-map attribution already shows it). */
+  try{
+    var mf=document.getElementById("mapFoot");
+    if(mf){
+      if(localStorage.getItem("otr_map_hint_seen")) mf.hidden=true;
+      else localStorage.setItem("otr_map_hint_seen","1");
+    }
+  }catch(e){}
 }
 
 /* Breakpoint sync for the boot-default panel state (see bootApp): while
@@ -1964,16 +2051,72 @@ function bouncePin(id){
   var el=document.getElementById("pin-"+id);
   if(el && !reduced){ el.classList.remove("pin-bounce"); void el.offsetWidth; el.classList.add("pin-bounce"); }
 }
+/* Desktop-hover-only pin popup (owner, Nov 25): tapping a pin never
+   opens a popup — the tap opens the building panel/sheet only. */
+function openHoverPopup(marker,html){
+  if(!map) return;
+  try{ L.popup({closeButton:false,offset:[0,-12],maxWidth:260}).setLatLng(marker.getLatLng()).setContent(html).openOn(map); }catch(e){}
+}
+function hoverPopupFor(marker,html){
+  marker.on("mouseover",function(){
+    if(window.innerWidth<1024) return;
+    if(window.matchMedia&&!window.matchMedia("(hover: hover)").matches) return;
+    openHoverPopup(marker,html);
+  });
+  marker.on("mouseout",function(){ if(map){ try{ map.closePopup(); }catch(e){} } });
+}
+/* Selected-pin highlight (owner, Nov 25): the picked pin stays enlarged
+   with the navy/gold accent until its panel closes. A facility key is its
+   numeric id; a project key is "p:<slug>". Card hover reuses highlightPin
+   but must never steal the selected pin's highlight on mouseleave. */
+function panelIsOpen(){
+  var p=document.getElementById("detailPanel");
+  return !!(p&&!p.classList.contains("panel-closed"));
+}
+function markerForKey(key){
+  if(typeof key==="string"&&key.indexOf("p:")===0) return projectMarkers[key.slice(2)]||null;
+  return markers[key]||null;
+}
+function pinElForKey(key){
+  if(typeof key==="string"&&key.indexOf("p:")===0) return document.getElementById("ppin-"+key.slice(2));
+  return document.getElementById("pin-"+key);
+}
+function highlightPinKey(key,on){
+  var m=markerForKey(key);
+  if(m&&m.setZIndexOffset){ try{ m.setZIndexOffset(on?1200:0); }catch(e){} }
+  var el=pinElForKey(key);
+  if(el) el.classList.toggle("pin-hl",!!on);
+}
+function setSelectedPin(key){
+  if(selectedPinKey!==null&&selectedPinKey!==key) highlightPinKey(selectedPinKey,false);
+  selectedPinKey=key;
+  if(key!==null&&key!==undefined) highlightPinKey(key,true);
+}
+function clearSelectedPin(){
+  if(selectedPinKey!==null&&selectedPinKey!==undefined) highlightPinKey(selectedPinKey,false);
+  selectedPinKey=null;
+}
+/* Return to the map (owner, Nov 25): scroll the page so the map's top
+   sits just under the sticky nav. Never touches the map's zoom/center. */
+function scrollToMapTop(){
+  var wrap=document.querySelector(".map-wrap"); if(!wrap) return;
+  var nav=document.querySelector(".site-nav");
+  var navH=nav?nav.getBoundingClientRect().height:0;
+  var y=wrap.getBoundingClientRect().top+(window.pageYOffset||0)-(navH+10);
+  if(y<0) y=0;
+  try{ window.scrollTo({top:y,behavior:reduced?"auto":"smooth"}); }catch(e){ window.scrollTo(0,y); }
+}
 /* Phase 6: hovering or keyboard-focusing a facility card highlights its
    pin ONLY — enlarge + navy/gold accent via the pin-hl class, plus the
    marker's z-index raise. This path must never move the map: it makes no
    fitBounds / flyTo / setView / pan call and touches nothing but the one
    marker and its pin element. */
 function highlightPin(id,on){
-  var m=markers[id];
-  if(m&&m.setZIndexOffset){ try{ m.setZIndexOffset(on?1200:0); }catch(e){} }
-  var el=document.getElementById("pin-"+id);
-  if(el) el.classList.toggle("pin-hl",!!on);
+  /* Card hover/focus must not clear the selected pin's highlight while
+     its panel is still open — the selection owns the highlight until
+     closePanel clears it. */
+  if(!on&&selectedPinKey!==null&&String(selectedPinKey)===String(id)&&panelIsOpen()) return;
+  highlightPinKey(id,!!on);
 }
 /* Phase 6 (F): Leaflet can render blank tiles after a layout change —
    re-measure the map shortly after panels/sheets/views resize it. */
@@ -2101,12 +2244,13 @@ function selectFacility(id,fly,programmatic){
      must NOT count as interaction, so load-time framing keeps working
      exactly as if nothing had been picked. */
   if(!programmatic) userInteracted=true;
-  setHashFor(f,true);
+  if(programmatic||fullscreenOpen) setHashFor(f,true); else pushHashFor(f);
   document.title=f.name+" \u2014 On The Record";
   var panelEl=document.getElementById("detailPanel"); if(panelEl) panelEl.classList.remove("panel-closed");
   var layoutEl=document.querySelector(".layout"); if(layoutEl) layoutEl.classList.remove("panel-is-closed");
   window.__panelAutoDefault=null; /* a real selection takes ownership of the panel state (boot-default breakpoint sync stops here) */
-  renderPanel(f); renderCards();
+  renderPanel(f); renderCards(); setSelectedPin(id);
+  if(fullscreenOpen) movePanelToFsSheet();
   /* Phase 6 micro-correction, completed by correction 8: a NEW
      selection starts the detail panel at its top, so the building's
      title and headline are the first things visible. Every selection
@@ -2140,14 +2284,14 @@ function selectFacility(id,fly,programmatic){
       if(map&&markers[id]){
         if(!map.hasLayer(markers[id])) markers[id].addTo(map);
         map.flyTo([f.lat,f.lng],Math.max(map.getZoom(),12),{duration:reduced?0:1.1,easeLinearity:0.12});
-        setTimeout(function(){ markers[id].openPopup(); bouncePin(id); }, reduced?0:500);
+        setTimeout(function(){ bouncePin(id); }, reduced?0:500);
       }
     });
   }
   if(map&&markers[id]){
     if(!map.hasLayer(markers[id])) markers[id].addTo(map);
     if(fly) map.flyTo([f.lat,f.lng],Math.max(map.getZoom(),12),{duration:reduced?0:1.1,easeLinearity:0.12});
-    setTimeout(function(){ markers[id].openPopup(); bouncePin(id); }, reduced?0:500);
+    setTimeout(function(){ bouncePin(id); }, reduced?0:500);
   }
   /* Phase 6 (A): on desktop, bring the matching card into view in the
      left-hand list and leave it marked active (renderCards did that).
@@ -2167,25 +2311,27 @@ function selectFacility(id,fly,programmatic){
       else if(cr.bottom>lr.bottom) colEl.scrollTop+=(cr.bottom-lr.bottom)+4;
     }catch(e){} },40);
   }
-  if(window.innerWidth<1024){
+  if(window.innerWidth<1024&&!fullscreenOpen){
     if(window.__sheetSet) window.__sheetSet("peek"); /* drop the sheet so the panel is readable */
     document.getElementById("detailPanel").scrollIntoView({behavior:reduced?"auto":"smooth",block:"start"});
   }
 }
 /* ---------- BIG PROJECTS: deep links, selection, panel ---------- */
 function projectSlugFromHash(){ try{ var h=window.location.hash||""; var m=h.match(/project=([a-z0-9\-]+)/i); return m?decodeURIComponent(m[1]):null; }catch(e){ return null; } }
-function setHashForProject(p){ try{ var url="#project="+encodeURIComponent(p.slug); if(window.history&&window.history.replaceState){ window.history.replaceState(null,"",url); } else { window.location.hash="project="+encodeURIComponent(p.slug); } }catch(e){} }
+function setHashForProject(p){ try{ var url="#project="+encodeURIComponent(p.slug); if(window.history&&window.history.replaceState){ window.history.replaceState(null,"",url); } else { window.location.hash="project="+encodeURIComponent(p.slug); } window.__otrLastHash=url; }catch(e){} }
+function pushHashForProject(p){ try{ var url="#project="+encodeURIComponent(p.slug); if((window.location.hash||"")===url){ setHashForProject(p); return; } if(window.history&&window.history.pushState){ window.history.pushState(null,"",url); } else { window.location.hash="project="+encodeURIComponent(p.slug); } window.__otrLastHash=url; }catch(e){} }
 function projectCoords(p){ if(isFinite(p.lat)&&isFinite(p.lng)) return [p.lat,p.lng]; var f=p.facilityId?facilityById(p.facilityId):null; return (f&&hasCoords(f))?[f.lat,f.lng]:null; }
 function selectProject(slug,fly,programmatic){
   var p=projectBySlug(slug); if(!p) return;
   if(!programmatic) userInteracted=true;
   selectedProjectSlug=slug;
-  setHashForProject(p);
+  if(programmatic||fullscreenOpen) setHashForProject(p); else pushHashForProject(p);
   document.title=p.name+" — On The Record";
   var panelEl=document.getElementById("detailPanel"); if(panelEl) panelEl.classList.remove("panel-closed");
   var layoutEl=document.querySelector(".layout"); if(layoutEl) layoutEl.classList.remove("panel-is-closed");
   window.__panelAutoDefault=null;
-  renderProjectPanel(p);
+  renderProjectPanel(p); setSelectedPin("p:"+slug);
+  if(fullscreenOpen) movePanelToFsSheet();
   if(panelEl) panelEl.scrollTop=0;
   var coords=projectCoords(p);
   var marker=p.facilityId?markers[p.facilityId]:projectMarkers[p.slug];
@@ -2193,11 +2339,10 @@ function selectProject(slug,fly,programmatic){
     if(!map||!coords) return;
     if(marker&&!map.hasLayer(marker)) marker.addTo(map);
     if(fly) map.flyTo(coords,Math.max(map.getZoom(),12),{duration:reduced?0:1.1,easeLinearity:0.12});
-    if(marker) setTimeout(function(){ try{ marker.openPopup(); }catch(e){} }, reduced?0:500);
   }
   if(map) showPin();
   else if(fly&&coords) ensureMap(showPin);
-  if(window.innerWidth<1024){
+  if(window.innerWidth<1024&&!fullscreenOpen){
     if(window.__sheetSet) window.__sheetSet("peek");
     if(panelEl) panelEl.scrollIntoView({behavior:reduced?"auto":"smooth",block:"start"});
   }
@@ -2225,12 +2370,39 @@ function renderProjectPanel(p){
   var zb=document.getElementById("projZoomBtn");
   if(zb) zb.addEventListener("click",function(){ var c=projectCoords(p); if(map&&c) map.flyTo(c,14,{duration:reduced?0:1,easeLinearity:0.12}); var mw=document.querySelector(".map-wrap"); if(mw) mw.scrollIntoView({behavior:reduced?"auto":"smooth",block:"start"}); });
 }
-function closePanel(){
+function closePanel(skipScroll){
   window.__panelAutoDefault=null; /* a deliberate close takes ownership of the panel state (bootApp re-arms it after imposing the mobile boot default) */
+  clearSelectedPin();
   var panelEl=document.getElementById("detailPanel"); if(panelEl) panelEl.classList.add("panel-closed");
   var layoutEl=document.querySelector(".layout"); if(layoutEl) layoutEl.classList.add("panel-is-closed");
+  if(fullscreenOpen){ hideFsSheet(); }
+  else if(!skipScroll){
+    /* Return to the map (owner, Nov 25): X, swipe down, Escape or Back
+       all land the reader back at the map's top, just under the sticky
+       header, at the same zoom/position — the close never reframes. */
+    var vm=document.getElementById("view-map");
+    if(vm&&!vm.hidden) scrollToMapTop();
+  }
   refreshMapSize(80); /* panel closing changes the map's box (F) */
 }
+/* Swipe down on the panel header closes it (owner, Nov 25) — mobile
+   only. The header is the swipe zone so scrolling the panel body still
+   scrolls; the X button and Escape remain as well. */
+(function(){
+  var panel=document.getElementById("detailPanel"); if(!panel) return;
+  var startY=null;
+  panel.addEventListener("touchstart",function(e){
+    if(window.innerWidth>=1024||!e.touches||e.touches.length!==1) return;
+    if(!e.target.closest||!e.target.closest(".panel-head")) return;
+    startY=e.touches[0].clientY;
+  },{passive:true});
+  panel.addEventListener("touchend",function(e){
+    if(startY===null) return;
+    var endY=e.changedTouches&&e.changedTouches[0]?e.changedTouches[0].clientY:startY;
+    var dy=endY-startY; startY=null;
+    if(dy>80) closePanel();
+  },{passive:true});
+})();
 function applyFilter(){
   if(!map) { renderCards(); return; }
   if(clusterModeOn()){ refreshClusters(); }
@@ -2391,7 +2563,7 @@ function refreshClusters(){
       g.members.forEach(function(m){ lat+=m.lat; lng+=m.lng; if(m.active) anyNews=true; });
       lat/=g.members.length; lng/=g.members.length;
       var html='<div class="cluster-bubble'+(anyNews?" cluster-gold":" cluster-gray")+'">'+g.members.length+'</div>';
-      var b=L.marker([lat,lng],{icon:L.divIcon({className:"",html:html,iconSize:[40,40],iconAnchor:[20,20]}),interactive:true}).addTo(map);
+      var b=L.marker([lat,lng],{icon:L.divIcon({className:"",html:html,iconSize:[44,44],iconAnchor:[22,22]}),interactive:true}).addTo(map);
       (function(members,lat,lng){
         b.on("click",function(){
           var bounds=L.latLngBounds(members.map(function(m){ return [m.lat,m.lng]; }));
@@ -2465,6 +2637,46 @@ function addMobileMapControls(streetTiles,satelliteTiles){
     return wrap;
   };
   toggle.addTo(map);
+  /* Full-screen button (owner, Nov 25): top-right corner, beside the
+     Street/Satellite toggle. Mobile only — CSS hides it at desktop. */
+  var fsCtl=L.control({position:"topright"});
+  fsCtl.onAdd=function(){
+    var wrap=L.DomUtil.create("div","otr-fullscreen-toggle");
+    var btn=document.createElement("button");
+    btn.type="button"; btn.id="fullscreenBtn";
+    btn.setAttribute("aria-label","Open the map full screen");
+    btn.textContent="⛶ Full screen";
+    L.DomEvent.disableClickPropagation(wrap);
+    L.DomEvent.on(btn,"click",function(){ enterFullscreen(); });
+    wrap.appendChild(btn);
+    return wrap;
+  };
+  fsCtl.addTo(map);
+  /* Whole county + Near me (owner, Nov 25): bottom-right, under the zoom
+     control. Whole county re-fits the default Flagler view; Near me asks
+     the phone for its location only when tapped — never automatically. */
+  var navCtl=L.control({position:"bottomright"});
+  navCtl.onAdd=function(){
+    var wrap=L.DomUtil.create("div","otr-map-nav");
+    var whole=document.createElement("button");
+    whole.type="button"; whole.id="wholeCountyBtn";
+    whole.setAttribute("aria-label","Reset the map to the whole county view");
+    whole.textContent="⌂ Whole county";
+    var near=document.createElement("button");
+    near.type="button"; near.id="nearMeBtn";
+    near.setAttribute("aria-label","Center the map on your current location");
+    near.textContent="◎ Near me";
+    L.DomEvent.disableClickPropagation(wrap);
+    L.DomEvent.on(whole,"click",function(){
+      userInteracted=true;
+      try{ map.closePopup(); }catch(e){}
+      frameCounty();
+    });
+    L.DomEvent.on(near,"click",function(){ locateNearMe(); });
+    wrap.appendChild(whole); wrap.appendChild(near);
+    return wrap;
+  };
+  navCtl.addTo(map);
   map.on("baselayerchange",function(e){
     currentBase=(e.layer===satelliteTiles)?"sat":"street";
     var btn=document.getElementById("basemapToggle");
@@ -2474,6 +2686,123 @@ function addMobileMapControls(streetTiles,satelliteTiles){
       if(inputs&&inputs.length>=2){ inputs[0].checked=(currentBase==="street"); inputs[1].checked=(currentBase==="sat"); }
     }catch(err){}
   });
+}
+/* ---------- FULL-SCREEN MAP (owner, Nov 25) ----------
+   The map-wrap becomes a fixed pane above the tab bar; the building
+   panel moves into the sheet over the map while full screen is open
+   and moves back to the layout on exit. The page never scrolls while
+   full screen, so exiting lands the reader at exactly the same spot,
+   at the same zoom/position. */
+var __fsEntryTop=false;
+function movePanelToFsSheet(){
+  var panel=document.getElementById("detailPanel"); if(!panel) return;
+  var body=document.getElementById("fsSheetBody"); if(!body) return;
+  if(panel.parentNode!==body) body.appendChild(panel);
+  var sheet=document.getElementById("fsSheet");
+  if(sheet){ sheet.setAttribute("data-open","true"); sheet.setAttribute("data-snap","half"); sheet.style.height=""; }
+}
+function hideFsSheet(){
+  var sheet=document.getElementById("fsSheet");
+  if(sheet){ sheet.setAttribute("data-open","false"); sheet.style.height=""; }
+}
+function enterFullscreen(){
+  if(fullscreenOpen||!map) return;
+  fullscreenOpen=true; __fsEntryTop=true;
+  document.body.classList.add("map-fullscreen");
+  var btn=document.getElementById("fullscreenBtn"); if(btn) btn.setAttribute("aria-label","Exit full-screen map");
+  /* A history entry so Browser Back exits full screen instead of
+     leaving the page; the popstate handler below owns the exit. */
+  try{ if(window.history&&window.history.pushState) window.history.pushState({otrFs:true},"",window.location.href); }catch(e){}
+  refreshMapSize(80);
+}
+function exitFullscreen(fromPopstate){
+  if(!fullscreenOpen) return;
+  fullscreenOpen=false;
+  /* The Back/Exit that leaves full screen may also change the hash
+     (back to the pre-fullscreen entry). That hashchange must NOT close
+     the panel — exiting full screen keeps the building open in the
+     normal view. The flag is consumed by the next hashchange, or
+     expires shortly after if the hash did not change. */
+  window.__otrFsExitNav=true;
+  setTimeout(function(){ window.__otrFsExitNav=false; },150);
+  document.body.classList.remove("map-fullscreen");
+  hideFsSheet();
+  var panel=document.getElementById("detailPanel");
+  var layout=document.querySelector(".layout");
+  if(panel&&layout&&panel.parentNode!==layout) layout.appendChild(panel);
+  var btn=document.getElementById("fullscreenBtn"); if(btn) btn.setAttribute("aria-label","Open the map full screen");
+  if(!fromPopstate&&__fsEntryTop){ try{ history.back(); }catch(e){} }
+  __fsEntryTop=false;
+  refreshMapSize(80);
+}
+(function initFsSheet(){
+  var sheet=document.getElementById("fsSheet"), handle=document.getElementById("fsSheetHandle");
+  var exitBtn=document.getElementById("fsExit");
+  if(exitBtn) exitBtn.addEventListener("click",function(){ exitFullscreen(false); });
+  if(!sheet||!handle) return;
+  function setFsSnap(name){
+    sheet.style.height="";
+    sheet.setAttribute("data-snap",name);
+    refreshMapSize(60);
+  }
+  window.__fsSetSnap=setFsSnap;
+  var drag=null;
+  handle.addEventListener("pointerdown",function(e){
+    if(!fullscreenOpen) return;
+    drag={y:e.clientY,h:sheet.getBoundingClientRect().height,moved:false};
+    sheet.classList.add("dragging");
+    try{ handle.setPointerCapture(e.pointerId); }catch(err){}
+  });
+  handle.addEventListener("pointermove",function(e){
+    if(!drag) return;
+    var dy=drag.y-e.clientY;
+    if(Math.abs(dy)>4) drag.moved=true;
+    var maxH=Math.max(240,window.innerHeight-108);
+    var h=Math.min(maxH,Math.max(120,drag.h+dy));
+    sheet.style.height=h+"px";
+  });
+  function endDrag(){
+    if(!drag) return;
+    var wasDrag=drag.moved; drag=null;
+    sheet.classList.remove("dragging");
+    var h=sheet.getBoundingClientRect().height, vh=window.innerHeight;
+    if(!wasDrag){ setFsSnap(sheet.getAttribute("data-snap")==="half"?"full":"half"); return; }
+    if(h<vh*0.32){ closePanel(); return; } /* dragged down past a third: close the sheet */
+    setFsSnap(h>vh*0.72?"full":"half");
+  }
+  handle.addEventListener("pointerup",endDrag);
+  handle.addEventListener("pointercancel",function(){ drag=null; sheet.classList.remove("dragging"); sheet.style.height=""; });
+  handle.addEventListener("keydown",function(e){
+    if(e.key==="Enter"||e.key===" "){ e.preventDefault(); setFsSnap(sheet.getAttribute("data-snap")==="half"?"full":"half"); }
+    else if(e.key==="ArrowUp"){ e.preventDefault(); setFsSnap("full"); }
+    else if(e.key==="ArrowDown"){ e.preventDefault(); setFsSnap("half"); }
+    else if(e.key==="Escape"){ e.preventDefault(); closePanel(); }
+  });
+})();
+/* Near me (owner, Nov 25): geolocation runs ONLY from the Near me tap —
+   nothing on this page asks for location on load or on open. */
+var nearMeToastTimer=null;
+function showMapToast(msg){
+  var t=document.getElementById("mapToast"); if(!t) return;
+  t.textContent=msg; t.hidden=false;
+  clearTimeout(nearMeToastTimer);
+  nearMeToastTimer=setTimeout(function(){ t.hidden=true; },4200);
+}
+function locateNearMe(){
+  if(!map) return;
+  if(!("geolocation" in navigator)){ showMapToast("Location isn't available on this device or browser."); return; }
+  navigator.geolocation.getCurrentPosition(function(pos){
+    var lat=pos.coords.latitude, lng=pos.coords.longitude;
+    if(nearMeMarker){ try{ map.removeLayer(nearMeMarker); }catch(e){} }
+    nearMeMarker=L.marker([lat,lng],{icon:L.divIcon({className:"",html:'<div class="near-me-dot"></div>',iconSize:[18,18],iconAnchor:[9,9]}),interactive:false,keyboard:false}).addTo(map);
+    userInteracted=true;
+    map.flyTo([lat,lng],Math.max(map.getZoom(),14),{duration:reduced?0:1,easeLinearity:0.12});
+  },function(err){
+    var code=err&&err.code;
+    if(code===1) showMapToast("Location permission was denied — allow location for this site in your browser settings to use Near me.");
+    else if(code===3) showMapToast("Finding your location timed out — try again.");
+    else showMapToast("Your location couldn't be determined right now.");
+  },{enableHighAccuracy:false,timeout:10000,maximumAge:60000});
 }
 /* Mobile chips row: keep the selected chip visible — the row scrolls
    horizontally under 1024px, so center the active chip in it. Desktop
@@ -2495,7 +2824,29 @@ document.querySelectorAll(".chip[data-filter]").forEach(function(ch){
   ch.addEventListener("click",function(){ setFilter(ch.getAttribute("data-filter")); });
 });
 /* Deep links: #building=<slug> lands directly on that building's open card on the map */
-window.addEventListener("hashchange",function(){ closeGlobe(); if(window.__onHash) window.__onHash(); });
+window.__otrLastHash=window.location.hash||"";
+window.addEventListener("hashchange",function(){
+  var prev=window.__otrLastHash||"", cur=window.location.hash||"";
+  closeGlobe(); if(window.__onHash) window.__onHash();
+  /* Back out of a building/project view: the panel closes and the reader
+     lands back at the map (closePanel scrolls there). Stepping back
+     between buildings re-opens the earlier one via handleRoute. */
+  if(window.__otrFsExitNav){
+    window.__otrFsExitNav=false; /* exiting full screen keeps the panel */
+  } else if(/building=|project=/.test(prev)&&!/building=|project=/.test(cur)){
+    /* closePanel scrolls only when the Map view is showing; on any other
+       view it just closes, silently. */
+    if(typeof closePanel==="function") closePanel();
+  }
+  window.__otrLastHash=cur;
+});
+window.addEventListener("popstate",function(e){
+  /* Browser Back exits full screen (owner, Nov 25). Only the pop that
+     leaves the full-screen entry carries a null state; landing back on
+     the full-screen entry itself (state {otrFs:true}) stays full
+     screen — the hashchange handler above closes the sheet instead. */
+  if(fullscreenOpen&&(!e.state||!e.state.otrFs)) exitFullscreen(true);
+});
 
 /* ================= LAZY MAP LOADER =================
    Leaflet's CSS+JS (~150 KB) load only on first need: the Map view being
@@ -2572,7 +2923,7 @@ function positionMapForRoute(){
     mapShownOnce=true;
     try{ map.stop(); }catch(e){}
     map.flyTo([f.lat,f.lng],14,{duration:reduced?0:1.1,easeLinearity:0.12});
-    setTimeout(function(){ if(markers[f.id]){ try{ markers[f.id].openPopup(); }catch(e){} bouncePin(f.id); } }, reduced?60:650);
+    setTimeout(function(){ if(markers[f.id]){ bouncePin(f.id); } }, reduced?60:650);
   } else if(!userInteracted){
     /* County framing runs only before the user's first interaction;
        after that, nothing reframes the map or changes its zoom/center. */
@@ -3217,6 +3568,7 @@ window.__onHash=handleRoute;
 /* ---------- Escape closes menus and the facility panel ---------- */
 document.addEventListener("keydown",function(e){
   if(e.key!=="Escape") return;
+  if(fullscreenOpen){ exitFullscreen(false); return; }
   var nl=document.getElementById("navLinks");
   if(nl&&nl.classList.contains("open")){ nl.classList.remove("open"); var tg2=document.getElementById("navToggle"); if(tg2) tg2.setAttribute("aria-expanded","false"); }
   var fp=document.getElementById("followPanel");
