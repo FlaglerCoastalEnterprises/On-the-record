@@ -1,0 +1,68 @@
+{
+  "terms": [
+    {
+      "term": "Millage (mill)",
+      "plain": "The property tax rate. 1 mill = $1 of tax per $1,000 of taxable value."
+    },
+    {
+      "term": "Taxable value",
+      "plain": "Assessed value minus exemptions. Taxes are figured on this, not on market value."
+    },
+    {
+      "term": "Rolled-back rate",
+      "plain": "The rate that would bring in the same tax money from existing property as last year. Above it is legally a tax increase, even if the rate itself didn't change."
+    },
+    {
+      "term": "Maximum (TRIM) rate",
+      "plain": "The highest rate a board can adopt; set in July and printed on the TRIM notice. It can go down later, not up."
+    },
+    {
+      "term": "TRIM notice",
+      "plain": "Truth in Millage notice mailed in August showing each government's proposed tax and hearing dates."
+    },
+    {
+      "term": "General fund",
+      "plain": "The main operating budget: police, parks, administration. Most property tax goes here."
+    },
+    {
+      "term": "Proprietary / enterprise funds",
+      "plain": "Business-like services paid by user fees, such as water, sewer and garbage."
+    },
+    {
+      "term": "Capital projects",
+      "plain": "Big one-time building and infrastructure spending."
+    },
+    {
+      "term": "Reserves / fund balance",
+      "plain": "Savings carried forward for emergencies and stability."
+    },
+    {
+      "term": "Cash carry forward",
+      "plain": "Money left over from last year that is budgeted again this year."
+    },
+    {
+      "term": "Constitutional officers",
+      "plain": "Elected offices funded through the county: Sheriff, Clerk, Property Appraiser, Tax Collector, Supervisor of Elections."
+    },
+    {
+      "term": "CRA",
+      "plain": "Community Redevelopment Agency: an area where growth in property taxes is set aside for local improvements."
+    },
+    {
+      "term": "Required Local Effort (RLE)",
+      "plain": "The school tax rate set by the state, not the School Board."
+    },
+    {
+      "term": "Budget amendment",
+      "plain": "A mid-year change to the adopted budget. Florida cities must post them online within 5 days."
+    },
+    {
+      "term": "Homestead exemption",
+      "plain": "Reduces taxable value of a primary home. Currently $25,000 for all taxes plus another $25,000 for non-school taxes on value over $50,000."
+    },
+    {
+      "term": "Amendment 3 (2026)",
+      "plain": "Voter-approved change raising the non-school homestead exemption to $150,000 in 2027 and $250,000 in 2028."
+    }
+  ]
+}

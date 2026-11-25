@@ -1,0 +1,123 @@
+{
+  "as_of": "2026-11-25",
+  "fiscal_years": {
+    "county_and_cities": "Oct 1 - Sep 30",
+    "school_district": "Jul 1 - Jun 30"
+  },
+  "annual_cycle": [
+    {
+      "when": "Jan-Feb",
+      "what": "Commissions set budget priorities and guidelines"
+    },
+    {
+      "when": "Apr-Jun",
+      "what": "Mid-year reviews; constitutional officers (Sheriff etc.) submit budgets"
+    },
+    {
+      "when": "Jul 1",
+      "what": "Property Appraiser certifies taxable values"
+    },
+    {
+      "when": "Jul",
+      "what": "Boards set MAXIMUM tax rates (can lower later, not raise)"
+    },
+    {
+      "when": "Aug",
+      "what": "TRIM notices mailed to property owners; budget workshops"
+    },
+    {
+      "when": "Sep",
+      "what": "Two public hearings each: tentative, then final adoption"
+    },
+    {
+      "when": "Oct 1",
+      "what": "New fiscal year starts (county, cities, sheriff)"
+    },
+    {
+      "when": "Year-round",
+      "what": "Budget amendments, contracts and grants at regular meetings"
+    }
+  ],
+  "fy2027_dates": [
+    {
+      "date": "2026-07-13",
+      "gov": "flagler-county",
+      "event": "Tentative budget; max millage"
+    },
+    {
+      "date": "2026-07-21",
+      "gov": "palm-coast",
+      "event": "Max millage 4.2296 (4-1)"
+    },
+    {
+      "date": "2026-07-23",
+      "gov": "flagler-beach",
+      "event": "Proposed millage"
+    },
+    {
+      "date": "2026-07-28",
+      "gov": "flagler-schools",
+      "event": "Tentative budget $353,097,566; millage 5.312"
+    },
+    {
+      "date": "2026-08-10",
+      "gov": "bunnell",
+      "event": "Tentative 7.93 mills"
+    },
+    {
+      "date": "2026-09-03",
+      "gov": "flagler-county",
+      "event": "1st hearing; tentative $333,288,593"
+    },
+    {
+      "date": "2026-09-08",
+      "gov": "flagler-schools",
+      "event": "Final budget and millage"
+    },
+    {
+      "date": "2026-09-09",
+      "gov": "palm-coast",
+      "event": "1st hearing; tentative 4.1387"
+    },
+    {
+      "date": "2026-09-10",
+      "gov": "flagler-beach",
+      "event": "1st hearing; 5.45 mills"
+    },
+    {
+      "date": "2026-09-14",
+      "gov": "flagler-county",
+      "event": "Final budget adopted"
+    },
+    {
+      "date": "2026-09-14",
+      "gov": "bunnell",
+      "event": "1st final hearing (scheduled)"
+    },
+    {
+      "date": "2026-09-23",
+      "gov": "palm-coast",
+      "event": "Final budget $533,947,885"
+    },
+    {
+      "date": "2026-09-24",
+      "gov": "flagler-beach",
+      "event": "Final budget ~$44.5M"
+    }
+  ],
+  "fy2028_watch": [
+    "Amendment 3: non-school homestead exemption rises to $150,000 starting Jan. 1, 2027 (affects FY2028 budgets), then $250,000 in 2028.",
+    "Budget season July-September 2027 is the live-coverage window."
+  ],
+  "src": [
+    "fc_tentative_pres",
+    "pc_max_millage",
+    "fb_calendar",
+    "sb_tentative_pres",
+    "bun_flaglerlive",
+    "fc_adopted",
+    "pc_ask_final",
+    "fb_final_cp",
+    "amend3_flc"
+  ]
+}

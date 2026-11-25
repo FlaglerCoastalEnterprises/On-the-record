@@ -1,0 +1,56 @@
+{
+  "as_of": "2026-11-25",
+  "tax_year": "2025 (FY2025-26), latest official statewide comparison",
+  "source": "fdor_table1",
+  "authorities": [
+    {
+      "name": "Flagler County BCC",
+      "prior_millage": 7.9945,
+      "rolled_back": 7.6151,
+      "adopted": 7.9945,
+      "levy": 144902504,
+      "pct_change_levy": 9.8
+    },
+    {
+      "name": "City of Palm Coast",
+      "prior_millage": 4.1893,
+      "rolled_back": 4.0035,
+      "adopted": 4.0893,
+      "levy": 44907165,
+      "pct_change_levy": 7.5
+    },
+    {
+      "name": "City of Flagler Beach",
+      "prior_millage": 5.45,
+      "rolled_back": 5.1604,
+      "adopted": 5.45,
+      "levy": 7325047,
+      "pct_change_levy": 9.9
+    },
+    {
+      "name": "City of Bunnell",
+      "prior_millage": 7.93,
+      "rolled_back": 5.6994,
+      "adopted": 7.93,
+      "levy": 3416575,
+      "pct_change_levy": 44.5
+    },
+    {
+      "name": "Town of Beverly Beach",
+      "prior_millage": 1.08,
+      "rolled_back": 1.031,
+      "adopted": 1.04,
+      "levy": 136316,
+      "pct_change_levy": 3.2
+    },
+    {
+      "name": "City of Marineland",
+      "prior_millage": 10.0,
+      "rolled_back": 10.1293,
+      "adopted": 10.0,
+      "levy": 139739,
+      "pct_change_levy": 0.7
+    }
+  ],
+  "note": "FY2027 equivalents come out from the state in 2027. Use per-government files for FY2027."
+}

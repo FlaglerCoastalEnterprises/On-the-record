@@ -1,0 +1,197 @@
+{
+  "id": "flagler-schools",
+  "name": "Flagler County School Board (Flagler Schools)",
+  "type": "school_district",
+  "fiscal_year": "2026-27",
+  "period": "2026-07-01 to 2027-06-30",
+  "as_of": "2026-11-25",
+  "status": "adopted",
+  "adopted": {
+    "date": "2026-09-08",
+    "total_budget": 353097566,
+    "vote": "3-0 (one member absent, one seat vacant)",
+    "resolutions": {
+      "millage": "2627-03",
+      "budget": "2627-04"
+    },
+    "src": [
+      "sb_observer_final",
+      "sb_cp_res",
+      "sb_931_final"
+    ]
+  },
+  "millage": {
+    "total": 5.312,
+    "required_local_effort": 3.064,
+    "discretionary_operating": 0.748,
+    "capital_outlay": 1.5,
+    "vs_rolled_back": "below",
+    "rle_amount_raised": 60555292,
+    "capital_levy_proceeds": 29645215,
+    "note": "RLE is set by the state; lowered for the 15th straight year. Some news reports swap the 0.748 and 1.5 labels; the district presentation lists 1.5 as capital outlay.",
+    "src": [
+      "sb_observer_final",
+      "sb_tentative_pres"
+    ]
+  },
+  "by_fund_tentative": {
+    "general": {
+      "revenues_and_balances": 167063346,
+      "expenditures": 161058715,
+      "ending_balance": 6004631
+    },
+    "food_service": 7660313,
+    "federal_special_revenue": 10796410,
+    "debt_service": {
+      "available": 8288544,
+      "expenditures": 4609601
+    },
+    "capital_projects": {
+      "available": 142763629,
+      "expenditures": 37027277,
+      "ending_balance": 94344376
+    },
+    "self_insurance": {
+      "available": 15652519,
+      "expenditures": 15000000
+    },
+    "src": [
+      "sb_tentative_pres"
+    ]
+  },
+  "general_fund_revenue_tentative": {
+    "federal": 970000,
+    "fefp": 54317798,
+    "family_empowerment_scholarships": 17329690,
+    "local": 79475858,
+    "total_revenue": 152093346,
+    "transfers_in": 6970000,
+    "beginning_fund_balance": 8000000,
+    "src": [
+      "sb_tentative_pres"
+    ]
+  },
+  "capital_plan_1_5_mill": [
+    {
+      "item": "MHS chiller and units upgrade",
+      "amount": 5400000
+    },
+    {
+      "item": "Maintenance service contracts and building repairs",
+      "amount": 6000000
+    },
+    {
+      "item": "Maintenance, renovation and repairs (general fund)",
+      "amount": 3300000
+    },
+    {
+      "item": "School buses and vehicles",
+      "amount": 2500000
+    },
+    {
+      "item": "Bus drivers salary and benefits",
+      "amount": 2500000
+    },
+    {
+      "item": "Debt service payments",
+      "amount": 2409698
+    },
+    {
+      "item": "Furniture, fixtures and equipment",
+      "amount": 1500000
+    },
+    {
+      "item": "IT/Custodial/FTC renovation",
+      "amount": 1300000
+    },
+    {
+      "item": "Property insurance premiums",
+      "amount": 770000
+    },
+    {
+      "item": "MHS additional football bleachers",
+      "amount": 650000
+    },
+    {
+      "item": "FPCHS Bldg 4 auditorium house lights",
+      "amount": 600000
+    },
+    {
+      "item": "OKES Bldg 5 waterproofing",
+      "amount": 550000
+    },
+    {
+      "item": "FPC serving lines/kitchen renovation",
+      "amount": 500000
+    },
+    {
+      "item": "Small district projects",
+      "amount": 500000
+    },
+    {
+      "item": "Leasing educational facilities",
+      "amount": 400000
+    },
+    {
+      "item": "District safety and security",
+      "amount": 300000
+    },
+    {
+      "item": "Added to fund balance reserves",
+      "amount": 465517
+    }
+  ],
+  "capital_plan_src": [
+    "sb_tentative_pres"
+  ],
+  "vouchers_fes": [
+    {
+      "year": "2020-21",
+      "students": 136,
+      "amount": 880241
+    },
+    {
+      "year": "2021-22",
+      "students": 515,
+      "amount": 4146085
+    },
+    {
+      "year": "2022-23",
+      "students": 685,
+      "amount": 6042970
+    },
+    {
+      "year": "2023-24",
+      "students": 798,
+      "amount": 7455558
+    },
+    {
+      "year": "2024-25",
+      "students": 1606,
+      "amount": 14174041
+    },
+    {
+      "year": "2025-26",
+      "students": 1926,
+      "amount": 14913258
+    },
+    {
+      "year": "2026-27",
+      "students": 2473,
+      "amount": 17329690
+    }
+  ],
+  "vouchers_src": [
+    "sb_tentative_pres"
+  ],
+  "prior_year": {
+    "total_budget_2025_26": 338224969,
+    "src": [
+      "sb_fy26_final"
+    ]
+  },
+  "open_questions": [
+    "Final adopted fund-by-fund totals (tentative shown).",
+    "School taxes are not affected by the Amendment 3 homestead increase."
+  ]
+}

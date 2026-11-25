@@ -1,0 +1,69 @@
+{
+  "id": "bunnell",
+  "name": "City of Bunnell",
+  "type": "city",
+  "fiscal_year": "FY2027",
+  "period": "2026-10-01 to 2027-09-30",
+  "as_of": "2026-11-25",
+  "status": "tentative_confirmed_final_pending",
+  "tentative": {
+    "date": "2026-08-10",
+    "millage": 7.93,
+    "years_flat": 4,
+    "general_fund": 7400000,
+    "src": [
+      "bun_flaglerlive"
+    ]
+  },
+  "general_fund_items": {
+    "police": 2900000,
+    "police_change": 263000,
+    "city_hall_debt_annual": "over $1 million (loan of $10M for City Hall and police station)",
+    "parks_recreation": 483000,
+    "parks_prior": 1350000,
+    "src": [
+      "bun_flaglerlive"
+    ]
+  },
+  "property_tax_revenue": {
+    "prior": 3200000,
+    "projected": 3300000,
+    "src": [
+      "bun_flaglerlive"
+    ],
+    "note": "Article also mentions a $349,000 decline; unresolved."
+  },
+  "tax_base": {
+    "exemptions_reduce_taxable_by": 230000000,
+    "government_property_exempt": 130000000,
+    "industrial_taxable_prior": 34500000,
+    "industrial_taxable_now": 57000000,
+    "src": [
+      "bun_flaglerlive"
+    ]
+  },
+  "example_bill": {
+    "home_value": 250000,
+    "homestead_exemption": 50000,
+    "city_tax": 1586,
+    "src": [
+      "bun_flaglerlive"
+    ]
+  },
+  "prior_year": {
+    "fy2026_millage": 7.93,
+    "fy2026_levy": 3416575,
+    "src": [
+      "fdor_table1"
+    ]
+  },
+  "context": [
+    "FlaglerLive reported the tentative budget was not posted publicly before the vote.",
+    "City Manager Alvin Jackson resigned in September 2026 (AskFlagler)."
+  ],
+  "open_questions": [
+    "Final adopted budget total and millage (hearings Sept. 14 and later).",
+    "Citywide total budget, not just general fund.",
+    "Result of Nov. 23 wastewater funding vote."
+  ]
+}

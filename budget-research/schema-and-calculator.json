@@ -1,0 +1,49 @@
+{
+  "standard_categories": [
+    "public_safety",
+    "general_government",
+    "transportation",
+    "physical_environment",
+    "culture_recreation",
+    "human_services",
+    "economic_environment",
+    "court_related",
+    "debt_service",
+    "reserves",
+    "transfers",
+    "education",
+    "utilities"
+  ],
+  "note": "Florida's Uniform Accounting System groups spending by these functions, so every Florida county and city can be mapped the same way. School districts report through the state (FEFP) and map to 'education'.",
+  "calculator": {
+    "formula": "tax = (taxable_value / 1000) * millage",
+    "taxable_value_current_law": "assessed - 25000 (all levies) - min(25000, max(0, assessed - 50000)) (non-school levies only); other exemptions apply",
+    "amendment_3": "non-school homestead exemption rises to 150000 for tax year 2027 and 250000 for tax year 2028 (verify exact stacking rules before building)",
+    "levies_by_location": {
+      "palm_coast": [
+        "flagler-county",
+        "palm-coast",
+        "flagler-schools"
+      ],
+      "flagler_beach": [
+        "flagler-county",
+        "flagler-beach",
+        "flagler-schools"
+      ],
+      "bunnell": [
+        "flagler-county",
+        "bunnell",
+        "flagler-schools"
+      ],
+      "unincorporated": [
+        "flagler-county",
+        "flagler-schools"
+      ]
+    },
+    "not_included_yet": [
+      "St. Johns River Water Management District",
+      "Florida Inland Navigation District",
+      "special assessments and MSBUs"
+    ]
+  }
+}

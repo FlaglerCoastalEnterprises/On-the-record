@@ -1,0 +1,64 @@
+{
+  "id": "flagler-sheriff",
+  "name": "Flagler County Sheriff's Office",
+  "type": "constitutional_officer",
+  "fiscal_year": "FY2027",
+  "period": "2026-10-01 to 2027-09-30",
+  "as_of": "2026-11-25",
+  "status": "funded_through_county_and_palm_coast",
+  "how_funded": "The Sheriff's budget is approved by the County Commission (paid from the county general fund) plus a law-enforcement contract with the City of Palm Coast.",
+  "proposed": {
+    "total_expense": 51970000,
+    "law_enforcement": 34600000,
+    "detention": 15800000,
+    "increase_pct": 8.17,
+    "share_of_county_general_fund_pct": 24,
+    "src": [
+      "fc_newsjournal_jul"
+    ]
+  },
+  "share_of_county_general_fund_pct": {
+    "fy2026": 30.63,
+    "fy2027": 33.24,
+    "src": [
+      "fc_aug3_pres"
+    ],
+    "note": "County presentation figure; differs from the ~24% in news coverage because it measures share of the general fund operating budget by entity."
+  },
+  "staffing": {
+    "new_deputies_county": 4,
+    "funded_staffing_net_change": -1,
+    "palm_coast_contract_new_deputies": 9,
+    "src": [
+      "sheriff_staffing",
+      "fc_newsjournal_jul"
+    ]
+  },
+  "palm_coast_contract": {
+    "requested": 11200000,
+    "prior": 9000000,
+    "src": [
+      "sheriff_pc_contract"
+    ]
+  },
+  "history": {
+    "fy2016": 20300000,
+    "fy2026": 48000000,
+    "growth_pct": 135,
+    "src": [
+      "sheriff_history"
+    ]
+  },
+  "amendment_3": {
+    "projected_loss_2027": "about $15.5M-$15.6M",
+    "actions": "hiring freeze; new vehicles canceled",
+    "src": [
+      "sheriff_amend3",
+      "sheriff_wftv"
+    ]
+  },
+  "open_questions": [
+    "Final adopted FY27 Sheriff budget total (find in county Schedule A / constitutional officer transfer detail).",
+    "Final Palm Coast contract amount."
+  ]
+}

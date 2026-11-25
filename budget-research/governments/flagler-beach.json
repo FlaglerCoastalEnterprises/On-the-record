@@ -1,0 +1,66 @@
+{
+  "id": "flagler-beach",
+  "name": "City of Flagler Beach",
+  "type": "city",
+  "fiscal_year": "FY2027",
+  "period": "2026-10-01 to 2027-09-30",
+  "as_of": "2026-11-25",
+  "status": "adopted",
+  "adopted": {
+    "date": "2026-09-24",
+    "total_budget_approx": 44500000,
+    "src": [
+      "fb_final_cp"
+    ],
+    "note": "City manager described it as 'approximately $44.5 million'. Pull the exact figure from the adopted budget book when posted."
+  },
+  "millage": {
+    "adopted": 5.45,
+    "prior_year": 5.45,
+    "vs_rolled_back": "below (staff: ~1.87% tax cut)",
+    "resolution": "2026-68",
+    "src": [
+      "fb_sept10_cp",
+      "fb_final_cp",
+      "fdor_table1"
+    ]
+  },
+  "pay": {
+    "cola_pct": 4,
+    "police_increase_pct": 5,
+    "src": [
+      "fb_final_cp"
+    ]
+  },
+  "calendar": [
+    {
+      "date": "2026-07-15",
+      "event": "Proposed budget submitted"
+    },
+    {
+      "date": "2026-07-23",
+      "event": "Proposed millage adopted"
+    },
+    {
+      "date": "2026-09-10",
+      "event": "First budget hearing"
+    },
+    {
+      "date": "2026-09-24",
+      "event": "Final budget and millage hearing"
+    }
+  ],
+  "calendar_src": [
+    "fb_calendar"
+  ],
+  "prior_year": {
+    "fy2026_millage": 5.45,
+    "fy2026_levy": 7325047,
+    "src": [
+      "fdor_table1"
+    ]
+  },
+  "open_questions": [
+    "Exact adopted total and general fund (FY27 adopted book not yet on the Finance page as of 2026-11-25)."
+  ]
+}

@@ -1,0 +1,237 @@
+{
+  "id": "flagler-county",
+  "name": "Flagler County Board of County Commissioners",
+  "type": "county",
+  "fiscal_year": "FY2027",
+  "period": "2026-10-01 to 2027-09-30",
+  "as_of": "2026-11-25",
+  "status": "adopted",
+  "adopted": {
+    "date": "2026-09-14",
+    "total_budget": 333288593,
+    "funds": 75,
+    "changes_from_tentative": "none",
+    "src": [
+      "fc_adopted"
+    ]
+  },
+  "timeline": [
+    {
+      "date": "2026-01-12",
+      "event": "Board policies and funding priorities",
+      "src": [
+        "fc_tentative_pres"
+      ]
+    },
+    {
+      "date": "2026-02-09",
+      "event": "Budget guidelines kickoff",
+      "src": [
+        "fc_tentative_pres"
+      ]
+    },
+    {
+      "date": "2026-07-13",
+      "event": "Tentative budget presented; board sets maximum millage",
+      "src": [
+        "fc_tentative_pres"
+      ]
+    },
+    {
+      "date": "2026-08-03",
+      "event": "Final review workshop",
+      "src": [
+        "fc_aug3_pres"
+      ]
+    },
+    {
+      "date": "2026-09-03",
+      "event": "First public hearing: Res. 2026-49 (tentative millage), Res. 2026-50 ($333,288,593 tentative budget)",
+      "src": [
+        "fc_tentative_adopt_cp"
+      ]
+    },
+    {
+      "date": "2026-09-14",
+      "event": "Final budget adopted, $333,288,593",
+      "src": [
+        "fc_adopted"
+      ]
+    }
+  ],
+  "millage": {
+    "proposed_july": {
+      "general_fund_operating": 7.8695,
+      "esl_operating": 0.125,
+      "esl_debt": 0.0,
+      "judicial_center_debt": 0.0961,
+      "aggregate": 8.0906,
+      "src": [
+        "fc_tentative_pres"
+      ]
+    },
+    "tentative_sept3": {
+      "total_operating": 7.9737,
+      "rolled_back_operating": 8.0486,
+      "pct_vs_rolled_back": -0.93,
+      "total_incl_voted_debt": 8.0698,
+      "prior_year_total": 8.18,
+      "src": [
+        "fc_buzz_sept3"
+      ],
+      "note": "Reported by Flagler County Buzz from the Sept. 3 hearing. Confirm final adopted rates in the FY27 millage resolution (not yet posted on the OMB page as of 2026-11-25)."
+    },
+    "prior_year": {
+      "fy2026_aggregate": 8.18,
+      "fy2026_bcc_operating_fdor": 7.9945,
+      "src": [
+        "fc_tentative_pres",
+        "fdor_table1"
+      ]
+    },
+    "value_of_one_mill": 17922727,
+    "value_of_one_mill_src": [
+      "fc_tentative_pres"
+    ]
+  },
+  "ad_valorem_revenue_proposed": {
+    "general_fund_operating": 141042904,
+    "esl_operating": 2240341,
+    "esl_debt": 0,
+    "judicial_center_debt": 1722374,
+    "total": 145005619,
+    "prior_year_total": 141017511,
+    "src": [
+      "fc_tentative_pres"
+    ]
+  },
+  "general_fund": {
+    "total": 216446194,
+    "revenue": {
+      "taxes": 140670111,
+      "cash_carry_forward": 60330262,
+      "charges_for_services": 6397560,
+      "intergovernmental": 4938252,
+      "miscellaneous": 2057327,
+      "excess_fees": 1436520,
+      "licenses_permits": 341001,
+      "other_taxes": 228661,
+      "fines_forfeitures": 46500
+    },
+    "expenditures": {
+      "transfer_to_constitutional_officers": 63258917,
+      "reserves": 60323645,
+      "public_safety": 35056762,
+      "general_government": 30658384,
+      "interfund_transfers": 12170810,
+      "human_services": 6262915,
+      "culture_recreation": 5458690,
+      "transportation": 1430994,
+      "court_related": 575703,
+      "physical_environment": 534988,
+      "economic_environment": 428726,
+      "debt_service": 285660
+    },
+    "share_by_entity_pct": {
+      "fy2026": {
+        "bocc": 58.95,
+        "sheriff": 30.63,
+        "property_appraiser": 2.43,
+        "tax_collector": 3.32
+      },
+      "fy2027": {
+        "bocc": 55.86,
+        "sheriff": 33.24,
+        "property_appraiser": 2.48,
+        "tax_collector": 3.35
+      },
+      "src": [
+        "fc_aug3_pres"
+      ]
+    },
+    "reserves_proposed": {
+      "financial_stability": 40055152,
+      "contingency": 15358710,
+      "restricted": 4982766,
+      "src": [
+        "fc_tentative_pres"
+      ]
+    },
+    "src": [
+      "fc_adopted"
+    ]
+  },
+  "by_fund_type_proposed": {
+    "general": 216726287,
+    "special_revenue": 59116032,
+    "internal_service": 18665281,
+    "capital_projects": 14335266,
+    "debt_service": 12707539,
+    "enterprise": 12279119,
+    "total": 333829524,
+    "src": [
+      "fc_tentative_pres"
+    ],
+    "note": "July proposal; adopted total is $333,288,593."
+  },
+  "debt_service_selected": {
+    "bond_cap_imp_ref_2024": 3406010,
+    "go_bonds_2005": 1790354,
+    "bond_cap_imp_rev_2020": 1630236,
+    "public_safety_comm_network": 1248052,
+    "airport": 594218,
+    "general_fund": 285660,
+    "taxable_special_assessment_bonds": 85794,
+    "src": [
+      "fc_adopted"
+    ]
+  },
+  "cra_payments_proposed": {
+    "flagler_beach": 524941,
+    "palm_coast": 2705887,
+    "marineland": 58845,
+    "bunnell": 140173,
+    "total": 3429846,
+    "src": [
+      "fc_tentative_pres"
+    ]
+  },
+  "special_assessments_fy2027": {
+    "espanola_ssd": "$11.76 per unit",
+    "rima_ridge_ssd": "$14.62 per unit",
+    "painters_hill_seawall": "$116.28 per front foot",
+    "dunes_cdd_stormwater": "$65.69 per residential unit",
+    "beach_renourishment_msbu": "$0",
+    "src": [
+      "fc_aug3_pres"
+    ]
+  },
+  "staffing": {
+    "bocc_fte_change_general_fund": -8.25,
+    "bocc_fte_change_non_general_fund": -5,
+    "cola_pct": 2.3,
+    "new_sheriff_deputies_from_bocc": 4,
+    "src": [
+      "fc_tentative_pres"
+    ]
+  },
+  "prior_year": {
+    "fy2026_adopted_total": 335772213,
+    "resolution": "2025-80",
+    "src": [
+      "fc_fy26_res"
+    ]
+  },
+  "context": [
+    "Flagler relies on property taxes for 47.27% of revenue, the most of any Florida county (Florida Trend).",
+    "County staff projected a $28M general fund deficit if the homestead amendment passed (FlaglerLive)."
+  ],
+  "context_src": [
+    "amend3_fl_trend",
+    "fc_deficit"
+  ],
+  "open_questions": [
+    "Final adopted FY27 millage rates by levy (resolution not yet on OMB page).",
+    "Monthly or quarterly budget-to-actual reports: OMB says it produces them but none are posted."
+  ]
+}

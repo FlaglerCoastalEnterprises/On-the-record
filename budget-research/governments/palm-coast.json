@@ -1,0 +1,101 @@
+{
+  "id": "palm-coast",
+  "name": "City of Palm Coast",
+  "type": "city",
+  "fiscal_year": "FY2027",
+  "period": "2026-10-01 to 2027-09-30",
+  "as_of": "2026-11-25",
+  "status": "adopted",
+  "adopted": {
+    "date": "2026-09-23",
+    "total_budget": 533947885,
+    "vote": "unanimous",
+    "src": [
+      "pc_ask_final",
+      "pc_931_final"
+    ]
+  },
+  "millage": {
+    "adopted": 4.1387,
+    "rolled_back": 4.1387,
+    "maximum_advertised": 4.2296,
+    "prior_year": 4.0893,
+    "note": "Adopted rate equals the rolled-back rate.",
+    "property_tax_revenue_est": 45500000,
+    "revenue_at_max_rate_est": 46500000,
+    "src": [
+      "pc_ask_final",
+      "pc_observer_final",
+      "pc_max_millage"
+    ]
+  },
+  "by_fund": {
+    "general_fund": 88006917,
+    "capital_projects": 88591235,
+    "proprietary_funds": 311610941,
+    "proprietary_share_pct": 58.4,
+    "proprietary_note": "Mostly wastewater capital and utilities, stormwater, collection and sanitation.",
+    "src": [
+      "pc_ask_final",
+      "pc_931_final"
+    ]
+  },
+  "sr100_cra_budget": {
+    "amount": 4003956,
+    "src": [
+      "pc_buzz_sept23"
+    ]
+  },
+  "timeline": [
+    {
+      "date": "2026-07-14",
+      "event": "General fund budget workshop",
+      "src": [
+        "pc_max_millage"
+      ]
+    },
+    {
+      "date": "2026-07-21",
+      "event": "Maximum millage 4.2296 set, 4-1 (Pontieri dissenting)",
+      "src": [
+        "pc_max_millage"
+      ]
+    },
+    {
+      "date": "2026-09-09",
+      "event": "Tentative 4.1387 mills and $533,947,885 budget; direction to fund 2 sheriff deputies (up to $330,000)",
+      "src": [
+        "pc_tentative_cp"
+      ]
+    },
+    {
+      "date": "2026-09-23",
+      "event": "Final budget and 4.1387 millage adopted unanimously",
+      "src": [
+        "pc_ask_final"
+      ]
+    }
+  ],
+  "prior_year": {
+    "fy2026_adopted_total": 696444327,
+    "resolution": "2025-152",
+    "fy2026_millage": 4.0893,
+    "src": [
+      "pc_fy27_overview",
+      "fdor_table1"
+    ],
+    "note": "FY27 total is down from FY26 mainly because of capital/utility spending in FY26."
+  },
+  "sheriff_contract": {
+    "requested_fy2027": 11200000,
+    "prior": 9000000,
+    "src": [
+      "sheriff_pc_contract"
+    ],
+    "note": "Request as reported; confirm the final contract amount."
+  },
+  "open_questions": [
+    "Final Sheriff contract amount for FY27.",
+    "Whether Palm Coast posts monthly/quarterly year-to-date reports publicly (a mid-year YTD review was presented April 21, 2026)."
+  ]
+}

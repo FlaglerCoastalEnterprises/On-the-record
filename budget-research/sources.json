@@ -1,0 +1,196 @@
+{
+  "as_of": "2026-11-25",
+  "note": "Every figure in this folder cites a key from this file. 'official' = government document; 'official-document-via-news' = a government document hosted by a news site; 'news' = reporting that should be replaced with the official document when found.",
+  "sources": {
+    "fc_adopted": {
+      "title": "Flagler County FY 2026-27 Adopted Budget (Schedule A, adopted Sept. 14, 2026)",
+      "url": "https://www.flaglercounty.gov/files/assets/county/v/1/financial-services/documents/current-budget/fy-2026-27-adopted-budget.pdf",
+      "type": "official"
+    },
+    "fc_omb": {
+      "title": "Flagler County Office of Management and Budget (budget documents index)",
+      "url": "https://www.flaglercounty.gov/Government/Departments/Financial-Services/Office-of-Management-and-Budget-OMB",
+      "type": "official"
+    },
+    "fc_tentative_pres": {
+      "title": "Flagler County FY 2027 Tentative Budget presentation, July 13, 2026 (hosted by FlaglerLive)",
+      "url": "https://flaglerlive.com/wp-content/uploads/tentative-budget-presentation_1.pdf",
+      "type": "official-document-via-news"
+    },
+    "fc_aug3_pres": {
+      "title": "Flagler County FY 2027 Proposed Budget Discussion, Aug. 3, 2026 workshop (hosted by FlaglerLive)",
+      "url": "https://flaglerlive.com/wp-content/uploads/080326-budget-workshop-proposed-budget.pdf",
+      "type": "official-document-via-news"
+    },
+    "fc_tentative_adopt_cp": {
+      "title": "CitizenPortal: Flagler County adopts tentative millage, $333.3M amended tentative FY27 budget (Sept. 3, 2026)",
+      "url": "https://citizenportal.ai/articles/9796147/Florida/Flagler-County/Flagler-County-board-adopts-tentative-millage-rates-approves-3333-million-amended-tentative-FY27-budget",
+      "type": "news"
+    },
+    "fc_buzz_sept3": {
+      "title": "Flagler County Buzz: Flagler County adopts a tentative budget (Sept. 7, 2026)",
+      "url": "https://www.flaglercountybuzz.com/2026/09/07/flagler-county-adopts-a-tentative-budget-and-hears-from-3-administrator-finalists/",
+      "type": "news"
+    },
+    "fc_newsjournal_jul": {
+      "title": "Daytona Beach News-Journal via AOL: Flagler BOCC sets tentative $333M budget (July 15, 2026)",
+      "url": "https://www.aol.com/articles/flagler-bocc-sets-tentative-333m-090840000.html",
+      "type": "news"
+    },
+    "fc_fy26_res": {
+      "title": "Flagler County Resolution 2025-80, FY 2025-26 final budget $335,772,213",
+      "url": "https://www.flaglercounty.gov/files/assets/county/v/1/financial-services/documents/current-budget/resolution-2025-80-fy-2025-26-adoption-of-budget.pdf",
+      "type": "official"
+    },
+    "fdor_table1": {
+      "title": "Florida Dept. of Revenue, Table 1: Comparison of Taxes Levied, Flagler County, FY 2024-25 and 2025-26",
+      "url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/25table1/Flagler%20Table%201.pdf",
+      "type": "official"
+    },
+    "pc_ask_final": {
+      "title": "AskFlagler: Palm Coast Budget, Millage Rate Adopted Unanimously (Sept. 23, 2026)",
+      "url": "https://askflagler.com/palm-coast-budget-millage-rate-adopted-unanimously/",
+      "type": "news"
+    },
+    "pc_observer_final": {
+      "title": "Palm Coast Observer: Palm Coast adopts $533.9 million budget with 4.1387 millage rate (Sept. 24, 2026)",
+      "url": "https://www.observerlocalnews.com/news/2026/sep/24/palm-coast-adopts-5339-million-budget-with-41387-millage-rate/",
+      "type": "news"
+    },
+    "pc_931_final": {
+      "title": "93.1 Coast: Palm Coast City Council Adopts Budget, Millage Rate",
+      "url": "https://931coast.com/palm-coast-city-council-adopts-budget-millage-rate/",
+      "type": "news"
+    },
+    "pc_buzz_sept23": {
+      "title": "Flagler County Buzz: Palm Coast Council Business Meeting Sept. 23, 2026 (SR 100 CRA $4,003,956)",
+      "url": "https://www.flaglercountybuzz.com/2026/09/19/palm-coast-city-council-business-meeting-on-september-23-2026-at-515-p-m/",
+      "type": "news"
+    },
+    "pc_max_millage": {
+      "title": "City of Palm Coast: Council Sets Maximum Millage Rate for FY2027 (July 21, 2026)",
+      "url": "https://preview.palmcoast.gov/newsroom/home/details/palm-coast-city-council-sets-maximum-millage-rate-for-fiscal-year-2027",
+      "type": "official"
+    },
+    "pc_tentative_cp": {
+      "title": "CitizenPortal: Palm Coast adopts tentative 4.1387-mill rate and $533.95M budget; agrees to fund two deputies (Sept. 9, 2026)",
+      "url": "https://citizenportal.ai/articles/9914544/Florida/Flagler-County/Palm-Coast-City/Palm-Coast-adopts-tentative-41387mill-rate-and-53395M-budget-agrees-to-fund-two-deputies",
+      "type": "news"
+    },
+    "pc_fy27_overview": {
+      "title": "Palm Coast FY2027 budget overview agenda item (hosted by FlaglerLive); FY2026 adopted $696,444,327 (Res. 2025-152)",
+      "url": "https://flaglerlive.com/wp-content/uploads/palm-coast-2027-budget-overview.pdf",
+      "type": "official-document-via-news"
+    },
+    "pc_agendas": {
+      "title": "Palm Coast agendas and minutes portal",
+      "url": "https://agendas.palmcoastgov.com/",
+      "type": "official"
+    },
+    "sb_observer_final": {
+      "title": "Palm Coast Observer: Flagler School Board adopts budget of $353 million (Sept. 8, 2026)",
+      "url": "https://www.observerlocalnews.com/news/2026/sep/08/flagler-school-board-adopts-budget-of-353-million/",
+      "type": "news"
+    },
+    "sb_931_final": {
+      "title": "93.1 Coast: Flagler Schools Approves Budget, Millage Rate",
+      "url": "https://931coast.com/flagler-schools-approves-budget-millage-rate/",
+      "type": "news"
+    },
+    "sb_tentative_pres": {
+      "title": "Flagler Schools 2026-27 Tentative Millage and Budget presentation, July 28, 2026 (hosted by FlaglerLive)",
+      "url": "https://flaglerlive.com/wp-content/uploads/2026-27-Tentative-Millage-Budget-Presentation.pdf",
+      "type": "official-document-via-news"
+    },
+    "sb_cp_res": {
+      "title": "CitizenPortal: School Board adopts Resolution 2627-03 (millage) and 2627-04 (budget), Sept. 8, 2026",
+      "url": "https://citizenportal.ai/articles/10226048/florida/school-districts/flagler/flagler-county-school-board-adopts-2026-27-millage-rates",
+      "type": "news"
+    },
+    "sheriff_staffing": {
+      "title": "Flagler News Weekly: Sheriff announces Chief Deputy resignation; notes BOCC approved 4 new deputies, reduced funded staffing by one",
+      "url": "https://www.flaglernewsweekly.com/?p=33881",
+      "type": "news"
+    },
+    "sheriff_amend3": {
+      "title": "News Daytona Beach: Sheriff's Office preparing for budget cuts due to Amendment 3 (~$15.6M in 2027)",
+      "url": "https://newsdaytonabeach.com/stories/flagler-county-sheriffs-office-preparing-for-wide-reaching-budget-cuts-due-to-amendment-3,183501",
+      "type": "news"
+    },
+    "sheriff_wftv": {
+      "title": "WFTV: Flagler County sheriff weighs budget cuts after passage of Amendment 3 ($15.5M)",
+      "url": "https://www.wftv.com/news/local/flagler-county-sheriff-weighs-budget-cuts-after-passage-amendment-3/T4UCDQTBMNE3FI7V6EUFDV27WQ/?outputType=amp",
+      "type": "news"
+    },
+    "sheriff_pc_contract": {
+      "title": "AskFlagler: Staly asks Palm Coast for ~$2.2M more; contract would be $11.2M (from $9.0M)",
+      "url": "https://askflagler.com/?p=13514",
+      "type": "news"
+    },
+    "sheriff_history": {
+      "title": "Palm Coast Observer editor's note: FCSO budget up 135% FY2016-FY2026, $20.3M to $48M",
+      "url": "https://www.observerlocalnews.com/news/2026/feb/11/my-view-flagler-county-sheriff-rick-staly-is-overspending/",
+      "type": "news"
+    },
+    "fb_final_cp": {
+      "title": "CitizenPortal: Flagler Beach keeps millage unchanged, adopts ~$44.5M budget (Sept. 24, 2026)",
+      "url": "https://citizenportal.ai/articles/10249617/Florida/Flagler-County/Flagler-Beach-City/Flagler-Beach-keeps-millage-unchanged-adopts-445M-budget-with-staff-pay-increases",
+      "type": "news"
+    },
+    "fb_sept10_cp": {
+      "title": "CitizenPortal: Flagler Beach levies 5.45 mills, Resolution 2026-68 (Sept. 10, 2026)",
+      "url": "https://citizenportal.ai/articles/10213756/florida/flagler-county/flagler-beach-city/flagler-beach-commission-levies-545-mills-hears-budget-presentation",
+      "type": "news"
+    },
+    "fb_calendar": {
+      "title": "City of Flagler Beach FY27 Budget Calendar",
+      "url": "https://cityofflaglerbeach.com/DocumentCenter/View/7014/FY27-Budget-Calendar-posted-03042026",
+      "type": "official"
+    },
+    "fb_proposed_book": {
+      "title": "City of Flagler Beach FY2026-27 Proposed Budget book, July 15, 2026 (hosted by FlaglerLive)",
+      "url": "https://flaglerlive.com/wp-content/uploads/flagler-beach-proposed-budget-2027.pdf",
+      "type": "official-document-via-news"
+    },
+    "fb_finance": {
+      "title": "City of Flagler Beach Finance page (budgets, audits)",
+      "url": "https://cityofflaglerbeach.com/123/Finance",
+      "type": "official"
+    },
+    "bun_flaglerlive": {
+      "title": "FlaglerLive: Bunnell tentative 2026-27 budget; City Hall debt is 2nd-largest general fund cost (Aug. 11, 2026)",
+      "url": "https://flaglerlive.com/bunnell-debt/",
+      "type": "news"
+    },
+    "amend3_fl_trend": {
+      "title": "Florida Trend: Taxing Question (Amendment 3 explainer; Flagler relies on property taxes for 47.27% of revenue)",
+      "url": "https://www.floridatrend.com/feature/2026/10/10/taxing-question/",
+      "type": "news"
+    },
+    "amend3_flc": {
+      "title": "Florida League of Cities: Amendment 3 property tax resources",
+      "url": "https://www.flcities.com/?p=3689",
+      "type": "association"
+    },
+    "amend3_fac": {
+      "title": "Florida Association of Counties: statewide county fiscal impact of SJR 2-F/SB 4-F",
+      "url": "https://www.fl-counties.com/wp-content/uploads/2026/05/FAC-Statewide-Fiscal-Impact.pdf",
+      "type": "association"
+    },
+    "fc_deficit": {
+      "title": "FlaglerLive: County projected $28M deficit out of $140M general fund if amendment passed",
+      "url": "https://flaglerlive.com/flagler-deficits/",
+      "type": "news"
+    },
+    "stat_166241": {
+      "title": "Fla. Stat. 166.241 (municipal budget amendments posted within 5 days)",
+      "url": "https://flsenate.gov/Laws/statutes/2020/166.241",
+      "type": "law"
+    },
+    "sb_fy26_final": {
+      "title": "Palm Coast Observer: School Board adopts final budget of $338 million for 2025-26 (Sept. 9, 2025)",
+      "url": "https://observerlocalnews.com/news/2025/sep/09/flagler-school-board-adopts-final-budget-of-338-million-for-2025-2026-fiscal-year",
+      "type": "news"
+    }
+  }
+}
