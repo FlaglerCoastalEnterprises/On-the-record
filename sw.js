@@ -2,7 +2,7 @@
    Pages and data always try the network first so the daily updates are
    never masked by a stale cache; the cache is only an offline fallback
    (the latest week's briefing stays readable with no connection). */
-const CACHE = "otr-cache-v3";
+const CACHE = "otr-cache-v4";
 const SHELL = [
   "/",
   "/index.html",
@@ -12,7 +12,8 @@ const SHELL = [
   "/icon-512.png",
   "/apple-touch-icon.png",
   "/data/facilities.json",
-  "/data/weeks/index.json"
+  "/data/weeks/index.json",
+  "/data/places/flagler.json"
 ];
 
 self.addEventListener("install", (event) => {

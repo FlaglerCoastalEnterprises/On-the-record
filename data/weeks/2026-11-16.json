@@ -62,7 +62,7 @@
   },
   {
    "board": "Flagler County School Board",
-   "facilityId": 1,
+   "facilityId": 45,
    "topics": [
     "schools",
     "meetings"
@@ -77,7 +77,7 @@
   },
   {
    "board": "Flagler County School Board",
-   "facilityId": 1,
+   "facilityId": 45,
    "topics": [
     "schools",
     "money"
@@ -92,7 +92,7 @@
   },
   {
    "board": "Flagler County School Board",
-   "facilityId": 1,
+   "facilityId": 45,
    "topics": [
     "schools"
    ],

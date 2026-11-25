@@ -3,19 +3,20 @@
   "id": 1,
   "icon": "🏛",
   "name": "Government Services Building",
-  "short": "County HQ · BOCC + School Board",
+  "short": "County HQ · BOCC",
   "address": "1769 E Moody Blvd, Bunnell",
-  "type": "County Government · BOCC & School Board",
+  "type": "County Government · BOCC",
   "lat": 29.47195,
   "lng": -81.2457,
   "cats": [
    "meetings",
-   "money",
-   "schools"
+   "money"
   ],
+  "moneyAmount": "$60M",
+  "moneyLabel": "Amendment 3 shadow",
   "mapsQ": "Government Services Building 1769 E Moody Blvd Bunnell FL",
   "slug": "government-services-building",
-  "meets": "<div class=\"m-board\"><p class=\"m-who\">Flagler County Board of County Commissioners</p><p><strong>Meets:</strong> 1st Monday · 9:00 a.m. and 3rd Monday · 5:00 p.m. A 1:00 p.m. workshop may be added if needed.</p><p><strong>Agendas:</strong> <a href=\"https://flaglercofl.portal.civicclerk.com/\" target=\"_blank\" rel=\"noopener\">CivicClerk portal</a> — agendas before Aug 17, 2026 are in the county archive.</p><p><strong>Watch live:</strong> <a href=\"https://www.youtube.com/@FlaglerCounty/live\" target=\"_blank\" rel=\"noopener\">Flagler County on YouTube</a> — also airs on Spectrum channel 492.</p><p><strong>Public records:</strong> PublicRecords@flaglercounty.gov · 386-313-4005 · in person at 1769 E. Moody Blvd., Bldg. 2, 3rd Floor, Bunnell.</p></div><div class=\"m-board\"><p class=\"m-who\">Flagler County School Board</p><p><strong>Meets:</strong> regular meeting once a month, usually 4th Tuesday · 6:00 p.m.; agenda workshop 2nd Tuesday · 3:00 p.m.; information workshop the same day as the regular meeting · 1:00 p.m.</p><p><strong>Agendas:</strong> <a href=\"https://go.boarddocs.com/fla/flcsd/Board.nsf/Public\" target=\"_blank\" rel=\"noopener\">BoardDocs</a></p><p><strong>Meeting videos:</strong> <a href=\"https://youtube.com/playlist?list=PLfx_w2JpNlBzcLsx7mTHJCM0z9nNsKrZE\" target=\"_blank\" rel=\"noopener\">YouTube playlist</a></p><p><strong>Public records:</strong> publicrecordsrequests@flaglerschools.com · 386-437-7526 x1120 · 1769 E. Moody Blvd., Bldg. 2, Bunnell · <a href=\"https://www.flaglerschools.com/public-records\" target=\"_blank\" rel=\"noopener\">Public records info</a></p></div>",
+  "meets": "<div class=\"m-board\"><p class=\"m-who\">Flagler County Board of County Commissioners</p><p><strong>Meets:</strong> 1st Monday · 9:00 a.m. and 3rd Monday · 5:00 p.m. A 1:00 p.m. workshop may be added if needed.</p><p><strong>Agendas:</strong> <a href=\"https://flaglercofl.portal.civicclerk.com/\" target=\"_blank\" rel=\"noopener\">CivicClerk portal</a> — agendas before Aug 17, 2026 are in the county archive.</p><p><strong>Watch live:</strong> <a href=\"https://www.youtube.com/@FlaglerCounty/live\" target=\"_blank\" rel=\"noopener\">Flagler County on YouTube</a> — also airs on Spectrum channel 492.</p><p><strong>Public records:</strong> PublicRecords@flaglercounty.gov · 386-313-4005 · in person at 1769 E. Moody Blvd., Bldg. 2, 3rd Floor, Bunnell.</p></div>",
   "shareLine": "FlaglerLive reports Flagler County faces 'cataclysmic' cuts of about $60 million from Amendment 3 — layoffs, and potential new fees and taxes; the County Commission and Sheriff are exploring a special taxing district to pay for policing countywide."
  },
  {
@@ -40,6 +41,8 @@
   "icon": "🏙",
   "name": "Palm Coast City Hall",
   "short": "City Council · Palm Coast",
+  "moneyAmount": "$17M",
+  "moneyLabel": "Town Center land deal",
   "address": "160 Lake Ave, Palm Coast",
   "type": "City Government · Palm Coast City Council",
   "lat": 29.48647,
@@ -58,6 +61,9 @@
   "icon": "🏊",
   "name": "Town Center — Future YMCA Site",
   "short": "$14M project · Central Ave",
+  "moneyAmount": "$14M",
+  "moneyLabel": "Project cost",
+  "devStatus": "Approved",
   "address": "1580 Central Ave, Palm Coast",
   "type": "Development Project · Multi-agency",
   "lat": 29.48449,
@@ -129,6 +135,7 @@
   "icon": "🎣",
   "name": "Flagler Beach Pier",
   "short": "New pier · Ocean Shore Blvd",
+  "devStatus": "Under construction",
   "address": "S Ocean Shore Blvd, Flagler Beach",
   "type": "Development · Landmark Project",
   "lat": 29.47879,
@@ -146,6 +153,8 @@
   "icon": "🐾",
   "name": "Flagler Humane Society",
   "short": "Animal control · Shelter Dr",
+  "moneyAmount": "$350,000",
+  "moneyLabel": "Animal-control contract",
   "address": "1 Shelter Dr, Palm Coast",
   "type": "Nonprofit Vendor · County Contract",
   "lat": 29.55756,
@@ -163,6 +172,8 @@
   "icon": "🛡",
   "name": "Flagler County Sheriff's Office",
   "short": "Sheriff · Operations Center, Bunnell",
+  "moneyAmount": "$4M",
+  "moneyLabel": "Returned funds",
   "address": "61 Sheriff EW Johnston Dr, Bunnell",
   "type": "Law Enforcement · Public Safety",
   "lat": 29.47081,
@@ -182,11 +193,11 @@
   "name": "Flagler County Public Library — Palm Coast",
   "short": "Library · Palm Coast Pkwy",
   "address": "2500 Palm Coast Pkwy NW, Palm Coast",
-  "type": "Public Library · Community / Schools",
+  "type": "Public Library · Community",
   "lat": 29.55416,
   "lng": -81.23815,
   "cats": [
-   "schools"
+   "community"
   ],
   "mapsQ": "Flagler County Public Library Palm Coast 2500 Palm Coast Pkwy NW",
   "slug": "flagler-county-public-library",
@@ -197,6 +208,8 @@
   "icon": "🚒",
   "name": "Fire Station 22",
   "short": "Fire Department · Palm Harbor",
+  "moneyAmount": "$230,000",
+  "moneyLabel": "Budget amendment for higher station costs",
   "address": "350 Palm Coast Pkwy NE, Palm Coast",
   "type": "Public Safety · Palm Coast Fire Department",
   "lat": 29.56159,
@@ -299,7 +312,7 @@
   "lat": 29.55799,
   "lng": -81.20337,
   "cats": [
-   "schools"
+   "community"
   ],
   "mapsQ": "Palm Coast Community Center 305 Palm Coast Pkwy NE Palm Coast FL",
   "slug": "palm-coast-community-center",
@@ -311,11 +324,11 @@
   "name": "Flagler County Public Library — Bunnell (Nexus Center)",
   "short": "Library · Commerce Pkwy, Bunnell",
   "address": "2199 Commerce Pkwy, Bunnell",
-  "type": "Public Library · Community / Schools",
+  "type": "Public Library · Community",
   "lat": 29.47174,
   "lng": -81.24181,
   "cats": [
-   "schools"
+   "community"
   ],
   "mapsQ": "Flagler County Public Library Bunnell 2199 Commerce Pkwy Bunnell FL",
   "slug": "flagler-county-public-library-bunnell",
@@ -326,6 +339,7 @@
   "icon": "✈️",
   "name": "Flagler Executive Airport",
   "short": "County Airport · Airport Rd",
+  "devStatus": "Existing",
   "address": "201 Airport Rd, Palm Coast",
   "type": "County Airport · Flagler County",
   "lat": 29.4722,
@@ -454,6 +468,7 @@
   "icon": "⛽",
   "name": "Seminole Woods & Sesame — Commercial Corner",
   "short": "Approved · Seminole Woods Blvd",
+  "devStatus": "Approved",
   "address": "2614 Seminole Woods Blvd, Palm Coast",
   "type": "Development Project · Commercial",
   "lat": 29.44402,
@@ -470,6 +485,7 @@
   "icon": "🏗",
   "name": "Evolve Palm Coast — Phase 2",
   "short": "Approved · US-1 at Whiteview Pkwy",
+  "devStatus": "Approved",
   "address": "11 Evolve Pkwy, Palm Coast",
   "type": "Development Project · Multifamily",
   "lat": 29.53174,
@@ -486,6 +502,7 @@
   "icon": "🏗",
   "name": "Lakeview Estates",
   "short": "Approved · Lakeview Blvd / US-1",
+  "devStatus": "Approved",
   "address": "398 Lakeview Blvd, Palm Coast",
   "type": "Development Project · Mixed Use",
   "lat": 29.61787,
@@ -502,6 +519,7 @@
   "icon": "🔌",
   "name": "DC BLOX Cable Landing Station",
   "short": "Under Construction · Town Center",
+  "devStatus": "Under construction",
   "address": "1035 Town Center Blvd, Palm Coast",
   "type": "Development Project · Infrastructure",
   "lat": 29.49298,
@@ -512,5 +530,274 @@
   "mapsQ": "DC BLOX 1035 Town Center Blvd Palm Coast FL",
   "slug": "dc-blox-cable-landing-station",
   "meets": "<p class=\"m-who\">No public board meets here</p><p>This is a development site. The project was permitted by the City of Palm Coast; see palmcoast.gov/cls for the city’s project page.</p>"
+ },
+ {
+  "id": 32,
+  "icon": "🏫",
+  "name": "Belle Terre Elementary School",
+  "short": "Elementary · Belle Terre Pkwy",
+  "address": "5545 Belle Terre Pkwy, Palm Coast",
+  "type": "Public Elementary School · Grades Pre-K-5",
+  "lat": 29.583481,
+  "lng": -81.258121,
+  "cats": [
+   "schools"
+  ],
+  "mapsQ": "Belle Terre Elementary School 5545 Belle Terre Pkwy Palm Coast FL",
+  "schoolUrl": "http://btesbobcats.com/",
+  "grade": "A",
+  "slug": "belle-terre-elementary-school",
+  "meets": "<p class=\"m-who\">No public board meets here</p><p>This is a public elementary school. District decisions are made by the Flagler County School Board — see its card. Site: <a href=\"http://btesbobcats.com/\" target=\"_blank\" rel=\"noopener\">btesbobcats.com</a> · (386) 447-1500</p>"
+ },
+ {
+  "id": 33,
+  "icon": "🏫",
+  "name": "Bunnell Elementary School",
+  "short": "Elementary · Bunnell",
+  "address": "305 N Palmetto St, Bunnell",
+  "type": "Public Elementary School · Grades Pre-K-5",
+  "lat": 29.473117,
+  "lng": -81.254066,
+  "cats": [
+   "schools"
+  ],
+  "mapsQ": "Bunnell Elementary School 305 N Palmetto St Bunnell FL",
+  "schoolUrl": "https://besbullpups.com/",
+  "grade": "B",
+  "slug": "bunnell-elementary-school",
+  "meets": "<p class=\"m-who\">No public board meets here</p><p>Public elementary school. Site: <a href=\"https://besbullpups.com/\" target=\"_blank\" rel=\"noopener\">besbullpups.com</a> · (386) 437-7533</p>"
+ },
+ {
+  "id": 34,
+  "icon": "🏫",
+  "name": "Old Kings Elementary School",
+  "short": "Elementary · Flagler Beach",
+  "address": "301 Old Kings Rd S, Flagler Beach",
+  "type": "Public Elementary School · Grades Pre-K-5",
+  "lat": 29.472779,
+  "lng": -81.175395,
+  "cats": [
+   "schools"
+  ],
+  "mapsQ": "Old Kings Elementary School 301 Old Kings Rd S Flagler Beach FL",
+  "schoolUrl": "http://okesowls.com/",
+  "grade": "A",
+  "slug": "old-kings-elementary-school",
+  "meets": "<p class=\"m-who\">No public board meets here</p><p>Public elementary school. Site: <a href=\"http://okesowls.com/\" target=\"_blank\" rel=\"noopener\">okesowls.com</a> · (386) 517-2060</p>"
+ },
+ {
+  "id": 35,
+  "icon": "🏫",
+  "name": "Rymfire Elementary School",
+  "short": "Elementary · Palm Coast",
+  "address": "1425 Rymfire Dr, Palm Coast",
+  "type": "Public Elementary School · Grades Pre-K-5",
+  "lat": 29.501898,
+  "lng": -81.252665,
+  "cats": [
+   "schools"
+  ],
+  "mapsQ": "Rymfire Elementary School 1425 Rymfire Dr Palm Coast FL",
+  "schoolUrl": "http://resroadrunners.com/",
+  "grade": "B",
+  "slug": "rymfire-elementary-school",
+  "meets": "<p class=\"m-who\">No public board meets here</p><p>Public elementary school. Site: <a href=\"http://resroadrunners.com/\" target=\"_blank\" rel=\"noopener\">resroadrunners.com</a> · (386) 206-4600</p>"
+ },
+ {
+  "id": 36,
+  "icon": "🏫",
+  "name": "Lewis E. Wadsworth Elementary School",
+  "short": "Elementary · Belle Terre Pkwy",
+  "address": "4550 Belle Terre Pkwy, Palm Coast",
+  "type": "Public Elementary School · Grades Pre-K-5",
+  "lat": 29.531928,
+  "lng": -81.224572,
+  "cats": [
+   "schools"
+  ],
+  "mapsQ": "Wadsworth Elementary School 4550 Belle Terre Pkwy Palm Coast FL",
+  "schoolUrl": "http://wespanthers.com/",
+  "grade": "B",
+  "slug": "wadsworth-elementary-school",
+  "meets": "<p class=\"m-who\">No public board meets here</p><p>Public elementary school. Site: <a href=\"http://wespanthers.com/\" target=\"_blank\" rel=\"noopener\">wespanthers.com</a> · (386) 446-6720</p>"
+ },
+ {
+  "id": 37,
+  "icon": "🏫",
+  "name": "Buddy Taylor Middle School",
+  "short": "Middle School · Belle Terre Pkwy",
+  "address": "4500 Belle Terre Pkwy, Palm Coast",
+  "type": "Public Middle School · Grades 6-8",
+  "lat": 29.529342,
+  "lng": -81.224009,
+  "cats": [
+   "schools"
+  ],
+  "mapsQ": "Buddy Taylor Middle School 4500 Belle Terre Pkwy Palm Coast FL",
+  "schoolUrl": "https://btmseagles.com/",
+  "grade": "A",
+  "slug": "buddy-taylor-middle-school",
+  "meets": "<p class=\"m-who\">No public board meets here</p><p>Public middle school. Site: <a href=\"https://btmseagles.com/\" target=\"_blank\" rel=\"noopener\">btmseagles.com</a> · (386) 446-6700</p>"
+ },
+ {
+  "id": 38,
+  "icon": "🏫",
+  "name": "Indian Trails Middle School",
+  "short": "Middle School · Belle Terre Pkwy",
+  "address": "5505 Belle Terre Pkwy, Palm Coast",
+  "type": "Public Middle School · Grades 6-8",
+  "lat": 29.577541,
+  "lng": -81.258391,
+  "cats": [
+   "schools"
+  ],
+  "mapsQ": "Indian Trails Middle School 5505 Belle Terre Pkwy Palm Coast FL",
+  "schoolUrl": "https://itmsmustangs.com/",
+  "grade": "A",
+  "slug": "indian-trails-middle-school",
+  "meets": "<p class=\"m-who\">No public board meets here</p><p>Public middle school. Site: <a href=\"https://itmsmustangs.com/\" target=\"_blank\" rel=\"noopener\">itmsmustangs.com</a> · (386) 446-6732</p>"
+ },
+ {
+  "id": 39,
+  "icon": "🎓",
+  "name": "Flagler Palm Coast High School",
+  "short": "High School · E Highway 100",
+  "address": "5500 E Highway 100, Palm Coast",
+  "type": "Public High School · Grades 9-12",
+  "lat": 29.47677,
+  "lng": -81.20901,
+  "cats": [
+   "schools"
+  ],
+  "mapsQ": "Flagler Palm Coast High School 5500 E Highway 100 Palm Coast FL",
+  "schoolUrl": "https://www.fpcbulldogs.com/",
+  "grade": "A",
+  "slug": "flagler-palm-coast-high-school",
+  "meets": "<p class=\"m-who\">No public board meets here</p><p>Public high school. Site: <a href=\"https://www.fpcbulldogs.com/\" target=\"_blank\" rel=\"noopener\">fpcbulldogs.com</a> · (386) 437-7540</p>"
+ },
+ {
+  "id": 40,
+  "icon": "🎓",
+  "name": "Matanzas High School",
+  "short": "High School · Pirate Nation Way",
+  "address": "3535 Pirate Nation Way, Palm Coast",
+  "type": "Public High School · Grades 8-12",
+  "lat": 29.60162,
+  "lng": -81.23491,
+  "cats": [
+   "schools"
+  ],
+  "mapsQ": "Matanzas High School 3535 Pirate Nation Way Palm Coast FL",
+  "schoolUrl": "https://www.mhspirates.com/",
+  "grade": "A",
+  "slug": "matanzas-high-school",
+  "meets": "<p class=\"m-who\">No public board meets here</p><p>Public high school. Site: <a href=\"https://www.mhspirates.com/\" target=\"_blank\" rel=\"noopener\">mhspirates.com</a> · (386) 447-1575</p>"
+ },
+ {
+  "id": 41,
+  "icon": "🏫",
+  "name": "Imagine School at Town Center",
+  "short": "Charter · Town Center Blvd",
+  "address": "775 Town Center Blvd, Palm Coast",
+  "type": "Public Charter School · Grades K-8",
+  "lat": 29.4888,
+  "lng": -81.197,
+  "cats": [
+   "schools"
+  ],
+  "mapsQ": "Imagine School at Town Center 775 Town Center Blvd Palm Coast FL",
+  "schoolUrl": "http://www.imagineschooltowncenter.org",
+  "grade": "B",
+  "slug": "imagine-school-at-town-center",
+  "meets": "<p class=\"m-who\">No public board meets here</p><p>Public charter school. Site: <a href=\"http://www.imagineschooltowncenter.org\" target=\"_blank\" rel=\"noopener\">imagineschooltowncenter.org</a> · (386) 586-0100</p>"
+ },
+ {
+  "id": 42,
+  "icon": "💻",
+  "name": "iFlagler Virtual School",
+  "short": "Virtual · E Highway 100",
+  "address": "5400 E Highway 100, Portable 5, Palm Coast",
+  "type": "Virtual School · Grades K-12",
+  "lat": 29.4766,
+  "lng": -81.2108,
+  "cats": [
+   "schools"
+  ],
+  "mapsQ": "iFlagler Virtual School 5400 E Highway 100 Palm Coast FL",
+  "schoolUrl": "https://www.iflagler.org",
+  "grade": "I",
+  "slug": "iflagler-virtual-school",
+  "meets": "<p class=\"m-who\">No public board meets here</p><p>Virtual school. Site: <a href=\"https://www.iflagler.org\" target=\"_blank\" rel=\"noopener\">iflagler.org</a> · (386) 447-1520</p>"
+ },
+ {
+  "id": 43,
+  "icon": "🛠",
+  "name": "Flagler Technical College",
+  "short": "Technical College · E Highway 100",
+  "address": "5400 E Highway 100, Palm Coast",
+  "type": "Postsecondary Career/Technical College · Adult Students",
+  "lat": 29.47625,
+  "lng": -81.21132,
+  "cats": [
+   "schools"
+  ],
+  "mapsQ": "Flagler Technical College 5400 E Highway 100 Palm Coast FL",
+  "schoolUrl": "https://flaglertech.edu/",
+  "slug": "flagler-technical-college",
+  "meets": "<p class=\"m-who\">No public board meets here</p><p>Postsecondary technical college for adult students. Site: <a href=\"https://flaglertech.edu/\" target=\"_blank\" rel=\"noopener\">flaglertech.edu</a> · (386) 447-4345</p>"
+ },
+ {
+  "id": 44,
+  "icon": "🏛",
+  "name": "Flagler Schools — District Office",
+  "short": "District Office · Bunnell",
+  "address": "1769 E Moody Blvd, Bldg. 2, Bunnell",
+  "type": "School District Office · Flagler Schools",
+  "lat": 29.4713,
+  "lng": -81.2468,
+  "cats": [
+   "schools"
+  ],
+  "mapsQ": "Flagler Schools District Office 1769 E Moody Blvd Bunnell FL",
+  "schoolUrl": "https://www.flaglerschools.com/",
+  "slug": "flagler-schools-district-office",
+  "meets": "<p class=\"m-who\">Flagler Schools — District Office</p><p>Superintendent LaShakia Moore · (386) 437-7526 · 1769 E Moody Blvd, Bldg. 2, Bunnell.</p>"
+ },
+ {
+  "id": 45,
+  "icon": "🗳",
+  "name": "Flagler County School Board",
+  "short": "School Board · Meets at GSB, Bunnell",
+  "address": "1769 E Moody Blvd, Bunnell",
+  "type": "Elected Board · Flagler County School Board",
+  "lat": 29.4726,
+  "lng": -81.2446,
+  "cats": [
+   "schools",
+   "meetings"
+  ],
+  "moneyAmount": "$3M",
+  "moneyLabel": "YMCA share",
+  "mapsQ": "Flagler County School Board 1769 E Moody Blvd Bunnell FL",
+  "slug": "flagler-county-school-board",
+  "meets": "<div class=\"m-board\"><p class=\"m-who\">Flagler County School Board</p><p><strong>Members:</strong> Cathy Moon (District 1), Rob Wood (District 2), Janie Ruddy (District 3), Christy Chong (District 4), Lauren Ramirez (District 5). <strong>Chair:</strong> Lauren Ramirez. <strong>Vice chair:</strong> Janie Ruddy. <strong>Superintendent:</strong> LaShakia Moore.</p><p><strong>Meets:</strong> regular meeting once a month, usually 4th Tuesday · 6:00 p.m.; agenda workshop 2nd Tuesday · 3:00 p.m.; information workshop the same day as the regular meeting · 1:00 p.m. Meets at the Government Services Building, 1769 E Moody Blvd, Bunnell.</p><p><strong>Agendas:</strong> <a href=\"https://go.boarddocs.com/fla/flcsd/Board.nsf/Public\" target=\"_blank\" rel=\"noopener\">BoardDocs</a></p><p><strong>Meeting videos:</strong> <a href=\"https://youtube.com/playlist?list=PLfx_w2JpNlBzcLsx7mTHJCM0z9nNsKrZE\" target=\"_blank\" rel=\"noopener\">YouTube playlist</a></p><p><strong>Public records:</strong> publicrecordsrequests@flaglerschools.com · 386-437-7526 x1120</p></div>",
+  "shareLine": "The School Board reorganized Nov 17 — Ramirez chair, Ruddy vice chair — approved its $3M YMCA share unanimously and the 2027-28 calendar 4-1."
+ },
+ {
+  "id": 46,
+  "icon": "🚒",
+  "name": "Flagler County Fire Rescue",
+  "short": "County Fire Rescue · Bunnell",
+  "address": "1769 E Moody Blvd, Bunnell",
+  "type": "County Fire Rescue · Flagler County",
+  "lat": 29.4732,
+  "lng": -81.244,
+  "cats": [
+   "safety"
+  ],
+  "mapsQ": "Flagler County Fire Rescue 1769 E Moody Blvd Bunnell FL",
+  "slug": "flagler-county-fire-rescue",
+  "meets": "<p class=\"m-who\">No public board meets here</p><p>Flagler County Fire Rescue — county department with 13 stations across 571 square miles. Decisions and the Dec 7 assessment hearing are before the County Commission — see the Government Services Building card.</p>",
+  "shareLine": "Flagler County Fire Rescue: Dec 7, 9:30 a.m. hearing on using the tax bill for fire-rescue assessments (from Oct 1, 2027); the department passed its 2026 state EMS inspection in full."
  }
 ]

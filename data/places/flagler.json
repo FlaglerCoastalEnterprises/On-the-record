@@ -1,0 +1,347 @@
+{
+ "county": "Flagler County",
+ "state": "Florida",
+ "fiscalYearStart": "Oct 1",
+ "governments": [
+  "Flagler County BOCC",
+  "Palm Coast",
+  "Flagler Beach",
+  "Bunnell",
+  "Beverly Beach",
+  "Marineland",
+  "Flagler County School Board"
+ ],
+ "meetingPages": {
+  "county": {
+   "label": "Flagler County CivicClerk portal",
+   "url": "https://flaglercofl.portal.civicclerk.com/"
+  },
+  "palmCoast": {
+   "label": "Palm Coast agenda center",
+   "url": "https://www.palmcoast.gov/agendas"
+  },
+  "flaglerBeach": {
+   "label": "Flagler Beach meetings hub",
+   "url": "https://flaglerbeach-fl.municodemeetings.com/"
+  },
+  "bunnell": {
+   "label": "City of Bunnell agendas & minutes",
+   "url": "https://www.bunnellcity.us/1479/Agendas-Minutes"
+  },
+  "schoolBoard": {
+   "label": "Flagler Schools BoardDocs",
+   "url": "https://go.boarddocs.com/fla/flcsd/Board.nsf/Public"
+  },
+  "clerk": {
+   "label": "Clerk of Court docket",
+   "url": "https://flaglerclerk.gov/docket/"
+  }
+ },
+ "topicNextMeeting": {
+  "meetings": "Tue Dec 1, 6 p.m. — Palm Coast City Council",
+  "money": "Mon Dec 7, 9:30 a.m. — fire-rescue assessment hearing",
+  "development": "Tue Dec 1, 6 p.m. — Palm Coast City Council",
+  "safety": "Mon Dec 7, 9:30 a.m. — fire-rescue assessment hearing",
+  "schools": "Tue Dec 8, 3 p.m. — School Board agenda workshop",
+  "community": "Library Board of Trustees — monthly, date not yet posted"
+ },
+ "keyDates": {
+  "meetings": [
+   {
+    "date": "Tue Dec 1",
+    "time": "6 p.m.",
+    "title": "Palm Coast City Council — business meeting",
+    "follow": "Palm Coast City Council Dec 1"
+   },
+   {
+    "date": "Mon Dec 7",
+    "time": "9 a.m.",
+    "title": "County Commission — regular meeting",
+    "follow": "County Commission Dec 7"
+   },
+   {
+    "date": "Mon Dec 7",
+    "time": "9:30 a.m.",
+    "title": "County Commission — public hearing, fire-rescue assessments",
+    "follow": "Fire-rescue assessment hearing Dec 7"
+   }
+  ],
+  "money": [
+   {
+    "date": "Mon Dec 7",
+    "time": "9:30 a.m.",
+    "title": "Public hearing — fire-rescue assessments",
+    "follow": "Fire-rescue assessment hearing Dec 7"
+   },
+   {
+    "date": "Tue Dec 1",
+    "time": "6 p.m.",
+    "title": "Palm Coast City Council — business meeting",
+    "follow": "Palm Coast City Council Dec 1"
+   },
+   {
+    "date": "Mon Dec 7",
+    "time": "9 a.m.",
+    "title": "County Commission — regular meeting",
+    "follow": "County Commission Dec 7"
+   }
+  ],
+  "development": [
+   {
+    "date": "Tue Dec 1",
+    "time": "6 p.m.",
+    "title": "Palm Coast City Council — business meeting",
+    "follow": "Palm Coast City Council Dec 1"
+   },
+   {
+    "date": "Tue Dec 8",
+    "time": "9 a.m.",
+    "title": "Palm Coast City Council — workshop",
+    "follow": "Palm Coast City Council workshop Dec 8"
+   },
+   {
+    "date": "Tue Dec 15",
+    "time": "9 a.m.",
+    "title": "Palm Coast City Council — business meeting",
+    "follow": "Palm Coast City Council Dec 15"
+   }
+  ],
+  "safety": [
+   {
+    "date": "Mon Dec 7",
+    "time": "9:30 a.m.",
+    "title": "Public hearing — fire-rescue assessments",
+    "follow": "Fire-rescue assessment hearing Dec 7"
+   },
+   {
+    "date": "Mon Dec 7",
+    "time": "9 a.m.",
+    "title": "County Commission — regular meeting",
+    "follow": "County Commission Dec 7"
+   },
+   {
+    "date": "Thu Dec 10",
+    "time": "5:30 p.m.",
+    "title": "Flagler Beach City Commission — regular meeting",
+    "follow": "Flagler Beach Commission Dec 10"
+   }
+  ],
+  "schools": [
+   {
+    "date": "Tue Dec 8",
+    "time": "3 p.m.",
+    "title": "School Board — agenda workshop (confirm on BoardDocs)",
+    "follow": "School Board workshop Dec 8"
+   },
+   {
+    "date": "Tue Dec 22",
+    "time": "6 p.m.",
+    "title": "School Board — regular meeting (confirm on BoardDocs)",
+    "follow": "School Board meeting Dec 22"
+   },
+   {
+    "date": "Tue Aug 10, 2027",
+    "time": "",
+    "title": "First day of the 2027-28 school year",
+    "follow": "First day of school Aug 10 2027"
+   }
+  ],
+  "community": [
+   {
+    "date": "Monthly",
+    "time": "",
+    "title": "Library Board of Trustees — date not yet posted",
+    "follow": "Library Board of Trustees"
+   }
+  ]
+ },
+ "calendar30": [
+  {
+   "date": "Tue Dec 1",
+   "time": "6 p.m.",
+   "board": "Palm Coast City Council",
+   "title": "business meeting"
+  },
+  {
+   "date": "Mon Dec 7",
+   "time": "9 a.m.",
+   "board": "County Commission",
+   "title": "regular meeting"
+  },
+  {
+   "date": "Mon Dec 7",
+   "time": "9:30 a.m.",
+   "board": "County Commission",
+   "title": "public hearing — fire-rescue assessments"
+  },
+  {
+   "date": "Tue Dec 8",
+   "time": "9 a.m.",
+   "board": "Palm Coast City Council",
+   "title": "workshop"
+  },
+  {
+   "date": "Tue Dec 8",
+   "time": "3 p.m.",
+   "board": "School Board",
+   "title": "agenda workshop"
+  },
+  {
+   "date": "Thu Dec 10",
+   "time": "5:30 p.m.",
+   "board": "Flagler Beach City Commission",
+   "title": "regular meeting"
+  },
+  {
+   "date": "Mon Dec 14",
+   "time": "7 p.m.",
+   "board": "Bunnell City Commission",
+   "title": "regular meeting"
+  },
+  {
+   "date": "Tue Dec 15",
+   "time": "9 a.m.",
+   "board": "Palm Coast City Council",
+   "title": "business meeting"
+  },
+  {
+   "date": "Mon Dec 21",
+   "time": "5 p.m.",
+   "board": "County Commission",
+   "title": "regular meeting"
+  },
+  {
+   "date": "Tue Dec 22",
+   "time": "6 p.m.",
+   "board": "School Board",
+   "title": "regular meeting"
+  }
+ ],
+ "calendarNote": "Dates follow each board’s published regular schedule — confirm on the board’s agenda page before you go.",
+ "schoolsWeek": {
+  "headline": "No School Board meeting this week (Nov 23-29). Last week the board reorganized and cleared the YMCA’s final hurdle.",
+  "votes": [
+   "Nov 17 — Ramirez chair / Ruddy vice chair",
+   "Nov 17 — $3M YMCA share approved unanimously (35-year lease)",
+   "Nov 17 — 2027-28 calendar approved 4-1 (Ruddy opposed; 179 student days, first day Aug 10)"
+  ],
+  "districtNews": [
+   "District grade A in 2026, first A since 2019 — first in six years (FLDOE)",
+   "Every graded school earned an A or B except iFlagler, graded Incomplete"
+  ],
+  "next": "Workshop Tue Dec 8, 3 p.m.; regular meeting Tue Dec 22, 6 p.m. (usual schedule — confirm on BoardDocs)"
+ },
+ "budgetWatch": {
+  "text": "The Budget Tracker is coming soon. Until it launches, the county’s current budget documents are on the County Commission’s CivicClerk portal.",
+  "url": "https://flaglercofl.portal.civicclerk.com/",
+  "label": "County budget documents — CivicClerk portal"
+ },
+ "recentDecisions": {
+  "development": [
+   {
+    "date": "Nov 17",
+    "text": "YMCA approval — School Board approves $3M share unanimously, 35-year lease",
+    "portal": "schools"
+   },
+   {
+    "date": "Oct 21",
+    "text": "Seminole Woods & Sesame — gas station, shops and cell tower approved",
+    "portal": "palmCoast"
+   },
+   {
+    "date": "Nov 18",
+    "text": "Evolve Palm Coast Phase 2 — 96 apartments approved, Development Order issued",
+    "portal": "palmCoast"
+   },
+   {
+    "date": "Oct 20",
+    "text": "Lakeview Estates — revised plans approved (39 homes, commercial, park)",
+    "portal": "palmCoast"
+   },
+   {
+    "date": "Nov 18",
+    "text": "Asphalt plant — Planning Board recommends approval 6-1 (Council decides)",
+    "portal": "palmCoast"
+   }
+  ],
+  "meetings": [
+   {
+    "date": "Nov 2026",
+    "text": "Town Center $17M land deal closes — Palm Coast buys 23 parcels",
+    "portal": "palmCoast"
+   },
+   {
+    "date": "Nov 17",
+    "text": "School Board organizational meeting — Ramirez chair, Ruddy vice chair",
+    "portal": "schoolBoard"
+   },
+   {
+    "date": "Nov 16",
+    "text": "$350,000 animal-control contract approved 5-0",
+    "portal": "county"
+   },
+   {
+    "date": "Nov 17",
+    "text": "County Commission — Carney chair, Richardson vice chair (unanimous)",
+    "portal": "county"
+   },
+   {
+    "date": "Nov 17",
+    "text": "Palm Coast seats three new members; Miller named vice mayor 4-1",
+    "portal": "palmCoast"
+   }
+  ],
+  "money": [
+   {
+    "date": "Nov 2026",
+    "text": "$17M Town Center land deal closes",
+    "portal": "palmCoast"
+   },
+   {
+    "date": "Nov 17",
+    "text": "$3M YMCA share approved unanimously",
+    "portal": "schoolBoard"
+   },
+   {
+    "date": "End of Oct",
+    "text": "$4M returned by the Sheriff’s Office to the county",
+    "portal": "county"
+   },
+   {
+    "date": "Nov 16",
+    "text": "$350,000 animal-control contract approved 5-0",
+    "portal": "county"
+   },
+   {
+    "date": "Nov 17",
+    "text": "Palm Coast budget amendments pass unanimously (incl. $230,000 for Fire Station 22)",
+    "portal": "palmCoast"
+   }
+  ],
+  "schools": [
+   {
+    "date": "Nov 17",
+    "text": "School Board votes — Ramirez chair / Ruddy vice chair; Moon & Wood seated",
+    "portal": "schoolBoard"
+   },
+   {
+    "date": "Nov 17",
+    "text": "$3M YMCA share approved unanimously",
+    "portal": "schoolBoard"
+   },
+   {
+    "date": "Nov 17",
+    "text": "2027-28 calendar approved 4-1 (Ruddy opposed; 179 days, first day Aug 10)",
+    "portal": "schoolBoard"
+   }
+  ],
+  "safety": [
+   {
+    "date": "End of Oct",
+    "text": "Sheriff’s Office returns $4M in unspent funds to the county",
+    "portal": "county"
+   }
+  ],
+  "community": []
+ }
+}
