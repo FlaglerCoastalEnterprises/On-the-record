@@ -1524,6 +1524,49 @@ function bootApp(){
      initial county framing still runs when the Map view opens, fitting
      the pane beside this panel. */
   renderPanel(startF); renderCards(); renderGlance();
+
+  /* Owner fix (Nov 25): on mobile (<1024px) the panel starts CLOSED —
+     the same panel-closed state the panel's own close control uses — so
+     opening the Map view shows the map and the sheet, not a building
+     nobody picked. Every open path (pin, card, list, search result,
+     deep link) funnels through selectFacility, which clears the closed
+     state, so the panel opens on the first real selection. A #building=
+     deep link (deep) keeps its panel open on every viewport, and
+     desktop keeps its by-design default-open panel. __panelAutoDefault
+     records that this open/closed state is still the untouched boot
+     default; the breakpoint listener after this function keeps it
+     matched to the layout mode across resizes/rotations until the
+     visitor takes ownership (any selection, or a deliberate close via
+     closePanel, clears it). */
+  if(!deep){
+    if(window.innerWidth<1024){ if(typeof closePanel==="function") closePanel(); window.__panelAutoDefault="mobile-closed"; }
+    else window.__panelAutoDefault="desktop-open";
+  }
+}
+
+/* Breakpoint sync for the boot-default panel state (see bootApp): while
+   __panelAutoDefault is set, keep the panel's open state matched to the
+   layout mode — closed under 1024px, open at desktop widths — so a
+   resize or rotation across the breakpoint never strands the mobile
+   closed state on desktop or the desktop open panel on a phone. Once
+   the visitor takes ownership (flag null), this never touches the
+   panel again. */
+if(window.matchMedia){
+  var __panelMq=window.matchMedia("(min-width: 1024px)");
+  var __panelMqSync=function(){
+    var mode=window.__panelAutoDefault; if(!mode) return;
+    var panelEl=document.getElementById("detailPanel"); if(!panelEl) return;
+    var layoutEl=document.querySelector(".layout");
+    if(__panelMq.matches&&mode==="mobile-closed"){
+      panelEl.classList.remove("panel-closed"); if(layoutEl) layoutEl.classList.remove("panel-is-closed");
+      window.__panelAutoDefault="desktop-open"; refreshMapSize(80);
+    } else if(!__panelMq.matches&&mode==="desktop-open"){
+      panelEl.classList.add("panel-closed"); if(layoutEl) layoutEl.classList.add("panel-is-closed");
+      window.__panelAutoDefault="mobile-closed"; refreshMapSize(80);
+    }
+  };
+  if(__panelMq.addEventListener) __panelMq.addEventListener("change",__panelMqSync);
+  else if(__panelMq.addListener) __panelMq.addListener(__panelMqSync);
 }
 document.getElementById("openBtn").addEventListener("click",function(){ openCounty(null); });
 document.getElementById("globeClose").addEventListener("click",function(){ closeGlobe(); });
@@ -1937,6 +1980,7 @@ function selectFacility(id,fly,programmatic){
   document.title=f.name+" \u2014 On The Record";
   var panelEl=document.getElementById("detailPanel"); if(panelEl) panelEl.classList.remove("panel-closed");
   var layoutEl=document.querySelector(".layout"); if(layoutEl) layoutEl.classList.remove("panel-is-closed");
+  window.__panelAutoDefault=null; /* a real selection takes ownership of the panel state (boot-default breakpoint sync stops here) */
   renderPanel(f); renderCards();
   /* Phase 6 micro-correction, completed by correction 8: a NEW
      selection starts the detail panel at its top, so the building's
@@ -2004,6 +2048,7 @@ function selectFacility(id,fly,programmatic){
   }
 }
 function closePanel(){
+  window.__panelAutoDefault=null; /* a deliberate close takes ownership of the panel state (bootApp re-arms it after imposing the mobile boot default) */
   var panelEl=document.getElementById("detailPanel"); if(panelEl) panelEl.classList.add("panel-closed");
   var layoutEl=document.querySelector(".layout"); if(layoutEl) layoutEl.classList.add("panel-is-closed");
   refreshMapSize(80); /* panel closing changes the map's box (F) */
