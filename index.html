@@ -606,6 +606,38 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
  .map-listcol .card{min-height:48px}
 }
 @media(max-width:1023px) and (prefers-reduced-motion:reduce){.map-listcol{transition:none}}
+/* ===== Mobile layout fixes (Claude, Nov 24) =====
+   1. No sideways scrolling: the map-view header buttons had flex-shrink:0
+      and pushed the page to ~546px wide on a 390px phone, which shifted the
+      whole page left and made the sheet wider than the screen.
+   2. The bottom sheet now starts as a slim "peek" bar instead of covering
+      half the screen, and the page gets bottom padding on the Map view so
+      the building panel can always scroll fully clear of the sheet.
+   3. The floating pin legend duplicated the inline legend and covered the
+      map footer text on phones, so it is hidden under 1024px. */
+html,body{overflow-x:clip}
+/* Pin legend sits top-left of the map so it never covers the map footer text */
+.map-wrap .map-legend{top:12px;bottom:auto}
+@media(max-width:1023px){
+ .topbar-inner{flex-direction:column;align-items:stretch}
+ .topbar-actions{flex-shrink:1;width:100%;min-width:0}
+ .topbar-actions .topbar-link,#globeBtn{display:none}
+ #howBtn{flex:0 0 auto}
+ .map-legend{display:none}
+ body:has(#view-map:not([hidden])){padding-bottom:calc(58px + 112px + env(safe-area-inset-bottom))}
+ .map-listcol[data-snap="peek"]{height:104px}
+ .map-listcol[data-snap="peek"] .sheet-scroll{overflow:hidden}
+ .map-listcol[data-snap="peek"] .cards{visibility:hidden}
+ .map-listcol .list-head span{display:none}
+ .map-listcol[data-snap="peek"] .sheet-handle{min-height:36px;padding:10px 0 4px}
+ .map-listcol .list-head{position:sticky;top:0;z-index:2;background:var(--off);padding:2px 0 10px;align-items:center}
+ .map-listcol .list-head h3{font-size:20px}
+ .sheet-count{font-size:13px;font-weight:700;color:var(--gold-dark);margin-left:auto}
+ .map-listcol[data-snap="peek"] .sheet-count:after{content:" · tap to browse"}
+ .map-listcol .list-head{cursor:pointer}
+ .map-split .panel{scroll-margin-top:76px}
+}
+
 </style>
 </head>
 <body>
@@ -763,11 +795,11 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
 </section>
 
 <div class="map-split">
-  <div class="map-listcol" id="mapListCol" data-snap="half">
-    <div class="sheet-handle" id="sheetHandle" role="button" tabindex="0" aria-expanded="true" aria-label="Facility list panel — tap or drag to resize"><span class="sheet-grip" aria-hidden="true"></span></div>
+  <div class="map-listcol" id="mapListCol" data-snap="peek">
+    <div class="sheet-handle" id="sheetHandle" role="button" tabindex="0" aria-expanded="false" aria-label="Facility list panel — tap or drag to resize"><span class="sheet-grip" aria-hidden="true"></span></div>
     <div class="sheet-scroll" id="sheetScroll">
 <section class="list-section">
-  <div class="list-head"><h3>All facilities</h3><span>Tap a card and the map flies to it.</span></div>
+  <div class="list-head" id="sheetHead"><h3>All facilities</h3><b class="sheet-count" id="sheetCount"></b><span>Tap a card and the map flies to it.</span></div>
   <div class="cards" id="cards"></div>
 </section>
     </div>
@@ -2440,7 +2472,7 @@ document.addEventListener("keydown",function(e){
   var SNAPS=["peek","half","full"];
   function snapHeight(name){
     var vh=window.innerHeight;
-    if(name==="peek") return 252;
+    if(name==="peek") return 104;
     if(name==="full") return Math.max(240,vh-126);
     return Math.round(vh*0.52);
   }
@@ -2490,6 +2522,13 @@ document.addEventListener("keydown",function(e){
       else if(e.key==="ArrowDown"){ e.preventDefault(); setSnap(SNAPS[Math.max(0,i-1)]); }
     });
     if(scrollEl) scrollEl.addEventListener("touchstart",function(){},{passive:true});
+    var sHead=document.getElementById("sheetHead");
+    if(sHead) sHead.addEventListener("click",function(){ if(isMobile()&&col.getAttribute("data-snap")==="peek") setSnap("half"); });
+    var sCount=document.getElementById("sheetCount");
+    function updCount(){ if(!sCount) return; var n=document.querySelectorAll("#cards .card").length; sCount.textContent=n?n+" places":""; }
+    updCount();
+    var cardsEl=document.getElementById("cards");
+    if(cardsEl&&window.MutationObserver) new MutationObserver(updCount).observe(cardsEl,{childList:true});
   }
 
   /* ---------- C: tab bar "More" menu ---------- */
