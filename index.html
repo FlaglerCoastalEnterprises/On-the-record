@@ -1503,7 +1503,28 @@ function initMap(){
     if(!countyBounds) countyBounds=L.latLngBounds([29.23,-81.56],[29.70,-81.00]);
     map=L.map("map",{scrollWheelZoom:false,zoomControl:false,minZoom:10,maxBounds:countyBounds,maxBoundsViscosity:1.0}).setView([29.49,-81.24],11);
     L.control.zoom({position:"bottomright"}).addTo(map); /* bottom-right: reachable one-thumb on a phone */
-    var streetTiles=L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"© OpenStreetMap contributors"});
+    /* Street basemap, owner Nov 25: CARTO Positron, style light_all.
+       A cleaner muted light basemap, pale water, soft roads, quiet
+       labels, so the navy and gold pins stand out. CARTO free tier allows
+       commercial use up to 1,000,000 tile requests per month, then 500
+       dollars per month, but it now requires a free API key: request one
+       at https://carto.com/basemaps/apikey, it arrives by email, no
+       account needed, and paste it into CARTO_API_KEY below. Until a real
+       key is pasted, the map keeps the previous OpenStreetMap tiles so it
+       never goes blank. Retina: the r placeholder loads 2x tiles on
+       high-DPI screens, maxNativeZoom 18 per CARTO. Attribution stays
+       visible, as CARTO requires. Stadia was ruled out: its free tier is
+       non-commercial only, commercial starts at 20 dollars per month. */
+    var CARTO_API_KEY="PASTE_YOUR_CARTO_KEY_HERE";
+    var streetTiles;
+    if(CARTO_API_KEY&&CARTO_API_KEY!=="PASTE_YOUR_CARTO_KEY_HERE"){
+      streetTiles=L.tileLayer("https://basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}{r}.png?key="+CARTO_API_KEY,{maxZoom:19,maxNativeZoom:18,attribution:'© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attribution/">CARTO</a>'});
+    }else{
+      streetTiles=L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"© OpenStreetMap contributors"});
+    }
+    /* Satellite stays Esri World Imagery: no 2x retina variant exists
+       on its public tile endpoint, 256px tiles only, so there is nothing
+       sharper to switch to. */
     var satelliteTiles=L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",{maxZoom:19,attribution:"Esri, Maxar, Earthstar Geographics"});
     streetTiles.addTo(map);
     L.control.layers({"Street map":streetTiles,"Satellite":satelliteTiles},null,{collapsed:false}).addTo(map);
