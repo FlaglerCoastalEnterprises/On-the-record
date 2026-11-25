@@ -1515,7 +1515,7 @@ function initMap(){
        high-DPI screens, maxNativeZoom 18 per CARTO. Attribution stays
        visible, as CARTO requires. Stadia was ruled out: its free tier is
        non-commercial only, commercial starts at 20 dollars per month. */
-    var CARTO_API_KEY="PASTE_YOUR_CARTO_KEY_HERE";
+    var CARTO_API_KEY="cb1_5g1z_1_d32bd5481dd61a256657c876";
     var streetTiles;
     if(CARTO_API_KEY&&CARTO_API_KEY!=="PASTE_YOUR_CARTO_KEY_HERE"){
       streetTiles=L.tileLayer("https://basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}{r}.png?key="+CARTO_API_KEY,{maxZoom:19,maxNativeZoom:18,attribution:'© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attribution/">CARTO</a>'});
