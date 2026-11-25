@@ -2,7 +2,7 @@
    Pages and data always try the network first so the daily updates are
    never masked by a stale cache; the cache is only an offline fallback
    (the latest week's briefing stays readable with no connection). */
-const CACHE = "otr-cache-v4";
+const CACHE = "otr-cache-v5";
 const SHELL = [
   "/",
   "/index.html",
