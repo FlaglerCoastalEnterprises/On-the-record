@@ -704,15 +704,21 @@ html,body{overflow-x:clip}
 @media(max-width:1023px){.topbar{padding-top:10px;padding-bottom:10px}.topbar-inner{flex-direction:row;align-items:center;gap:10px;flex-wrap:nowrap}.topbar-inner>div:first-child{display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-width:0}.topbar h1,.topbar .subtitle,.topbar .pill-by{display:none}.topbar .hero-pills{flex-wrap:nowrap}.topbar .updated-line{margin:0}.topbar-actions{width:auto;flex-shrink:0}}
 @media(min-width:1024px){.toolbar .legend span:not(#countLabel){display:none}}
 /* ===== Mobile map fixes (owner, Nov 25) — under 1024px unless noted =====
-   Toolbar: chips take their own row; the Map/List toggle and the place
+   Toolbar: chips take their own row — ONE horizontally scrollable row
+   (no wrap), so the map starts higher; the selected chip is scrolled
+   into view by setFilter below. The Map/List toggle and the place
    count share one row; the toolbar's gold/gray legend text leaves the
    toolbar on mobile and becomes one small line inside the map's bottom
    edge (.map-legend-line). The layers control is replaced on mobile by a
    single Street/Satellite toggle (.otr-basemap-toggle). Nearby pins
-   cluster into .cluster-bubble (JS module below). Desktop unchanged. */
+   cluster into .cluster-bubble (JS module below); a bubble that cannot
+   separate any further at max zoom opens a .cluster-picker list instead
+   of zooming again. Desktop unchanged. */
 @media(max-width:1023px){
  .toolbar-top{flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:flex-start}
- .toolbar-top .chips{flex:1 1 100%;order:0}
+ .toolbar-top .chips{flex:1 1 100%;order:0;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:2px}
+ .toolbar-top .chips::-webkit-scrollbar{display:none}
+ .toolbar-top .chips .chip{flex-shrink:0;white-space:nowrap}
  .toolbar-top .view-toggle{order:1}
  .toolbar-top .legend{order:2;margin-left:auto}
  .toolbar .legend span:not(#countLabel){display:none}
@@ -731,6 +737,14 @@ html,body{overflow-x:clip}
 .cluster-bubble{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid #fff;box-shadow:0 5px 14px rgba(0,0,0,.3);font-family:Inter,system-ui,sans-serif;font-size:14px;font-weight:800;color:#fff}
 .cluster-gold{background:linear-gradient(135deg,#C6A26B,var(--gold))}
 .cluster-gray{background:#8A94A6}
+/* Cluster picker: the small chooser list shown when a bubble cannot
+   separate any further at max zoom (e.g. the E Highway 100 campus). */
+.cluster-picker-popup .leaflet-popup-content{margin:12px 14px;line-height:1.35}
+.cluster-picker-title{font-family:Inter,system-ui,sans-serif;font-size:12px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--gold-dark);margin-bottom:8px}
+.cluster-picker-item{display:flex;flex-direction:column;align-items:flex-start;gap:2px;width:100%;min-height:44px;padding:9px 10px;margin-top:6px;background:#fff;border:1px solid var(--line);border-radius:12px;cursor:pointer;text-align:left;font-family:inherit}
+.cluster-picker-item:hover,.cluster-picker-item:focus-visible{border-color:var(--gold);box-shadow:0 0 0 2px rgba(178,141,87,.35);outline:none}
+.cluster-picker-name{font-family:"Source Serif 4","Merriweather",Georgia,serif;font-size:15px;font-weight:700;color:var(--navy)}
+.cluster-picker-sub{font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#64748B}
 </style>
 </head>
 <body>
@@ -1273,7 +1287,7 @@ var FACILITIES = [
   {id:41, icon:"🏫", name:"Imagine School at Town Center", short:"Charter · Town Center Blvd", address:"775 Town Center Blvd, Palm Coast", type:"Public Charter School · Grades K-8", lat:29.4888, lng:-81.197, cats:["schools"], active:false, badge:"GRADE B · 2026", headline:"Imagine School at Town Center (public charter) — Grades K-8. 2026 FLDOE grade: B.", bullets:["Public charter school. Grades K-8.","2026 state grade: B — Florida Department of Education. Source: <a href=\"https://www.fldoe.org/accountability/accountability-reporting/school-grades/index.stml\" target=\"_blank\" rel=\"noopener\">FLDOE School Grades 2026 (2025-26)</a>.","School site: <a href=\"http://www.imagineschooltowncenter.org\" target=\"_blank\" rel=\"noopener\">http://www.imagineschooltowncenter.org</a> · Phone: (386) 586-0100.","Quiet this week so far — no new meeting or news found for Nov. 23–29."], next:"Open on school days — see the school site for hours and calendar.", timeline:[{d:"2026", t:"FLDOE grade released — see headline"}], mapsQ:"Imagine School at Town Center 775 Town Center Blvd Palm Coast FL"},
   {id:42, icon:"💻", name:"iFlagler Virtual School", short:"Virtual · E Highway 100", address:"5400 E Highway 100, Portable 5, Palm Coast", type:"Virtual School · Grades K-12", lat:29.4766, lng:-81.2108, cats:["schools"], active:false, badge:"GRADE I · INCOMPLETE", headline:"iFlagler Virtual School — Grades K-12, online. FLDOE grade in 2025-26: I (Incomplete — no letter grade issued).", bullets:["Grades K-12, virtual. FLDOE issued no letter grade in 2025-26 — grade listed as Incomplete (I). Source: <a href=\"https://www.fldoe.org/accountability/accountability-reporting/school-grades/index.stml\" target=\"_blank\" rel=\"noopener\">FLDOE School Grades 2026 (2025-26)</a>.","School site: <a href=\"https://www.iflagler.org\" target=\"_blank\" rel=\"noopener\">iflagler.org</a> · Phone: (386) 447-1520.","Quiet this week so far — no new meeting or news found for Nov. 23–29."], next:"Virtual school — see iflagler.org for enrollment and calendar.", timeline:[{d:"2026", t:"FLDOE lists iFlagler as Incomplete for 2025-26"}], mapsQ:"iFlagler Virtual School 5400 E Highway 100 Palm Coast FL"},
   {id:43, icon:"🛠", name:"Flagler Technical College", short:"Technical College · E Highway 100", address:"5400 E Highway 100, Palm Coast", type:"Postsecondary Career/Technical College · Adult Students", lat:29.47625, lng:-81.21132, cats:["schools"], active:false, badge:"NO K-12 GRADE", headline:"Flagler Technical College — postsecondary career and technical college for adult students. It receives no FLDOE K-12 school grade.", bullets:["Postsecondary career/technical college for adult students — it receives NO FLDOE K-12 school grade; no grade is shown for this school.","Site: <a href=\"https://flaglertech.edu/\" target=\"_blank\" rel=\"noopener\">flaglertech.edu</a> · Phone: (386) 447-4345.","Quiet this week so far — no new meeting or news found for Nov. 23–29."], next:"See flaglertech.edu for programs and enrollment.", timeline:[{d:"Now", t:"Operating — postsecondary technical college"}], mapsQ:"Flagler Technical College 5400 E Highway 100 Palm Coast FL"},
-  {id:44, icon:"🏛", name:"Flagler Schools — District Office", short:"District Office · Bunnell", address:"1769 E Moody Blvd, Bldg. 2, Bunnell", type:"School District Office · Flagler Schools", lat:29.4713, lng:-81.2468, cats:["schools"], active:false, badge:"DISTRICT GRADE A · 2026", headline:"Flagler Schools district office — district grade A in 2026, its first A in six years (FLDOE). 13,336 students in 2025-26.", bullets:["Superintendent: LaShakia Moore. Phone: (386) 437-7526.","District grade: A in 2026 — its first A since 2019 (first in six years). Source: <a href=\"https://www.fldoe.org/accountability/accountability-reporting/school-grades/index.stml\" target=\"_blank\" rel=\"noopener\">FLDOE School Grades 2026 (2025-26)</a>.","Enrollment: 13,336 students in 2025-26.","Quiet this week so far — no new meeting or news found for Nov. 23–29."], next:"District office in Bunnell — School Board meetings are on the separate School Board card.", timeline:[{d:"2026", t:"District earns FLDOE grade A — first since 2019"}], mapsQ:"Flagler Schools District Office 1769 E Moody Blvd Bunnell FL"},
+  {id:44, icon:"🏛", name:"Flagler Schools — District Office", short:"District Office · Bunnell", address:"1769 E Moody Blvd, Bldg. 2, Bunnell", type:"School District Office · Flagler Schools", lat:29.473399, lng:-81.245376, cats:["schools"], active:false, badge:"DISTRICT GRADE A · 2026", headline:"Flagler Schools district office — district grade A in 2026, its first A in six years (FLDOE). 13,336 students in 2025-26.", bullets:["Superintendent: LaShakia Moore. Phone: (386) 437-7526.","District grade: A in 2026 — its first A since 2019 (first in six years). Source: <a href=\"https://www.fldoe.org/accountability/accountability-reporting/school-grades/index.stml\" target=\"_blank\" rel=\"noopener\">FLDOE School Grades 2026 (2025-26)</a>.","Enrollment: 13,336 students in 2025-26.","Quiet this week so far — no new meeting or news found for Nov. 23–29."], next:"District office in Bunnell — School Board meetings are on the separate School Board card.", timeline:[{d:"2026", t:"District earns FLDOE grade A — first since 2019"}], mapsQ:"Flagler Schools District Office 1769 E Moody Blvd Bunnell FL"}, /* Nov 25: pin corrected from the retention pond SW of the GSB to the GSB main building centre, verified on satellite. */
   {id:45, icon:"🗳", name:"Flagler County School Board", short:"School Board · Meets at GSB, Bunnell", address:"1769 E Moody Blvd, Bunnell", type:"Elected Board · Flagler County School Board", lat:29.4726, lng:-81.2446, cats:["schools","meetings"], active:true, badge:"NEWS THIS WEEK", moneyAmount:"$3M", moneyLabel:"YMCA share", headline:"Board reorganizes Nov 17: Ramirez chair, Ruddy vice chair — and the $3M YMCA share and 2027-28 calendar pass.", bullets:["Nov 17 organizational meeting — Lauren Ramirez elected chair, Janie Ruddy vice chair; Cathy Moon and Rob Wood seated, Christy Chong re-elected. Members: Cathy Moon (District 1), Rob Wood (District 2), Janie Ruddy (District 3), Christy Chong (District 4), Lauren Ramirez (District 5). Chair: Lauren Ramirez. Vice chair: Janie Ruddy. Superintendent: LaShakia Moore. (Source: FlaglerLive, Nov 18, 2026)","Nov 17 — $3M YMCA share approved unanimously, 35-year lease toward the roughly $14M Palm Coast YMCA. (Sources: FlaglerLive, Nov 18, 2026; The Observer, Nov 18, 2026)","2027-28 school calendar approved 4-1, Ruddy opposed, 179 student days, first day Aug 10. (Source: official record — BoardDocs)"], next:"Next: agenda workshop Tue Dec 8, 3 p.m.; regular meeting Tue Dec 22, 6 p.m. (the board’s usual schedule — confirm on BoardDocs).", timeline:[{d:"Tue Nov 17", t:"Ramirez elected chair, Ruddy vice chair; Moon & Wood seated, Chong re-elected"},{d:"Tue Nov 17", t:"$3M YMCA share approved unanimously — 35-year lease"},{d:"Tue Nov 17", t:"2027-28 calendar approved 4-1 — 179 student days, first day Aug 10"},{d:"Tue Dec 8 · 3pm", t:"Next agenda workshop (usual schedule — confirm on BoardDocs)"},{d:"Tue Dec 22 · 6pm", t:"Next regular meeting (usual schedule — confirm on BoardDocs)"}], mapsQ:"Flagler County School Board 1769 E Moody Blvd Bunnell FL"},
   {id:46, icon:"🚒", name:"Flagler County Fire Rescue", short:"County Fire Rescue · Bunnell", address:"1769 E Moody Blvd, Bunnell", type:"County Fire Rescue · Flagler County", lat:29.4732, lng:-81.244, cats:["safety"], active:true, badge:"HEARING DEC 7", headline:"Dec 7 hearing: the County Commission considers using the tax bill to collect fire-rescue assessments — and the department passed its state EMS inspection in full.", bullets:["Mon Dec 7, 2026, 9:30 a.m., Board Chambers, 1769 E Moody Blvd, Bldg 2, Bunnell: the County Commission considers a resolution to use a uniform collection method (the tax bill) for fire-rescue assessments in unincorporated Flagler County, Beverly Beach, Bunnell and Marineland. Assessments would begin Oct 1, 2027 and continue annually unless the county ends them. (Source: public-hearing notice, Nov 12, 2026)","Flagler County Fire Rescue runs 13 stations across 571 square miles, staffed around the clock by paramedics and EMTs. (Source: <a href=\"https://www.flaglercounty.gov/County-Services/Public-Safety/Flagler-County-Fire-Rescue\" target=\"_blank\" rel=\"noopener\">flaglercounty.gov — Fire Rescue</a>)","It passed its 2026 Florida Department of Health EMS inspection on Oct 27, 2026, all areas in full compliance."], next:"Public hearing Mon Dec 7, 2026, 9:30 a.m., Board Chambers, 1769 E Moody Blvd, Bldg 2, Bunnell — fire-rescue assessments.", timeline:[{d:"Oct 27, 2026", t:"Passes Florida Dept. of Health EMS inspection — all areas in full compliance"},{d:"Mon Dec 7 · 9:30am", t:"Public hearing — uniform collection method for fire-rescue assessments"}], mapsQ:"Flagler County Fire Rescue 1769 E Moody Blvd Bunnell FL"}
 ];
@@ -1476,7 +1490,18 @@ function initMap(){
     /* scrollWheelZoom starts OFF (click-to-interact, wired below): with it
        on, Leaflet swallowed every page-scroll wheel tick over the map as a
        zoom-out, throwing the view out to a Florida-wide frame — Symptom B. */
-    map=L.map("map",{scrollWheelZoom:false,zoomControl:false}).setView([29.49,-81.24],11);
+    /* Keep the map inside Flagler County (owner, Nov 25): maxBounds is the
+       county boundary (Census TIGER/Line, FLAGLER_BOUNDARY above) padded a
+       little, with a hard stop at the edge (viscosity 1.0), and minZoom 10
+       so the county can never be panned out of frame toward Daytona or
+       Port Orange. minZoom 10 is the widest the county fit needs on a
+       390px phone, so the initial framing is unaffected. */
+    var countyBounds=null;
+    if(typeof FLAGLER_BOUNDARY!=="undefined"){
+      try{ countyBounds=L.geoJSON(FLAGLER_BOUNDARY).getBounds().pad(0.08); }catch(e){}
+    }
+    if(!countyBounds) countyBounds=L.latLngBounds([29.23,-81.56],[29.70,-81.00]);
+    map=L.map("map",{scrollWheelZoom:false,zoomControl:false,minZoom:10,maxBounds:countyBounds,maxBoundsViscosity:1.0}).setView([29.49,-81.24],11);
     L.control.zoom({position:"bottomright"}).addTo(map); /* bottom-right: reachable one-thumb on a phone */
     var streetTiles=L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"© OpenStreetMap contributors"});
     var satelliteTiles=L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",{maxZoom:19,attribution:"Esri, Maxar, Earthstar Geographics"});
@@ -2209,13 +2234,52 @@ function applyFilter(){
    Under 1024px only. Nearby pins (within CLUSTER_RADIUS_PX world pixels at
    the current zoom, greedy centroid grouping) collapse into one numbered
    bubble — gold if ANY member has news this week, gray if all are quiet.
-   A bubble tap only zooms toward its members; it never opens a building.
-   A pin tap still opens that building through selectFacility (unchanged).
+   A bubble tap zooms toward its members; it never opens a building —
+   except when the bubble cannot separate any further at max zoom, when
+   the tap opens a small chooser list of the places inside instead of
+   zooming again (openClusterPicker below). A pin tap still opens that
+   building through selectFacility (unchanged).
    Desktop (>=1024px) never enters this path: individual pins exactly as
    before, hover-highlight included. If anything here throws, the refresh
    falls back to the plain per-marker filter state. */
 var CLUSTER_RADIUS_PX=48;
+var CLUSTER_MAX_ZOOM=17; /* the deepest a bubble tap ever zooms (matches the old flyToBounds cap) */
 var clusterGroup=null, clusterMarkers=[], clusterLayers=[], clusterWired=false;
+/* Cluster picker: when a bubble's members cannot separate any further —
+   the map is already at (or past) the zoom the bubble's bounds would fit
+   at — tapping it lists the places inside to choose from instead of
+   zooming again. Members may be facilities (numeric key) or standalone
+   Big Projects ("p:<slug>"). */
+function clusterMemberLabel(m){
+  if(typeof m.key==="string"&&m.key.indexOf("p:")===0){
+    var pr=null; PROJECTS.forEach(function(x){ if("p:"+x.slug===m.key) pr=x; });
+    return pr?{name:pr.name,sub:"Big Project · "+pr.status,kind:"project",slug:pr.slug}:null;
+  }
+  var f=null; FACILITIES.forEach(function(x){ if(x.id===m.key) f=x; });
+  return f?{name:f.name,sub:f.address||"",kind:"facility",id:f.id}:null;
+}
+function openClusterPicker(members,latlng){
+  if(!map) return;
+  var items=[];
+  members.forEach(function(m){ var l=clusterMemberLabel(m); if(l) items.push(l); });
+  if(items.length<2) return;
+  var div=document.createElement("div");
+  div.className="cluster-picker";
+  var h=document.createElement("div"); h.className="cluster-picker-title"; h.textContent=items.length+" places here — choose one:"; div.appendChild(h);
+  items.forEach(function(it){
+    var btn=document.createElement("button"); btn.type="button"; btn.className="cluster-picker-item";
+    var nm=document.createElement("span"); nm.className="cluster-picker-name"; nm.textContent=it.name;
+    var sb=document.createElement("span"); sb.className="cluster-picker-sub"; sb.textContent=it.sub;
+    btn.appendChild(nm); btn.appendChild(sb);
+    btn.addEventListener("click",function(){
+      if(map) map.closePopup();
+      if(it.kind==="project"){ if(typeof selectProject==="function") selectProject(it.slug,true); }
+      else selectFacility(it.id,true);
+    });
+    div.appendChild(btn);
+  });
+  L.popup({closeButton:true,className:"cluster-picker-popup",maxWidth:280,minWidth:220}).setLatLng(latlng).setContent(div).openOn(map);
+}
 function clusterModeOn(){ return typeof window!=="undefined" && window.innerWidth<1024; }
 function clusterVisible(f){ return currentFilter==="all"||f.cats.indexOf(currentFilter)>-1; }
 function clusterDetachedId(){
@@ -2307,12 +2371,15 @@ function refreshClusters(){
       lat/=g.members.length; lng/=g.members.length;
       var html='<div class="cluster-bubble'+(anyNews?" cluster-gold":" cluster-gray")+'">'+g.members.length+'</div>';
       var b=L.marker([lat,lng],{icon:L.divIcon({className:"",html:html,iconSize:[40,40],iconAnchor:[20,20]}),interactive:true}).addTo(map);
-      (function(members){
+      (function(members,lat,lng){
         b.on("click",function(){
           var bounds=L.latLngBounds(members.map(function(m){ return [m.lat,m.lng]; }));
-          map.flyToBounds(bounds.pad(0.25),{maxZoom:17,duration:reduced?0:0.7});
+          var targetZoom=CLUSTER_MAX_ZOOM;
+          try{ targetZoom=Math.min(map.getBoundsZoom(bounds.pad(0.25)),CLUSTER_MAX_ZOOM); }catch(e){}
+          if(map.getZoom()>=targetZoom){ openClusterPicker(members,[lat,lng]); return; }
+          map.flyToBounds(bounds.pad(0.25),{maxZoom:CLUSTER_MAX_ZOOM,duration:reduced?0:0.7});
         });
-      })(g.members);
+      })(g.members,lat,lng);
       clusterLayers.push(b);
     });
   }catch(e){
@@ -2387,10 +2454,21 @@ function addMobileMapControls(streetTiles,satelliteTiles){
     }catch(err){}
   });
 }
+/* Mobile chips row: keep the selected chip visible — the row scrolls
+   horizontally under 1024px, so center the active chip in it. Desktop
+   never scrolls (the row wraps there, all chips visible). */
+function scrollChipIntoView(name){
+  if(typeof window==="undefined"||window.innerWidth>=1024) return;
+  var chips=document.querySelector(".toolbar-top .chips"); if(!chips) return;
+  var chip=chips.querySelector('.chip[data-filter="'+name+'"]'); if(!chip) return;
+  var target=chip.offsetLeft+chip.offsetWidth/2-chips.clientWidth/2;
+  try{ chips.scrollTo({left:target,behavior:reduced?"auto":"smooth"}); }catch(e){ chips.scrollLeft=target; }
+}
 function setFilter(name){
   currentFilter=name;
   document.querySelectorAll(".chip[data-filter]").forEach(function(c){ c.setAttribute("aria-pressed", c.getAttribute("data-filter")===name?"true":"false"); });
   applyFilter();
+  scrollChipIntoView(name);
 }
 document.querySelectorAll(".chip[data-filter]").forEach(function(ch){
   ch.addEventListener("click",function(){ setFilter(ch.getAttribute("data-filter")); });
