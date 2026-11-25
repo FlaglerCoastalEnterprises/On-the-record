@@ -810,7 +810,7 @@ html,body{overflow-x:clip}
 <section class="glance" aria-label="This week at a glance">
   <div class="eyebrow">This week at a glance — Nov 23–29</div>
   <div class="glance-grid">
-    <div class="glance-card" id="glanceBoards"><div class="num" id="statBoards">1<small> of </small>5</div><h4>Boards met</h4><p>Only Bunnell met — Mon Nov 23; its wastewater vote and rezonings are still unreported, though the commission unanimously approved the interim manager's clean-up steps. The County Commission, School Board, Palm Coast Council &amp; Flagler Beach did not meet; their next meetings are on their pins.</p></div>
+    <div class="glance-card" id="glanceBoards"><div class="num" id="statBoards">1<small> of </small>5<small> boards met this week</small></div><h4>Boards met</h4><p>Only Bunnell met — Mon Nov 23; its wastewater vote and rezonings are still unreported, though the commission unanimously approved the interim manager's clean-up steps. The County Commission, School Board, Palm Coast Council &amp; Flagler Beach did not meet; their next meetings are on their pins.</p></div>
     <div class="glance-card" id="glanceFacilities"><div class="num" id="statFacilities">46</div><h4>Facilities mapped</h4><p>Every major public building in the county gets a living page — gold where news happened, gray where it was quiet.</p></div>
     <a class="glance-card" id="glanceReturned" href="#building=flagler-county-sheriffs-office"><div class="num" id="statReturned">$4<small>M</small></div><h4>Returned to the county</h4><p>The Sheriff's Office returned $4 million in unspent funds to the county — money left over from its federal ICE detention contracts.</p><span class="glance-src">Source: FlaglerLive, Nov. 23, 2026</span></a>
     <a class="glance-card" id="glanceAmendment" href="#building=government-services-building"><div class="num" id="statAmendment">About $60<small>M</small></div><h4>Amendment 3 cuts</h4><p>FlaglerLive reports the county faces 'cataclysmic' cuts of about $60 million — plus layoffs and potential new fees and taxes. A special taxing district for policing is being explored.</p><span class="glance-src">Source: FlaglerLive, Nov. 2026</span></a>
@@ -1384,7 +1384,7 @@ function renderGlance(){
     (f.timeline||[]).forEach(function(t){ if(/Nov 2[3-9]/.test(t.d)&&/\bmet\b/i.test(t.t)&&!/no .*meeting/i.test(t.t)) held=true; });
     if(held) met++;
   });
-  setGlanceStat("glanceBoards","statBoards",(met>0&&boardsTotal>0)?(met+'<small> of </small>'+boardsTotal):null);
+  setGlanceStat("glanceBoards","statBoards",(met>0&&boardsTotal>0)?(met+'<small> of </small>'+boardsTotal+'<small> boards met this week</small>'):null);
   // Returned to the county — the dollar figure as stated on the Sheriff's card.
   var ret=moneyFigure(facilityById(10),/returned\s+\$(\d+(?:\.\d+)?)\s*million/i);
   setGlanceStat("glanceReturned","statReturned",ret?("$"+ret+"<small>M</small>"):null);
