@@ -1,0 +1,285 @@
+[
+ {
+  "slug": "walmart-flagler-landings",
+  "name": "Walmart Supercenter — Flagler Landings",
+  "location": "South side of State Road 100, just west of BJ’s Wholesale · Palm Coast",
+  "lat": 29.473,
+  "lng": -81.2021,
+  "size": "38.81 acres · Walmart Supercenter of 186,276 sq ft approved · about 242,000 sq ft at full buildout (future retail and a fuel station follow by separate applications)",
+  "developer": "Flagler Pines Properties LLC (landowner) · Flagler Venture, LLC (applicant)",
+  "status": "Council approved",
+  "facilityId": null,
+  "timeline": [
+   {
+    "date": "Nov. 4, 2025",
+    "text": "City Council annexes the property into Palm Coast at the applicant’s request.",
+    "source": "City of Palm Coast agenda packet, Sept. 1, 2026",
+    "url": "https://www.palmcoast.gov/agendas"
+   },
+   {
+    "date": "Feb. 2026",
+    "text": "Technical Site Plan — Tier 3 (Application #6587) submitted for a big-box anchor tenant on ±38.81 acres.",
+    "source": "City of Palm Coast agenda packet, Sept. 1, 2026",
+    "url": "https://www.palmcoast.gov/agendas"
+   },
+   {
+    "date": "June 17, 2026",
+    "text": "Planning & Land Development Regulation Board recommends approval with conditions, 5–0.",
+    "source": "PLDRB minutes and approving resolution — City of Palm Coast",
+    "url": "https://www.palmcoast.gov/agendas"
+   },
+   {
+    "date": "Sept. 1, 2026",
+    "text": "City Council approves the technical site plan 5–0, with conditions. The anchor is set at 186,276 sq ft; the ±55,172 sq ft of future retail and the ±1,618 sq ft fuel station move to separate applications.",
+    "source": "City Council meeting record, Sept. 1, 2026",
+    "url": "https://www.palmcoast.gov/agendas"
+   },
+   {
+    "date": "Sept. 1, 2026",
+    "text": "Council also approves the proportionate-share and impact-fee agreement 5–0 — a $4.1 million share toward SR-100 improvements, with corridor work required at Site Development Permit issuance.",
+    "source": "City Council meeting record, Sept. 1, 2026",
+    "url": "https://www.palmcoast.gov/agendas"
+   },
+   {
+    "date": "Next",
+    "text": "A Site Development Permit follows once the remaining staff conditions are resolved; the SR-100 traffic improvements must be operational before construction begins, and conditions must be satisfied before building permits.",
+    "source": "Daytona Beach News-Journal, Sept. 4, 2026",
+    "url": "https://www.news-journalonline.com/story/news/local/flagler/2026/09/04/palm-coast-oks-walmart-site-pending-road-upgrades/91559349007/"
+   }
+  ],
+  "sources": [
+   {
+    "label": "FlaglerLive — Walmart on SR-100 (project page)",
+    "url": "https://flaglerlive.com/walmart-sr100"
+   },
+   {
+    "label": "Palm Coast agenda center — Application #6587 packet, minutes and resolutions",
+    "url": "https://www.palmcoast.gov/agendas"
+   },
+   {
+    "label": "Daytona Beach News-Journal — “Palm Coast OKs Walmart site pending road upgrades,” Sept. 4, 2026",
+    "url": "https://www.news-journalonline.com/story/news/local/flagler/2026/09/04/palm-coast-oks-walmart-site-pending-road-upgrades/91559349007/"
+   }
+  ]
+ },
+ {
+  "slug": "palm-coast-ymca-town-center",
+  "name": "Palm Coast YMCA — Town Center",
+  "location": "1580 Central Ave, Palm Coast (Town Center)",
+  "lat": 29.48449,
+  "lng": -81.19767,
+  "size": "About $14M facility · Olympic-size pool · 35-year lease at $1/year on city land",
+  "developer": "Volusia/Flagler YMCA",
+  "status": "Council approved",
+  "facilityId": 4,
+  "timeline": [
+   {
+    "date": "Oct. 20, 2026",
+    "text": "Palm Coast City Council approves the city’s $3.25M share, contingent on the School Board’s $3M share.",
+    "source": "FlaglerLive, Nov. 2026",
+    "url": "https://www.palmcoast.gov/agendas"
+   },
+   {
+    "date": "Nov. 17, 2026",
+    "text": "Flagler County School Board unanimously approves the 35-year lease and its $3M share — the project’s final approval hurdle.",
+    "source": "FlaglerLive + The Observer, Nov. 18, 2026",
+    "url": "https://go.boarddocs.com/fla/flcsd/Board.nsf/Public"
+   },
+   {
+    "date": "Next",
+    "text": "Construction planning for the Town Center site — no construction start date on record yet.",
+    "source": "Town Center — Future YMCA Site card, this site",
+    "url": ""
+   }
+  ],
+  "sources": [
+   {
+    "label": "Palm Coast agenda center",
+    "url": "https://www.palmcoast.gov/agendas"
+   },
+   {
+    "label": "Flagler Schools BoardDocs",
+    "url": "https://go.boarddocs.com/fla/flcsd/Board.nsf/Public"
+   }
+  ]
+ },
+ {
+  "slug": "town-center-land-purchase",
+  "name": "Town Center Land Purchase",
+  "location": "Town Center, Palm Coast — 23 parcels",
+  "lat": 29.48647,
+  "lng": -81.20768,
+  "size": "$17 million · 23 parcels · about 259 acres",
+  "developer": "City of Palm Coast (buyer) · Palm Coast Holdings/Allete (seller)",
+  "status": "Council approved",
+  "facilityId": 3,
+  "timeline": [
+   {
+    "date": "Aug. 19, 2026",
+    "text": "City Council approves the $17M purchase of 23 Town Center parcels, 4–1.",
+    "source": "Palm Coast City Hall card, this site (FlaglerLive on the purchase)",
+    "url": "https://www.palmcoast.gov/agendas"
+   },
+   {
+    "date": "Oct. 20, 2026",
+    "text": "Council approves an $11 million loan to pay for the purchase.",
+    "source": "Palm Coast City Hall card, this site",
+    "url": "https://www.palmcoast.gov/agendas"
+   },
+   {
+    "date": "Nov. 2026",
+    "text": "The city closes on the 23 parcels — about 259 acres — settling its lawsuit with Palm Coast Holdings/Allete.",
+    "source": "Palm Coast City Hall card, this site",
+    "url": "https://www.palmcoast.gov/agendas"
+   }
+  ],
+  "sources": [
+   {
+    "label": "Palm Coast agenda center",
+    "url": "https://www.palmcoast.gov/agendas"
+   }
+  ]
+ },
+ {
+  "slug": "lakeview-estates-matanzas",
+  "name": "Lakeview Estates — Former Matanzas Golf Course",
+  "location": "398 Lakeview Blvd, Palm Coast — the 280-acre former Matanzas golf course",
+  "lat": 29.61787,
+  "lng": -81.26994,
+  "size": "280 acres · 250 single-family homes · 250,000 sq ft of neighborhood commercial · an ~11-acre community park",
+  "developer": "Not verified yet",
+  "status": "Council approved",
+  "facilityId": 30,
+  "timeline": [
+   {
+    "date": "2021",
+    "text": "Lakeview Estates approved on the former Matanzas golf course (up to 272 homes).",
+    "source": "Lakeview Estates card, this site (Daytona Beach News-Journal)",
+    "url": "https://www.palmcoast.gov/agendas"
+   },
+   {
+    "date": "Sept. 1, 2026",
+    "text": "City Council tables the comprehensive-plan and MPD amendments 4–1, pending arsenic soil testing and other items.",
+    "source": "City Council meeting record, Sept. 1, 2026",
+    "url": "https://www.palmcoast.gov/agendas"
+   },
+   {
+    "date": "Oct. 20, 2026",
+    "text": "Council approves the revised plans — 39 more homes (250 total), 250,000 sq ft of commercial on Tract 9 fronting US-1, and an ~11-acre park on Tract 8; buffers raised and a soil test for arsenic required.",
+    "source": "Lakeview Estates card, this site (Daytona Beach News-Journal; city agenda packet)",
+    "url": "https://www.palmcoast.gov/agendas"
+   }
+  ],
+  "sources": [
+   {
+    "label": "Palm Coast agenda center",
+    "url": "https://www.palmcoast.gov/agendas"
+   }
+  ]
+ },
+ {
+  "slug": "evolve-palm-coast-phase-2",
+  "name": "Evolve Palm Coast — Phase 2",
+  "location": "11 Evolve Pkwy, Palm Coast — US-1 at Whiteview Pkwy",
+  "lat": 29.53174,
+  "lng": -81.2616,
+  "size": "96 apartments in four three-story buildings · 352 homes in total with Phase 1 (built and leasing)",
+  "developer": "Not verified yet",
+  "status": "Council approved",
+  "facilityId": 29,
+  "timeline": [
+   {
+    "date": "Nov. 18, 2026",
+    "text": "The Planning & Land Development Regulation Board approves the Phase 2 Technical Site Plan (Application No. 6796), and the city issues the Development Order the same day.",
+    "source": "City of Palm Coast PLDRB packet, Nov. 18, 2026 (item D.3)",
+    "url": "https://www.palmcoast.gov/agendas"
+   },
+   {
+    "date": "Next",
+    "text": "Conditions before building: school-concurrency sign-off, a FEMA flood-map amendment ahead of the site permit, and recreation finished before anyone moves in. Construction start not yet announced.",
+    "source": "City of Palm Coast PLDRB packet, Nov. 18, 2026",
+    "url": "https://www.palmcoast.gov/agendas"
+   }
+  ],
+  "sources": [
+   {
+    "label": "Palm Coast agenda center",
+    "url": "https://www.palmcoast.gov/agendas"
+   }
+  ]
+ },
+ {
+  "slug": "dc-blox-cable-landing-station",
+  "name": "DC BLOX Cable Landing Station",
+  "location": "1035 Town Center Blvd, Palm Coast",
+  "lat": 29.49298,
+  "lng": -81.19528,
+  "size": "33,760 sq ft · U.S. landing station for Google’s Sol subsea cable (Spain–Azores–Bermuda–Florida)",
+  "developer": "DC BLOX",
+  "status": "Under construction",
+  "facilityId": 31,
+  "timeline": [
+   {
+    "date": "Apr. 8, 2026",
+    "text": "Building permit issued.",
+    "source": "City of Palm Coast",
+    "url": "https://www.palmcoast.gov/cls"
+   },
+   {
+    "date": "Now",
+    "text": "Under construction in Town Center. The Sol cable comes ashore at Flagler Beach and runs inland to this site; no second building has been submitted or approved.",
+    "source": "City of Palm Coast",
+    "url": "https://www.palmcoast.gov/cls"
+   },
+   {
+    "date": "Q1 2027",
+    "text": "Expected operational.",
+    "source": "DC BLOX (company), via City of Palm Coast",
+    "url": "https://www.palmcoast.gov/cls"
+   }
+  ],
+  "sources": [
+   {
+    "label": "City of Palm Coast — cable landing station page",
+    "url": "https://www.palmcoast.gov/cls"
+   }
+  ]
+ },
+ {
+  "slug": "flagler-beach-pier-replacement",
+  "name": "Flagler Beach Pier Replacement",
+  "location": "S Ocean Shore Blvd, Flagler Beach",
+  "lat": 29.47879,
+  "lng": -81.12631,
+  "size": "New concrete pier · deck 28 ft above sea level · pylons driven 80–125 ft deep",
+  "developer": "City of Flagler Beach",
+  "status": "Under construction",
+  "facilityId": 8,
+  "timeline": [
+   {
+    "date": "Fall 2022",
+    "text": "The old pier closes; a concrete replacement follows.",
+    "source": "Flagler Beach Pier card, this site",
+    "url": "https://flaglerbeach-fl.municodemeetings.com/"
+   },
+   {
+    "date": "Now",
+    "text": "The new concrete pier is under construction — pylons driven 80–125 ft deep, deck rising 28 ft above the sea. Commission decision: no access charge for the first year or two; planned open hours 5 a.m.–10 p.m.",
+    "source": "Flagler Beach Pier card, this site",
+    "url": "https://flaglerbeach-fl.municodemeetings.com/"
+   },
+   {
+    "date": "Jan. 2027",
+    "text": "Substantial completion targeted for January 2027, with a spring opening planned.",
+    "source": "Flagler Beach Pier card, this site",
+    "url": "https://flaglerbeach-fl.municodemeetings.com/"
+   }
+  ],
+  "sources": [
+   {
+    "label": "Flagler Beach meetings hub",
+    "url": "https://flaglerbeach-fl.municodemeetings.com/"
+   }
+  ]
+ }
+]

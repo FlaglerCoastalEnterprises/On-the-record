@@ -688,6 +688,14 @@ html,body{overflow-x:clip}
 .money-amount{font-family:var(--serif);font-size:26px;font-weight:800;color:var(--navy);line-height:1;margin:6px 0 2px}
 .money-amount small{font-size:13px;color:var(--gold-dark);font-family:Inter,sans-serif;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
 .status-label{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;padding:5px 9px;border-radius:999px;background:#E8EDF7;color:#2B4A77;border:1px solid #C9D6EE;margin-top:6px}
+/* ===== Big Projects tracker (added Nov 25, 2026) ===== */
+.pin-proj{background:linear-gradient(135deg,var(--navy3),var(--navy));border-color:var(--gold2)}
+.pin-proj span{color:var(--gold2);font-size:13px;line-height:1}
+.proj-facts{margin-top:12px;background:rgba(255,255,255,.07);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.proj-fact{font-size:13.5px;line-height:1.55;color:#D8E1EE;padding:2px 0}
+.proj-fact strong{color:var(--gold2);font-weight:800;letter-spacing:.05em;text-transform:uppercase;font-size:10.5px;margin-right:7px}
+.proj-srcs{font-size:13.5px;line-height:1.8}
+.proj-srcs a{color:var(--navy);font-weight:700}
 .grade-chip{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.05em;padding:5px 10px;border-radius:999px;background:var(--gold);color:#0A2342;margin-top:6px}
 .grouped-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px;margin-top:9px}
 .grouped-card h4{margin:0;font-family:var(--serif);font-size:17px;color:var(--navy)}
@@ -943,6 +951,7 @@ html,body{overflow-x:clip}
     <p class="topic-desc" id="topicDesc"></p>
     <div id="topicSummary"></div>
     <div id="topicSpecial"></div>
+    <div id="topicProjects"></div>
     <div id="topicKeyDates"></div>
     <div id="topicStories"></div>
     <div id="topicDecisions"></div>
@@ -1339,7 +1348,7 @@ function facilityById(id){ for(var i=0;i<FACILITIES.length;i++){ if(FACILITIES[i
 function deepLinkFor(f){ return "#building="+encodeURIComponent(f.slug); }
 function slugFromHash(){ try{ var h=window.location.hash||""; var m=h.match(/building=([a-z0-9\-]+)/i); return m?decodeURIComponent(m[1]):null; }catch(e){ return null; } }
 function setHashFor(f,replace){ try{ var url="#building="+encodeURIComponent(f.slug); if(replace===false){ window.location.hash="building="+encodeURIComponent(f.slug); } else if(window.history&&window.history.replaceState){ window.history.replaceState(null,"",url); } else { window.location.hash="building="+encodeURIComponent(f.slug); } }catch(e){} }
-var map=null, markers={}, currentFilter="all", selectedId=1, mapReady=false, opened=true, pendingFilter=null, viewMode="map", currentQuery="", userInteracted=false;
+var map=null, markers={}, projectMarkers={}, selectedProjectSlug=null, currentFilter="all", selectedId=1, mapReady=false, opened=true, pendingFilter=null, viewMode="map", currentQuery="", userInteracted=false;
 var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /* ---------- GLOBE (canvas wireframe) ---------- */
@@ -1486,6 +1495,14 @@ function initMap(){
       m.bindPopup("<strong style='font-family:Source Serif 4,Merriweather,Georgia,serif;font-size:15px'>"+f.name+"</strong><br>"+f.address+"<br><em style='color:#715628'>"+f.badge+"</em>");
       m.on("click",function(){ userInteracted=true; selectFacility(f.id,false); });
       markers[f.id]=m;
+    });
+    PROJECTS.forEach(function(p){
+      if(p.facilityId) return; /* facility-linked projects ride their building's pin — never double-pinned */
+      if(!isFinite(p.lat)||!isFinite(p.lng)) return;
+      var pm=L.marker([p.lat,p.lng],{icon:iconForProject(p)}).addTo(map);
+      pm.bindPopup("<strong style='font-family:Source Serif 4,Merriweather,Georgia,serif;font-size:15px'>"+p.name+"</strong><br>"+p.location+"<br><em style='color:#715628'>Big Project · "+p.status+"</em>");
+      pm.on("click",function(){ userInteracted=true; selectProject(p.slug,false); });
+      projectMarkers[p.slug]=pm;
     });
     TOWNS.forEach(function(t){
       L.marker([t.lat,t.lng],{interactive:false,keyboard:false,zIndexOffset:-1000,icon:L.divIcon({className:"town-label",html:"<span>"+t.name+"</span>"})}).addTo(map);
@@ -1788,6 +1805,10 @@ function goToSearchResult(f){
 })();
 
 /* ---------- MAP APP ---------- */
+function iconForProject(p){
+  var html='<div class="custom-pin" id="ppin-'+p.slug+'"><div class="pin-core pin-proj"><span>◆</span></div></div>';
+  return L.divIcon({className:"",html:html,iconSize:[38,38],iconAnchor:[19,19],popupAnchor:[0,-16]});
+}
 function iconFor(f,i){
   var cls=f.active?"pin-gold":"pin-gray";
   var pulse=f.active?'<div class="pin-pulse"></div>':'';
@@ -2025,6 +2046,7 @@ document.getElementById("viewListBtn").addEventListener("click",function(){ setV
 function selectFacility(id,fly,programmatic){
   var prevSelectedId=selectedId;
   selectedId=id;
+  selectedProjectSlug=null;
   var f=FACILITIES.filter(function(x){ return x.id===id; })[0];
   if(!f) return;
   /* Genuine gestures only — a pin, card, list or search-result click —
@@ -2104,6 +2126,59 @@ function selectFacility(id,fly,programmatic){
     document.getElementById("detailPanel").scrollIntoView({behavior:reduced?"auto":"smooth",block:"start"});
   }
 }
+/* ---------- BIG PROJECTS: deep links, selection, panel ---------- */
+function projectSlugFromHash(){ try{ var h=window.location.hash||""; var m=h.match(/project=([a-z0-9\-]+)/i); return m?decodeURIComponent(m[1]):null; }catch(e){ return null; } }
+function setHashForProject(p){ try{ var url="#project="+encodeURIComponent(p.slug); if(window.history&&window.history.replaceState){ window.history.replaceState(null,"",url); } else { window.location.hash="project="+encodeURIComponent(p.slug); } }catch(e){} }
+function projectCoords(p){ if(isFinite(p.lat)&&isFinite(p.lng)) return [p.lat,p.lng]; var f=p.facilityId?facilityById(p.facilityId):null; return (f&&hasCoords(f))?[f.lat,f.lng]:null; }
+function selectProject(slug,fly,programmatic){
+  var p=projectBySlug(slug); if(!p) return;
+  if(!programmatic) userInteracted=true;
+  selectedProjectSlug=slug;
+  setHashForProject(p);
+  document.title=p.name+" — On The Record";
+  var panelEl=document.getElementById("detailPanel"); if(panelEl) panelEl.classList.remove("panel-closed");
+  var layoutEl=document.querySelector(".layout"); if(layoutEl) layoutEl.classList.remove("panel-is-closed");
+  window.__panelAutoDefault=null;
+  renderProjectPanel(p);
+  if(panelEl) panelEl.scrollTop=0;
+  var coords=projectCoords(p);
+  var marker=p.facilityId?markers[p.facilityId]:projectMarkers[p.slug];
+  function showPin(){
+    if(!map||!coords) return;
+    if(marker&&!map.hasLayer(marker)) marker.addTo(map);
+    if(fly) map.flyTo(coords,Math.max(map.getZoom(),12),{duration:reduced?0:1.1,easeLinearity:0.12});
+    if(marker) setTimeout(function(){ try{ marker.openPopup(); }catch(e){} }, reduced?0:500);
+  }
+  if(map) showPin();
+  else if(fly&&coords) ensureMap(showPin);
+  if(window.innerWidth<1024){
+    if(window.__sheetSet) window.__sheetSet("peek");
+    if(panelEl) panelEl.scrollIntoView({behavior:reduced?"auto":"smooth",block:"start"});
+  }
+  if(map&&clusterModeOn()) refreshClusters();
+}
+function renderProjectPanel(p){
+  var panel=document.getElementById("detailPanel"); if(!panel) return;
+  var f=p.facilityId?facilityById(p.facilityId):null;
+  var icon=f?f.icon:"🏗";
+  var tl=p.timeline.map(function(t,i){
+    var src=t.source?'<div class="src-line">Source: '+(t.url?'<a href="'+t.url+'" target="_blank" rel="noopener">'+escT(t.source)+' ↗</a>':escT(t.source))+'</div>':"";
+    return '<div class="tl-item" style="animation-delay:'+(i*0.08)+'s"><div class="tl-date">'+escT(t.date)+'</div><div class="tl-text">'+t.text+src+'</div></div>';
+  }).join("");
+  var srcs=p.sources.map(function(s){ return '<div><a href="'+s.url+'" target="_blank" rel="noopener">'+escT(s.label)+' ↗</a></div>'; }).join("");
+  panel.innerHTML='<div class="panel-inner"><button class="panel-close" id="panelClose" type="button" aria-label="Close this project’s panel">×</button><div class="panel-head"><div class="medallion" aria-hidden="true">'+icon+'</div><div class="eyebrow">Big Project · Development Tracker</div><h2>'+p.name+'</h2><div class="panel-addr">'+p.location+'</div><div style="margin-top:10px"><span class="status-label">Status: '+p.status+'</span></div><div class="proj-facts"><div class="proj-fact"><strong>Size</strong>'+p.size+'</div><div class="proj-fact"><strong>Developer</strong>'+p.developer+'</div></div></div>'+
+  '<div class="panel-body"><div class="section-label">Timeline — every vote on record</div><div class="timeline">'+tl+'</div>'+
+  '<div class="section-label">Sources</div><div class="proj-srcs">'+srcs+'</div>'+
+  '<div class="panel-actions">'+(f?'<button class="btn btn-share" id="projBuildingBtn" type="button">See the building card →</button>':'')+'<a class="btn btn-gold" target="_blank" rel="noopener" href="'+mapsLink(p.name+" "+p.location+" FL")+'">Open in Maps ↗</a>'+(!f?'<button class="btn" id="projZoomBtn" type="button">Zoom to pin</button>':'')+'</div>'+
+  '<div class="panel-report"><a href="mailto:coastalenterprises386@gmail.com?subject='+encodeURIComponent("Error report: "+p.name)+'">Report an error on this card</a></div></div></div>';
+  refreshMapSize(80);
+  var pcb=document.getElementById("panelClose");
+  if(pcb) pcb.addEventListener("click",function(){ closePanel(); });
+  var bb=document.getElementById("projBuildingBtn");
+  if(bb&&f) bb.addEventListener("click",function(){ selectFacility(f.id,true); });
+  var zb=document.getElementById("projZoomBtn");
+  if(zb) zb.addEventListener("click",function(){ var c=projectCoords(p); if(map&&c) map.flyTo(c,14,{duration:reduced?0:1,easeLinearity:0.12}); var mw=document.querySelector(".map-wrap"); if(mw) mw.scrollIntoView({behavior:reduced?"auto":"smooth",block:"start"}); });
+}
 function closePanel(){
   window.__panelAutoDefault=null; /* a deliberate close takes ownership of the panel state (bootApp re-arms it after imposing the mobile boot default) */
   var panelEl=document.getElementById("detailPanel"); if(panelEl) panelEl.classList.add("panel-closed");
@@ -2120,6 +2195,12 @@ function applyFilter(){
       var m=markers[f.id]; if(!m) return;
       if(show){ if(!map.hasLayer(m)) m.addTo(map); } else if(map.hasLayer(m)) map.removeLayer(m);
     });
+    PROJECTS.forEach(function(p){
+      if(p.facilityId) return;
+      var pm=projectMarkers[p.slug]; if(!pm) return;
+      var showP=currentFilter==="all"||currentFilter==="development";
+      if(showP){ if(!map.hasLayer(pm)) pm.addTo(map); } else if(map.hasLayer(pm)) map.removeLayer(pm);
+    });
   }
   renderCards();
   if(viewMode==="list") renderList();
@@ -2134,83 +2215,120 @@ function applyFilter(){
    before, hover-highlight included. If anything here throws, the refresh
    falls back to the plain per-marker filter state. */
 var CLUSTER_RADIUS_PX=48;
-var clusterGroup=null, clusterMarkers=[], clusterWired=false;
+var clusterGroup=null, clusterMarkers=[], clusterLayers=[], clusterWired=false;
 function clusterModeOn(){ return typeof window!=="undefined" && window.innerWidth<1024; }
 function clusterVisible(f){ return currentFilter==="all"||f.cats.indexOf(currentFilter)>-1; }
 function clusterDetachedId(){
-  /* The facility whose panel is actually open keeps its own pin: every
-     selection path (pin, card, list, search, deep link) opens the panel,
-     and a deliberate close lets the pin re-cluster on the next refresh. */
   var panel=document.getElementById("detailPanel");
-  if(panel&&!panel.classList.contains("panel-closed")&&typeof selectedId!=="undefined") return selectedId;
+  if(panel&&!panel.classList.contains("panel-closed")){
+    if(typeof selectedProjectSlug!=="undefined"&&selectedProjectSlug) return "p:"+selectedProjectSlug;
+    if(typeof selectedId!=="undefined") return selectedId;
+  }
   return null;
 }
 function clusterGroups(){
-  /* Grouping over world-pixel coordinates at the current zoom —
-     pan-independent, so it is directly testable. */
   var zoom=map.getZoom(), detached=clusterDetachedId(), pts=[];
   FACILITIES.forEach(function(f){
     if(!hasCoords(f)||!clusterVisible(f)||f.id===detached) return;
     var p=map.project([f.lat,f.lng],zoom);
-    pts.push({f:f,x:p.x,y:p.y});
+    pts.push({key:f.id,lat:f.lat,lng:f.lng,active:!!f.active,x:p.x,y:p.y});
   });
-  var groups=[];
+  PROJECTS.forEach(function(pr){
+    if(pr.facilityId) return;
+    if(!isFinite(pr.lat)||!isFinite(pr.lng)) return;
+    if(!(currentFilter==="all"||currentFilter==="development")) return;
+    var key="p:"+pr.slug;
+    if(key===detached) return;
+    var p=map.project([pr.lat,pr.lng],zoom);
+    pts.push({key:key,lat:pr.lat,lng:pr.lng,active:false,x:p.x,y:p.y});
+  });
+  var groups=[], used={};
   pts.forEach(function(pt){
-    var hit=null;
-    for(var i=0;i<groups.length;i++){
-      var g=groups[i], dx=pt.x-g.cx, dy=pt.y-g.cy;
-      if(Math.sqrt(dx*dx+dy*dy)<=CLUSTER_RADIUS_PX){ hit=g; break; }
+    if(used[pt.key]) return;
+    var members=[pt]; used[pt.key]=true;
+    var cx=pt.x, cy=pt.y, changed=true;
+    while(changed){
+      changed=false;
+      pts.forEach(function(q){
+        if(used[q.key]) return;
+        var dx=q.x-cx, dy=q.y-cy;
+        if(Math.sqrt(dx*dx+dy*dy)<=CLUSTER_RADIUS_PX){ members.push(q); used[q.key]=true; changed=true; }
+      });
+      if(changed){ cx=0; cy=0; members.forEach(function(m){ cx+=m.x; cy+=m.y; }); cx/=members.length; cy/=members.length; }
     }
-    if(!hit){ hit={members:[],cx:0,cy:0}; groups.push(hit); }
-    hit.members.push(pt);
-    var sx=0, sy=0;
-    hit.members.forEach(function(m){ sx+=m.x; sy+=m.y; });
-    hit.cx=sx/hit.members.length; hit.cy=sy/hit.members.length;
+    groups.push({members:members});
   });
   return groups;
 }
 function clearClusters(){
   if(clusterGroup&&map){ try{ map.removeLayer(clusterGroup); }catch(e){} }
   clusterGroup=null; clusterMarkers=[];
+  if(map){ clusterLayers.forEach(function(b){ try{ map.removeLayer(b); }catch(e){} }); }
+  clusterLayers=[];
 }
 function refreshClusters(){
-  if(!map||!window.L||!clusterModeOn()) return;
-  try{
+  if(!map) return;
+  if(!clusterModeOn()){
     clearClusters();
-    clusterGroup=L.layerGroup().addTo(map);
-    var inCluster={};
-    clusterGroups().forEach(function(g){
-      if(g.members.length<2) return;
-      g.members.forEach(function(m){ inCluster[m.f.id]=true; });
-      var anyNews=g.members.some(function(m){ return !!m.f.active; });
-      var lat=0, lng=0;
-      g.members.forEach(function(m){ lat+=m.f.lat; lng+=m.f.lng; });
-      lat/=g.members.length; lng/=g.members.length;
-      var cm=L.marker([lat,lng],{zIndexOffset:600,icon:L.divIcon({className:"",html:'<div class="cluster-bubble '+(anyNews?"cluster-gold":"cluster-gray")+'"><span>'+g.members.length+'</span></div>',iconSize:[40,40],iconAnchor:[20,20]})});
-      (function(members){
-        cm.on("click",function(){
-          userInteracted=true;
-          var b=L.latLngBounds(members.map(function(m){ return [m.f.lat,m.f.lng]; }));
-          try{ map.flyToBounds(b.pad(0.25),{maxZoom:17,duration:reduced?0:0.6}); }catch(e){ try{ map.fitBounds(b.pad(0.25),{maxZoom:17}); }catch(e2){} }
-        });
-      })(g.members);
-      cm.addTo(clusterGroup);
-      clusterMarkers.push(cm);
-    });
     FACILITIES.forEach(function(f){
-      var m=markers[f.id]; if(!m) return;
+      var m=markers[f.id]; if(!m||!hasCoords(f)) return;
+      var show=currentFilter==="all"||f.cats.indexOf(currentFilter)>-1;
+      if(show){ if(!map.hasLayer(m)) m.addTo(map); } else if(map.hasLayer(m)) map.removeLayer(m);
+    });
+    PROJECTS.forEach(function(pr){
+      if(pr.facilityId) return;
+      var m=projectMarkers[pr.slug]; if(!m) return;
+      var showP=currentFilter==="all"||currentFilter==="development";
+      if(showP){ if(!map.hasLayer(m)) m.addTo(map); } else if(map.hasLayer(m)) map.removeLayer(m);
+    });
+    return;
+  }
+  try{
+    var groups=clusterGroups(), inCluster={};
+    groups.forEach(function(g){ if(g.members.length<2) return; g.members.forEach(function(m){ inCluster[m.key]=true; }); });
+    FACILITIES.forEach(function(f){
+      var m=markers[f.id]; if(!m||!hasCoords(f)) return;
       if(inCluster[f.id]||!clusterVisible(f)){ if(map.hasLayer(m)) map.removeLayer(m); }
       else if(!map.hasLayer(m)) m.addTo(map);
     });
+    PROJECTS.forEach(function(pr){
+      if(pr.facilityId) return;
+      var m=projectMarkers[pr.slug]; if(!m) return;
+      var key="p:"+pr.slug;
+      var visP=currentFilter==="all"||currentFilter==="development";
+      if(inCluster[key]||!visP){ if(map.hasLayer(m)) map.removeLayer(m); }
+      else if(!map.hasLayer(m)) m.addTo(map);
+    });
+    clearClusters();
+    groups.forEach(function(g){
+      if(g.members.length<2) return;
+      var lat=0, lng=0, anyNews=false;
+      g.members.forEach(function(m){ lat+=m.lat; lng+=m.lng; if(m.active) anyNews=true; });
+      lat/=g.members.length; lng/=g.members.length;
+      var html='<div class="cluster-bubble'+(anyNews?" cluster-gold":" cluster-gray")+'">'+g.members.length+'</div>';
+      var b=L.marker([lat,lng],{icon:L.divIcon({className:"",html:html,iconSize:[40,40],iconAnchor:[20,20]}),interactive:true}).addTo(map);
+      (function(members){
+        b.on("click",function(){
+          var bounds=L.latLngBounds(members.map(function(m){ return [m.lat,m.lng]; }));
+          map.flyToBounds(bounds.pad(0.25),{maxZoom:17,duration:reduced?0:0.7});
+        });
+      })(g.members);
+      clusterLayers.push(b);
+    });
   }catch(e){
-    /* Degrade to plain markers: restore the per-filter individual state. */
-    try{
-      clearClusters();
-      FACILITIES.forEach(function(f){
-        var m=markers[f.id]; if(!m) return;
-        if(clusterVisible(f)){ if(!map.hasLayer(m)) m.addTo(map); } else if(map.hasLayer(m)) map.removeLayer(m);
-      });
-    }catch(e2){}
+    /* Fallback: plain markers, no clustering. */
+    clearClusters();
+    FACILITIES.forEach(function(f){
+      var m=markers[f.id]; if(!m||!hasCoords(f)) return;
+      var show=currentFilter==="all"||f.cats.indexOf(currentFilter)>-1;
+      if(show){ if(!map.hasLayer(m)) m.addTo(map); } else if(map.hasLayer(m)) map.removeLayer(m);
+    });
+    PROJECTS.forEach(function(pr){
+      if(pr.facilityId) return;
+      var m=projectMarkers[pr.slug]; if(!m) return;
+      var showP=currentFilter==="all"||currentFilter==="development";
+      if(showP){ if(!map.hasLayer(m)) m.addTo(map); } else if(map.hasLayer(m)) map.removeLayer(m);
+    });
   }
 }
 function initClustering(){
@@ -2364,6 +2482,86 @@ function positionMapForRoute(){
   }
 }
 
+/* ================= BIG PROJECTS TRACKER =================
+   [DATA:projects] Canonical embedded copy of data/projects.json. Standing
+   tracker: major developments stay on the map (Development layer) and on
+   the Development topic page whether or not they have news this week.
+   Status is exactly one of: Proposed / Planning Board / Council approved /
+   Permitted / Under construction / Open — set from the sourced record,
+   never from a schedule. A project with facilityId rides that facility's
+   pin (never double-pinned); a project without one gets its own pin. */
+var PROJECTS=[
+  {slug:"walmart-flagler-landings", name:"Walmart Supercenter — Flagler Landings", location:"South side of State Road 100, just west of BJ’s Wholesale · Palm Coast", lat:29.473, lng:-81.2021, size:"38.81 acres · Walmart Supercenter of 186,276 sq ft approved · about 242,000 sq ft at full buildout (future retail and a fuel station follow by separate applications)", developer:"Flagler Pines Properties LLC (landowner) · Flagler Venture, LLC (applicant)", status:"Council approved", facilityId:null,
+   timeline:[
+    {date:"Nov. 4, 2025", text:"City Council annexes the property into Palm Coast at the applicant’s request.", source:"City of Palm Coast agenda packet, Sept. 1, 2026", url:"https://www.palmcoast.gov/agendas"},
+    {date:"Feb. 2026", text:"Technical Site Plan — Tier 3 (Application #6587) submitted for a big-box anchor tenant on ±38.81 acres.", source:"City of Palm Coast agenda packet, Sept. 1, 2026", url:"https://www.palmcoast.gov/agendas"},
+    {date:"June 17, 2026", text:"Planning & Land Development Regulation Board recommends approval with conditions, 5–0.", source:"PLDRB minutes and approving resolution — City of Palm Coast", url:"https://www.palmcoast.gov/agendas"},
+    {date:"Sept. 1, 2026", text:"City Council approves the technical site plan 5–0, with conditions. The anchor is set at 186,276 sq ft; the ±55,172 sq ft of future retail and the ±1,618 sq ft fuel station move to separate applications.", source:"City Council meeting record, Sept. 1, 2026", url:"https://www.palmcoast.gov/agendas"},
+    {date:"Sept. 1, 2026", text:"Council also approves the proportionate-share and impact-fee agreement 5–0 — a $4.1 million share toward SR-100 improvements, with corridor work required at Site Development Permit issuance.", source:"City Council meeting record, Sept. 1, 2026", url:"https://www.palmcoast.gov/agendas"},
+    {date:"Next", text:"A Site Development Permit follows once the remaining staff conditions are resolved; the SR-100 traffic improvements must be operational before construction begins, and conditions must be satisfied before building permits.", source:"Daytona Beach News-Journal, Sept. 4, 2026", url:"https://www.news-journalonline.com/story/news/local/flagler/2026/09/04/palm-coast-oks-walmart-site-pending-road-upgrades/91559349007/"}
+   ],
+   sources:[
+    {label:"FlaglerLive — Walmart on SR-100 (project page)", url:"https://flaglerlive.com/walmart-sr100"},
+    {label:"Palm Coast agenda center — Application #6587 packet, minutes and resolutions", url:"https://www.palmcoast.gov/agendas"},
+    {label:"Daytona Beach News-Journal — “Palm Coast OKs Walmart site pending road upgrades,” Sept. 4, 2026", url:"https://www.news-journalonline.com/story/news/local/flagler/2026/09/04/palm-coast-oks-walmart-site-pending-road-upgrades/91559349007/"}
+   ]},
+  {slug:"palm-coast-ymca-town-center", name:"Palm Coast YMCA — Town Center", location:"1580 Central Ave, Palm Coast (Town Center)", lat:29.48449, lng:-81.19767, size:"About $14M facility · Olympic-size pool · 35-year lease at $1/year on city land", developer:"Volusia/Flagler YMCA", status:"Council approved", facilityId:4,
+   timeline:[
+    {date:"Oct. 20, 2026", text:"Palm Coast City Council approves the city’s $3.25M share, contingent on the School Board’s $3M share.", source:"FlaglerLive, Nov. 2026", url:"https://www.palmcoast.gov/agendas"},
+    {date:"Nov. 17, 2026", text:"Flagler County School Board unanimously approves the 35-year lease and its $3M share — the project’s final approval hurdle.", source:"FlaglerLive + The Observer, Nov. 18, 2026", url:"https://go.boarddocs.com/fla/flcsd/Board.nsf/Public"},
+    {date:"Next", text:"Construction planning for the Town Center site — no construction start date on record yet.", source:"Town Center — Future YMCA Site card, this site", url:""}
+   ],
+   sources:[
+    {label:"Palm Coast agenda center", url:"https://www.palmcoast.gov/agendas"},
+    {label:"Flagler Schools BoardDocs", url:"https://go.boarddocs.com/fla/flcsd/Board.nsf/Public"}
+   ]},
+  {slug:"town-center-land-purchase", name:"Town Center Land Purchase", location:"Town Center, Palm Coast — 23 parcels", lat:29.48647, lng:-81.20768, size:"$17 million · 23 parcels · about 259 acres", developer:"City of Palm Coast (buyer) · Palm Coast Holdings/Allete (seller)", status:"Council approved", facilityId:3,
+   timeline:[
+    {date:"Aug. 19, 2026", text:"City Council approves the $17M purchase of 23 Town Center parcels, 4–1.", source:"Palm Coast City Hall card, this site (FlaglerLive on the purchase)", url:"https://www.palmcoast.gov/agendas"},
+    {date:"Oct. 20, 2026", text:"Council approves an $11 million loan to pay for the purchase.", source:"Palm Coast City Hall card, this site", url:"https://www.palmcoast.gov/agendas"},
+    {date:"Nov. 2026", text:"The city closes on the 23 parcels — about 259 acres — settling its lawsuit with Palm Coast Holdings/Allete.", source:"Palm Coast City Hall card, this site", url:"https://www.palmcoast.gov/agendas"}
+   ],
+   sources:[
+    {label:"Palm Coast agenda center", url:"https://www.palmcoast.gov/agendas"}
+   ]},
+  {slug:"lakeview-estates-matanzas", name:"Lakeview Estates — Former Matanzas Golf Course", location:"398 Lakeview Blvd, Palm Coast — the 280-acre former Matanzas golf course", lat:29.61787, lng:-81.26994, size:"280 acres · 250 single-family homes · 250,000 sq ft of neighborhood commercial · an ~11-acre community park", developer:"Not verified yet", status:"Council approved", facilityId:30,
+   timeline:[
+    {date:"2021", text:"Lakeview Estates approved on the former Matanzas golf course (up to 272 homes).", source:"Lakeview Estates card, this site (Daytona Beach News-Journal)", url:"https://www.palmcoast.gov/agendas"},
+    {date:"Sept. 1, 2026", text:"City Council tables the comprehensive-plan and MPD amendments 4–1, pending arsenic soil testing and other items.", source:"City Council meeting record, Sept. 1, 2026", url:"https://www.palmcoast.gov/agendas"},
+    {date:"Oct. 20, 2026", text:"Council approves the revised plans — 39 more homes (250 total), 250,000 sq ft of commercial on Tract 9 fronting US-1, and an ~11-acre park on Tract 8; buffers raised and a soil test for arsenic required.", source:"Lakeview Estates card, this site (Daytona Beach News-Journal; city agenda packet)", url:"https://www.palmcoast.gov/agendas"}
+   ],
+   sources:[
+    {label:"Palm Coast agenda center", url:"https://www.palmcoast.gov/agendas"}
+   ]},
+  {slug:"evolve-palm-coast-phase-2", name:"Evolve Palm Coast — Phase 2", location:"11 Evolve Pkwy, Palm Coast — US-1 at Whiteview Pkwy", lat:29.53174, lng:-81.2616, size:"96 apartments in four three-story buildings · 352 homes in total with Phase 1 (built and leasing)", developer:"Not verified yet", status:"Council approved", facilityId:29,
+   timeline:[
+    {date:"Nov. 18, 2026", text:"The Planning & Land Development Regulation Board approves the Phase 2 Technical Site Plan (Application No. 6796), and the city issues the Development Order the same day.", source:"City of Palm Coast PLDRB packet, Nov. 18, 2026 (item D.3)", url:"https://www.palmcoast.gov/agendas"},
+    {date:"Next", text:"Conditions before building: school-concurrency sign-off, a FEMA flood-map amendment ahead of the site permit, and recreation finished before anyone moves in. Construction start not yet announced.", source:"City of Palm Coast PLDRB packet, Nov. 18, 2026", url:"https://www.palmcoast.gov/agendas"}
+   ],
+   sources:[
+    {label:"Palm Coast agenda center", url:"https://www.palmcoast.gov/agendas"}
+   ]},
+  {slug:"dc-blox-cable-landing-station", name:"DC BLOX Cable Landing Station", location:"1035 Town Center Blvd, Palm Coast", lat:29.49298, lng:-81.19528, size:"33,760 sq ft · U.S. landing station for Google’s Sol subsea cable (Spain–Azores–Bermuda–Florida)", developer:"DC BLOX", status:"Under construction", facilityId:31,
+   timeline:[
+    {date:"Apr. 8, 2026", text:"Building permit issued.", source:"City of Palm Coast", url:"https://www.palmcoast.gov/cls"},
+    {date:"Now", text:"Under construction in Town Center. The Sol cable comes ashore at Flagler Beach and runs inland to this site; no second building has been submitted or approved.", source:"City of Palm Coast", url:"https://www.palmcoast.gov/cls"},
+    {date:"Q1 2027", text:"Expected operational.", source:"DC BLOX (company), via City of Palm Coast", url:"https://www.palmcoast.gov/cls"}
+   ],
+   sources:[
+    {label:"City of Palm Coast — cable landing station page", url:"https://www.palmcoast.gov/cls"}
+   ]},
+  {slug:"flagler-beach-pier-replacement", name:"Flagler Beach Pier Replacement", location:"S Ocean Shore Blvd, Flagler Beach", lat:29.47879, lng:-81.12631, size:"New concrete pier · deck 28 ft above sea level · pylons driven 80–125 ft deep", developer:"City of Flagler Beach", status:"Under construction", facilityId:8,
+   timeline:[
+    {date:"Fall 2022", text:"The old pier closes; a concrete replacement follows.", source:"Flagler Beach Pier card, this site", url:"https://flaglerbeach-fl.municodemeetings.com/"},
+    {date:"Now", text:"The new concrete pier is under construction — pylons driven 80–125 ft deep, deck rising 28 ft above the sea. Commission decision: no access charge for the first year or two; planned open hours 5 a.m.–10 p.m.", source:"Flagler Beach Pier card, this site", url:"https://flaglerbeach-fl.municodemeetings.com/"},
+    {date:"Jan. 2027", text:"Substantial completion targeted for January 2027, with a spring opening planned.", source:"Flagler Beach Pier card, this site", url:"https://flaglerbeach-fl.municodemeetings.com/"}
+   ],
+   sources:[
+    {label:"Flagler Beach meetings hub", url:"https://flaglerbeach-fl.municodemeetings.com/"}
+   ]}
+];
+function projectBySlug(slug){ for(var i=0;i<PROJECTS.length;i++){ if(PROJECTS[i].slug===slug) return PROJECTS[i]; } return null; }
+
 /* ================= EXTERNAL DATA LOADER =================
    [DATA:current-week] Canonical embedded copy of data/weeks/2026-11-23.json's
    header fields (the week's items themselves live on the facility entries:
@@ -2378,8 +2576,15 @@ var WEEK_META={id:"2026-11-23",label:"Week of Nov 23\u201329, 2026",range:"Nov 2
    does with the embedded data alone. All updates are in place, so the
    county registry and every other reference keep pointing at the same
    arrays and objects. */
-function applyExternalData(fac,week,past){
+function applyExternalData(fac,week,past,projects){
   try{
+    /* Big Projects apply independently: a facilities/week failure must not
+       block the tracker, and a tracker failure must not block the rest. */
+    if(Array.isArray(projects)&&projects.length){
+      var pok=true;
+      for(var qi=0;qi<projects.length;qi++){ var qp=projects[qi]; if(!qp||typeof qp.slug!=="string"||typeof qp.name!=="string"||typeof qp.status!=="string") pok=false; }
+      if(pok){ PROJECTS.length=0; projects.forEach(function(qp2){ PROJECTS.push(qp2); }); }
+    }
     if(typeof WEEK_TOP_IDS==="undefined"||typeof ARCHIVE==="undefined") return; /* router script not parsed yet: keep embedded data */
     if(!Array.isArray(fac)||!fac.length) return;
     for(var i=0;i<fac.length;i++){ var f0=fac[i]; if(!f0||typeof f0.id!=="number"||typeof f0.name!=="string") return; }
@@ -2427,8 +2632,9 @@ window.__dataReady=new Promise(function(res){ __dataResolve=res; });
     index.forEach(function(w){
       if(w&&!w.current&&w.file) jobs.push(getJSON("data/weeks/"+w.file).then(function(d){ return {entry:w,data:d}; }));
     });
+    jobs.push(getJSON("data/projects.json").catch(function(){ return null; }));
     return Promise.all(jobs).then(function(res){
-      applyExternalData(res[0],res[1],res.slice(2));
+      applyExternalData(res[0],res[1],res.slice(2,res.length-1),res[res.length-1]);
       settle();
     });
   }).catch(function(){ settle(); });
@@ -2628,6 +2834,16 @@ function renderTopic(t){
     spHtml='<div class="grouped-card"><h4>Palm Coast Fire Department — six stations</h4><p style="font-size:14.5px;color:#475569;margin:6px 0 0">These six stations are Palm Coast Fire Department stations. Flagler County Fire Rescue is a separate county department — see its own card in the list below.</p><ul>'+stations.map(function(f){return "<li><strong>"+f.name+"</strong> — "+f.address+"</li>";}).join("")+'</ul></div>';
   }
   if(sp) sp.innerHTML=spHtml;
+  // Big Projects tracker (Development topic only): every tracked project
+  // with its current status, whether or not it has news this week.
+  var tpEl=document.getElementById("topicProjects");
+  if(tpEl){
+    if(t==="development"&&typeof PROJECTS!=="undefined"&&PROJECTS.length){
+      tpEl.innerHTML='<h2 class="section-h">Big Projects</h2><p style="font-size:14.5px;color:#475569;margin:0 0 12px">The standing tracker — major developments stay on this list and on the map whether or not they had news this week. Tap a project for its current status and every vote on record.</p>'+PROJECTS.map(function(p){
+        return '<a class="place-row" href="#project='+p.slug+'"><span><span class="pr-name">'+p.name+'</span><span class="pr-addr">'+p.location+'</span></span><span class="status-label" style="margin-top:0">'+p.status+'</span></a>';
+      }).join("");
+    } else tpEl.innerHTML="";
+  }
   // Key dates
   var kd=document.getElementById("topicKeyDates");
   if(kd){
@@ -2859,6 +3075,13 @@ function handleRoute(){
     if(v==="topics"){ var t=parts[1]||"meetings"; if(!TOPIC_META[t]) t="meetings"; renderTopic(t); showView("topic",t); }
     else if(v==="home"||v==="map"||v==="week"||v==="archive"||v==="newsletter"||v==="coverage"||v==="partner"||v==="about") showView(v);
     else showView("home");
+    return;
+  }
+  var pslug=(typeof projectSlugFromHash==="function")?projectSlugFromHash():null;
+  if(pslug){
+    var prj=(typeof projectBySlug==="function")?projectBySlug(pslug):null;
+    showView("map");
+    if(prj){ if(viewMode!=="map") setViewMode("map"); selectProject(prj.slug,true,true); }
     return;
   }
   var slug=slugFromHash();
