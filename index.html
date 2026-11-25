@@ -695,6 +695,34 @@ html,body{overflow-x:clip}
 .section-h{font-family:var(--serif);font-size:var(--h-md);color:var(--navy);margin:26px 0 6px}
 @media(max-width:1023px){.topbar{padding-top:10px;padding-bottom:10px}.topbar-inner{flex-direction:row;align-items:center;gap:10px;flex-wrap:nowrap}.topbar-inner>div:first-child{display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-width:0}.topbar h1,.topbar .subtitle,.topbar .pill-by{display:none}.topbar .hero-pills{flex-wrap:nowrap}.topbar .updated-line{margin:0}.topbar-actions{width:auto;flex-shrink:0}}
 @media(min-width:1024px){.toolbar .legend span:not(#countLabel){display:none}}
+/* ===== Mobile map fixes (owner, Nov 25) — under 1024px unless noted =====
+   Toolbar: chips take their own row; the Map/List toggle and the place
+   count share one row; the toolbar's gold/gray legend text leaves the
+   toolbar on mobile and becomes one small line inside the map's bottom
+   edge (.map-legend-line). The layers control is replaced on mobile by a
+   single Street/Satellite toggle (.otr-basemap-toggle). Nearby pins
+   cluster into .cluster-bubble (JS module below). Desktop unchanged. */
+@media(max-width:1023px){
+ .toolbar-top{flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:flex-start}
+ .toolbar-top .chips{flex:1 1 100%;order:0}
+ .toolbar-top .view-toggle{order:1}
+ .toolbar-top .legend{order:2;margin-left:auto}
+ .toolbar .legend span:not(#countLabel){display:none}
+ .leaflet-control-layers{display:none}
+}
+@media(min-width:1024px){
+ .otr-basemap-toggle{display:none}
+ .map-legend-line{display:none}
+}
+.map-legend-line{pointer-events:none;background:rgba(255,254,251,.94);border:1px solid var(--line);border-radius:999px;padding:5px 11px;font-family:Inter,system-ui,sans-serif;font-size:11.5px;font-weight:600;color:#334155;box-shadow:0 4px 12px rgba(10,35,66,.16);white-space:nowrap}
+.map-legend-line i{display:inline-block;width:9px;height:9px;border-radius:50%;margin:0 5px 0 7px}
+.map-legend-line i:first-child{margin-left:0}
+.map-legend-line .mll-gold{background:var(--gold)}
+.map-legend-line .mll-gray{background:#8A94A6}
+.otr-basemap-toggle button{background:rgba(255,254,251,.96);border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-family:Inter,system-ui,sans-serif;font-size:12.5px;font-weight:700;color:var(--navy);box-shadow:0 6px 16px rgba(10,35,66,.18);cursor:pointer;min-height:40px}
+.cluster-bubble{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid #fff;box-shadow:0 5px 14px rgba(0,0,0,.3);font-family:Inter,system-ui,sans-serif;font-size:14px;font-weight:800;color:#fff}
+.cluster-gold{background:linear-gradient(135deg,#C6A26B,var(--gold))}
+.cluster-gray{background:#8A94A6}
 </style>
 </head>
 <body>
@@ -1370,6 +1398,33 @@ function moneyFigure(f,re){
   var m=text.match(re);
   return m?m[1]:null;
 }
+/* Money displays (facility cards, building panels, article rows) must read
+   the way the source states the figure: keep the source's qualifier
+   ("About", "~") and plain words for what the money is — never an internal
+   shorthand label. The qualifier is derived at render from the bullet that
+   states the figure (the same bullet the panel's source line points to);
+   the one data label that is internal shorthand is corrected here, in the
+   renderer, with the source's own words. */
+var MONEY_LABEL_OVERRIDES={1:"Amendment 3 cuts"};
+function moneyLabelText(f){ return (f&&MONEY_LABEL_OVERRIDES[f.id])||(f&&f.moneyLabel)||""; }
+function moneyFigureText(f){
+  if(!f||!f.moneyAmount) return "";
+  var amt=String(f.moneyAmount), moneyRe;
+  if(/M$/.test(amt)){ var moneyNum=amt.replace(/^\$/,'').replace(/M$/,'').replace(/\./g,'\\.'); moneyRe=new RegExp('\\$'+moneyNum+'\\s*(?:M\\b|million)','i'); }
+  else { moneyRe=new RegExp('\\$'+amt.replace(/^\$/,'').replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'\\b','i'); }
+  var bullet=(f.bullets||[]).filter(function(b){ return moneyRe.test(b); })[0];
+  if(bullet){
+    var hit=bullet.match(moneyRe);
+    if(hit){
+      var before=bullet.slice(Math.max(0,hit.index-16),hit.index);
+      var q=before.match(/(about|roughly|approximately|nearly)\s*$/i);
+      if(q){ var w=q[1].toLowerCase(); return w.charAt(0).toUpperCase()+w.slice(1)+" "+amt; }
+      if(/~\s*$/.test(before)) return "~"+amt;
+    }
+  }
+  return amt;
+}
+function moneyDisplayHTML(f){ return moneyFigureText(f)+' <small>· '+moneyLabelText(f)+'</small>'; }
 function renderGlance(){
   // Facilities mapped — the real facility count.
   setGlanceStat("glanceFacilities","statFacilities",FACILITIES.length>0?String(FACILITIES.length):null);
@@ -1418,6 +1473,7 @@ function initMap(){
     var satelliteTiles=L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",{maxZoom:19,attribution:"Esri, Maxar, Earthstar Geographics"});
     streetTiles.addTo(map);
     L.control.layers({"Street map":streetTiles,"Satellite":satelliteTiles},null,{collapsed:false}).addTo(map);
+    addMobileMapControls(streetTiles,satelliteTiles);
     if(typeof FLAGLER_BOUNDARY!=="undefined"){
       L.geoJSON(FLAGLER_BOUNDARY,{interactive:false,style:function(){ return {color:"#8C6E3E",weight:2,opacity:.9,fillColor:"#B28D57",fillOpacity:.05}; }}).addTo(map);
       /* No fitBounds here: framing at init time measures the map before the
@@ -1434,6 +1490,7 @@ function initMap(){
     TOWNS.forEach(function(t){
       L.marker([t.lat,t.lng],{interactive:false,keyboard:false,zIndexOffset:-1000,icon:L.divIcon({className:"town-label",html:"<span>"+t.name+"</span>"})}).addTo(map);
     });
+    initClustering();
     /* Phase 6 correction 3 — interaction tracking, the wheel-zoom gate,
        and initial framing, restructured so the guarantees hold by
        construction rather than by one fragile callback:
@@ -1810,7 +1867,7 @@ function renderPanel(f){
   var panelSub=f.active?"":'<div style="font-size:13px;line-height:1.5;color:#B9C8DE;margin-top:6px">'+f.headline+'</div>';
   var moneySrc="";
   if(f.moneyAmount){ var amtStr=String(f.moneyAmount); var moneyRe; if(/M$/.test(amtStr)){ var moneyNum=amtStr.replace(/^\$/,'').replace(/M$/,'').replace(/\./g,'\\.'); moneyRe=new RegExp('\\$'+moneyNum+'\\s*(?:M\\b|million)','i'); } else { moneyRe=new RegExp('\\$'+amtStr.replace(/^\$/,'').replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'\\b','i'); } var moneyBullet=(f.bullets||[]).filter(function(b){ return moneyRe.test(b); })[0]; if(moneyBullet) moneySrc=sourceLineHTML(f,moneyBullet); }
-  panel.innerHTML='<div class="panel-inner"><button class="panel-close" id="panelClose" type="button" aria-label="Close this building\u2019s panel">×</button><div class="panel-head"><div class="medallion" aria-hidden="true">'+f.icon+'</div><div class="eyebrow">'+f.type+'</div><h2>'+f.name+'</h2><div class="panel-addr">'+(hasCoords(f)?f.address:'Location pending verification')+'</div><div class="panel-headline">“'+panelUpdate+'”</div>'+panelSub+'<div class="gold-rule"><span>◆ ◆ ◆</span></div><div class="panel-meta">'+statusTag+tags+'</div>'+(f.moneyAmount?'<div style="margin-top:12px;background:rgba(178,141,87,.18);border:1px solid rgba(216,192,148,.5);border-radius:12px;padding:10px 12px"><span style="font-size:10px;letter-spacing:.16em;font-weight:800;text-transform:uppercase;color:var(--gold2)">'+(f.moneyLabel||'Amount')+'</span><div style="font-family:var(--serif);font-size:28px;line-height:1;color:#fff">'+f.moneyAmount+'</div>'+(moneySrc?'<div class="src-line" style="margin-top:6px">'+moneySrc+'</div>':'')+'</div>':'')+(f.devStatus?'<div style="margin-top:10px"><span class="status-label">Status: '+f.devStatus+'</span></div>':'')+'</div>'+
+  panel.innerHTML='<div class="panel-inner"><button class="panel-close" id="panelClose" type="button" aria-label="Close this building\u2019s panel">×</button><div class="panel-head"><div class="medallion" aria-hidden="true">'+f.icon+'</div><div class="eyebrow">'+f.type+'</div><h2>'+f.name+'</h2><div class="panel-addr">'+(hasCoords(f)?f.address:'Location pending verification')+'</div><div class="panel-headline">“'+panelUpdate+'”</div>'+panelSub+'<div class="gold-rule"><span>◆ ◆ ◆</span></div><div class="panel-meta">'+statusTag+tags+'</div>'+(f.moneyAmount?'<div style="margin-top:12px;background:rgba(178,141,87,.18);border:1px solid rgba(216,192,148,.5);border-radius:12px;padding:10px 12px"><span style="font-size:10px;letter-spacing:.16em;font-weight:800;text-transform:uppercase;color:var(--gold2)">'+(moneyLabelText(f)||'Amount')+'</span><div style="font-family:var(--serif);font-size:28px;line-height:1;color:#fff">'+moneyFigureText(f)+'</div>'+(moneySrc?'<div class="src-line" style="margin-top:6px">'+moneySrc+'</div>':'')+'</div>':'')+(f.devStatus?'<div style="margin-top:10px"><span class="status-label">Status: '+f.devStatus+'</span></div>':'')+'</div>'+
   '<div class="panel-body"><div class="section-label">What happened this week</div>'+news+
   '<div class="section-label">Who meets here</div><div class="meets">'+(MEETS[f.id]||'<p>Meeting info not verified yet.</p>')+'</div>'+
   '<div class="section-label">What\'s next</div><div class="next-box"><span class="nb-label">Next</span>'+f.next+'</div>'+
@@ -1906,7 +1963,7 @@ function renderCards(){
     var bc=f.active?"badge-news":(f.badge.indexOf("UP NEXT")===0?"badge-next":"badge-quiet");
     var cardUpdate=f.active?f.headline:"No new activity this week.";
     var addrLine=hasCoords(f)?(f.address+' · '+f.short):'Location pending verification';
-    return '<div class="card-cell"><button class="card'+(f.id===selectedId?' active':'')+'" data-id="'+f.id+'" style="animation-delay:'+(i*0.05)+'s"><div class="ic" aria-hidden="true">'+f.icon+'</div><div class="card-top"><h4>'+f.name+'</h4><span class="badge '+bc+'">'+(SCHOOL_SITES[f.id]&&f.id!==43?'<a class="grade-link" href="'+FLDOE_URL+'" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px">'+f.badge+'</a>':f.badge)+'</span></div><p>'+cardUpdate+'</p>'+(f.moneyAmount?'<span class="money-amount">'+f.moneyAmount+' <small>'+(f.moneyLabel||'')+'</small></span>':'')+(f.devStatus?'<span class="status-label">'+f.devStatus+'</span>':'')+'<span class="card-src">'+cardSourceHTML(f)+'</span><div class="addr">'+addrLine+'</div></button><a class="report-link" href="'+reportMailto(f)+'">Report an error</a></div>';
+    return '<div class="card-cell"><button class="card'+(f.id===selectedId?' active':'')+'" data-id="'+f.id+'" style="animation-delay:'+(i*0.05)+'s"><div class="ic" aria-hidden="true">'+f.icon+'</div><div class="card-top"><h4>'+f.name+'</h4><span class="badge '+bc+'">'+(SCHOOL_SITES[f.id]&&f.id!==43?'<a class="grade-link" href="'+FLDOE_URL+'" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px">'+f.badge+'</a>':f.badge)+'</span></div><p>'+cardUpdate+'</p>'+(f.moneyAmount?'<span class="money-amount">'+moneyDisplayHTML(f)+'</span>':'')+(f.devStatus?'<span class="status-label">'+f.devStatus+'</span>':'')+'<span class="card-src">'+cardSourceHTML(f)+'</span><div class="addr">'+addrLine+'</div></button><a class="report-link" href="'+reportMailto(f)+'">Report an error</a></div>';
   }).join("");
   wrap.querySelectorAll(".card").forEach(function(btn){
     btn.addEventListener("click",function(){ selectFacility(parseInt(btn.getAttribute("data-id"),10),true); });
@@ -2055,13 +2112,162 @@ function closePanel(){
 }
 function applyFilter(){
   if(!map) { renderCards(); return; }
-  FACILITIES.forEach(function(f){
-    var show=currentFilter==="all"||f.cats.indexOf(currentFilter)>-1;
-    var m=markers[f.id]; if(!m) return;
-    if(show){ if(!map.hasLayer(m)) m.addTo(map); } else if(map.hasLayer(m)) map.removeLayer(m);
-  });
+  if(clusterModeOn()){ refreshClusters(); }
+  else {
+    clearClusters();
+    FACILITIES.forEach(function(f){
+      var show=currentFilter==="all"||f.cats.indexOf(currentFilter)>-1;
+      var m=markers[f.id]; if(!m) return;
+      if(show){ if(!map.hasLayer(m)) m.addTo(map); } else if(map.hasLayer(m)) map.removeLayer(m);
+    });
+  }
   renderCards();
   if(viewMode==="list") renderList();
+}
+/* ---------- MOBILE PIN CLUSTERING + MAP CONTROLS (owner, Nov 25) ----------
+   Under 1024px only. Nearby pins (within CLUSTER_RADIUS_PX world pixels at
+   the current zoom, greedy centroid grouping) collapse into one numbered
+   bubble — gold if ANY member has news this week, gray if all are quiet.
+   A bubble tap only zooms toward its members; it never opens a building.
+   A pin tap still opens that building through selectFacility (unchanged).
+   Desktop (>=1024px) never enters this path: individual pins exactly as
+   before, hover-highlight included. If anything here throws, the refresh
+   falls back to the plain per-marker filter state. */
+var CLUSTER_RADIUS_PX=48;
+var clusterGroup=null, clusterMarkers=[], clusterWired=false;
+function clusterModeOn(){ return typeof window!=="undefined" && window.innerWidth<1024; }
+function clusterVisible(f){ return currentFilter==="all"||f.cats.indexOf(currentFilter)>-1; }
+function clusterDetachedId(){
+  /* The facility whose panel is actually open keeps its own pin: every
+     selection path (pin, card, list, search, deep link) opens the panel,
+     and a deliberate close lets the pin re-cluster on the next refresh. */
+  var panel=document.getElementById("detailPanel");
+  if(panel&&!panel.classList.contains("panel-closed")&&typeof selectedId!=="undefined") return selectedId;
+  return null;
+}
+function clusterGroups(){
+  /* Grouping over world-pixel coordinates at the current zoom —
+     pan-independent, so it is directly testable. */
+  var zoom=map.getZoom(), detached=clusterDetachedId(), pts=[];
+  FACILITIES.forEach(function(f){
+    if(!hasCoords(f)||!clusterVisible(f)||f.id===detached) return;
+    var p=map.project([f.lat,f.lng],zoom);
+    pts.push({f:f,x:p.x,y:p.y});
+  });
+  var groups=[];
+  pts.forEach(function(pt){
+    var hit=null;
+    for(var i=0;i<groups.length;i++){
+      var g=groups[i], dx=pt.x-g.cx, dy=pt.y-g.cy;
+      if(Math.sqrt(dx*dx+dy*dy)<=CLUSTER_RADIUS_PX){ hit=g; break; }
+    }
+    if(!hit){ hit={members:[],cx:0,cy:0}; groups.push(hit); }
+    hit.members.push(pt);
+    var sx=0, sy=0;
+    hit.members.forEach(function(m){ sx+=m.x; sy+=m.y; });
+    hit.cx=sx/hit.members.length; hit.cy=sy/hit.members.length;
+  });
+  return groups;
+}
+function clearClusters(){
+  if(clusterGroup&&map){ try{ map.removeLayer(clusterGroup); }catch(e){} }
+  clusterGroup=null; clusterMarkers=[];
+}
+function refreshClusters(){
+  if(!map||!window.L||!clusterModeOn()) return;
+  try{
+    clearClusters();
+    clusterGroup=L.layerGroup().addTo(map);
+    var inCluster={};
+    clusterGroups().forEach(function(g){
+      if(g.members.length<2) return;
+      g.members.forEach(function(m){ inCluster[m.f.id]=true; });
+      var anyNews=g.members.some(function(m){ return !!m.f.active; });
+      var lat=0, lng=0;
+      g.members.forEach(function(m){ lat+=m.f.lat; lng+=m.f.lng; });
+      lat/=g.members.length; lng/=g.members.length;
+      var cm=L.marker([lat,lng],{zIndexOffset:600,icon:L.divIcon({className:"",html:'<div class="cluster-bubble '+(anyNews?"cluster-gold":"cluster-gray")+'"><span>'+g.members.length+'</span></div>',iconSize:[40,40],iconAnchor:[20,20]})});
+      (function(members){
+        cm.on("click",function(){
+          userInteracted=true;
+          var b=L.latLngBounds(members.map(function(m){ return [m.f.lat,m.f.lng]; }));
+          try{ map.flyToBounds(b.pad(0.25),{maxZoom:17,duration:reduced?0:0.6}); }catch(e){ try{ map.fitBounds(b.pad(0.25),{maxZoom:17}); }catch(e2){} }
+        });
+      })(g.members);
+      cm.addTo(clusterGroup);
+      clusterMarkers.push(cm);
+    });
+    FACILITIES.forEach(function(f){
+      var m=markers[f.id]; if(!m) return;
+      if(inCluster[f.id]||!clusterVisible(f)){ if(map.hasLayer(m)) map.removeLayer(m); }
+      else if(!map.hasLayer(m)) m.addTo(map);
+    });
+  }catch(e){
+    /* Degrade to plain markers: restore the per-filter individual state. */
+    try{
+      clearClusters();
+      FACILITIES.forEach(function(f){
+        var m=markers[f.id]; if(!m) return;
+        if(clusterVisible(f)){ if(!map.hasLayer(m)) m.addTo(map); } else if(map.hasLayer(m)) map.removeLayer(m);
+      });
+    }catch(e2){}
+  }
+}
+function initClustering(){
+  if(clusterWired||!map) return;
+  clusterWired=true;
+  map.on("zoomend",function(){ if(clusterModeOn()) refreshClusters(); });
+  if(window.matchMedia){
+    var mq=window.matchMedia("(max-width: 1023px)");
+    var onMq=function(){ if(map) applyFilter(); };
+    if(mq.addEventListener) mq.addEventListener("change",onMq);
+    else if(mq.addListener) mq.addListener(onMq);
+  }
+  if(clusterModeOn()) refreshClusters();
+}
+/* Mobile-only map controls: a one-line pin legend inside the map at its
+   bottom-left edge, and a single Street/Satellite toggle at top-right.
+   The layers control is CSS-hidden under 1024px and both of these are
+   CSS-hidden at desktop widths, where the existing controls rule. The
+   toggle swaps the same two tile layers the layers control uses, and
+   stays in sync with it through the baselayerchange event. */
+function addMobileMapControls(streetTiles,satelliteTiles){
+  var legend=L.control({position:"bottomleft"});
+  legend.onAdd=function(){
+    var d=L.DomUtil.create("div","map-legend-line");
+    d.setAttribute("aria-hidden","true");
+    d.innerHTML='<i class="mll-gold"></i>News this week<i class="mll-gray"></i>Quiet';
+    return d;
+  };
+  legend.addTo(map);
+  var currentBase="street";
+  var toggle=L.control({position:"topright"});
+  toggle.onAdd=function(){
+    var wrap=L.DomUtil.create("div","otr-basemap-toggle");
+    var btn=document.createElement("button");
+    btn.type="button"; btn.id="basemapToggle";
+    btn.setAttribute("aria-label","Switch base map between street and satellite");
+    btn.textContent="Satellite";
+    L.DomEvent.disableClickPropagation(wrap);
+    L.DomEvent.on(btn,"click",function(){
+      var toSat=currentBase==="street";
+      if(toSat){ map.removeLayer(streetTiles); satelliteTiles.addTo(map); }
+      else { map.removeLayer(satelliteTiles); streetTiles.addTo(map); }
+      try{ map.fire("baselayerchange",{layer:toSat?satelliteTiles:streetTiles,name:toSat?"Satellite":"Street map"}); }catch(e){}
+    });
+    wrap.appendChild(btn);
+    return wrap;
+  };
+  toggle.addTo(map);
+  map.on("baselayerchange",function(e){
+    currentBase=(e.layer===satelliteTiles)?"sat":"street";
+    var btn=document.getElementById("basemapToggle");
+    if(btn) btn.textContent=(currentBase==="sat")?"Street":"Satellite";
+    try{
+      var inputs=document.querySelectorAll(".leaflet-control-layers input");
+      if(inputs&&inputs.length>=2){ inputs[0].checked=(currentBase==="street"); inputs[1].checked=(currentBase==="sat"); }
+    }catch(err){}
+  });
 }
 function setFilter(name){
   currentFilter=name;
@@ -2340,7 +2546,7 @@ function renderPreviewCounts(){
 }
 /* ---------- This Week article ---------- */
 function articleItemHTML(f){
-  return '<article class="article-item"><span class="ai-place">'+f.name+' · '+f.address+'</span><h3>'+f.headline+'</h3>'+(f.moneyAmount?'<div class="money-amount">'+f.moneyAmount+' <small>'+(f.moneyLabel||'')+'</small></div>':'')+(f.devStatus?'<span class="status-label">Status: '+f.devStatus+'</span>':'')+'<p>'+summaryFor(f,460)+'</p><span class="ai-src">'+sourceLineHTML(f,(f.bullets||[])[0]||"")+'</span><a class="ai-link" href="#building='+f.slug+'">Open on the map →</a></article>';
+  return '<article class="article-item"><span class="ai-place">'+f.name+' · '+f.address+'</span><h3>'+f.headline+'</h3>'+(f.moneyAmount?'<div class="money-amount">'+moneyDisplayHTML(f)+'</div>':'')+(f.devStatus?'<span class="status-label">Status: '+f.devStatus+'</span>':'')+'<p>'+summaryFor(f,460)+'</p><span class="ai-src">'+sourceLineHTML(f,(f.bullets||[])[0]||"")+'</span><a class="ai-link" href="#building='+f.slug+'">Open on the map →</a></article>';
 }
 function renderWeek(){
   var wrap=document.getElementById("weekArticle"); if(!wrap) return;
@@ -2463,7 +2669,7 @@ function renderTopic(t){
     places.innerHTML=listAll.map(function(f){
       var bc=f.active?"badge-news":(f.badge.indexOf("UP NEXT")===0?"badge-next":"badge-quiet");
       var addr=hasCoords(f)?f.address:"Location pending verification";
-      var extra=(f.moneyAmount?' · '+f.moneyAmount:'')+(f.devStatus?' · '+f.devStatus:'');
+      var extra=(f.moneyAmount?' · '+moneyFigureText(f):'')+(f.devStatus?' · '+f.devStatus:'');
       return '<a class="place-row" href="#building='+f.slug+'"><span><span class="pr-name">'+f.name+'</span><span class="pr-addr">'+addr+' · '+f.type+extra+'</span></span><span class="badge '+bc+'">'+f.badge+'</span></a>';
     }).join("");
   }
