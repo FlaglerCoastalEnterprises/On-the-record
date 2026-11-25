@@ -236,6 +236,14 @@ button{font-family:inherit;min-height:40px} a{color:var(--navy)}
 .btn-share{background:linear-gradient(180deg,#C6A26B,var(--gold));color:#0A2342;border-color:var(--gold);box-shadow:0 6px 16px rgba(178,141,87,.35)}
 .btn-share:hover{background:#C6A26B;color:#0A2342}
 .btn-follow{border-color:rgba(216,192,148,.65);color:var(--gold2)}
+.btn-alerts{grid-column:1/-1;display:flex;align-items:center;justify-content:center;gap:9px}
+[data-alert-toggle][hidden]{display:none}
+.alert-pill{font-size:11px;font-weight:800;letter-spacing:.05em;padding:2px 10px;border-radius:999px;border:1px solid currentColor;line-height:1.6}
+.alerts-on .alert-pill{background:var(--gold);border-color:var(--gold);color:#0A2342}
+.alert-note{font-size:12.5px;line-height:1.45;margin-top:6px}
+.panel-body .alert-note{color:#F0B9B5;text-align:center}
+.follow-topic-box .alert-note{color:#B42318;margin:8px 0 0}
+.btn-alerts-topic{margin-left:8px}
 .follow-panel{margin-top:12px;background:rgba(255,255,255,.07);border:1px solid rgba(216,192,148,.45);border-radius:14px;padding:14px;font-size:16px;line-height:1.55;color:#E6ECF5;animation:panelIn .35s both}
 .follow-panel strong{color:#fff}
 .follow-panel p{margin:0 0 10px}
@@ -606,6 +614,7 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
  .map-listcol .card{min-height:48px}
 }
 @media(max-width:1023px) and (prefers-reduced-motion:reduce){.map-listcol{transition:none}}
+
 /* ===== Mobile layout fixes (Claude, Nov 24) =====
    1. No sideways scrolling: the map-view header buttons had flex-shrink:0
       and pushed the page to ~546px wide on a 390px phone, which shifted the
@@ -637,7 +646,6 @@ html,body{overflow-x:clip}
  .map-listcol .list-head{cursor:pointer}
  .map-split .panel{scroll-margin-top:76px}
 }
-
 </style>
 </head>
 <body>
@@ -854,6 +862,8 @@ html,body{overflow-x:clip}
     <div id="topicStories"></div>
     <div class="follow-topic-box">
       <button class="btn-follow-topic" id="topicFollowBtn" type="button" aria-expanded="false">＋ Follow this topic</button>
+      <button class="btn-follow-topic btn-alerts-topic" id="topicAlertToggle" type="button" data-alert-toggle="meetings" aria-pressed="false" hidden>Browser alerts <span class="alert-pill">Off</span></button>
+      <p class="alert-note" id="topicAlertNote" data-alert-note="meetings" role="status" aria-live="polite"></p>
       <div id="topicFollowPanel" hidden>
         <p class="follow-copy">Alerts go out when news is posted for this topic — sent personally by the Flagler Coastal team, not an automated blast.</p>
         <div class="follow-row"><input type="email" id="topicFollowEmail" placeholder="you@example.com" aria-label="Email address for topic alerts" autocomplete="email"><button class="btn-follow-topic" id="topicFollowGo" type="button">Follow by email</button></div>
@@ -1647,7 +1657,7 @@ function renderPanel(f){
   '<div class="section-label">Who meets here</div><div class="meets">'+(MEETS[f.id]||'<p>Meeting info not verified yet.</p>')+'</div>'+
   '<div class="section-label">What\'s next</div><div class="next-box"><span class="nb-label">Next</span>'+f.next+'</div>'+
   '<div class="section-label">Timeline</div><div class="timeline">'+tl+'</div>'+
-  '<div class="panel-actions"><button class="btn btn-share" id="shareBtn" type="button">↗ Share this building</button><button class="btn btn-follow" id="followBtn" type="button" aria-expanded="false">＋ Follow this building</button><a class="btn btn-gold" target="_blank" rel="noopener" href="'+mapsLink(f.mapsQ)+'">Open in Maps ↗</a>'+(hasCoords(f)?'<button class="btn" id="zoomBtn" type="button">Zoom to pin</button>':'')+'</div><div class="share-note" id="shareNote" role="status" aria-live="polite"></div><div class="follow-panel" id="followPanel" hidden><p style="margin:0"><strong>Follow '+f.name+' by email.</strong></p><p style="margin:8px 0 0">Alerts go out when news is posted for this building — sent personally by the Flagler Coastal team, not an automated blast.</p><div class="follow-row"><input type="email" id="followEmail" placeholder="you@example.com" aria-label="Email address for alerts about this building" autocomplete="email"><button class="follow-mail" id="followGo" type="button" style="border:none;cursor:pointer">Follow by email</button></div><p class="follow-note">This opens your email app with a pre-addressed follow request — nothing is stored on this site.</p><p class="follow-thanks" id="followThanks" hidden>Thanks — your email app should open with the follow request addressed to us.</p></div><div class="panel-report"><a href="'+reportMailto(f)+'">Report an error on this card</a></div></div></div>';
+  '<div class="panel-actions"><button class="btn btn-share" id="shareBtn" type="button">↗ Share this building</button><button class="btn btn-follow" id="followBtn" type="button" aria-expanded="false">＋ Follow this building</button><button class="btn btn-follow btn-alerts" type="button" data-alert-toggle="'+f.slug+'" aria-pressed="false" hidden>Browser alerts <span class="alert-pill">Off</span></button><a class="btn btn-gold" target="_blank" rel="noopener" href="'+mapsLink(f.mapsQ)+'">Open in Maps ↗</a>'+(hasCoords(f)?'<button class="btn" id="zoomBtn" type="button">Zoom to pin</button>':'')+'</div><div class="alert-note" data-alert-note="'+f.slug+'" role="status" aria-live="polite"></div><div class="share-note" id="shareNote" role="status" aria-live="polite"></div><div class="follow-panel" id="followPanel" hidden><p style="margin:0"><strong>Follow '+f.name+' by email.</strong></p><p style="margin:8px 0 0">Alerts go out when news is posted for this building — sent personally by the Flagler Coastal team, not an automated blast.</p><div class="follow-row"><input type="email" id="followEmail" placeholder="you@example.com" aria-label="Email address for alerts about this building" autocomplete="email"><button class="follow-mail" id="followGo" type="button" style="border:none;cursor:pointer">Follow by email</button></div><p class="follow-note">This opens your email app with a pre-addressed follow request — nothing is stored on this site.</p><p class="follow-thanks" id="followThanks" hidden>Thanks — your email app should open with the follow request addressed to us.</p></div><div class="panel-report"><a href="'+reportMailto(f)+'">Report an error on this card</a></div></div></div>';
   refreshMapSize(80); /* panel opening changes the map's box (F) */
   var pcb=document.getElementById("panelClose");
   if(pcb) pcb.addEventListener("click",function(){ closePanel(); });
@@ -1666,6 +1676,7 @@ function renderPanel(f){
     window.location.href="mailto:coastalenterprises386@gmail.com?subject="+encodeURIComponent("Follow: "+f.name)+"&body="+encodeURIComponent(body);
     var th=document.getElementById("followThanks"); if(th) th.hidden=false;
   });
+  if(window.__otrPushAlerts) window.__otrPushAlerts.refresh();
 }
 function bouncePin(id){
   var el=document.getElementById("pin-"+id);
@@ -2202,6 +2213,11 @@ function renderTopic(t){
       return '<a class="place-row" href="#building='+f.slug+'"><span><span class="pr-name">'+f.name+'</span><span class="pr-addr">'+addr+' · '+f.type+'</span></span><span class="badge '+bc+'">'+f.badge+'</span></a>';
     }).join("");
   }
+  var at=document.getElementById("topicAlertToggle");
+  if(at) at.setAttribute("data-alert-toggle",t);
+  var an=document.getElementById("topicAlertNote");
+  if(an){ an.setAttribute("data-alert-note",t); an.textContent=""; }
+  if(window.__otrPushAlerts) window.__otrPushAlerts.refresh();
 }
 /* ================= PHASE 4 — COUNTY REGISTRY, COVERAGE, PARTNER, FOLLOW =================
    DATA STRUCTURE: one registry entry per county. Adding a county means
@@ -2605,6 +2621,132 @@ document.addEventListener("keydown",function(e){
     try{ localStorage.setItem("otr_install_dismissed","1"); }catch(e){}
   });
   maybeShowInstall();
+})();
+</script>
+<script>
+/* ================= BROWSER PUSH ALERTS — client for the otr-push Worker =================
+   Separate from the email Follow flow above: these toggles subscribe the
+   browser itself to push alerts for a building or topic. Follows live in
+   localStorage under otr_alert_follows only. Toggles stay hidden unless
+   push is supported in this browser. */
+(function initPushAlerts(){
+  "use strict";
+  var WORKER="https://otr-push.coastalenterprises386.workers.dev";
+  var KEY="otr_alert_follows";
+  var supported=("PushManager" in window)&&("serviceWorker" in navigator)&&("Notification" in window);
+
+  function readFollows(){
+    try{ var v=JSON.parse(localStorage.getItem(KEY)||"[]"); return Array.isArray(v)?v:[]; }
+    catch(e){ return []; }
+  }
+  function saveFollows(list){
+    try{ localStorage.setItem(KEY,JSON.stringify(list)); }catch(e){}
+  }
+  function urlBase64ToUint8Array(base64String){
+    var padding="=".repeat((4-(base64String.length%4))%4);
+    var base64=(base64String+padding).replace(/-/g,"+").replace(/_/g,"/");
+    var rawData=window.atob(base64);
+    var outputArray=new Uint8Array(rawData.length);
+    for(var i=0;i<rawData.length;i++) outputArray[i]=rawData.charCodeAt(i);
+    return outputArray;
+  }
+  function postSubscribe(sub,follows){
+    return fetch(WORKER+"/subscribe",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({subscription:sub.toJSON(),follows:follows})
+    });
+  }
+  /* Returns the existing push subscription, or creates one (asking for
+     notification permission first). Resolves null when permission is not
+     granted or no VAPID key comes back. */
+  function ensureSubscription(){
+    return navigator.serviceWorker.ready.then(function(reg){
+      return reg.pushManager.getSubscription().then(function(existing){
+        if(existing) return existing;
+        return fetch(WORKER+"/vapid").then(function(r){ return r.json(); }).then(function(data){
+          if(!data||!data.publicKey) return null;
+          return Notification.requestPermission().then(function(perm){
+            if(perm!=="granted") return null;
+            return reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:urlBase64ToUint8Array(data.publicKey)});
+          });
+        });
+      });
+    });
+  }
+  /* Re-POST the stored follows against the current subscription, if one
+     exists. Never creates a subscription; fails quietly. */
+  function syncFollows(){
+    if(!supported) return Promise.resolve();
+    return navigator.serviceWorker.ready.then(function(reg){
+      return reg.pushManager.getSubscription();
+    }).then(function(sub){
+      if(!sub) return null;
+      return postSubscribe(sub,readFollows()).catch(function(){});
+    }).catch(function(){});
+  }
+  function paintToggle(btn,on){
+    btn.setAttribute("aria-pressed",on?"true":"false");
+    btn.classList.toggle("alerts-on",!!on);
+    var pill=btn.querySelector(".alert-pill");
+    if(pill) pill.textContent=on?"On":"Off";
+  }
+  /* Reveal toggles (supported browsers only) and paint every toggle's
+     state from the stored follows list. */
+  function refresh(){
+    var follows=readFollows();
+    document.querySelectorAll("[data-alert-toggle]").forEach(function(btn){
+      if(supported) btn.hidden=false;
+      paintToggle(btn,follows.indexOf(btn.getAttribute("data-alert-toggle"))>-1);
+    });
+  }
+  function setNote(id,msg){
+    document.querySelectorAll("[data-alert-note]").forEach(function(n){
+      if(n.getAttribute("data-alert-note")===id) n.textContent=msg||"";
+    });
+  }
+  function setAlert(id,on){
+    var follows=readFollows();
+    if(on){
+      if(follows.indexOf(id)===-1) follows.push(id);
+      return ensureSubscription().then(function(sub){
+        if(!sub) throw new Error("no subscription");
+        saveFollows(follows);
+        return postSubscribe(sub,follows).catch(function(){});
+      }).then(function(){
+        refresh();
+      }).catch(function(){
+        /* Not saved: repaint from the stored list so the toggle reverts. */
+        refresh();
+        setNote(id,"Browser alerts couldn't be turned on.");
+      });
+    }
+    follows=follows.filter(function(x){ return x!==id; });
+    saveFollows(follows);
+    refresh();
+    return syncFollows();
+  }
+  document.addEventListener("click",function(e){
+    var t=e.target;
+    var btn=(t&&t.closest)?t.closest("[data-alert-toggle]"):null;
+    if(!btn) return;
+    var id=btn.getAttribute("data-alert-toggle");
+    if(!id) return;
+    setNote(id,"");
+    var on=readFollows().indexOf(id)===-1;
+    document.querySelectorAll("[data-alert-toggle]").forEach(function(b){
+      if(b.getAttribute("data-alert-toggle")===id) paintToggle(b,on);
+    });
+    setAlert(id,on);
+  });
+  window.__otrPushAlerts={refresh:refresh,syncFollows:syncFollows,setAlert:setAlert,supported:supported};
+  if(supported){
+    /* Initialize toggle states once the service worker registration is
+       ready; also refresh on load in case registration settled earlier. */
+    try{ navigator.serviceWorker.ready.then(function(){ refresh(); },function(){ refresh(); }); }catch(e){ refresh(); }
+    window.addEventListener("load",refresh);
+    refresh();
+  }
 })();
 </script>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "c68d8265fc6d4f238d67c9b7cf71df1e"}'></script><!-- End Cloudflare Web Analytics -->

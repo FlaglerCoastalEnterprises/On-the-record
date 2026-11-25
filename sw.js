@@ -2,7 +2,7 @@
    Pages and data always try the network first so the daily updates are
    never masked by a stale cache; the cache is only an offline fallback
    (the latest week's briefing stays readable with no connection). */
-const CACHE = "otr-cache-v2";
+const CACHE = "otr-cache-v3";
 const SHELL = [
   "/",
   "/index.html",
@@ -26,6 +26,42 @@ self.addEventListener("activate", (event) => {
     caches.keys()
       .then((keys) => Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k))))
       .then(() => self.clients.claim())
+  );
+});
+
+/* Push alerts: the otr-push Worker sends JSON payloads {title, body, url, tag}
+   for followed buildings/topics. Show the notification; a tap focuses an
+   existing site tab and navigates it to the payload's deep link, or opens a
+   new window when no site tab is open. */
+self.addEventListener("push", (event) => {
+  let data = {};
+  try { data = event.data ? event.data.json() : {}; } catch (e) { data = {}; }
+  const title = data.title || "On The Record";
+  const options = {
+    body: data.body || "",
+    icon: "/icon-192.png",
+    badge: "/icon-192.png",
+    data: { url: data.url || "/" }
+  };
+  if (data.tag) options.tag = data.tag;
+  event.waitUntil(self.registration.showNotification(title, options));
+});
+
+self.addEventListener("notificationclick", (event) => {
+  event.notification.close();
+  const target = (event.notification.data && event.notification.data.url) || "/";
+  event.waitUntil(
+    self.clients.matchAll({ type: "window", includeUncontrolled: true }).then((clientList) => {
+      for (const client of clientList) {
+        if (new URL(client.url).origin === self.location.origin && "focus" in client) {
+          if ("navigate" in client) {
+            return client.navigate(target).then((c) => (c ? c.focus() : client.focus()));
+          }
+          return client.focus();
+        }
+      }
+      if (self.clients.openWindow) return self.clients.openWindow(target);
+    })
   );
 });
 
