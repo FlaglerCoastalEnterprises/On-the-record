@@ -3,182 +3,131 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="color-scheme" content="light">
 <link rel="icon" type="image/png" href="/favicon-64.png">
-<title>Shop Flagler Coastal Enterprises — Coastal-made apparel and gear</title>
-<meta name="description" content="Shop Flagler Coastal Enterprises: coastal-made apparel and gear from Flagler County. Hoodies, tees, polos, tumblers, mugs and stickers — made to order, printed and shipped in the USA.">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<title>The Shop — Flagler Coastal Enterprises</title>
+<meta name="description" content="Wear your local pride. Apparel and goods from Flagler Coastal Enterprises, made to order and shipped in the USA.">
 <link rel="canonical" href="https://on-the-record.coastalenterprises386.workers.dev/shop.html">
-<meta name="theme-color" content="#0A2342">
-<meta property="og:title" content="Shop Flagler Coastal Enterprises">
-<meta property="og:description" content="Coastal-made apparel and gear from Flagler County. Made to order. Printed and shipped in the USA.">
+<meta name="theme-color" content="#FFFFFF">
+<meta property="og:title" content="The Shop — Flagler Coastal Enterprises">
+<meta property="og:description" content="Wear your local pride. Made to order for the people of Flagler County.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://on-the-record.coastalenterprises386.workers.dev/shop.html">
-<meta property="og:image" content="https://on-the-record.coastalenterprises386.workers.dev/brand/fce-logo-full.png">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Shop Flagler Coastal Enterprises">
-<meta name="twitter:description" content="Coastal-made apparel and gear from Flagler County. Made to order. Printed and shipped in the USA.">
+<meta property="og:image" content="https://on-the-record.coastalenterprises386.workers.dev/brand/fce-logo-flat.png">
+<meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,500;0,8..60,600;0,8..60,700;0,8..60,900;1,8..60,500;1,8..60,600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--navy:#0A2342;--navy2:#0E2F57;--navy3:#12365E;--gold:#B28D57;--gold2:#D8C094;--gold-dark:#715628;--off:#F7F3EB;--paper:#FFFEFB;--ink:#1A2332;--muted:#5B6577;--line:#E6DDD0;--serif:"Source Serif 4","Merriweather",Georgia,serif}
+:root{--navy:#0B2342;--ink:#16202E;--muted:#5E6878;--rule:#E3E6EB;--tile:#F3F4F6;--gold:#A8844C;--serif:"Source Serif 4",Georgia,serif;--sans:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
 *{box-sizing:border-box}
-body{margin:0;background:var(--off);color:var(--ink);font-family:Inter,system-ui,-apple-system,sans-serif;font-size:16px;line-height:1.5}
-a{color:var(--navy)}
-button{font-family:inherit}
-:focus-visible{outline:3px solid var(--gold-dark);outline-offset:2px}
-/* Top bar */
-.shop-topbar{background:var(--navy);color:#fff}
-.shop-topbar-inner{max-width:1180px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.shop-topbar a{color:#C7D3E6;text-decoration:none;font-size:13px;font-weight:600}
-.shop-topbar a:hover{color:#fff;text-decoration:underline;text-underline-offset:3px}
-.shop-topbar .tb-brand{margin-right:auto;font-family:var(--serif);font-weight:700;font-size:16px;color:#fff}
-.shop-topbar .tb-brand em{color:var(--gold2);font-style:italic}
-/* Header */
-.shop-hero{max-width:1180px;margin:0 auto;padding:34px 20px 8px;text-align:center}
-.shop-logo{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 10px 26px rgba(10,35,66,.12);display:inline-block;padding:18px 26px;margin-bottom:20px}
-.shop-logo img{display:block;width:auto;max-width:min(320px,72vw);height:auto;max-height:120px}
-.shop-hero h1{margin:0 0 8px;font-family:var(--serif);font-weight:700;font-size:34px;line-height:1.1;color:var(--navy)}
-.shop-hero .subline{margin:0 auto 6px;max-width:560px;font-size:17px;color:var(--muted)}
-/* Product grid: 2 columns on phone, 4 on desktop */
-.shop-grid{max-width:1180px;margin:0 auto;padding:22px 20px 8px;display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-@media(min-width:1024px){.shop-grid{grid-template-columns:repeat(4,1fr);gap:18px}}
-.product{background:var(--paper);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 4px 14px rgba(10,35,66,.06)}
-.product-photo{aspect-ratio:3/4;overflow:hidden;background:linear-gradient(160deg,var(--navy2),var(--navy) 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--gold2)}
-.product-photo img{width:100%;height:100%;object-fit:cover;display:block;background:#EEF0F3}
-.product-photo svg{width:44px;height:44px;display:block}
-.product-photo span{font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#C7D3E6}
-.product-body{padding:14px 14px 16px;display:flex;flex-direction:column;gap:6px;flex:1}
-.product-body h2{margin:0;font-family:var(--serif);font-weight:700;font-size:18px;line-height:1.25;color:var(--navy)}
-.product-note{margin:0;font-size:13px;line-height:1.45;color:var(--muted)}
-.product-price{margin:2px 0 8px;font-size:15px;font-weight:800;color:var(--navy)}
-.shop-btn{margin-top:auto;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:11px 16px;border:none;border-radius:999px;background:linear-gradient(180deg,#C6A26B,var(--gold));color:#0A2342;font-size:14.5px;font-weight:800;text-decoration:none;cursor:pointer;box-shadow:0 4px 12px rgba(178,141,87,.35)}
-.shop-btn:hover{filter:brightness(1.05)}
-.shop-btn svg{width:17px;height:17px;display:block}
-/* Promise band */
-.shop-band{background:var(--navy);color:#fff;margin:26px 0 0}
-.shop-band-inner{max-width:1180px;margin:0 auto;padding:22px 20px;text-align:center}
-.shop-band p{margin:0;font-family:var(--serif);font-size:20px;line-height:1.4}
-.shop-band p em{color:var(--gold2);font-style:italic}
-.shop-band .fine{margin:8px 0 0;font-family:Inter,system-ui,sans-serif;font-size:13px;color:#C7D3E6}
-/* Full shop CTA */
-.shop-cta{max-width:1180px;margin:0 auto;padding:28px 20px 10px;text-align:center}
-.shop-cta .btn-full{display:inline-flex;align-items:center;gap:9px;min-height:52px;padding:14px 28px;border-radius:999px;background:var(--navy);color:#fff;font-size:16px;font-weight:800;text-decoration:none;box-shadow:0 8px 20px rgba(10,35,66,.25)}
-.shop-cta .btn-full:hover{background:var(--navy2)}
-.shop-cta .btn-full svg{width:18px;height:18px;display:block}
-.shop-cta p{margin:12px 0 0;font-size:13px;color:var(--muted)}
-/* Footer */
-.shop-footer{max-width:1180px;margin:0 auto;padding:26px 20px 34px;text-align:center;font-size:13px;line-height:1.7;color:var(--muted)}
-.shop-footer a{font-weight:700;text-decoration:none}
-.shop-footer a:hover{text-decoration:underline;text-underline-offset:3px}
-.shop-footer .rule{border-top:1px solid var(--line);margin-bottom:16px}
-@media(max-width:1023px){
-  .shop-hero{padding:26px 14px 4px}
-  .shop-hero h1{font-size:28px}
-  .shop-grid{padding:18px 14px 4px;gap:12px}
-  .shop-topbar-inner{padding:10px 14px}
-  .shop-band p{font-size:18px}
-}
+html,body{margin:0;background:#fff;color:var(--ink)}
+body{font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+header{border-bottom:1px solid var(--rule)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:18px;padding-bottom:18px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand img{width:44px;height:auto;display:block}
+.brand span{font-family:var(--serif);font-size:17px;font-weight:600;color:var(--navy)}
+.bar nav a{font-size:14px;font-weight:500;color:var(--navy);text-decoration:none;margin-left:18px}
+.bar nav a:hover{text-decoration:underline;text-underline-offset:3px}
+.hero{padding:44px 0 30px;max-width:620px}
+.eyebrow{margin:0 0 14px;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+h1{margin:0 0 14px;font-family:var(--serif);font-weight:400;font-size:38px;line-height:1.12;letter-spacing:-.01em;color:var(--navy)}
+.lede{margin:0;font-size:17px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px 16px;padding:12px 0 40px}
+@media(min-width:860px){.grid{grid-template-columns:repeat(4,1fr);gap:40px 24px}h1{font-size:46px}.hero{padding:64px 0 40px}}
+.item{display:block;text-decoration:none}
+.ph{aspect-ratio:3/4;background:var(--tile);overflow:hidden;margin-bottom:12px}
+.ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease}
+.item:hover .ph img{transform:scale(1.03)}
+.item b{display:block;font-family:var(--serif);font-weight:600;font-size:17px;color:var(--navy);line-height:1.3}
+.item:hover b{text-decoration:underline;text-underline-offset:3px}
+.meta{display:block;font-size:13.5px;color:var(--muted);margin-top:2px}
+.price{display:block;font-size:14.5px;font-weight:600;color:var(--ink);margin-top:6px}
+.note{border-top:1px solid var(--rule);padding:32px 0;display:grid;gap:22px}
+@media(min-width:860px){.note{grid-template-columns:repeat(3,1fr)}}
+.note h2{margin:0 0 6px;font-family:var(--serif);font-weight:600;font-size:18px;color:var(--navy)}
+.note p{margin:0;font-size:14.5px;color:var(--muted)}
+.cta-row{border-top:1px solid var(--rule);padding:32px 0 40px}
+.cta{display:inline-block;padding:14px 22px;background:var(--navy);color:#fff;text-decoration:none;font-weight:600;font-size:15px;border-radius:2px}
+.cta:hover{background:#13345F}
+footer{border-top:1px solid var(--rule);padding:26px 0 40px;font-size:13px;color:var(--muted)}
+footer nav{display:flex;flex-wrap:wrap;gap:18px;margin-bottom:12px}
+footer nav a{color:var(--navy);text-decoration:none;font-weight:500}
+footer nav a:hover{text-decoration:underline;text-underline-offset:3px}
+@media(max-width:420px){.brand span{font-size:15px}.brand img{width:36px}.bar nav a{margin-left:12px;font-size:13.5px}}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 </style>
 </head>
 <body>
-<header class="shop-topbar">
-  <div class="shop-topbar-inner">
-    <a class="tb-brand" href="/">On The <em>Record</em></a>
-    <a href="/">Back to On The Record</a>
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="/links" aria-label="Flagler Coastal Enterprises"><img src="/brand/fce-mark.png" alt="" width="44" height="24"><span>Flagler Coastal Enterprises</span></a>
+    <nav aria-label="Site"><a href="/links">About</a><a data-store-link href="#">Store</a></nav>
   </div>
 </header>
 
-<main>
-  <section class="shop-hero" aria-labelledby="shopTitle">
-    <div class="shop-logo"><img src="/brand/fce-logo-full.png" alt="Flagler Coastal Enterprises logo" width="640" height="360"></div>
-    <h1 id="shopTitle">Shop Flagler Coastal Enterprises</h1>
-    <p class="subline">Coastal-made apparel and gear from Flagler County.</p>
-  </section>
-
-  <section class="shop-grid" aria-label="Products">
-    <article class="product">
-      <div class="product-photo"><img src="https://cdn.fourthwall.com/customizations/sh_bbce7754-d7ed-439d-9744-314d58c573ee/ab586dda-111b-4d72-acaa-31acbf4f0d6d.webp" alt="Flagler Coastal hoodie in mint, full logo on the back" loading="lazy" width="768" height="1024"></div>
-      <div class="product-body">
-        <h2>Hoodie</h2>
-        <p class="product-price">From $58</p>
-        <a class="shop-btn" data-store-link data-path="/products/flagler-coastal-hoodie-2" href="#" aria-label="Shop the Hoodie"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Shop</a>
-      </div>
-    </article>
-    <article class="product">
-      <div class="product-photo"><img src="https://cdn.fourthwall.com/customizations/sh_bbce7754-d7ed-439d-9744-314d58c573ee/05876954-94b5-49b3-b303-d380ba7f86a9.webp" alt="Flagler Coastal heavyweight tee in Lagoon Blue, full logo on the back" loading="lazy" width="768" height="1024"></div>
-      <div class="product-body">
-        <h2>Heavyweight Tee</h2>
-        <p class="product-price">From $33</p>
-        <a class="shop-btn" data-store-link data-path="/products/flagler-coastal-heavyweight-tee-2" href="#" aria-label="Shop the Heavyweight Tee"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Shop</a>
-      </div>
-    </article>
-    <article class="product">
-      <div class="product-photo"><img src="https://cdn.fourthwall.com/customizations/sh_bbce7754-d7ed-439d-9744-314d58c573ee/fb9bcceb-c3d5-4a60-872c-270c112beed3.webp" alt="Flagler Coastal work polo in navy with chest logo" loading="lazy" width="768" height="1024"></div>
-      <div class="product-body">
-        <h2>Work Polo</h2>
-        <p class="product-note">Navy &amp; Black — plus a light Stone / White version</p>
-        <p class="product-price">From $30</p>
-        <a class="shop-btn" data-store-link data-path="/products/flagler-coastal-work-polo-2" href="#" aria-label="Shop the Work Polo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Shop</a>
-      </div>
-    </article>
-    <article class="product">
-      <div class="product-photo"><img src="https://cdn.fourthwall.com/customizations/sh_bbce7754-d7ed-439d-9744-314d58c573ee/6b66b2d9-d90b-4542-906f-9bd36dde275e.webp" alt="Flagler Coastal performance tee in navy with chest logo" loading="lazy" width="768" height="1024"></div>
-      <div class="product-body">
-        <h2>Performance Tee</h2>
-        <p class="product-price">From $25</p>
-        <a class="shop-btn" data-store-link data-path="/products/flagler-coastal-performance-tee-2" href="#" aria-label="Shop the Performance Tee"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Shop</a>
-      </div>
-    </article>
-    <article class="product">
-      <div class="product-photo"><img src="https://cdn.fourthwall.com/customizations/sh_bbce7754-d7ed-439d-9744-314d58c573ee/af0efe9a-b22f-46a3-bfdd-37601c253537.webp" alt="White 20 oz Flagler Coastal tumbler" loading="lazy" width="768" height="1024"></div>
-      <div class="product-body">
-        <h2>Tumbler</h2>
-        <p class="product-price">$35</p>
-        <a class="shop-btn" data-store-link data-path="/products/flagler-coastal-tumbler" href="#" aria-label="Shop the Tumbler"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Shop</a>
-      </div>
-    </article>
-    <article class="product">
-      <div class="product-photo"><img src="https://cdn.fourthwall.com/customizations/sh_bbce7754-d7ed-439d-9744-314d58c573ee/e07d8cc6-2861-4f69-bcb0-5c7accc609c2.webp" alt="White Flagler Coastal mug" loading="lazy" width="768" height="1024"></div>
-      <div class="product-body">
-        <h2>Mug</h2>
-        <p class="product-price">$16</p>
-        <a class="shop-btn" data-store-link data-path="/products/flagler-coastal-mug" href="#" aria-label="Shop the Mug"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Shop</a>
-      </div>
-    </article>
-    <article class="product">
-      <div class="product-photo"><img src="https://cdn.fourthwall.com/customizations/sh_bbce7754-d7ed-439d-9744-314d58c573ee/ae3f96cd-c4e9-4404-9cee-21dc57a004f6.webp" alt="Flagler Coastal logo sticker" loading="lazy" width="768" height="1024"></div>
-      <div class="product-body">
-        <h2>Sticker</h2>
-        <p class="product-price">$8</p>
-        <a class="shop-btn" data-store-link data-path="/products/flagler-coastal-sticker" href="#" aria-label="Shop the Sticker"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Shop</a>
-      </div>
-    </article>
-  </section>
-
-  <section class="shop-band" aria-label="Our promise">
-    <div class="shop-band-inner">
-      <p>Made to order. Printed and shipped in the USA. <em>Quality guaranteed.</em></p>
-      <p class="fine">Checkout, payment, shipping, taxes and returns are handled by Fourthwall.</p>
-    </div>
-  </section>
-
-  <div class="shop-cta">
-    <a class="btn-full" data-store-link href="#" aria-label="View the full shop">View the full shop <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg></a>
-    <p>Every Shop button on this page opens the Fourthwall store in a new tab. No cart here.</p>
+<main class="wrap">
+  <div class="hero">
+    <p class="eyebrow">The Shop</p>
+    <h1>Wear your local pride.</h1>
+    <p class="lede">Apparel and everyday goods for the people of Flagler County. Every piece is made to order and shipped to your door.</p>
   </div>
+
+  <section class="grid" aria-label="Products">
+      <a class="item" data-store-link data-path="/products/flagler-coastal-hoodie-2" href="#">
+        <div class="ph"><img src="https://cdn.fourthwall.com/customizations/sh_bbce7754-d7ed-439d-9744-314d58c573ee/ab586dda-111b-4d72-acaa-31acbf4f0d6d.webp" alt="Mint hoodie with the Flagler Coastal logo on the back" loading="lazy" width="768" height="1024"></div>
+        <b>Hoodie</b><span class="meta">White, grey, aqua and mint</span><span class="price">From $58</span>
+      </a>
+      <a class="item" data-store-link data-path="/products/flagler-coastal-heavyweight-tee-2" href="#">
+        <div class="ph"><img src="https://cdn.fourthwall.com/customizations/sh_bbce7754-d7ed-439d-9744-314d58c573ee/05876954-94b5-49b3-b303-d380ba7f86a9.webp" alt="Lagoon Blue tee with the Flagler Coastal logo on the back" loading="lazy" width="768" height="1024"></div>
+        <b>Heavyweight Tee</b><span class="meta">Garment-dyed Comfort Colors cotton</span><span class="price">From $33</span>
+      </a>
+      <a class="item" data-store-link data-path="/products/flagler-coastal-work-polo-2" href="#">
+        <div class="ph"><img src="https://cdn.fourthwall.com/customizations/sh_bbce7754-d7ed-439d-9744-314d58c573ee/fb9bcceb-c3d5-4a60-872c-270c112beed3.webp" alt="Navy polo with a small Flagler Coastal logo on the chest" loading="lazy" width="768" height="1024"></div>
+        <b>Work Polo</b><span class="meta">Navy, black and steel grey</span><span class="price">From $30</span>
+      </a>
+      <a class="item" data-store-link data-path="/products/flagler-coastal-work-polo-light" href="#">
+        <div class="ph"><img src="https://cdn.fourthwall.com/customizations/sh_bbce7754-d7ed-439d-9744-314d58c573ee/49933438-18bb-4acf-80d5-513661a35f25.webp" alt="Stone polo with the Flagler Coastal logo on the chest" loading="lazy" width="768" height="1024"></div>
+        <b>Work Polo, Light</b><span class="meta">Stone and white</span><span class="price">From $30</span>
+      </a>
+      <a class="item" data-store-link data-path="/products/flagler-coastal-performance-tee-2" href="#">
+        <div class="ph"><img src="https://cdn.fourthwall.com/customizations/sh_bbce7754-d7ed-439d-9744-314d58c573ee/6b66b2d9-d90b-4542-906f-9bd36dde275e.webp" alt="Navy performance tee with a small chest logo" loading="lazy" width="768" height="1024"></div>
+        <b>Performance Tee</b><span class="meta">Lightweight and breathable</span><span class="price">From $25</span>
+      </a>
+      <a class="item" data-store-link data-path="/products/flagler-coastal-tumbler" href="#">
+        <div class="ph"><img src="https://cdn.fourthwall.com/customizations/sh_bbce7754-d7ed-439d-9744-314d58c573ee/af0efe9a-b22f-46a3-bfdd-37601c253537.webp" alt="White insulated tumbler with the Flagler Coastal logo" loading="lazy" width="768" height="1024"></div>
+        <b>Tumbler</b><span class="meta">20 oz, insulated</span><span class="price">$35</span>
+      </a>
+      <a class="item" data-store-link data-path="/products/flagler-coastal-mug" href="#">
+        <div class="ph"><img src="https://cdn.fourthwall.com/customizations/sh_bbce7754-d7ed-439d-9744-314d58c573ee/e07d8cc6-2861-4f69-bcb0-5c7accc609c2.webp" alt="White mug with the Flagler Coastal logo" loading="lazy" width="768" height="1024"></div>
+        <b>Mug</b><span class="meta">11 oz ceramic</span><span class="price">$16</span>
+      </a>
+      <a class="item" data-store-link data-path="/products/flagler-coastal-sticker" href="#">
+        <div class="ph"><img src="https://cdn.fourthwall.com/customizations/sh_bbce7754-d7ed-439d-9744-314d58c573ee/ae3f96cd-c4e9-4404-9cee-21dc57a004f6.webp" alt="Flagler Coastal logo sticker" loading="lazy" width="768" height="1024"></div>
+        <b>Sticker</b><span class="meta">3 inch, kiss-cut</span><span class="price">$8</span>
+      </a>
+  </section>
+
+  <section class="note" aria-label="About our products">
+    <div><h2>Made to order</h2><p>Each item is printed when you order it, so nothing goes to waste.</p></div>
+    <div><h2>Shipped in the USA</h2><p>Most orders arrive in about one to two weeks.</p></div>
+    <div><h2>Quality guaranteed</h2><p>If something arrives misprinted or damaged, it is replaced or refunded.</p></div>
+  </section>
+
+  <div class="cta-row"><a class="cta" data-store-link href="#">View the full shop</a></div>
 </main>
 
-<footer class="shop-footer">
-  <div class="rule"></div>
-  <strong>Shop Flagler Coastal Enterprises</strong> — a Flagler Coastal Enterprises LLC store · Palm Coast, Florida<br>
-  <a href="/">← Back to On The Record</a> · <a href="mailto:coastalenterprises386@gmail.com">coastalenterprises386@gmail.com</a><br>
-  © 2026 Flagler Coastal Enterprises LLC
+<footer>
+  <div class="wrap">
+    <nav aria-label="More"><a href="/links">About us</a><a href="/">On The Record</a><a href="mailto:coastalenterprises386@gmail.com">Email us</a></nav>
+    © 2026 Flagler Coastal Enterprises LLC · Palm Coast, Florida. Checkout, payment and shipping are handled securely by Fourthwall.
+  </div>
 </footer>
-
 <script>
-/* ===== STORE CONFIG — change the store URL in this ONE place; every
-   Shop button on this page (product cards + "View the full shop") follows it. ===== */
+/* ===== STORE CONFIG — change the store URL in this ONE place. ===== */
 const STORE_URL = "https://flaglercoastal-shop.fourthwall.com";
 document.querySelectorAll("[data-store-link]").forEach(function (a) {
   a.href = STORE_URL + (a.getAttribute("data-path") || "");
