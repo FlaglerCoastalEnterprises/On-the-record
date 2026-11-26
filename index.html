@@ -876,6 +876,16 @@ h1,h2,h3{font-weight:600}
 .glance-card .num small,.glance-card .num span{font-size:.6em}
 @media (min-width:901px){.bs-tag{text-transform:none;letter-spacing:.02em;font-weight:500;font-size:12px}.nt-label{display:none}.nav-links .nt-ic{display:none}}
 @media (max-width:640px){.glance-grid{grid-template-columns:1fr;gap:0}.glance-card{padding-top:16px;padding-bottom:16px}}
+.trust-section{border-top:1px solid var(--line);padding-top:28px;margin-bottom:8px}
+.trust-section h3{font-family:var(--serif);font-weight:600;font-size:24px;line-height:1.25;margin:6px 0 8px;color:var(--navy)}
+.trust-section>p{color:var(--muted);max-width:640px;margin:0 0 20px}
+.trust-stats{display:grid;grid-template-columns:repeat(4,1fr);margin:0 0 18px;border-top:1px solid var(--navy)}
+.trust-stats div{padding:14px 16px 14px 0}
+.trust-stats div+div{padding-left:16px;border-left:1px solid var(--line)}
+.trust-stats dt{font-family:var(--serif);font-weight:600;font-size:32px;line-height:1.1;color:var(--navy)}
+.trust-stats dd{margin:4px 0 0;font-size:13.5px;color:var(--muted)}
+.trust-names{font-size:13.5px;color:var(--muted);line-height:1.7;margin:0 0 20px;max-width:720px}
+@media (max-width:640px){.trust-stats{grid-template-columns:1fr 1fr}.trust-stats div:nth-child(3){padding-left:0;border-left:0}.trust-stats div:nth-child(n+3){border-top:1px solid var(--line)}}
 </style>
 </head>
 <body>
@@ -963,6 +973,19 @@ h1,h2,h3{font-weight:600}
       <div class="preview-counts" id="previewCounts"></div>
       <a class="btn-hero" href="#/map">Open the full map →</a>
     </div>
+  </section>
+  <section class="home-section trust-section" aria-labelledby="trustTitle">
+    <div class="eyebrow">How we report</div>
+    <h3 id="trustTitle">Every fact, traced to its source.</h3>
+    <p>We start from the official record — agendas, votes, budgets and filings — and confirm news reports against it before anything appears here. We read newsrooms from across the political spectrum, and every reporter whose work we use is named and linked.</p>
+    <dl class="trust-stats">
+      <div><dt id="tsTotal">95</dt><dd>sources we check</dd></div>
+      <div><dt id="tsOfficial">53</dt><dd>official records and data</dd></div>
+      <div><dt id="tsNews">40</dt><dd>newsrooms, every viewpoint</dd></div>
+      <div><dt>Every</dt><dd>story names and links its source</dd></div>
+    </dl>
+    <p class="trust-names">Flagler County Commission · City of Palm Coast · Flagler Schools · Sheriff's Office · Supervisor of Elections · FlaglerLive · Palm Coast Observer · Associated Press · The Wall Street Journal · The New York Times</p>
+    <div class="support-actions"><a class="btn-hero" href="/sources">See all our sources</a><a class="support-alt" href="/sources#h-credit">How we credit reporters</a></div>
   </section>
   <section class="home-section support-section" aria-label="Support On The Record">
     <div class="eyebrow">Support local reporting</div>
@@ -3989,5 +4012,8 @@ document.addEventListener("keydown",function(e){
 })();
 </script>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "c68d8265fc6d4f238d67c9b7cf71df1e"}'></script><!-- End Cloudflare Web Analytics -->
+<script>
+(function(){try{fetch("/data/sources.json",{cache:"no-cache"}).then(function(r){return r.json();}).then(function(d){var s=d.sources||[];function set(id,v){var e=document.getElementById(id);if(e)e.textContent=v;}set("tsTotal",s.length);set("tsOfficial",s.filter(function(x){return x.tier===1||x.tier===2;}).length);set("tsNews",s.filter(function(x){return x.tier===3;}).length);}).catch(function(){});}catch(e){}})();
+</script>
 </body>
 </html>
