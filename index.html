@@ -894,6 +894,17 @@ h1,h2,h3{font-weight:600}
 .tabbar :focus-visible,.footer-nav :focus-visible{outline-color:var(--gold2)}
 .leaflet-container:focus-visible{outline:3px solid var(--gold-dark);outline-offset:-3px}
 .leaflet-bar a:focus-visible{outline:3px solid var(--gold-dark);outline-offset:2px;position:relative;z-index:2}
+
+/* ===== Font match to /sources (Nov 26, 2026, Jetmir) =====
+   Same families (Source Serif 4 + Inter); what changes is the treatment
+   the Sources page uses: display headlines in light (400) serif at a
+   larger scale, and intro text in the softer muted tone. Section
+   headings (h2/h3, info-card) keep their 600 serif, as on /sources. */
+h1{font-weight:400}
+.home-hero h1{font-weight:400;line-height:1.08}
+.page-wrap h1{font-weight:400;font-size:clamp(32px,5vw,46px)}
+.home-sub{color:#5E6878}
+.page-lede{font-size:17px;color:#5E6878}
 .support-section h3{font-family:var(--serif);font-weight:600;font-size:24px;line-height:1.25;margin:6px 0 8px;color:var(--navy)}
 .support-section p{color:var(--muted);max-width:620px;margin:0 0 18px}
 .support-actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
