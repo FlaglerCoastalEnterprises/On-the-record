@@ -2,7 +2,7 @@
  "id": "2026-11-23",
  "label": "Week of Nov 23–29, 2026",
  "range": "Nov 23–29, 2026",
- "lede": "One board met this week — Bunnell, on Monday night, Nov. 23 — and its wastewater vote and rezonings are still unreported, though the commission unanimously approved the interim manager's clean-up steps. The week’s biggest stories were money: the Sheriff’s Office returned $4 million in unspent funds to the county, and reporting put the county’s Amendment 3 budget cuts at about $60 million. Everything below is drawn from the same verified items on the map, grouped by topic.",
+ "lede": "One board met this week — Bunnell, on Monday night, Nov. 23 — and its wastewater vote and rezonings are still unconfirmed, though the commission unanimously approved the interim manager's clean-up steps. The week’s biggest stories were money: the Sheriff’s Office returned $4 million in unspent funds to the county, and reporting put the county’s Amendment 3 budget cuts at about $60 million. Everything below is drawn from the same verified items on the map, grouped by topic.",
  "topStories": [
   10,
   1,
@@ -13,13 +13,13 @@
    "facilityId": 1,
    "active": true,
    "badge": "NEWS THIS WEEK",
-   "headline": "Amendment 3 fallout: FlaglerLive reports the county faces 'cataclysmic' cuts of about $60 million.",
+   "headline": "Amendment 3 fallout: county faces about $60 million in cuts, layoffs and possible new fees.",
    "bullets": [
-    "Amendment 3 fallout: FlaglerLive reports the county faces 'cataclysmic' cuts of about $60 million, layoffs, and potential new fees and taxes. The County Commission and Sheriff are exploring a special taxing district to pay for policing countywide. Flagler County voters backed Amendment 3 with 68%. (First reported by Pierre Tristam, <a href=\"https://flaglerlive.com/amendment-cataclysmic/\" target=\"_blank\" rel=\"noopener\">FlaglerLive</a>, Nov. 10, 2026)",
+    "Amendment 3 fallout: the county faces about $60 million in 'cataclysmic' cuts, layoffs, and potential new fees and taxes, according to county figures presented by Acting County Administrator Adam Mengel at a County Commission workshop. The County Commission and Sheriff are exploring a special taxing district to pay for policing countywide. Flagler County voters backed Amendment 3 with 68%. (First reported by Pierre Tristam, <a href=\"https://flaglerlive.com/amendment-cataclysmic/\" target=\"_blank\" rel=\"noopener\">FlaglerLive</a>, Nov. 10, 2026)",
     "County unemployment held steady at 5.2% in October (vs. 4.3% statewide, 4.1% nationally), though the workforce shrank by more than 200. (Reported by Pierre Tristam, <a href=\"https://flaglerlive.com/unemployment-housing-october-2026/\" target=\"_blank\" rel=\"noopener\">FlaglerLive</a>, Nov. 23, 2026)",
     "Week 1 at this building (Nov 16–17): the BOCC approved the 1-year, $350,000 Humane Society animal-control contract 5–0, and the County Commission unanimously selected Kim Carney as chair and Pam Richardson as vice chair — full record in the timeline below."
    ],
-   "next": "No County Commission meeting this week. Next regular meeting Mon Dec. 7, 2026, 9:00 a.m. — with a 9:30 a.m. public hearing on a resolution to use a uniform collection method for fire rescue assessments in unincorporated areas plus Beverly Beach, Bunnell, and Marineland, effective Oct. 1, 2027. (Source: public-hearing notice, noticeregistry.com.)",
+   "next": "No County Commission meeting this week. Next regular meeting Mon Dec. 7, 2026, 9:00 a.m. — with a 9:30 a.m. public hearing on a resolution to use a uniform collection method for fire rescue assessments in unincorporated areas plus Beverly Beach, Bunnell, and Marineland, effective Oct. 1, 2027. (Official record: public-hearing notice, noticeregistry.com.)",
    "timeline": [
     {
      "d": "Mon Nov 16 · 5pm",
@@ -39,7 +39,7 @@
     },
     {
      "d": "Nov 2026 reporting",
-     "t": "FlaglerLive: county faces ~$60M in 'cataclysmic' Amendment 3 cuts; special taxing district for policing explored; county unemployment held at 5.2% in October"
+     "t": "County faces ~$60M in 'cataclysmic' Amendment 3 cuts; special taxing district for policing explored; county unemployment held at 5.2% in October"
     }
    ]
   },
@@ -74,7 +74,7 @@
     "City Manager Mike McGlothlin's first-year evaluation — a combined 3.52 out of 5, 'meets expectations' — was not discussed in open session, and he received no raise. (Reported by Pierre Tristam, <a href=\"https://flaglerlive.com/mcglothlin-evaluations-2026/\" target=\"_blank\" rel=\"noopener\">FlaglerLive</a>, Nov. 23, 2026)",
     "Amendment 3 would cost Palm Coast $21.7 million by 2028 — 47% of its property tax revenue. (Reported by Pierre Tristam, <a href=\"https://flaglerlive.com/amendment-3-analysis/\" target=\"_blank\" rel=\"noopener\">FlaglerLive</a>, Nov. 4, 2026)"
    ],
-   "next": "No City Council meeting this week. Next business meeting Tue Dec. 1, 2026, 6:00 p.m. — the tentative calendar lists second readings of the Cascades/Seminole Trace land-use map amendment and master planned development. No full Dec. 1 agenda published yet, so whether the asphalt plant (Planning Board recommended approval 6–1 on Nov. 18; Council needs a 4-of-5 supermajority) is on it is unconfirmed. (Source: Palm Coast Storylines, Oct. 6 agenda worksheet)",
+   "next": "No City Council meeting this week. Next business meeting Tue Dec. 1, 2026, 6:00 p.m. — the tentative calendar lists second readings of the Cascades/Seminole Trace land-use map amendment and master planned development. No full Dec. 1 agenda published yet, so whether the asphalt plant (Planning Board recommended approval 6–1 on Nov. 18; Council needs a 4-of-5 supermajority) is on it is unconfirmed. (Palm Coast Storylines agenda worksheet, Oct. 6, 2026)",
    "timeline": [
     {
      "d": "Tue Nov 17 · 9am",
@@ -166,14 +166,14 @@
    "badge": "OUTCOME PENDING",
    "headline": "Nov. 23 agenda is out — the wastewater money vote leads a packed night. Outcome pending.",
    "bullets": [
-    "The Nov. 23 meeting happened at 7:00 p.m. FlaglerLive covered the meeting's clean-up presentation (see below), but the votes on Resolution 2026-16 (wastewater facility plan / State Revolving Fund) and the rest of the agenda remain unreported as of Wed Nov. 25 — no minutes posted. The meeting was livestreamed on the city's YouTube channel.",
+    "The Nov. 23 meeting happened at 7:00 p.m. FlaglerLive covered the meeting's clean-up presentation (see below), but the outcome of the votes on Resolution 2026-16 (wastewater facility plan / State Revolving Fund) and the rest of the agenda has not been confirmed as of Thu Nov. 26 — no minutes posted, and no second newsroom has confirmed the result. The meeting was livestreamed on the city's YouTube channel.",
     "Interim City Manager David Brannon told the commission Monday evening that contracts had been signed without authority, an $835,000 budget error had been found, and other problems surfaced after former City Manager Alvin Jackson's departure. The commission unanimously approved Brannon's clean-up steps and named Commissioner Adkinson to a committee. (Reported by Pierre Tristam, <a href=\"https://flaglerlive.com/inappropriately-signed/\" target=\"_blank\" rel=\"noopener\">FlaglerLive</a>, Nov. 24, 2026)",
-    "What was on the agenda: Resolution 2026-16 (wastewater facility plan / SRF); Ordinances 2026-20 and 2026-21 (rezoning about 14.92 acres to Commercial-Medium / B-1 Business District) and Ordinance 2026-22 (rezoning about 0.92 acres from Industrial to Single Family-Medium Density), all second reading; Resolution 2026-17 (FY2025-2026 budget amendment); the city's 2027 legislative priorities; amending the cold-weather shelter agreement with Flagler County; appointing a member to the Planning, Zoning and Appeals Board; and consent items (renewing the generator-maintenance agreement with Ring Power, sewer manhole inspection/rehabilitation, and a street-sweeping agreement). (Source: City of Bunnell Agendas & Minutes page)",
+    "What was on the agenda: Resolution 2026-16 (wastewater facility plan / SRF); Ordinances 2026-20 and 2026-21 (rezoning about 14.92 acres to Commercial-Medium / B-1 Business District) and Ordinance 2026-22 (rezoning about 0.92 acres from Industrial to Single Family-Medium Density), all second reading; Resolution 2026-17 (FY2025-2026 budget amendment); the city's 2027 legislative priorities; amending the cold-weather shelter agreement with Flagler County; appointing a member to the Planning, Zoning and Appeals Board; and consent items (renewing the generator-maintenance agreement with Ring Power, sewer manhole inspection/rehabilitation, and a street-sweeping agreement). (Official record: <a href=\"https://www.bunnellcity.us/1479/Agendas-Minutes\" target=\"_blank\" rel=\"noopener\">City of Bunnell Agendas & Minutes page</a>)",
     "Why Res. 2026-16 matters: approving the wastewater facility plan and sending it to the Florida Department of Environmental Protection is the step required to unlock the city's awarded State Revolving Fund (SRF) SA-HMW funding — the Supplemental Appropriation for Hurricanes Helene and Milton and the Hawaii Wildfires — for wastewater treatment plant improvements.",
-    "City news: storm debris collection began Mon Nov. 23 (separate piles for yard waste, construction debris, and appliances). A portion of E. Woodlawn St. between W. SR 100 and N. Anderson St. is closed until further notice — impassable from storm flooding/damage. City offices are closed Thu–Fri Nov. 26–27 for Thanksgiving; no trash service Thu Nov. 26. City Manager applications are open through Dec. 31, 2026. (Source: City of Bunnell news page, bunnellcity.us)",
+    "City news: storm debris collection began Mon Nov. 23 (separate piles for yard waste, construction debris, and appliances). A portion of E. Woodlawn St. between W. SR 100 and N. Anderson St. is closed until further notice — impassable from storm flooding/damage. City offices are closed Thu–Fri Nov. 26–27 for Thanksgiving; no trash service Thu Nov. 26. City Manager applications are open through Dec. 31, 2026. (Official record: City of Bunnell news page, bunnellcity.us)",
     "Recent context: Oct. 28, in a special hearing, the Commission denied the contested Project Butterfly 610-acre landfill west of Bunnell after 18 appeals. This building is the city's new Administration & Police complex — city offices and the Bunnell Police Department are based here too."
    ],
-   "next": "Next regular meeting Mon Dec. 14, 2026, 7:00 p.m. The Nov. 23 votes on Res. 2026-16 and the rezoning ordinances are still unreported — watch the City of Bunnell Agendas & Minutes page for the minutes.",
+   "next": "Next regular meeting Mon Dec. 14, 2026, 7:00 p.m. The Nov. 23 votes on Res. 2026-16 and the rezoning ordinances are still unconfirmed — watch the City of Bunnell Agendas & Minutes page for the minutes.",
    "timeline": [
     {
      "d": "Oct 28",
@@ -189,7 +189,7 @@
     },
     {
      "d": "Mon Nov 23 · 7pm",
-     "t": "Commission met; Res. 2026-16 wastewater/SRF vote outcome not yet reported"
+     "t": "Commission met; Res. 2026-16 wastewater/SRF vote outcome not yet confirmed"
     },
     {
      "d": "Mon Nov 23",
@@ -310,7 +310,7 @@
     },
     {
      "d": "Mon Nov 23",
-     "t": "FlaglerLive reports the ICE contract figures; Staly orders drastic-cut planning — 'everything is on the table'"
+     "t": "ICE contract figures disclosed; Staly orders drastic-cut planning — 'everything is on the table'"
     }
    ]
   },
@@ -1003,7 +1003,7 @@
    "bullets": [
     "Nov 17 organizational meeting — Lauren Ramirez elected chair, Janie Ruddy vice chair; Cathy Moon and Rob Wood seated, Christy Chong re-elected. Members: Cathy Moon (District 1), Rob Wood (District 2), Janie Ruddy (District 3), Christy Chong (District 4), Lauren Ramirez (District 5). Chair: Lauren Ramirez. Vice chair: Janie Ruddy. Superintendent: LaShakia Moore. (Reported by Pierre Tristam, <a href=\"https://flaglerlive.com/ramirez-reorg/\" target=\"_blank\" rel=\"noopener\">FlaglerLive</a>, Nov. 18, 2026)",
     "Nov 17 — $3M YMCA share approved unanimously, 35-year lease toward the roughly $14M Palm Coast YMCA. (Reported by Pierre Tristam, <a href=\"https://flaglerlive.com/schools-ymca/\" target=\"_blank\" rel=\"noopener\">FlaglerLive</a>, Nov. 18, 2026; Brent Woronoff, <a href=\"https://www.observerlocalnews.com/news/2026/nov/18/palm-coast-ymca-clears-final-hurdle-as-school-board-approves-lease-agreement/\" target=\"_blank\" rel=\"noopener\">Palm Coast Observer</a>, Nov. 18, 2026; first reported by the Palm Coast Observer)",
-    "2027-28 school calendar approved 4-1, Ruddy opposed, 179 student days, first day Aug 10. (Source: official record — BoardDocs)"
+    "2027-28 school calendar approved 4-1, Ruddy opposed, 179 student days, first day Aug 10. (Official record: <a href=\"https://go.boarddocs.com/fla/flcsd/Board.nsf/Public\" target=\"_blank\" rel=\"noopener\">Flagler Schools BoardDocs</a>, Nov. 17, 2026)"
    ],
    "next": "Next: agenda workshop Tue Dec 8, 3 p.m.; regular meeting Tue Dec 22, 6 p.m. (the board’s usual schedule — confirm on BoardDocs).",
    "timeline": [
@@ -1035,8 +1035,8 @@
    "badge": "HEARING DEC 7",
    "headline": "Dec 7 hearing: the County Commission considers using the tax bill to collect fire-rescue assessments — and the department passed its state EMS inspection in full.",
    "bullets": [
-    "Mon Dec 7, 2026, 9:30 a.m., Board Chambers, 1769 E Moody Blvd, Bldg 2, Bunnell: the County Commission considers a resolution to use a uniform collection method (the tax bill) for fire-rescue assessments in unincorporated Flagler County, Beverly Beach, Bunnell and Marineland. Assessments would begin Oct 1, 2027 and continue annually unless the county ends them. (Source: public-hearing notice, Nov 12, 2026)",
-    "Flagler County Fire Rescue runs 13 stations across 571 square miles, staffed around the clock by paramedics and EMTs. (Source: <a href=\"https://www.flaglercounty.gov/County-Services/Public-Safety/Flagler-County-Fire-Rescue\" target=\"_blank\" rel=\"noopener\">flaglercounty.gov — Fire Rescue</a>)",
+    "Mon Dec 7, 2026, 9:30 a.m., Board Chambers, 1769 E Moody Blvd, Bldg 2, Bunnell: the County Commission considers a resolution to use a uniform collection method (the tax bill) for fire-rescue assessments in unincorporated Flagler County, Beverly Beach, Bunnell and Marineland. Assessments would begin Oct 1, 2027 and continue annually unless the county ends them. (Official record: public-hearing notice, Nov. 12, 2026)",
+    "Flagler County Fire Rescue runs 13 stations across 571 square miles, staffed around the clock by paramedics and EMTs. (Official record: <a href=\"https://www.flaglercounty.gov/County-Services/Public-Safety/Flagler-County-Fire-Rescue\" target=\"_blank\" rel=\"noopener\">flaglercounty.gov — Fire Rescue</a>)",
     "It passed its 2026 Florida Department of Health EMS inspection on Oct 27, 2026, all areas in full compliance."
    ],
    "next": "Public hearing Mon Dec 7, 2026, 9:30 a.m., Board Chambers, 1769 E Moody Blvd, Bldg 2, Bunnell — fire-rescue assessments.",
