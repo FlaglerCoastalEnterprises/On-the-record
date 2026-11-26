@@ -55,6 +55,14 @@ footer nav a{color:var(--navy);text-decoration:none;font-weight:500}
 footer nav a:hover{text-decoration:underline;text-underline-offset:3px}
 :focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 @media(min-width:700px){h1{font-size:46px}.hero{padding:64px 0 48px}}
+.feature{background:var(--navy);color:#fff;border-radius:4px;padding:32px 28px}
+.f-eyebrow{margin:0 0 10px;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#D8C094}
+.f-title{margin:0 0 10px;font-family:var(--serif);font-weight:600;font-size:30px;line-height:1.15;color:#fff}
+.f-text{margin:0 0 24px;font-size:16px;color:rgba(255,255,255,.82);max-width:28em}
+.f-btn{display:inline-block;padding:13px 20px;background:#fff;color:var(--navy);text-decoration:none;font-weight:600;font-size:15px;border-radius:2px}
+.f-btn span{color:var(--gold);margin-left:4px}
+.f-btn:hover{background:#F1F2F4}
+.f-note{margin:14px 0 0;font-size:13px;color:rgba(255,255,255,.55)}
 </style>
 </head>
 <body>
@@ -85,10 +93,20 @@ footer nav a:hover{text-decoration:underline;text-underline-offset:3px}
     </ul>
   </section>
 
+  <section aria-labelledby="h-work">
+    <h2 id="h-work">Our work</h2>
+    <div class="feature">
+      <p class="f-eyebrow">Flagship project</p>
+      <p class="f-title">On The Record</p>
+      <p class="f-text">Know before they vote. Nonpartisan coverage of Flagler County government.</p>
+      <a class="f-btn" href="/">Visit On The Record <span aria-hidden="true">&rarr;</span></a>
+      <p class="f-note">Free &middot; Updated after every meeting</p>
+    </div>
+  </section>
+
   <section aria-labelledby="h-connected">
     <h2 id="h-connected">Stay connected</h2>
     <div class="rows">
-      <a href="/"><div><b>On The Record</b><span>Know before they vote. Nonpartisan coverage of Flagler County government.</span></div><i aria-hidden="true">&rarr;</i></a>
       <a href="https://www.facebook.com/FCEPalmCoast" target="_blank" rel="noopener"><div><b>Facebook</b><span>Community updates and conversation</span></div><i aria-hidden="true">&rarr;</i></a>
       <a href="https://x.com/fce_palmcoast" target="_blank" rel="noopener"><div><b>X</b><span>Quick updates as they happen</span></div><i aria-hidden="true">&rarr;</i></a>
       <a href="https://www.youtube.com/@FlaglerCoastalEnterprises" target="_blank" rel="noopener"><div><b>YouTube</b><span>Videos from around Flagler County</span></div><i aria-hidden="true">&rarr;</i></a>
