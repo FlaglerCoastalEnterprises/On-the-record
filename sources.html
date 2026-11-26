@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" type="image/png" href="/favicon-64.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<title>Our sources — On The Record</title>
+<meta name="description" content="Every source On The Record uses: official government records first, then established newsrooms. Flagler County, its cities and towns, the region, Florida and national.">
+<link rel="canonical" href="https://on-the-record.coastalenterprises386.workers.dev/sources">
+<meta name="theme-color" content="#FFFFFF">
+<meta property="og:title" content="Our sources — On The Record">
+<meta property="og:description" content="Official records first. Every item names its source.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://on-the-record.coastalenterprises386.workers.dev/sources">
+<meta property="og:image" content="https://on-the-record.coastalenterprises386.workers.dev/og-image.png">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0A2342;--ink:#16202E;--muted:#5E6878;--rule:#E3E6EB;--gold:#A8844C;--serif:"Source Serif 4",Georgia,serif;--sans:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box}
+html,body{margin:0;background:#fff;color:var(--ink)}
+body{font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:880px;margin:0 auto;padding:0 24px}
+header{background:var(--navy);color:#fff}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:18px;padding-bottom:18px}
+.brand{font-family:var(--serif);font-size:20px;font-weight:600;color:#fff;text-decoration:none}
+.brand em{color:#D8C094;font-weight:400}
+.bar nav a{font-size:14px;font-weight:500;color:#fff;text-decoration:none;margin-left:18px}
+.bar nav a:hover{text-decoration:underline;text-underline-offset:3px}
+.hero{padding:44px 0 28px;max-width:640px}
+.eyebrow{margin:0 0 12px;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+h1{margin:0 0 14px;font-family:var(--serif);font-weight:400;font-size:38px;line-height:1.12;color:var(--navy)}
+.lede{margin:0;font-size:17px;color:var(--muted)}
+.tiers{list-style:none;margin:0;padding:24px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);display:grid;gap:14px}
+.tiers li{display:grid;grid-template-columns:28px 1fr;gap:10px}
+.tiers b{display:block;color:var(--navy);font-weight:600}
+.tiers span{font-size:14.5px;color:var(--muted)}
+.tiers i{font-style:normal;font-family:var(--serif);font-size:20px;color:var(--gold);line-height:1.2}
+.controls{padding:28px 0 8px}
+.search{width:100%;font:inherit;font-size:16px;padding:12px 14px;border:1px solid #C9CED6;border-radius:2px;color:var(--ink)}
+.search:focus{outline:2px solid var(--navy);outline-offset:1px}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.filters button{font:inherit;font-size:14px;font-weight:500;padding:8px 14px;border:1px solid #C9CED6;background:#fff;color:var(--navy);border-radius:2px;cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
+.count{margin:16px 0 0;font-size:14px;color:var(--muted)}
+section.group{padding:28px 0 8px}
+h2{margin:0 0 4px;font-family:var(--serif);font-weight:600;font-size:24px;color:var(--navy)}
+.group-note{margin:0 0 10px;font-size:14px;color:var(--muted)}
+.src{display:block;padding:16px 0;border-bottom:1px solid var(--rule);text-decoration:none}
+.src:last-child{border-bottom:0}
+.src-top{display:flex;justify-content:space-between;gap:16px;align-items:baseline}
+.src b{font-weight:600;color:var(--navy)}
+.src:hover b{text-decoration:underline;text-underline-offset:3px}
+.tag{flex:none;font-size:12px;color:var(--muted);white-space:nowrap}
+.tag.t1{color:var(--navy);font-weight:600}
+.src p{margin:4px 0 0;font-size:14.5px;color:var(--muted)}
+.area{color:var(--ink)}
+.suggest{margin:40px 0 0;padding:28px 0;border-top:1px solid var(--rule)}
+.suggest p{margin:0 0 16px;color:var(--muted);max-width:36em}
+.cta{display:inline-block;padding:14px 22px;background:var(--navy);color:#fff;text-decoration:none;font-weight:600;font-size:15px;border-radius:2px}
+.cta:hover{background:#13345F}
+footer{border-top:1px solid var(--rule);padding:26px 0 40px;font-size:13px;color:var(--muted)}
+footer nav{display:flex;flex-wrap:wrap;gap:18px;margin-bottom:12px}
+footer nav a{color:var(--navy);text-decoration:none;font-weight:500}
+footer nav a:hover{text-decoration:underline;text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+@media(min-width:700px){h1{font-size:46px}.hero{padding:64px 0 36px}}
+@media(max-width:480px){.src-top{flex-direction:column;gap:2px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="/">On The <em>Record</em></a>
+    <nav aria-label="Site"><a href="/">Home</a><a href="/#/about">About</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <p class="eyebrow">Our sources</p>
+    <h1>Where the facts come from.</h1>
+    <p class="lede">Official records come first. News reports are treated as leads and confirmed against the record before we publish. Every item on On The Record names its source, so you can check it yourself.</p>
+  </div>
+
+  <ol class="tiers" aria-label="How we rank sources">
+    <li><i>1</i><div><b>Official record</b><span>Agendas, minutes, votes, budgets, court and agency records.</span></div></li>
+    <li><i>2</i><div><b>Official data and notices</b><span>Government statistics, legal notices, public hearing notices.</span></div></li>
+    <li><i>3</i><div><b>Established newsrooms</b><span>Newsrooms with editors and a corrections policy. Used as leads.</span></div></li>
+    <li><i>4</i><div><b>Fact-check and context</b><span>Independent fact-checkers.</span></div></li>
+  </ol>
+
+  <div class="controls">
+    <label for="q" class="eyebrow" style="display:block">Search sources</label>
+    <input id="q" class="search" type="search" placeholder="Try Palm Coast, budget, elections, roads" autocomplete="off">
+    <div class="filters" role="group" aria-label="Filter by area" id="filters"></div>
+    <p class="count" id="count" aria-live="polite"></p>
+  </div>
+
+  <div id="list"><p class="count">Loading sources…</p></div>
+
+  <div class="suggest">
+    <h2>Know a source we should add?</h2>
+    <p>We add public, verifiable sources: government sites, official data, and newsrooms with editors. Tell us what you rely on.</p>
+    <a class="cta" href="mailto:coastalenterprises386@gmail.com?subject=Source%20suggestion%20for%20On%20The%20Record">Suggest a source</a>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <nav aria-label="Footer"><a href="/">On The Record</a><a href="/#/about">About</a><a href="/links">Flagler Coastal Enterprises</a><a href="/shop">Support Us</a></nav>
+    <div id="updated">On The Record is nonpartisan and published by Flagler Coastal Enterprises LLC, Palm Coast, Florida.</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var ORDER=["flagler","region","metro","state","national"];
+  var LABEL={flagler:"Flagler County",region:"The region",metro:"Major Florida cities",state:"Florida",national:"National"};
+  var data=null, active="all";
+  var list=document.getElementById("list"), q=document.getElementById("q"), countEl=document.getElementById("count"), filters=document.getElementById("filters");
+  function esc(s){return String(s||"").replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+  function host(u){try{return new URL(u).hostname.replace(/^www\./,"");}catch(e){return u;}}
+  function buildFilters(){
+    var keys=["all"].concat(ORDER);
+    filters.innerHTML=keys.map(function(k){return '<button type="button" data-k="'+k+'" aria-pressed="'+(k===active)+'">'+(k==="all"?"All":LABEL[k])+'</button>';}).join("");
+    filters.querySelectorAll("button").forEach(function(b){b.addEventListener("click",function(){active=b.getAttribute("data-k");buildFilters();render();});});
+  }
+  function render(){
+    var term=q.value.trim().toLowerCase(), shown=0, html="";
+    ORDER.forEach(function(r){
+      if(active!=="all"&&active!==r) return;
+      var items=data.sources.filter(function(s){
+        if(s.region!==r) return false;
+        if(!term) return true;
+        return (s.name+" "+s.area+" "+s.covers+" "+s.tier_label+" "+host(s.url)).toLowerCase().indexOf(term)>-1;
+      }).sort(function(a,b){return a.tier-b.tier||a.area.localeCompare(b.area)||a.name.localeCompare(b.name);});
+      if(!items.length) return;
+      shown+=items.length;
+      html+='<section class="group" aria-labelledby="g-'+r+'"><h2 id="g-'+r+'">'+LABEL[r]+'</h2><p class="group-note">'+esc(data.regions[r])+'</p>';
+      items.forEach(function(s){
+        html+='<a class="src" href="'+esc(s.url)+'" target="_blank" rel="noopener"><div class="src-top"><b>'+esc(s.name)+'</b><span class="tag'+(s.tier===1?' t1':'')+'">'+esc(s.tier_label)+'</span></div>'+
+          '<p><span class="area">'+esc(s.area)+'</span> · '+esc(s.covers)+' · '+esc(host(s.url))+'</p></a>';
+      });
+      html+='</section>';
+    });
+    list.innerHTML=html||'<p class="count">No sources match that search.</p>';
+    countEl.textContent=shown+" of "+data.sources.length+" sources";
+  }
+  fetch("/data/sources.json",{cache:"no-cache"}).then(function(r){return r.json();}).then(function(d){
+    data=d; buildFilters(); render();
+    document.getElementById("updated").textContent="Source list last checked "+new Date(d.updated+"T12:00:00").toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"})+". On The Record is nonpartisan and published by Flagler Coastal Enterprises LLC, Palm Coast, Florida.";
+  }).catch(function(){list.innerHTML='<p class="count">The source list could not load. Please refresh.</p>';});
+  q.addEventListener("input",function(){ if(data) render(); });
+})();
+</script>
+<script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "c68d8265fc6d4f238d67c9b7cf71df1e"}'></script>
+</body>
+</html>
