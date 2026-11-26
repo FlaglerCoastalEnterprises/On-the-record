@@ -44,7 +44,8 @@ button{font-family:inherit}
 .shop-grid{max-width:1180px;margin:0 auto;padding:22px 20px 8px;display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
 @media(min-width:1024px){.shop-grid{grid-template-columns:repeat(4,1fr);gap:18px}}
 .product{background:var(--paper);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 4px 14px rgba(10,35,66,.06)}
-.product-photo{aspect-ratio:4/3;background:linear-gradient(160deg,var(--navy2),var(--navy) 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--gold2)}
+.product-photo{aspect-ratio:3/4;overflow:hidden;background:linear-gradient(160deg,var(--navy2),var(--navy) 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--gold2)}
+.product-photo img{width:100%;height:100%;object-fit:cover;display:block;background:#EEF0F3}
 .product-photo svg{width:44px;height:44px;display:block}
 .product-photo span{font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#C7D3E6}
 .product-body{padding:14px 14px 16px;display:flex;flex-direction:column;gap:6px;flex:1}
@@ -97,60 +98,60 @@ button{font-family:inherit}
 
   <section class="shop-grid" aria-label="Products">
     <article class="product">
-      <div class="product-photo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/></svg><span>Photo coming soon</span></div>
+      <div class="product-photo"><img src="https://cdn.fourthwall.com/customizations/sh_bbce7754-d7ed-439d-9744-314d58c573ee/ab586dda-111b-4d72-acaa-31acbf4f0d6d.webp" alt="Flagler Coastal hoodie in mint, full logo on the back" loading="lazy" width="768" height="1024"></div>
       <div class="product-body">
         <h2>Hoodie</h2>
         <p class="product-price">From $58</p>
-        <a class="shop-btn" data-store-link href="#" aria-label="Shop the Hoodie"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Shop</a>
+        <a class="shop-btn" data-store-link data-path="/products/flagler-coastal-hoodie-2" href="#" aria-label="Shop the Hoodie"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Shop</a>
       </div>
     </article>
     <article class="product">
-      <div class="product-photo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/></svg><span>Photo coming soon</span></div>
+      <div class="product-photo"><img src="https://cdn.fourthwall.com/customizations/sh_bbce7754-d7ed-439d-9744-314d58c573ee/05876954-94b5-49b3-b303-d380ba7f86a9.webp" alt="Flagler Coastal heavyweight tee in Lagoon Blue, full logo on the back" loading="lazy" width="768" height="1024"></div>
       <div class="product-body">
         <h2>Heavyweight Tee</h2>
         <p class="product-price">From $33</p>
-        <a class="shop-btn" data-store-link href="#" aria-label="Shop the Heavyweight Tee"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Shop</a>
+        <a class="shop-btn" data-store-link data-path="/products/flagler-coastal-heavyweight-tee-2" href="#" aria-label="Shop the Heavyweight Tee"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Shop</a>
       </div>
     </article>
     <article class="product">
-      <div class="product-photo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/></svg><span>Photo coming soon</span></div>
+      <div class="product-photo"><img src="https://cdn.fourthwall.com/customizations/sh_bbce7754-d7ed-439d-9744-314d58c573ee/fb9bcceb-c3d5-4a60-872c-270c112beed3.webp" alt="Flagler Coastal work polo in navy with chest logo" loading="lazy" width="768" height="1024"></div>
       <div class="product-body">
         <h2>Work Polo</h2>
         <p class="product-note">Navy &amp; Black — plus a light Stone / White version</p>
         <p class="product-price">From $30</p>
-        <a class="shop-btn" data-store-link href="#" aria-label="Shop the Work Polo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Shop</a>
+        <a class="shop-btn" data-store-link data-path="/products/flagler-coastal-work-polo-2" href="#" aria-label="Shop the Work Polo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Shop</a>
       </div>
     </article>
     <article class="product">
-      <div class="product-photo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/></svg><span>Photo coming soon</span></div>
+      <div class="product-photo"><img src="https://cdn.fourthwall.com/customizations/sh_bbce7754-d7ed-439d-9744-314d58c573ee/6b66b2d9-d90b-4542-906f-9bd36dde275e.webp" alt="Flagler Coastal performance tee in navy with chest logo" loading="lazy" width="768" height="1024"></div>
       <div class="product-body">
         <h2>Performance Tee</h2>
         <p class="product-price">From $25</p>
-        <a class="shop-btn" data-store-link href="#" aria-label="Shop the Performance Tee"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Shop</a>
+        <a class="shop-btn" data-store-link data-path="/products/flagler-coastal-performance-tee-2" href="#" aria-label="Shop the Performance Tee"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Shop</a>
       </div>
     </article>
     <article class="product">
-      <div class="product-photo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 8 1.75 12.28a2 2 0 0 0 2 1.72h4.54a2 2 0 0 0 2-1.72L18 8"/><path d="M5 8h14"/><path d="M7 15a6.47 6.47 0 0 1 5 0 6.47 6.47 0 0 0 5 0"/><path d="m12 8 1-6h2"/></svg><span>Photo coming soon</span></div>
+      <div class="product-photo"><img src="https://cdn.fourthwall.com/customizations/sh_bbce7754-d7ed-439d-9744-314d58c573ee/af0efe9a-b22f-46a3-bfdd-37601c253537.webp" alt="White 20 oz Flagler Coastal tumbler" loading="lazy" width="768" height="1024"></div>
       <div class="product-body">
         <h2>Tumbler</h2>
         <p class="product-price">$35</p>
-        <a class="shop-btn" data-store-link href="#" aria-label="Shop the Tumbler"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Shop</a>
+        <a class="shop-btn" data-store-link data-path="/products/flagler-coastal-tumbler" href="#" aria-label="Shop the Tumbler"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Shop</a>
       </div>
     </article>
     <article class="product">
-      <div class="product-photo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" x2="6" y1="2" y2="4"/><line x1="10" x2="10" y1="2" y2="4"/><line x1="14" x2="14" y1="2" y2="4"/></svg><span>Photo coming soon</span></div>
+      <div class="product-photo"><img src="https://cdn.fourthwall.com/customizations/sh_bbce7754-d7ed-439d-9744-314d58c573ee/e07d8cc6-2861-4f69-bcb0-5c7accc609c2.webp" alt="White Flagler Coastal mug" loading="lazy" width="768" height="1024"></div>
       <div class="product-body">
         <h2>Mug</h2>
         <p class="product-price">$16</p>
-        <a class="shop-btn" data-store-link href="#" aria-label="Shop the Mug"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Shop</a>
+        <a class="shop-btn" data-store-link data-path="/products/flagler-coastal-mug" href="#" aria-label="Shop the Mug"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Shop</a>
       </div>
     </article>
     <article class="product">
-      <div class="product-photo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/></svg><span>Photo coming soon</span></div>
+      <div class="product-photo"><img src="https://cdn.fourthwall.com/customizations/sh_bbce7754-d7ed-439d-9744-314d58c573ee/ae3f96cd-c4e9-4404-9cee-21dc57a004f6.webp" alt="Flagler Coastal logo sticker" loading="lazy" width="768" height="1024"></div>
       <div class="product-body">
         <h2>Sticker</h2>
         <p class="product-price">$8</p>
-        <a class="shop-btn" data-store-link href="#" aria-label="Shop the Sticker"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Shop</a>
+        <a class="shop-btn" data-store-link data-path="/products/flagler-coastal-sticker" href="#" aria-label="Shop the Sticker"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Shop</a>
       </div>
     </article>
   </section>
@@ -180,7 +181,7 @@ button{font-family:inherit}
    Shop button on this page (product cards + "View the full shop") follows it. ===== */
 const STORE_URL = "https://flaglercoastal-shop.fourthwall.com";
 document.querySelectorAll("[data-store-link]").forEach(function (a) {
-  a.href = STORE_URL;
+  a.href = STORE_URL + (a.getAttribute("data-path") || "");
   a.target = "_blank";
   a.rel = "noopener";
 });
