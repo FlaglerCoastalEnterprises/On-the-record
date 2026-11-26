@@ -346,6 +346,8 @@ footer{max-width:1180px;margin:0 auto;padding:20px 20px 30px}
 .site-nav-inner{max-width:1180px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:14px;min-height:58px;flex-wrap:nowrap}
 .wordmark{font-family:"Source Serif 4","Merriweather",Georgia,serif;font-weight:700;font-size:20px;color:#fff;text-decoration:none;white-space:nowrap;line-height:1;flex-shrink:0}
 .wordmark em{color:var(--gold2);font-weight:500}
+.wordmark{display:flex;align-items:center;gap:10px}
+.wordmark-logo{width:36px;height:36px;border-radius:4px;display:block;flex:none}
 .nav-toggle{display:none;margin-left:auto;background:rgba(255,255,255,.08);border:1px solid rgba(216,192,148,.55);color:var(--gold2);border-radius:4px;padding:9px 16px;font-weight:700;font-size:13px;cursor:pointer;min-height:40px}
 .nav-scrim{position:fixed;inset:0;z-index:1190;background:rgba(6,23,46,.55)}
 .nav-scrim[hidden]{display:none}
@@ -925,7 +927,7 @@ h1,h2,h3{font-weight:600}
 </div>
 <nav class="site-nav" aria-label="Main navigation">
   <div class="site-nav-inner">
-    <a class="wordmark" href="#/home">On The <em>Record</em></a>
+    <a class="wordmark" href="#/home"><img class="wordmark-logo" src="/brand/otr-monogram-navy-dot.jpg" alt="" width="36" height="36">On The <em>Record</em></a>
     <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navLinks">Menu</button>
     <div class="nav-links" id="navLinks">
       <div class="nav-sheet-head"><span>Menu</span><button class="nav-close" id="navClose" type="button" aria-label="Close menu">×</button></div>
