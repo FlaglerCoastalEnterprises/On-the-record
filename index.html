@@ -869,6 +869,13 @@ h1,h2,h3{font-weight:600}
 .support-actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
 .support-alt{display:inline-block;padding:14px 22px;border:1px solid var(--navy);border-radius:4px;color:var(--navy);font-weight:600;text-decoration:none}
 @media (max-width:640px){#globeHero{padding-top:76px}}
+/* audit polish Nov 26 */
+.map-preview{background:var(--navy)}
+.map-preview:before{display:none}
+.glance-card{background:transparent;border:0;border-top:1px solid var(--line);border-radius:0;box-shadow:none;padding-left:0;padding-right:0}
+.glance-card .num small,.glance-card .num span{font-size:.6em}
+@media (min-width:901px){.bs-tag{text-transform:none;letter-spacing:.02em;font-weight:500;font-size:12px}.nt-label{display:none}.nav-links .nt-ic{display:none}}
+@media (max-width:640px){.glance-grid{grid-template-columns:1fr;gap:0}.glance-card{padding-top:16px;padding-bottom:16px}}
 </style>
 </head>
 <body>
@@ -902,7 +909,7 @@ h1,h2,h3{font-weight:600}
 <div class="brand-strip" aria-label="Published by Flagler Coastal Enterprises">
   <div class="brand-strip-inner">
     <span class="bs-company">Flagler Coastal Enterprises</span>
-    <span class="bs-tag">People | Opportunity | A Stronger Tomorrow</span>
+    <span class="bs-tag">People · Opportunity · A stronger tomorrow</span>
     <span class="bs-pub">On The Record is a Flagler Coastal Enterprises publication</span>
   </div>
 </div>
@@ -1303,7 +1310,6 @@ h1,h2,h3{font-weight:600}
     <div class="footer-main">
       <div>
         <strong>On The Record</strong> — Flagler County government. Know before they vote.<br>
-        Published by Flagler Coastal Enterprises LLC · Palm Coast, Florida<br>
         On The Record is nonpartisan: we don’t endorse candidates, campaigns or ballot measures, and we don’t take positions on the decisions we cover.<br>
         © 2026 Flagler Coastal Enterprises LLC
         <div class="footer-social">
