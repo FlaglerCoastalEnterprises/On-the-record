@@ -2,8 +2,9 @@
  "id": "2026-11-23",
  "label": "Week of Nov 23–29, 2026",
  "range": "Nov 23–29, 2026",
- "lede": "One board met this week — Bunnell, on Monday night, Nov. 23 — and its wastewater vote and rezonings are still unconfirmed, though the commission unanimously approved the interim manager's clean-up steps. The week’s biggest stories were money: the Sheriff’s Office returned $4 million in unspent funds to the county, and reporting put the county’s Amendment 3 budget cuts at about $60 million. Everything below is drawn from the same verified items on the map, grouped by topic.",
+ "lede": "Flooding is the week’s main story: the county is asking residents to report damage, Flagler joined the state flooding emergency on Nov. 18, and a countywide no-wake order is in effect — but the federal disaster declaration approved Nov. 24 covers six other counties, not Flagler. One board met this week — Bunnell, on Monday night, Nov. 23 — and its wastewater vote and rezonings are still unconfirmed, though the commission unanimously approved the interim manager’s clean-up steps. The week’s other big stories were money: the Sheriff’s Office returned $4 million in unspent funds to the county, and reporting put the county’s Amendment 3 budget cuts at about $60 million. Everything below is drawn from the same verified items on the map, grouped by topic.",
  "topStories": [
+  21,
   10,
   1,
   6
@@ -516,21 +517,43 @@
   },
   {
    "facilityId": 21,
-   "active": false,
-   "badge": "ALWAYS ON",
-   "headline": "The county's Emergency Operations Center — Building 3 on the Government Services campus.",
+   "active": true,
+   "badge": "NEWS THIS WEEK",
+   "headline": "Flooding is the week's main story: report damage, Flagler joins the state emergency, and a countywide no-wake order is in effect.",
    "bullets": [
     "Home of Flagler County Emergency Management — the EOC is Building 3, behind the Government Services Building at 1769 E. Moody Blvd (Flagler County Emergency Management).",
-    "This is the room that activates during hurricanes and major emergencies, coordinating the county's response.",
-    "The pin is offset on the campus so every campus building stays clickable — same approach as the Justice Center pin.",
-    "Source: Flagler County (flaglercounty.gov — Emergency Management).",
-    "Quiet this week so far — no new meeting or news found for Nov. 23–29."
+    "This is the room that activates during hurricanes and major emergencies, coordinating the county’s response.",
+    "Flagler County Emergency Management is asking residents to report flood damage to their homes — one report per address, with photos if possible — through the county’s online Public Damage Assessment Tool or by calling 386-313-4200. The county says a report is for information only: it is not a request for aid, does not start an insurance claim, and does not qualify anyone for disaster benefits. The count helps show how widespread the damage is and what needs are not being met, which shapes the case for state and federal help. (Official record: <a href=\"https://www.flaglercounty.gov/County-Services/Emergency-Management\" target=\"_blank\" rel=\"noopener\">Flagler County Emergency Management</a>; reported by Angel Green, <a href=\"https://www.wftv.com/news/local/flagler-county/flooded-home-flagler-county-take-few-minutes-report-it/IMCQCP4PIRAX7IM65GRPVIOGFY/\" target=\"_blank\" rel=\"noopener\">WFTV Channel 9</a>, Nov. 25, 2026; and Haley Coomes, <a href=\"https://www.clickorlando.com/news/local/2026/11/26/flagler-county-asks-residents-to-report-flood-damage/\" target=\"_blank\" rel=\"noopener\">WKMG News 6</a>, Nov. 26, 2026; FlaglerLive also republished the county release, <a href=\"https://flaglerlive.com/flood-reporting/\" target=\"_blank\" rel=\"noopener\">Staff, FlaglerLive</a>, Nov. 25, 2026)",
+    "Executive Order 26-232, dated Nov. 18, added Flagler to the governor’s fall flooding emergency (EO 26-227), bringing the total to 21 counties. Under the order, the county and its cities can use the state’s emergency procedures for the flood response, and the emergency lasts as long as the original order. (Official record: <a href=\"https://www.flgov.com/eog/sites/default/files/executive-orders/2026/EO%2026-232.pdf\" target=\"_blank\" rel=\"noopener\">Executive Order 26-232</a>; reported by Jim Turner, <a href=\"https://www.wgcu.org/section/weather/2026-11-19/governor-desantis-expands-executive-order-amid-rains-flooding\" target=\"_blank\" rel=\"noopener\">News Service of Florida (via WGCU)</a>, Nov. 19, 2026)",
+    "FEMA announced Nov. 24 that the President approved a major disaster declaration for Florida’s November flooding. Individual aid covers Brevard, Indian River, Martin, Okeechobee, Palm Beach and St. Lucie counties — Flagler is not among them, so Flagler residents cannot apply for federal individual aid under this declaration. Public assistance for debris removal and emergency protective measures covers Brevard, Hardee, Indian River, Martin, Okeechobee and Palm Beach. On Nov. 23, Gov. DeSantis said the state is preparing a broader request based on new damage assessments; the counties in that request were not named. (Official record: <a href=\"https://www.fema.gov/press-release/20261124/president-donald-j-trump-approves-major-disaster-declaration-florida\" target=\"_blank\" rel=\"noopener\">FEMA</a>; reported by Erin Seaton, <a href=\"https://www.news4jax.com/news/local/2026/11/27/president-trump-signs-major-disaster-declaration-for-florida-following-several-storms-flooding/\" target=\"_blank\" rel=\"noopener\">News4JAX</a>, Nov. 26, 2026; and Olivia Tyler, <a href=\"https://www.wesh.com/article/desantis-press-conference-melbourne-florida/74507529\" target=\"_blank\" rel=\"noopener\">WESH 2</a>, Nov. 23, 2026)",
+    "Rain on Nov. 20–21 flooded streets in Palm Coast neighborhoods, including Perth Place and Parkview Drive near Belle Terre Parkway, and several roads around Bunnell were still closed that Friday night. On Nov. 21 the county issued Emergency Administrative Order No. 2026-01: a countywide no-wake restriction on all navigable waters, with vessels at idle speed only, and a 5 MPH maximum on any roadway where standing or flowing water is present. The order stays in effect until it is rescinded, superseded, or the local state of emergency expires. (Official record: <a href=\"https://www.flaglercounty.gov/News-articles/2026-11-21-No-Wake-Order\" target=\"_blank\" rel=\"noopener\">Flagler County</a>; reported by Nick Neville, <a href=\"https://www.clickorlando.com/news/local/2026/11/21/heavy-rain-floods-palm-coast-neighborhood-streets-as-flagler-county-reports-closures/\" target=\"_blank\" rel=\"noopener\">WKMG News 6</a>, Nov. 21, 2026)",
+    "The pin is offset on the campus so every campus building stays clickable — same approach as the Justice Center pin."
    ],
-   "next": "Standing by — activates for storms and county emergencies.",
+   "next": "County offices are closed through Nov. 27 and reopen Nov. 30. Residents with flood damage should report it through the county’s Public Damage Assessment Tool or by calling 386-313-4200 — a report is for information only, not a request for aid.",
    "timeline": [
     {
-     "d": "Now",
-     "t": "Emergency Management HQ — Skywarn training held here Nov 16, 2026"
+     "d": "Nov 16",
+     "t": "Emergency Management HQ — Skywarn training held here"
+    },
+    {
+     "d": "Nov 18",
+     "t": "Executive Order 26-232 adds Flagler to the state flooding emergency (21 counties)"
+    },
+    {
+     "d": "Nov 20–21",
+     "t": "Heavy rain floods Palm Coast streets; roads around Bunnell close"
+    },
+    {
+     "d": "Nov 21",
+     "t": "County issues countywide no-wake order (Emergency Administrative Order No. 2026-01)"
+    },
+    {
+     "d": "Nov 24",
+     "t": "FEMA approves major disaster declaration for six counties — Flagler not included"
+    },
+    {
+     "d": "Nov 25–26",
+     "t": "County asks residents to report flood damage (online tool or 386-313-4200)"
     }
    ]
   },
