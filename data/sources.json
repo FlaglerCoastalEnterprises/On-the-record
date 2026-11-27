@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-26",
+ "updated": "2026-11-27",
  "publisher": "Flagler Coastal Enterprises LLC",
  "policy": "Official records come first. News reports are used as leads and are confirmed against the official record before On The Record publishes. Every item names its source.",
  "tiers": {
@@ -25,7 +25,18 @@
    "tier_label": "Official record",
    "covers": "County services, news releases, budgets",
    "watch": "News releases, budget documents",
-   "verified": "2026-11-26"
+   "verified": "2026-11-27"
+  },
+  {
+   "name": "Flagler County Emergency Management",
+   "url": "https://www.flaglercounty.gov/County-Services/Emergency-Management",
+   "region": "flagler",
+   "area": "Flagler County",
+   "tier": 1,
+   "tier_label": "Official record",
+   "covers": "Emergency orders, storm and flood response, damage reporting",
+   "watch": "Emergency notices, local declarations, road closures, damage assessment",
+   "verified": "2026-11-27"
   },
   {
    "name": "Flagler County Commission agendas and minutes",
@@ -135,7 +146,7 @@
    "tier_label": "Official record",
    "covers": "City news, projects, budget",
    "watch": "News releases, project updates",
-   "verified": "2026-11-26"
+   "verified": "2026-11-27"
   },
   {
    "name": "City of Bunnell agendas and minutes",
@@ -201,7 +212,7 @@
    "tier_label": "Established newsroom",
    "covers": "Daily local news across the county",
    "watch": "Use as a lead; confirm with the official record",
-   "verified": "2026-11-26"
+   "verified": "2026-11-27"
   },
   {
    "name": "Palm Coast Observer",
@@ -366,7 +377,7 @@
    "tier_label": "Established newsroom",
    "covers": "Jacksonville and Northeast Florida TV news",
    "watch": "Regional leads",
-   "verified": "2026-11-26"
+   "verified": "2026-11-27"
   },
   {
    "name": "First Coast News",
@@ -432,7 +443,7 @@
    "tier_label": "Established newsroom",
    "covers": "Orlando and Daytona TV news",
    "watch": "Regional leads",
-   "verified": "2026-11-26"
+   "verified": "2026-11-27"
   },
   {
    "name": "WFTV Channel 9",
@@ -443,7 +454,18 @@
    "tier_label": "Established newsroom",
    "covers": "Orlando and Central Florida TV news",
    "watch": "Regional leads",
-   "verified": "2026-11-26"
+   "verified": "2026-11-27"
+  },
+  {
+   "name": "WKMG News 6 (ClickOrlando)",
+   "url": "https://www.clickorlando.com",
+   "region": "region",
+   "area": "Central Florida",
+   "tier": 3,
+   "tier_label": "Established newsroom",
+   "covers": "Central Florida news, including Flagler and Volusia counties",
+   "watch": "Flagler County, weather and emergency coverage",
+   "verified": "2026-11-27"
   },
   {
    "name": "City of Jacksonville",
@@ -575,7 +597,7 @@
    "tier_label": "Official record",
    "covers": "Bill signings, vetoes, appointments, emergency orders",
    "watch": "Actions naming Flagler or its cities",
-   "verified": "2026-11-26"
+   "verified": "2026-11-27"
   },
   {
    "name": "The Florida Senate",
