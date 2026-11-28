@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-27",
+ "updated": "2026-11-28",
  "publisher": "Flagler Coastal Enterprises LLC",
  "policy": "Official records come first. News reports are used as leads and are confirmed against the official record before On The Record publishes. Every item names its source.",
  "tiers": {
@@ -69,7 +69,7 @@
    "tier_label": "Official record",
    "covers": "Public safety news, arrests, budget",
    "watch": "News releases",
-   "verified": "2026-11-26"
+   "verified": "2026-11-28"
   },
   {
    "name": "Flagler County Supervisor of Elections",
@@ -113,7 +113,7 @@
    "tier_label": "Official record",
    "covers": "School district news and operations",
    "watch": "District announcements",
-   "verified": "2026-11-26"
+   "verified": "2026-11-28"
   },
   {
    "name": "Flagler County School Board (BoardDocs)",
@@ -168,7 +168,7 @@
    "tier_label": "Official record",
    "covers": "City news and services",
    "watch": "News, notices",
-   "verified": "2026-11-26"
+   "verified": "2026-11-28"
   },
   {
    "name": "Flagler Beach meeting portal",
@@ -202,6 +202,17 @@
    "covers": "Town Commission agendas",
    "watch": "New agendas",
    "verified": "2026-11-26"
+  },
+  {
+   "name": "Business Observer legal notices (Flagler)",
+   "url": "https://legals.businessobserverfl.com",
+   "region": "flagler",
+   "area": "Flagler County",
+   "tier": 2,
+   "tier_label": "Official data and notices",
+   "covers": "Published legal notices tagged Flagler: city hearings and ordinances, community development district meetings",
+   "watch": "New notices tagged Flagler",
+   "verified": "2026-11-28"
   },
   {
    "name": "FlaglerLive",
@@ -322,7 +333,7 @@
    "tier_label": "Official record",
    "covers": "State road projects, lane closures in Flagler and Volusia",
    "watch": "New projects, closures, hearings",
-   "verified": "2026-11-26"
+   "verified": "2026-11-28"
   },
   {
    "name": "FDOT District 5 public meeting notices",
