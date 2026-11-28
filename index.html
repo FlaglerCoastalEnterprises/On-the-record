@@ -4091,5 +4091,11 @@ document.addEventListener("keydown",function(e){
 <script>
 (function(){try{fetch("/data/sources.json",{cache:"no-cache"}).then(function(r){return r.json();}).then(function(d){var s=d.sources||[];function set(id,v){var e=document.getElementById(id);if(e)e.textContent=v;}set("tsTotal",s.length);set("tsOfficial",s.filter(function(x){return x.tier===1||x.tier===2;}).length);set("tsNews",s.filter(function(x){return x.tier===3;}).length);}).catch(function(){});}catch(e){}})();
 </script>
+<style id="polish-2026-11-28">
+/* Polish pass 2026-11-28 (Jetmir): square buttons per the house standard, and the
+   map band flattened — solid navy, no gradient, no shadow. */
+.btn-hero,.btn-hero-ghost,.btn,.btn-follow-topic,.nav-toggle{border-radius:0}
+.map-preview{background:var(--navy);border-radius:0;box-shadow:none}
+</style>
 </body>
 </html>
